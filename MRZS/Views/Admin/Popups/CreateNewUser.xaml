@@ -1,0 +1,42 @@
+﻿<sdk:ChildWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MRZS.Views.Admin.Popups.CreateNewUser"
+           Width="400" Height="Auto" 
+           Title="Создание нового пользователя">
+    <Grid x:Name="LayoutRoot" Margin="2">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="0.250*"/>
+    		<ColumnDefinition Width="0.600*"/>
+    	</Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+        	<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+		
+		<sdk:Label HorizontalAlignment="Right" Content="Логин"   VerticalAlignment="Center" Grid.Row="1" Margin="0,0,5,0"/>
+		<TextBox x:Name="textBoxUserLogin" Grid.Row="1" Width="240"   Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Column="1"/>
+		<sdk:Label HorizontalAlignment="Right" Content="Пароль"  VerticalAlignment="Center" Grid.Row="2" Margin="0,0,5,0"/>
+		<PasswordBox x:Name="textBoxUserPassword" Grid.Row="2" Width="240" Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Column="2"/>
+		<sdk:Label Content="Повторите пароль"  VerticalAlignment="Center" Grid.Row="3"  d:LayoutOverrides="Width" HorizontalAlignment="Right" Margin="0,0,5,0"/>
+		<PasswordBox x:Name="textBoxUserOneMorePassword" Grid.Row="3" Width="240"  Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Column="1"/>
+		<sdk:Label HorizontalAlignment="Right" Content="Email"  VerticalAlignment="Center" Grid.Row="4" Margin="0,0,5,0"/>
+		<TextBox x:Name="textBoxUserEmail" Width="240"  Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Row="4" Grid.Column="1"/>
+		<sdk:Label HorizontalAlignment="Right" Content="Роль"  VerticalAlignment="Center" Grid.Row="5" Margin="0,0,5,0"/>
+        <ComboBox x:Name="comboBoxUserRole" DisplayMemberPath="RoleName"  Width="240"  Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Row="5" SelectionChanged="textBoxUserRole_SelectionChanged" Grid.Column="1" />
+        <sdk:Label HorizontalAlignment="Right" x:Name="labelGroup" Content="Группа"  VerticalAlignment="Center" Grid.Row="6"   d:LayoutOverrides="GridBox" Margin="0,0,5,0"/>
+        <ComboBox x:Name="comboBoxUserGroup" DisplayMemberPath="GroupName"  Width="240"  Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Row="6"  Grid.Column="1"   d:LayoutOverrides="GridBox"/>
+        <Button x:Name="CancelButton" VerticalAlignment="Bottom" Content="Отменить" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="9" Grid.Column="1" />
+        <Button x:Name="OKButton" Content="Создать" Click="OKButton_Click" Height="23" Margin="53,12,79,0" Grid.Row="9" Grid.Column="1" />
+        <sdk:Label HorizontalAlignment="Left" Content="Заполните всю информацию касающуюся пользователя" Margin="5,0,0,0"  d:LayoutOverrides="Height" Grid.Row="0" Grid.ColumnSpan="2"/>
+        <sdk:Label HorizontalAlignment="Right" Content="Имя"   VerticalAlignment="Center" Grid.Row="7" Margin="0,0,5,0"/>
+        <TextBox x:Name="textBoxFirstName" Grid.Row="7" Width="240"   Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Column="1"/>
+        <sdk:Label HorizontalAlignment="Right" Content="Фамилия"   VerticalAlignment="Center" Grid.Row="8" Margin="0,0,5,0"/>
+        <TextBox x:Name="textBoxLastName" Grid.Row="8" Width="240"   Margin="0,5,2,5" HorizontalAlignment="Left" Grid.Column="1"/>
+    </Grid>
+</sdk:ChildWindow>

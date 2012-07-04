@@ -1,0 +1,182 @@
+/*function(
+	Parent, 
+	Name, 
+	IsEnable, 
+	IsEnableCursor, 
+	IsBlockMenuCrossing, 
+	CallFunctionName
+)*/
+Menu.AddMenu(Menu.MainMenu, '>Часы', true, false, true, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Часы'), '   <variable:clock_day>.<variable:clock_month>.<variable:clock_year>', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Часы'), '    <variable:clock_hour>.<variable:clock_minutes>.<variable:clock_seconds>', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Часы'), ' Коррекция хода', true, true, false, StdEdit, ["clock_correction"]);
+	Menu.AddMenu(Menu.GetMenuByName('>Часы'), '   <variable:clock_correction>', true, true, false, null, null);
+	
+Menu.AddMenu(Menu.MainMenu, '>Измерения', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Измерения'), 'Напряжения...', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Напряжения...'), 'UАВ Н = <variable:UАВ Н > В', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Напряжения...'), 'UАВ КЗ= <variable:UАВ КЗ> В', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Напряжения...'), 'UВС Н = <variable:UВС Н > В', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Напряжения...'), 'UВС КЗ= <variable:UВС КЗ> В', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Измерения'), 'Токи...', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), '3I0 Н =<variable:3I0 Н > А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), '3I0 КЗ=<variable:3I0 КЗ> А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IА  Н =<variable:IА  Н > А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IА  КЗ=<variable:IА  КЗ> А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IВ  Н =<variable:IВ  Н > А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IВ  КЗ=<variable:IВ  КЗ> А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IС  Н =<variable:IС  Н > А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Токи...'), 'IС  КЗ=<variable:IС  КЗ> А', true, true, false, null, null);
+
+Menu.AddMenu(Menu.MainMenu, '>Настройка', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'Входы', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ01...', true, true, false, StdEditList, ["ВходыДВ01", DVList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ02...', true, true, false, StdEditList, ["ВходыДВ02", DVList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ03...', true, true, false, StdEditList, ["ВходыДВ03", DVList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ04...', true, true, false, StdEditList, ["ВходыДВ04", DVList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ05...', true, true, false, StdEditList, ["ВходыДВ05", DVList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Входы'), 'ДВ06...', true, true, false, StdEditList, ["ВходыДВ06", DVList, false]);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'Выходы ком.', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выходы ком.'), 'Р01...', true, true, false, StdEditList, ["Выходы комР01", RList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Выходы ком.'), 'Р02...', true, true, false, StdEditList, ["Выходы комР02", RList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Выходы ком.'), 'Р03...', true, true, false, StdEditList, ["Выходы комР03", RList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Выходы ком.'), 'Р04...', true, true, false, StdEditList, ["Выходы комР04", RList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Выходы ком.'), 'Р05...', true, true, false, StdEditList, ["Выходы комР05", RList, false]);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'Индикация', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ1...', true, true, false, StdEditList, ["ИндикацияСДИ1", IndicationList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ2...', true, true, false, StdEditList, ["ИндикацияСДИ2", IndicationList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ3...', true, true, false, StdEditList, ["ИндикацияСДИ3", IndicationList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ4...', true, true, false, StdEditList, ["ИндикацияСДИ4", IndicationList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ5...', true, true, false, StdEditList, ["ИндикацияСДИ5", IndicationList, false]);
+		Menu.AddMenu(Menu.GetMenuByName('Индикация'), 'СДИ6...', true, true, false, StdEditList, ["ИндикацияСДИ6", IndicationList, false]);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'Трансформатор', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), 'Коэф трансфор ТН', true, true, false, StdEdit, ["Коэф трансфор ТН"]);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), '<variable:Коэф трансфор ТН>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), 'Коэф трансфор ТТ', true, true, false, StdEdit, ["Коэф трансфор ТТ"]);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), '<variable:Коэф трансфор ТТ>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), 'Коэф трансфор Т0', true, true, false, StdEdit, ["Коэф трансфор Т0"]);
+		Menu.AddMenu(Menu.GetMenuByName('Трансформатор'), '<variable:Коэф трансфор Т0>', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'УВВ', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('УВВ'), 'Дискр входы...', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Дискр входы...'), 'Вид сигнала', true, false, true, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ01', true, true, false, StdEditList, ["ДВ01Вид сигнала", DVOKindSignal, true, 'ДВ01']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ01Вид сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ02', true, true, false, StdEditList, ["ДВ02Вид сигнала", DVOKindSignal, true, 'ДВ02']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ02Вид сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ03', true, true, false, StdEditList, ["ДВ03Вид сигнала", DVOKindSignal, true, 'ДВ03']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ03Вид сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ04', true, true, false, StdEditList, ["ДВ04Вид сигнала", DVOKindSignal, true, 'ДВ04']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ04Вид сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ05', true, true, false, StdEditList, ["ДВ05Вид сигнала", DVOKindSignal, true, 'ДВ05']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ05Вид сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), 'ДВ06', true, true, false, StdEditList, ["ДВ06Вид сигнала", DVOKindSignal, true, 'ДВ06']);
+				Menu.AddMenu(Menu.GetMenuByName('Вид сигнала'), '<eval:(DVOKindSignal[<variable:ДВ06Вид сигнала>])>', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Дискр входы...'), 'Тип сигнала', true, false, true, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ01', true, true, false, StdEditList, ["ДВ01Тип сигнала", DVOTypeSignal, true, 'ДВ01']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ01Тип сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ02', true, true, false, StdEditList, ["ДВ02Тип сигнала", DVOTypeSignal, true, 'ДВ02']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ02Тип сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ03', true, true, false, StdEditList, ["ДВ03Тип сигнала", DVOTypeSignal, true, 'ДВ03']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ03Тип сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ04', true, true, false, StdEditList, ["ДВ04Тип сигнала", DVOTypeSignal, true, 'ДВ04']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ04Тип сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ05', true, true, false, StdEditList, ["ДВ05Тип сигнала", DVOTypeSignal, true, 'ДВ05']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ05Тип сигнала>])>', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), 'ДВ06', true, true, false, StdEditList, ["ДВ06Тип сигнала", DVOTypeSignal, true, 'ДВ06']);
+				Menu.AddMenu(Menu.GetMenuByName('Тип сигнала'), '<eval:(DVOTypeSignal[<variable:ДВ06Тип сигнала>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('УВВ'), 'Допуск ДВ...', true, false, true, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ01...', true, true, false, StdEdit, ["Допуск ДВ...ДВ01"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ01> мс', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ02...', true, true, false, StdEdit, ["Допуск ДВ...ДВ02"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ02> мс', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ03...', true, true, false, StdEdit, ["Допуск ДВ...ДВ03"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ03> мс', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ04...', true, true, false, StdEdit, ["Допуск ДВ...ДВ04"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ04> мс', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ05...', true, true, false, StdEdit, ["Допуск ДВ...ДВ05"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ05> мс', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), 'ДВ06...', true, true, false, StdEdit, ["Допуск ДВ...ДВ06"]);
+			Menu.AddMenu(Menu.GetMenuByName('Допуск ДВ...'), '<variable:Допуск ДВ...ДВ06> мс', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'Коммуникация', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Коммуникация'), 'Имя ячейки.', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Коммуникация'), 'Без имени', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Коммуникация'), 'Адрес в сети', true, true, false, StdEdit, ["Адрес в сети"]);
+		Menu.AddMenu(Menu.GetMenuByName('Коммуникация'), '<variable:Адрес в сети>', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Настройка'), 'О-функции', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('О-функции'), 'Источники', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Источники'), 'О-функция', true, false, true, StdEditList, ["ИсточникиО-функция", OFunctionSource, false]);
+		Menu.AddMenu(Menu.GetMenuByName('О-функции'), 'Таймера', true, true, false, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Источники'), 'О-функция ', true, false, true, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('О-функция '), 'Таймер паузы', true, true, false, StdEdit, ["Таймер паузы"]);
+				Menu.AddMenu(Menu.GetMenuByName('О-функция '), '<variable:Таймер паузы> с', true, true, false, null, null);
+				Menu.AddMenu(Menu.GetMenuByName('О-функция '), 'Таймер работы', true, true, false, StdEdit, ["Таймер работы"]);
+				Menu.AddMenu(Menu.GetMenuByName('О-функция '), '<variable:Таймер работы> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('О-функции'), 'Тип функции', true, false, true, null, null);
+			Menu.AddMenu(Menu.GetMenuByName('Тип функции'), 'О-функция', true, true, false, StdEditList, ["О-функцииТип функции", OFunctionType, true, 'О-функция']);
+			Menu.AddMenu(Menu.GetMenuByName('Тип функции'), '<eval:(OFunctionType[<variable:О-функцииТип функции>])>', true, true, false, null, null);
+			
+Menu.AddMenu(Menu.MainMenu, '>Конфигурация', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Конфигурация'), 'МТЗ        <eval:(Configuration[<variable:КонфигурацияМТЗ>])>', true, true, false, StdEditList, ["КонфигурацияМТЗ", Configuration, true, 'МТЗ']);
+	Menu.AddMenu(Menu.GetMenuByName('>Конфигурация'), 'ЗЗ         <eval:(Configuration[<variable:Конфигурация ЗЗ>])>', true, true, false, StdEditList, ["Конфигурация ЗЗ", Configuration, true, 'ЗЗ']);
+	Menu.AddMenu(Menu.GetMenuByName('>Конфигурация'), 'АПВ        <eval:(Configuration[<variable:КонфигурацияАПВ>])>', true, true, false, StdEditList, ["КонфигурацияАПВ", Configuration, true, 'АПВ']);
+
+Menu.AddMenu(Menu.MainMenu, '>Авария', true, false, true, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Авария'), '№125   11:21:03.35', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Авария'), '20.07.07  9)', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Авария'), '4,353 А', true, true, false, null, null);
+	
+Menu.AddMenu(Menu.MainMenu, '>Диагностика', true, false, true, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>Диагностика'), 'Ошибок нет', true, true, false, null, null);
+	
+Menu.AddMenu(Menu.MainMenu, '>МТЗ', (GetVariable("КонфигурацияМТЗ") == 0), true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>МТЗ'), 'Уставки...', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки...'), 'Уставка МТЗ1', true, true, false, StdEdit, ["Уставка МТЗ1"]);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки...'), '<variable:Уставка МТЗ1> А', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки...'), 'Уставка МТЗ2', true, true, false, StdEdit, ["Уставка МТЗ2"]);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки...'), '<variable:Уставка МТЗ2> А', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>МТЗ'), 'Выдержки...', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), 'Выдержка МТЗ1', true, true, false, StdEdit, ["Выдержка МТЗ1"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), '<variable:Выдержка МТЗ1> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), 'Выдержка МТЗ2', true, true, false, StdEdit, ["Выдержка МТЗ2"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), '<variable:Выдержка МТЗ2> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), 'Т Ускор МТЗ', true, true, false, StdEdit, ["Уста"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), '<variable:Т Ускор МТЗ> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), 'Т Ввода ускор', true, true, false, StdEdit, ["Уста"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...'), '<variable:Т Ввода ускор> с', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>МТЗ'), 'Управление...', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), 'Вариант МТЗ', true, true, false, StdEditList, ["Вариант МТЗ", MTZVariant, true, 'Вариант МТЗ']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '<eval:(MTZVariant[<variable:Вариант МТЗ>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '1 Ступень МТЗ', true, true, false, StdEditList, ["1 Ступень МТЗ", OnOff, true, '1 Ступень МТЗ']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '<eval:(OnOff[<variable:1 Ступень МТЗ>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '2 Ступень МТЗ', true, true, false, StdEditList, ["2 Ступень МТЗ", OnOff, true, '2 Ступень МТЗ']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '<eval:(OnOff[<variable:2 Ступень МТЗ>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), 'Ускор МТЗ2', true, true, false, StdEditList, ["Ускор МТЗ2", OnOff, true, 'Ускор МТЗ2']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...'), '<eval:(OnOff[<variable:Ускор МТЗ2>])>', true, true, false, null, null);
+	
+Menu.AddMenu(Menu.MainMenu, '>ЗЗ', (GetVariable("Конфигурация ЗЗ") == 0), true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>ЗЗ'), 'Уставки... ', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки... '), 'Уставка ЗЗ  3I0', true, true, false, StdEdit, ["Уставка ЗЗ"]);
+		Menu.AddMenu(Menu.GetMenuByName('Уставки... '), '<variable:Уставка ЗЗ> мА', true, true, false, null, null);	
+	Menu.AddMenu(Menu.GetMenuByName('>ЗЗ'), 'Выдержки... ', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки... '), 'Выдержка ЗЗ', true, true, false, StdEdit, ["Выдержка ЗЗ"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки... '), '<variable:Выдержка ЗЗ> с', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>ЗЗ'), 'Управление... ', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление... '), 'Защита ЗЗ', true, true, false, StdEditList, ["Защита ЗЗ", OnOff, true, 'Защита ЗЗ']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление... '), '<eval:(OnOff[<variable:Защита ЗЗ>])>', true, true, false, null, null);
+	
+Menu.AddMenu(Menu.MainMenu, '>АПВ', (GetVariable("КонфигурацияАПВ") == 0), true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>АПВ'), 'Выдержки...  ', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), '1 Цикл АПВ', true, true, false, StdEdit, ["1 Цикл АПВ"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), '<variable:1 Цикл АПВ> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), 'Блок АПВ1', true, true, false, StdEdit, ["Блок АПВ1"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), '<variable:Блок АПВ1> с', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), 'Блок АПВ2', true, true, false, StdEdit, ["Блок АПВ2"]);
+		Menu.AddMenu(Menu.GetMenuByName('Выдержки...  '), '<variable:Блок АПВ2> с', true, true, false, null, null);
+	Menu.AddMenu(Menu.GetMenuByName('>АПВ'), 'Управление...  ', true, false, true, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), 'АПВ', true, true, false, StdEditList, ["АПВ", OnOff, true, 'АПВ']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), '<eval:(OnOff[<variable:АПВ>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), 'Пуск от МТЗ1', true, true, false, StdEditList, ["Пуск от МТЗ1", OnOff, true, 'Пуск от МТЗ1']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), '<eval:(OnOff[<variable:Пуск от МТЗ1>])>', true, true, false, null, null);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), 'Пуск от МТЗ2', true, true, false, StdEditList, ["Пуск от МТЗ2", OnOff, true, 'Пуск от МТЗ2']);
+		Menu.AddMenu(Menu.GetMenuByName('Управление...  '), '<eval:(OnOff[<variable:Пуск от МТЗ2>])>', true, true, false, null, null);
+

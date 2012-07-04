@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<body>
+	<scripts>
+		<element path="Data/МРЗС-05М/function.js"/>
+
+		<element path="Data/МРЗС-05М/variablesClass.js"/>
+		<element path="Data/МРЗС-05М/variables.js"/>
+
+		<element path="Data/МРЗС-05М/menuPassword.js"/>
+		<element path="Data/МРЗС-05М/menuConfirm.js"/>
+
+		<element path="Data/МРЗС-05М/menuClock.js"/>
+		<element path="Data/МРЗС-05М/menuStdEdit.js"/>
+		<element path="Data/МРЗС-05М/menuStdEditList.js"/>
+			
+		<element path="Data/МРЗС-05М/menuClass.js"/>
+		<element path="Data/МРЗС-05М/menu.js"/>
+
+		<element path="Data/МРЗС-05М/form.js"/>
+		<element path="Data/МРЗС-05М/form_create.js"/>
+		<element path="Data/МРЗС-05М/form_events.js"/>
+		
+		<element path="Data/МРЗС-05М/defence.js"/>
+		<element path="Data/МРЗС-05М/defence_MTZ.js"/>
+		<element path="Data/МРЗС-05М/defence_ZZ.js"/>
+		<element path="Data/МРЗС-05М/defence_APV.js"/>
+		
+	</scripts>
+	<buttons>
+	</buttons>
+	<edits>
+		<element name="disp1"/>
+		<element name="disp2"/>
+		
+		<element name="SDIEdit1"/>
+		<element name="SDIEdit2"/>
+		<element name="SDIEdit3"/>
+		<element name="SDIEdit4"/>
+		<element name="SDIEdit5"/>
+		<element name="SDIEdit6"/>
+	</edits>
+	<labels>
+		<element name="labelDV" text="Дискретные входы" top="5" left="310" font="Tahoma" font_size="10"/>
+		<element name="labelR" text="Реле" top="5" left="840" font="Tahoma" font_size="10"/>
+
+		<element name="labelDVO1" text="ДВ01" top="30" left="320" font="Tahoma" font_size="16"/>
+		<element name="labelDVO2" text="ДВ02" top="80" left="320" font="Tahoma" font_size="16"/>
+		<element name="labelDVO3" text="ДВ03" top="130" left="320" font="Tahoma" font_size="16"/>
+		<element name="labelDVO4" text="ДВ04" top="180" left="320" font="Tahoma" font_size="16"/>
+		<element name="labelDVO5" text="ДВ05" top="230" left="320" font="Tahoma" font_size="16"/>
+		<element name="labelDVO6" text="ДВ06" top="280" left="320" font="Tahoma" font_size="16"/>
+
+		<element name="labelR01" text="Р01" top="30" left="870" font="Tahoma" font_size="16"/>
+		<element name="labelR02" text="Р02" top="80" left="870" font="Tahoma" font_size="16"/>
+		<element name="labelR03" text="Р03" top="130" left="870" font="Tahoma" font_size="16"/>
+		<element name="labelR04" text="Р04" top="180" left="870" font="Tahoma" font_size="16"/>
+		<element name="labelR05" text="Р05" top="230" left="870" font="Tahoma" font_size="16"/>
+	</labels>
+	<images>
+		<element name="ImageDeviceBackground"/>
+
+		<element name="DeviceIndicator"/>
+		<element name="SDIIndicator1"/>
+		<element name="SDIIndicator2"/>
+		<element name="SDIIndicator3"/>
+		<element name="SDIIndicator4"/>
+		<element name="SDIIndicator5"/>
+		<element name="SDIIndicator6"/>
+
+		<element name="btn0"/>
+		<element name="btn1"/>
+		<element name="btn2"/>
+		<element name="btn3"/>
+		<element name="btn4"/>
+		<element name="btn5"/>
+		<element name="btn6"/>
+		<element name="btn7"/>
+		<element name="btn8"/>
+		<element name="btn9"/>
+		<element name="btnDot"/>
+		<element name="btnEnter"/>
+		<element name="btnEsc"/>
+		<element name="btnF"/>
+		<element name="btnLEFT"/>
+		<element name="btnRIGHT"/>
+		<element name="btnUP"/>
+		<element name="btnBOTTOM"/>
+
+
+		<element name="btnDV01"/>
+		<element name="btnDV02"/>
+		<element name="btnDV03"/>
+		<element name="btnDV04"/>
+		<element name="btnDV05"/>
+		<element name="btnDV06"/>
+
+		<element name="btnR01"/>
+		<element name="btnR02"/>
+		<element name="btnR03"/>
+		<element name="btnR04"/>
+		<element name="btnR05"/>
+	</images>
+	<timers>
+		<element name="TimerCursor"/>
+		<element name="TimerButtonClick"/>
+		<element name="TimerClock"/>
+		<element name="TimerDefenceMTZ1"/>
+		<element name="TimerDefenceMTZ2"/>
+		<element name="TimerDefenceZZ"/>
+		<element name="TimerDefenceAPV"/>
+	</timers>
+</body>

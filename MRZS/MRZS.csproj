@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F84C112A-FF68-44DF-B2EF-79D5619603BD}</ProjectGuid>
+    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MRZS</RootNamespace>
+    <AssemblyName>MRZS</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>true</SilverlightApplication>
+    <SupportedCultures>en-US</SupportedCultures>
+    <XapOutputs>true</XapOutputs>
+    <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
+    <XapFilename>MRZS.xap</XapFilename>
+    <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
+    <SilverlightAppEntry>MRZS.App</SilverlightAppEntry>
+    <TestPageFileName>TestPage.html</TestPageFileName>
+    <CreateTestPage>true</CreateTestPage>
+    <ValidateXaml>true</ValidateXaml>
+    <EnableOutOfBrowser>true</EnableOutOfBrowser>
+    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
+    <UsePlatformExtensions>false</UsePlatformExtensions>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+    <LinkedServerProject>..\MRZS.Web\MRZS.Web.csproj</LinkedServerProject>
+    <Utf8Output>true</Utf8Output>
+    <ExpressionBlendVersion>5.0.30129.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="C1.Silverlight">
+      <HintPath>Libs\C1.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.Chart">
+      <HintPath>C:\Program Files (x86)\ComponentOne\Studio for Silverlight\Bin\C1.Silverlight.Chart.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.Chart.Extended, Version=3.0.20101.71, Culture=neutral, PublicKeyToken=2aa4ec5576d6c3ce, processorArchitecture=MSIL" />
+    <Reference Include="C1.Silverlight.DataGrid">
+      <HintPath>C:\Program Files (x86)\ComponentOne\Studio for Silverlight\Bin\C1.Silverlight.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.DataGrid.Ria">
+      <HintPath>C:\Program Files (x86)\ComponentOne\Studio for Silverlight\Bin\C1.Silverlight.DataGrid.Ria.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.DateTimeEditors">
+      <HintPath>Libs\C1.Silverlight.DateTimeEditors.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.Extended">
+      <HintPath>Libs\C1.Silverlight.Extended.dll</HintPath>
+    </Reference>
+    <Reference Include="C1.Silverlight.MediaPlayer">
+      <HintPath>C:\Program Files (x86)\ComponentOne\Studio for Silverlight\Bin\C1.Silverlight.MediaPlayer.dll</HintPath>
+    </Reference>
+    <Reference Include="Divelements.SandRibbon">
+      <HintPath>Libs\Divelements.SandRibbon.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Expression.Drawing">
+      <HintPath>Libs\Microsoft.Expression.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Windows.Controls.WatermarkedTextBox">
+      <HintPath>Libs\Microsoft.Windows.Controls.WatermarkedTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows" />
+    <Reference Include="mscorlib" />
+    <Reference Include="system" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Windows.Controls.Data" />
+    <Reference Include="System.Windows.Controls.Data.DataForm.Toolkit, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Libs\System.Windows.Controls.Data.DataForm.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Controls.Data.Input" />
+    <Reference Include="System.ServiceModel.DomainServices.Client" />
+    <Reference Include="System.ServiceModel.DomainServices.Client.Web" />
+    <Reference Include="System.ServiceModel.Web.Extensions" />
+    <Reference Include="System.Windows.Controls.Data.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.DataVisualization.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.DomainServices, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Input" />
+    <Reference Include="System.Windows.Controls.Input.Toolkit" />
+    <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Controls.Toolkit.Internals, Version=4.0.5.0, Culture=neutral, PublicKeyToken=2c5c654d367bf4a7, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Windows.Browser" />
+    <Reference Include="System.Windows.Controls" />
+    <Reference Include="System.Windows.Controls.Navigation" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\MRZS.Web\Resources\RegistrationDataResources.Designer.cs">
+      <Link>Web\Resources\RegistrationDataResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RegistrationDataResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="..\MRZS.Web\Resources\ValidationErrorResources.Designer.cs">
+      <Link>Web\Resources\ValidationErrorResources.Designer.cs</Link>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ValidationErrorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Resources\ApplicationStrings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ApplicationStrings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Assets\Resources\ErrorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ErrorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Generated_Code\Models\Shared\User.shared.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Generated_Code\MRZS.Web.g.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Helpers\DateTimeConverter.cs" />
+    <Compile Include="Helpers\NullToBoolConverter.cs" />
+    <Compile Include="Helpers\ReversedVisibilityConverter.cs" />
+    <Compile Include="Helpers\SelectedColorConverter.cs" />
+    <Compile Include="Helpers\StudentStatisticConverter.cs" />
+    <Compile Include="Helpers\UserStatisticConverter.cs" />
+    <Compile Include="Helpers\VisibilityConverter.cs" />
+    <Compile Include="Models\EmulatorStarter.cs" />
+    <Compile Include="Models\ViewModels\BaseViewModel.cs" />
+    <Compile Include="Models\ViewModels\BookViewModel.cs" />
+    <Compile Include="Models\Constants.cs" />
+    <Compile Include="Models\ViewModels\DelegateCommand.cs" />
+    <Compile Include="Models\LoginInfo.cs" />
+    <Compile Include="Models\ViewModels\AnswersStatisticViewModel.cs" />
+    <Compile Include="Models\ViewModels\SectionViewModel.cs" />
+    <Compile Include="Models\ViewModels\StatisticViewModel.cs" />
+    <Compile Include="Models\ViewModels\UserStatisticViewModel.cs" />
+    <Compile Include="Models\UserExtensions.cs" />
+    <Compile Include="Models\RegistrationDataExtensions.cs" />
+    <Compile Include="Controls\BusyIndicator.cs" />
+    <Compile Include="Controls\VisualStates.cs" />
+    <Compile Include="Controls\CustomDataForm.cs" />
+    <Compile Include="Helpers\DataBindingExtensions.cs" />
+    <Compile Include="Helpers\DataFieldExtensions.cs" />
+    <Compile Include="Helpers\NotOperatorValueConverter.cs" />
+    <Compile Include="Helpers\StringFormatValueConverter.cs" />
+    <Compile Include="Helpers\TargetNullValueConverter.cs" />
+    <Compile Include="Helpers\ResourceWrapper.cs" />
+    <Compile Include="Assets\Resources\SecurityQuestions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityQuestions.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Resources\RegistrationDataResources.Designer.cs" />
+    <Compile Include="Resources\ValidationErrorResources.Designer.cs" />
+    <Compile Include="Views\Admin\Books.xaml.cs">
+      <DependentUpon>Books.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Groups.xaml.cs">
+      <DependentUpon>Groups.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\CreateNewGroup.xaml.cs">
+      <DependentUpon>CreateNewGroup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\CreateNewUser.xaml.cs">
+      <DependentUpon>CreateNewUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\MoveQuestion.xaml.cs">
+      <DependentUpon>MoveQuestion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\MoveQuestionViewModel.cs" />
+    <Compile Include="Views\Admin\Popups\NewAnswer.xaml.cs">
+      <DependentUpon>NewAnswer.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\NewPage.xaml.cs">
+      <DependentUpon>NewPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\NewQuestion.xaml.cs">
+      <DependentUpon>NewQuestion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\NewQuiz.xaml.cs">
+      <DependentUpon>NewQuiz.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Popups\NewUser.xaml.cs">
+      <DependentUpon>NewUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Admin\Users.xaml.cs">
+      <DependentUpon>Users.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Coordinator\Coordination.xaml.cs">
+      <DependentUpon>Coordination.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Coordinator\Popups\DefineStudentSection.xaml.cs">
+      <DependentUpon>DefineStudentSection.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Coordinator\Statistic.xaml.cs">
+      <DependentUpon>Statistic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Coordinator\UserStatistic.xaml.cs">
+      <DependentUpon>UserStatistic.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Emulator\Emulator-05M.xaml.cs">
+      <DependentUpon>Emulator-05M.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Emulator\InputDV.xaml.cs">
+      <DependentUpon>InputDV.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Emulator\OutputR.xaml.cs">
+      <DependentUpon>OutputR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ErrorWindow.xaml.cs">
+      <DependentUpon>ErrorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\About.xaml.cs">
+      <DependentUpon>About.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Home.xaml.cs">
+      <DependentUpon>Home.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Login\LoginStatus.xaml.cs">
+      <DependentUpon>LoginStatus.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\LoginForm.xaml.cs">
+      <DependentUpon>LoginForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\LoginRegistrationWindow.xaml.cs">
+      <DependentUpon>LoginRegistrationWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Login\RegistrationForm.xaml.cs">
+      <DependentUpon>RegistrationForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Student\Education.xaml.cs">
+      <DependentUpon>Education.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Student\InterectiveTestResult.Model.cs" />
+    <Compile Include="Views\Student\InterectiveTestResult.xaml.cs">
+      <DependentUpon>InterectiveTestResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Student\StartEducation.xaml.cs">
+      <DependentUpon>StartEducation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Student\Test.xaml.cs">
+      <DependentUpon>Test.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Student\TestResult.Model.cs" />
+    <Compile Include="Views\Student\TestResult.xaml.cs">
+      <DependentUpon>TestResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WarrningPopup.xaml.cs">
+      <DependentUpon>WarrningPopup.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Assets\Styles.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Controls\BusyIndicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\Books.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Groups.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\CreateNewGroup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\CreateNewUser.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Admin\Popups\MoveQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\NewAnswer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\NewPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\NewQuestion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\NewQuiz.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Popups\NewUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Admin\Users.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Coordinator\Coordination.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Coordinator\Popups\DefineStudentSection.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Coordinator\Statistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Coordinator\UserStatistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Emulator\Emulator-05M.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Emulator\InputDV.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Emulator\OutputR.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ErrorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="Views\About.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="Views\Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login\LoginStatus.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login\LoginForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="Views\Login\LoginRegistrationWindow.xaml">
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Login\RegistrationForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:MarkupCompilePass1</Generator>
+    </Page>
+    <Page Include="Views\Student\Education.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Student\InterectiveTestResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Student\StartEducation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Student\Test.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Student\TestResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WarrningPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AppManifest.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Libs\System.Windows.Controls.Data.DataForm.Toolkit.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="..\MRZS.Web\Resources\RegistrationDataResources.resx">
+      <Link>Web\Resources\RegistrationDataResources.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RegistrationDataResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\MRZS.Web\Resources\ValidationErrorResources.resx">
+      <Link>Web\Resources\ValidationErrorResources.resx</Link>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ValidationErrorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\ApplicationStrings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ApplicationStrings.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MRZS</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\ErrorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ErrorResources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MRZS</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Resources\SecurityQuestions.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SecurityQuestions.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MRZS</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\RegistrationDataResources.resx" />
+    <EmbeddedResource Include="Resources\ValidationErrorResources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\DataSources\MRZS.Web.Services.AnswerContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.BookContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.GroupContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.PageContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.QuestionContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.QuizContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.ResultAnswerContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.ResultQuizContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.RoleContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.SectionContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.UserContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.UserRegistrationContext.datasource" />
+    <None Include="Properties\OutOfBrowserSettings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1296766829_stock_task-assigned-to.png" />
+    <Resource Include="Images\1297289393_graduated.png" />
+    <Resource Include="Images\1297804238_book_add.png" />
+    <Resource Include="Images\deletert9.png" />
+    <Resource Include="Images\editfr9.png" />
+    <Resource Include="Images\1297885081_layout_add.png" />
+    <Resource Include="Images\1297886907_tests.png" />
+    <Resource Include="Images\1297893540_Arrow Up.png" />
+    <Resource Include="Images\1297893552_Arrow Down.png" />
+    <Resource Include="Images\1297981143_disk.png" />
+    <Resource Include="Images\1298142732_page_text_add.png" />
+    <Resource Include="Images\1298238222_go-previous-rtl.png" />
+    <Resource Include="Images\1298238719_gnome-session-logout.png" />
+    <Resource Include="Images\1298497749_daemons.png" />
+    <Content Include="Images\1299358394_arrow_cycle.ico" />
+    <Resource Include="Images\1300912148_back.png" />
+    <Content Include="Libs\C1.Silverlight.Chart.dll" />
+    <Content Include="Libs\C1.Silverlight.Chart.Extended.dll" />
+    <Content Include="Libs\C1.Silverlight.DataGrid.dll" />
+    <Content Include="Libs\C1.Silverlight.DataGrid.Ria.dll" />
+    <Content Include="Libs\C1.Silverlight.DateTimeEditors.dll" />
+    <Content Include="Libs\C1.Silverlight.dll" />
+    <Content Include="Libs\C1.Silverlight.Extended.dll" />
+    <Content Include="Libs\C1.Silverlight.MediaPlayer.dll" />
+    <Resource Include="Images\1292357295_info.png" />
+    <Content Include="Libs\Divelements.SandRibbon.dll" />
+    <Content Include="Libs\Microsoft.Expression.Drawing.dll" />
+    <Content Include="Libs\Microsoft.Windows.Controls.WatermarkedTextBox.dll" />
+    <Content Include="ServiceReferences.ClientConfig" />
+    <Resource Include="Images\image002.jpg" />
+    <Resource Include="Images\image004.jpg" />
+    <Resource Include="Web\Images\deletert9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Web\Images\editfr9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
+        <SilverlightProjectProperties />
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

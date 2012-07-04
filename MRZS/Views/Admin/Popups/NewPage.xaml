@@ -1,0 +1,70 @@
+﻿<sdk:ChildWindow
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
+     xmlns:c1ext="clr-namespace:C1.Silverlight.Extended;assembly=C1.Silverlight.Extended" 
+    mc:Ignorable="d" x:Class="MRZS.Views.Admin.Popups.NewPage"
+           Width="740" Height="Auto" 
+           Title="Создание страницы">
+	<Grid x:Name="LayoutRoot" Margin="2">
+		<Grid.RowDefinitions>
+			<RowDefinition />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<sdk:Label Content="Путь к странице" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Row="0" Grid.Column="0" d:LayoutOverrides="Height"/>
+		<TextBox x:Name="textBoxPagePath" Grid.Row="0" Margin="5,5,5,5" Height="23" Grid.Column="1"   HorizontalAlignment="Stretch"/>
+		<sdk:Label Content="Номер" Visibility="Collapsed" HorizontalAlignment="Left" Margin="5,5,5,5" Grid.Row="1" Grid.Column="0" d:LayoutOverrides="Height"/>
+        <toolkit:NumericUpDown x:Name="pageOrder" Visibility="Collapsed" Grid.Column="1" HorizontalAlignment="Left"  Value="1" MinWidth="100" Width="Auto" Margin="5,5,0,5" Grid.Row="1"/>
+		<CheckBox x:Name="checkBoxLastPage" IsChecked="True" Visibility="Collapsed" Content="Последняя страница?" Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,8,20,6" Grid.Column="1" />
+		<Button x:Name="CancelButton" Content="Отменить" Grid.ColumnSpan="2" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="3" />
+		<Button x:Name="OKButton" Content="Сохранить" Grid.ColumnSpan="2" Click="OKButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" Grid.Row="3" />
+		
+		<sdk:TabControl Height="350" Margin="5,8,0,0" HorizontalAlignment="Stretch" x:Name="tabControl" Grid.ColumnSpan="2" VerticalAlignment="Top" Grid.Column="0" Grid.Row="2">
+			<sdk:TabItem Header="Html содержимое" Visibility="Collapsed">
+				<Grid Background="#FFE5E5E5">
+					
+				</Grid>
+			</sdk:TabItem>
+			<sdk:TabItem Header="Медиа контент">
+				<Grid Background="#FFE5E5E5">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition Height="Auto"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<sdk:Label Content="Относительный путь к файлу" Grid.Column="0" Grid.Row="0"  VerticalAlignment="Center" Margin="5,5,5,5"/>
+					<TextBox x:Name="textBoxFilePath" Height="23" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="0" Margin="5,5,5,5" VerticalAlignment="Top"/> 					
+					
+					<sdk:Label Content="Название контента" Grid.Column="0" Grid.Row="1"  VerticalAlignment="Center" Margin="5,5,5,5"/>
+					<TextBox x:Name="textBoxContentName" Height="23" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="1" Margin="5,5,5,5" VerticalAlignment="Top"/> 					
+					
+					<Button x:Name="buttonAddContent" Content="Добавить контент" Height="23" Width="120" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Click="buttonAddContent_Click" />
+					<Button x:Name="buttonDeleteContent" Content="Удалить контент" IsEnabled="False" Height="23" Width="120" HorizontalAlignment="Right" Grid.Row="2" Grid.Column="1" Margin="5,5,145,5" Click="buttonDeleteContent_Click" />
+					<sdk:DataGrid Margin="5,5,5,5" x:Name="gridContents" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" IsReadOnly="True" AutoGenerateColumns="False" SelectionChanged="gridContents_SelectionChanged">
+						<sdk:DataGrid.Columns>
+                            <sdk:DataGridTextColumn Header="Название контента" Binding="{Binding ContentName,Mode=OneWay}"/>
+							<sdk:DataGridTextColumn Header="Путь к файлу" Binding="{Binding Path,Mode=OneWay}"/>	
+						</sdk:DataGrid.Columns>
+					</sdk:DataGrid>
+					
+				</Grid>
+			</sdk:TabItem>
+		</sdk:TabControl>
+		
+	</Grid>
+</sdk:ChildWindow>

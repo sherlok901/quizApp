@@ -1,0 +1,88 @@
+﻿<navigation:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="MRZS.Views.Admin.Users"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Users Page" xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" xmlns:my="clr-namespace:MRZS.Web.Services" xmlns:my1="clr-namespace:MRZS.Web.Models">
+    <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <sdk:Label HorizontalAlignment="Left" Content="Пользователи" Margin="8,8,0,0" VerticalAlignment="Top" Grid.Row="0"/>
+        <sdk:DataGrid MinHeight="100" Height="Auto" x:Name="gridUsers" VerticalAlignment="Stretch" Margin="5" Width="Auto" Grid.ColumnSpan="4" Grid.Column="0" AutoGenerateColumns="False" Grid.Row="1" SelectionChanged="gridUsers_SelectionChanged">
+            <sdk:DataGrid.Columns>
+            	<sdk:DataGridTemplateColumn>
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style x:Key="customButtonStyle" TargetType="Button">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Grid.Resources>
+                                <Button x:Name="myButton" Width="24" Height="24" Click="ButtonDeleteUser_Click">
+                                    <Button.Content>
+                                        <Image Source="/MRZS;component/Web/Images/deletert9.png"  Stretch="Uniform"/>
+                                    </Button.Content>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTemplateColumn>
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.Resources>
+                                    <Style x:Key="customButtonStyle" TargetType="Button">
+                                        <Setter Property="Padding" Value="0"/>
+                                        <Setter Property="BorderThickness" Value="0"/>
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="Button">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" Width="Auto" />
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Grid.Resources>
+                                <Button x:Name="myButton" Width="24" Height="24"  Click="buttonEditUser_Click">
+                                    <Image Source="/MRZS;component/Web/Images/editfr9.png"  Stretch="Uniform"/>
+                                </Button>
+                            </Grid>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTextColumn Binding="{Binding FirstName, Mode=OneWay}" IsReadOnly="True" Header="Имя" />
+                <sdk:DataGridTextColumn Binding="{Binding LastName, Mode=OneWay}" IsReadOnly="True" Header="Фамилия" />
+                <sdk:DataGridTextColumn Binding="{Binding UserLogin, Mode=OneWay}" IsReadOnly="True" Header="Логин" />
+                <sdk:DataGridTextColumn Binding="{Binding UserRole, Mode=OneWay}" IsReadOnly="True" Header="Роль" />
+                <sdk:DataGridTextColumn Binding="{Binding LastActivityDate, Mode=OneWay,  Converter={StaticResource DateTimeConverter}}" IsReadOnly="True" Header="Время последней активности" />
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+        <Button Content="Удалить пользователя" x:Name="buttonDeleteUser" HorizontalAlignment="Right" IsEnabled="False" Margin="0,5,8,3" Width="150" Grid.Row="0" Grid.Column="3" d:LayoutOverrides="Height" Click="ButtonDeleteUser_Click" />
+		<Button Content="Редактировать пользователя" x:Name="buttonEditUser" HorizontalAlignment="Right" IsEnabled="False" Margin="0,5,8,3" Width="150" Grid.Row="0" Grid.Column="2" d:LayoutOverrides="Height" Click="buttonEditUser_Click" />
+        <Button Content="Создать пользователя"  HorizontalAlignment="Right" Margin="0,5,8,3" Width="150" Grid.Row="0" Grid.Column="1" d:LayoutOverrides="Height" Click="Button_Click" />
+        
+    </Grid>
+</navigation:Page>

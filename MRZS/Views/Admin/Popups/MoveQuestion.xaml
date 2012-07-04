@@ -1,0 +1,99 @@
+﻿<navigation:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="MRZS.Views.Admin.Popups.MoveQuestion"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="MoveQuestion Page">
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition></RowDefinition>
+			<RowDefinition Height="29"></RowDefinition>
+		</Grid.RowDefinitions>
+        <Grid Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="20"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Книга:" Height="20" Grid.Row="0" FontWeight="Bold"/>
+            <TextBlock Text="{Binding SectionFrom.BookName}" Height="20" Grid.Row="1"/>
+            <TextBlock Text="Раздел:" Height="20" Grid.Row="2" FontWeight="Bold"/>
+            <TextBlock Text="{Binding SectionFrom.Name}" Height="20" Grid.Row="3"/>
+            <sdk:DataGrid VerticalAlignment="Stretch"
+                              AllowDrop="False"
+                              Grid.Row="4"
+                              IsReadOnly="True"
+                              SelectionMode="Single"
+                              SelectedItem="{Binding QuestionToMove, Mode=TwoWay}"
+                              ItemsSource="{Binding FromQuestionSet}" 
+                              AutoGenerateColumns="False"
+                              HorizontalAlignment="Stretch"
+                              x:Name="gridQuestionFrom">
+		        	<sdk:DataGrid.Columns>
+		        		<sdk:DataGridTextColumn Binding="{Binding Text}" Header="Вопрос" Width="*"></sdk:DataGridTextColumn>	     	
+					</sdk:DataGrid.Columns>
+				</sdk:DataGrid>
+        </Grid>
+        <Grid Grid.Column="1"
+					Margin="5" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto"
+					HorizontalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
+                <RowDefinition Height="60"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+                <TextBlock Text="Выберите секцию в которую перемещать:" Grid.Row="0" Height="20" FontWeight="Bold"></TextBlock>
+			
+			<ComboBox Height="50" Margin="0,5,0,5" 
+                      ItemsSource="{Binding Sections}"
+                      Grid.Row="1"
+                      SelectedItem="{Binding Path=SectionTo, Mode=TwoWay}">
+				<ComboBox.ItemTemplate>
+                    <DataTemplate>
+						<StackPanel>
+							<StackPanel Orientation="Horizontal">
+								<TextBlock FontWeight="Bold" Text="Книга: "/>
+								<TextBlock Text="{Binding Path=BookName}" TextWrapping="Wrap"/>
+							</StackPanel> 
+							<StackPanel Orientation="Horizontal">
+								<TextBlock FontWeight="Bold" Text="Раздел: "/>
+								<TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap"/>
+							</StackPanel>
+						</StackPanel>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+			</ComboBox>
+			
+			<sdk:DataGrid VerticalAlignment="Stretch" 
+                          Grid.Row="2"
+                          ItemsSource="{Binding Path=ToQuestionSet}" 
+                          HorizontalAlignment="Stretch"
+                          AutoGenerateColumns="False"
+                          IsReadOnly="True">
+	        	<sdk:DataGrid.Columns>
+                    <sdk:DataGridTextColumn Binding="{Binding Text}" Header="Вопрос" Width="*"></sdk:DataGridTextColumn>	     	
+				</sdk:DataGrid.Columns>
+			</sdk:DataGrid>
+
+        </Grid>
+		<StackPanel Grid.ColumnSpan="2" Grid.Row="1" Margin="0,0,0,5">
+            <Button Content="Переместить" 
+                    Command="{Binding MoveQuestionsCommand}" 
+                    CommandParameter="{Binding SelectedItem, ElementName=gridQuestionFrom}"
+                    Width="100" 
+                    Height="24"
+					ToolTipService.ToolTip="Переместить выделенные слева вопросы в правый раздел."/>
+		</StackPanel>
+    </Grid>
+</navigation:Page>

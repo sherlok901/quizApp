@@ -1,0 +1,2419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MRZSodel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008"
+              xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator"
+              xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MRZSodelStoreContainer">
+          <EntitySet Name="Answer" EntityType="MRZSodel.Store.Answer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Applications" EntityType="MRZSodel.Store.aspnet_Applications" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="aspnet_Membership" EntityType="MRZSodel.Store.aspnet_Membership" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="aspnet_Paths" EntityType="MRZSodel.Store.aspnet_Paths" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="MRZSodel.Store.aspnet_PersonalizationAllUsers"
+                     store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="MRZSodel.Store.aspnet_PersonalizationPerUser"
+                     store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Profile" EntityType="MRZSodel.Store.aspnet_Profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_Roles" EntityType="MRZSodel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="MRZSodel.Store.aspnet_SchemaVersions" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="aspnet_Users" EntityType="MRZSodel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="aspnet_UsersInRoles" EntityType="MRZSodel.Store.aspnet_UsersInRoles" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="aspnet_WebEvent_Events" EntityType="MRZSodel.Store.aspnet_WebEvent_Events"
+                     store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Book" EntityType="MRZSodel.Store.Book" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Defect" EntityType="MRZSodel.Store.Defect" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Group" EntityType="MRZSodel.Store.Group" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="InterectiveTest" EntityType="MRZSodel.Store.InterectiveTest" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="InterectiveTestLog" EntityType="MRZSodel.Store.InterectiveTestLog" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="InterectiveTestParameter" EntityType="MRZSodel.Store.InterectiveTestParameter"
+                     store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MultimediaContent" EntityType="MRZSodel.Store.MultimediaContent" store:Type="Tables"
+                     Schema="dbo" />
+          <EntitySet Name="Page" EntityType="MRZSodel.Store.Page" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Question" EntityType="MRZSodel.Store.Question" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Quiz" EntityType="MRZSodel.Store.Quiz" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QuizResult" EntityType="MRZSodel.Store.QuizResult" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Repairmen" EntityType="MRZSodel.Store.Repairmen" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ResultAnswer" EntityType="MRZSodel.Store.ResultAnswer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Section" EntityType="MRZSodel.Store.Section" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SectionInterectiveTest" EntityType="MRZSodel.Store.SectionInterectiveTest"
+                     store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="MRZSodel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="MRZSodel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserSection" EntityType="MRZSodel.Store.UserSection" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK__aspnet_Me__Appli__21B6055D"
+                          Association="MRZSodel.Store.FK__aspnet_Me__Appli__21B6055D">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__22AA2996"
+                          Association="MRZSodel.Store.FK__aspnet_Me__UserI__22AA2996">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__5AEE82B9"
+                          Association="MRZSodel.Store.FK__aspnet_Pa__Appli__5AEE82B9">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__628FA481"
+                          Association="MRZSodel.Store.FK__aspnet_Pe__PathI__628FA481">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__68487DD7"
+                          Association="MRZSodel.Store.FK__aspnet_Pe__PathI__68487DD7">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__693CA210"
+                          Association="MRZSodel.Store.FK__aspnet_Pe__UserI__693CA210">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__38996AB5"
+                          Association="MRZSodel.Store.FK__aspnet_Pr__UserI__38996AB5">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__440B1D61"
+                          Association="MRZSodel.Store.FK__aspnet_Ro__Appli__440B1D61">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__0DAF0CB0"
+                          Association="MRZSodel.Store.FK__aspnet_Us__Appli__0DAF0CB0">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__RoleI__4AB81AF0"
+                          Association="MRZSodel.Store.FK__aspnet_Us__RoleI__4AB81AF0">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__UserI__49C3F6B7"
+                          Association="MRZSodel.Store.FK__aspnet_Us__UserI__49C3F6B7">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_UsersInRoles" EntitySet="aspnet_UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Answer_Question" Association="MRZSodel.Store.FK_Answer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="Answer" EntitySet="Answer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Defect_InterectiveTest" Association="MRZSodel.Store.FK_Defect_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTest" />
+            <End Role="Defect" EntitySet="Defect" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterectiveTestLog_InterectiveTest"
+                          Association="MRZSodel.Store.FK_InterectiveTestLog_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTest" />
+            <End Role="InterectiveTestLog" EntitySet="InterectiveTestLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterectiveTestParameter_InterectiveTest"
+                          Association="MRZSodel.Store.FK_InterectiveTestParameter_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTest" />
+            <End Role="InterectiveTestParameter" EntitySet="InterectiveTestParameter" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MultimediaContent_Page" Association="MRZSodel.Store.FK_MultimediaContent_Page">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="MultimediaContent" EntitySet="MultimediaContent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Section" Association="MRZSodel.Store.FK_Page_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Page" EntitySet="Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Quiz" Association="MRZSodel.Store.FK_Question_Quiz">
+            <End Role="Quiz" EntitySet="Quiz" />
+            <End Role="Question" EntitySet="Question" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_Section" Association="MRZSodel.Store.FK_Quiz_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Quiz" EntitySet="Quiz" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizResult_Quiz" Association="MRZSodel.Store.FK_QuizResult_Quiz">
+            <End Role="Quiz" EntitySet="Quiz" />
+            <End Role="QuizResult" EntitySet="QuizResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizResult_User" Association="MRZSodel.Store.FK_QuizResult_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="QuizResult" EntitySet="QuizResult" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repairmen_Defect" Association="MRZSodel.Store.FK_Repairmen_Defect">
+            <End Role="Defect" EntitySet="Defect" />
+            <End Role="Repairmen" EntitySet="Repairmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_Answer" Association="MRZSodel.Store.FK_ResultAnswer_Answer">
+            <End Role="Answer" EntitySet="Answer" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_Question" Association="MRZSodel.Store.FK_ResultAnswer_Question">
+            <End Role="Question" EntitySet="Question" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_QuizResult" Association="MRZSodel.Store.FK_ResultAnswer_QuizResult">
+            <End Role="QuizResult" EntitySet="QuizResult" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Book" Association="MRZSodel.Store.FK_Section_Book">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectionInterectiveTest_InterectiveTest"
+                          Association="MRZSodel.Store.FK_SectionInterectiveTest_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTest" />
+            <End Role="SectionInterectiveTest" EntitySet="SectionInterectiveTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SectionInterectiveTest_Section"
+                          Association="MRZSodel.Store.FK_SectionInterectiveTest_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="SectionInterectiveTest" EntitySet="SectionInterectiveTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_aspnet_Users" Association="MRZSodel.Store.FK_User_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group" Association="MRZSodel.Store.FK_User_Group">
+            <End Role="Group" EntitySet="Group" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSection_Section" Association="MRZSodel.Store.FK_UserSection_Section">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="UserSection" EntitySet="UserSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSection_User" Association="MRZSodel.Store.FK_UserSection_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserSection" EntitySet="UserSection" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Name="AnswerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="AnswerText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsCorrect" Type="bit" Nullable="false" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredApplicationName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="MobilePIN" Type="nvarchar" MaxLength="16" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="LoweredEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="ntext" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Path" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredPath" Type="nvarchar" Nullable="false" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Name="PathId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PageSettings" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PathId" Type="uniqueidentifier" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="PageSettings" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="ntext" Nullable="false" />
+          <Property Name="PropertyValuesString" Type="ntext" Nullable="false" />
+          <Property Name="PropertyValuesBinary" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredRoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Name="Feature" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="CompatibleSchemaVersion" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="IsCurrentVersion" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="LoweredUserName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="MobileAlias" Type="nvarchar" MaxLength="16" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_WebEvent_Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="char" Nullable="false" MaxLength="32" />
+          <Property Name="EventTimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="EventTime" Type="datetime" Nullable="false" />
+          <Property Name="EventType" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="EventSequence" Type="decimal" Nullable="false" Precision="19" />
+          <Property Name="EventOccurrence" Type="decimal" Nullable="false" Precision="19" />
+          <Property Name="EventCode" Type="int" Nullable="false" />
+          <Property Name="EventDetailCode" Type="int" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ApplicationPath" Type="nvarchar" MaxLength="256" />
+          <Property Name="ApplicationVirtualPath" Type="nvarchar" MaxLength="256" />
+          <Property Name="MachineName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="RequestUrl" Type="nvarchar" MaxLength="1024" />
+          <Property Name="ExceptionType" Type="nvarchar" MaxLength="256" />
+          <Property Name="Details" Type="ntext" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Name="BookId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Defect">
+          <Key>
+            <PropertyRef Name="DefectId" />
+          </Key>
+          <Property Name="DefectId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InterectiveTestId" Type="int" Nullable="false" />
+          <Property Name="IsCorrect" Type="bit" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Name="GroupId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="InterectiveTest">
+          <Key>
+            <PropertyRef Name="InterectiveTestId" />
+          </Key>
+          <Property Name="InterectiveTestId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TestInstanceName" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="Message" Type="nvarchar" MaxLength="250" />
+          <Property Name="TestName" Type="nvarchar" MaxLength="250" />
+          <Property Name="PreparetionMessage" Type="nvarchar(max)" />
+          <Property Name="TitleText" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="InterectiveTestLog">
+          <Key>
+            <PropertyRef Name="InterectiveTestLogId" />
+          </Key>
+          <Property Name="InterectiveTestLogId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="InterectiveTestId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Attempts" Type="int" Nullable="false" />
+          <Property Name="SectionId" Type="int" />
+        </EntityType>
+        <EntityType Name="InterectiveTestParameter">
+          <Key>
+            <PropertyRef Name="InterectiveTestParameterId" />
+          </Key>
+          <Property Name="InterectiveTestParameterId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="InterectiveTestId" Type="int" Nullable="false" />
+          <Property Name="ParameterName" Type="nvarchar" Nullable="false" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="MultimediaContent">
+          <Key>
+            <PropertyRef Name="MultimediaContentId" />
+          </Key>
+          <Property Name="MultimediaContentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Path" Type="nvarchar(max)" />
+          <Property Name="PageId" Type="int" />
+          <Property Name="ContentName" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Name="PageId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PageContent" Type="nvarchar(max)" />
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="PagePath" Type="nvarchar(max)" />
+          <Property Name="PageOrder" Type="int" />
+          <Property Name="IsLastPage" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Name="QuestionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QuizId" Type="int" Nullable="false" />
+          <Property Name="Difficulty" Type="int" />
+          <Property Name="Text" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Quiz">
+          <Key>
+            <PropertyRef Name="QuizId" />
+          </Key>
+          <Property Name="QuizId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SectionId" Type="int" />
+          <Property Name="QuizName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="SimpleDifficulty" Type="int" />
+          <Property Name="MediumDifficulty" Type="int" />
+          <Property Name="HardDifficulty" Type="int" />
+        </EntityType>
+        <EntityType Name="QuizResult">
+          <Key>
+            <PropertyRef Name="QuizResultId" />
+          </Key>
+          <Property Name="QuizResultId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="QuizId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repairmen">
+          <Key>
+            <PropertyRef Name="RepeirmenId" />
+          </Key>
+          <Property Name="RepeirmenId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="DefectId" Type="int" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsCorrect" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ResultAnswer">
+          <Key>
+            <PropertyRef Name="ResultAnswerId" />
+          </Key>
+          <Property Name="ResultAnswerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="QuestionId" Type="int" Nullable="false" />
+          <Property Name="AnswerId" Type="int" />
+          <Property Name="AnswerTime" Type="datetime" />
+          <Property Name="QuizResultId" Type="int" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="SectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="250" />
+          <Property Name="BookId" Type="int" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="SectionInterectiveTest">
+          <Key>
+            <PropertyRef Name="InterectiveTestId" />
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Name="InterectiveTestId" Type="int" Nullable="false" />
+          <Property Name="SectionId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GroupId" Type="int" />
+          <Property Name="aspnet_UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="UserSection">
+          <Key>
+            <PropertyRef Name="UserSectionId" />
+          </Key>
+          <Property Name="UserSectionId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="SectionId" Type="int" Nullable="false" />
+          <Property Name="IsPassed" Type="bit" />
+        </EntityType>
+        <Association Name="FK__aspnet_Me__Appli__21B6055D">
+          <End Role="aspnet_Applications" Type="MRZSodel.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="MRZSodel.Store.aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__22AA2996">
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Membership" Type="MRZSodel.Store.aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__5AEE82B9">
+          <End Role="aspnet_Applications" Type="MRZSodel.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Paths" Type="MRZSodel.Store.aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__628FA481">
+          <End Role="aspnet_Paths" Type="MRZSodel.Store.aspnet_Paths" Multiplicity="1" />
+          <End Role="aspnet_PersonalizationAllUsers" Type="MRZSodel.Store.aspnet_PersonalizationAllUsers"
+               Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__68487DD7">
+          <End Role="aspnet_Paths" Type="MRZSodel.Store.aspnet_Paths" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="MRZSodel.Store.aspnet_PersonalizationPerUser"
+               Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__693CA210">
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="0..1" />
+          <End Role="aspnet_PersonalizationPerUser" Type="MRZSodel.Store.aspnet_PersonalizationPerUser"
+               Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__38996AB5">
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_Profile" Type="MRZSodel.Store.aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__440B1D61">
+          <End Role="aspnet_Applications" Type="MRZSodel.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Roles" Type="MRZSodel.Store.aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__0DAF0CB0">
+          <End Role="aspnet_Applications" Type="MRZSodel.Store.aspnet_Applications" Multiplicity="1" />
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__RoleI__4AB81AF0">
+          <End Role="aspnet_Roles" Type="MRZSodel.Store.aspnet_Roles" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="MRZSodel.Store.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__UserI__49C3F6B7">
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="aspnet_UsersInRoles" Type="MRZSodel.Store.aspnet_UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Answer_Question">
+          <End Role="Question" Type="MRZSodel.Store.Question" Multiplicity="1" />
+          <End Role="Answer" Type="MRZSodel.Store.Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Defect_InterectiveTest">
+          <End Role="InterectiveTest" Type="MRZSodel.Store.InterectiveTest" Multiplicity="1" />
+          <End Role="Defect" Type="MRZSodel.Store.Defect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="Defect">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterectiveTestLog_InterectiveTest">
+          <End Role="InterectiveTest" Type="MRZSodel.Store.InterectiveTest" Multiplicity="1" />
+          <End Role="InterectiveTestLog" Type="MRZSodel.Store.InterectiveTestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="InterectiveTestLog">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterectiveTestParameter_InterectiveTest">
+          <End Role="InterectiveTest" Type="MRZSodel.Store.InterectiveTest" Multiplicity="1" />
+          <End Role="InterectiveTestParameter" Type="MRZSodel.Store.InterectiveTestParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="InterectiveTestParameter">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MultimediaContent_Page">
+          <End Role="Page" Type="MRZSodel.Store.Page" Multiplicity="0..1" />
+          <End Role="MultimediaContent" Type="MRZSodel.Store.MultimediaContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="MultimediaContent">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Section">
+          <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="1" />
+          <End Role="Page" Type="MRZSodel.Store.Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Quiz">
+          <End Role="Quiz" Type="MRZSodel.Store.Quiz" Multiplicity="1" />
+          <End Role="Question" Type="MRZSodel.Store.Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizId" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuizId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_Section">
+          <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="0..1" />
+          <End Role="Quiz" Type="MRZSodel.Store.Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizResult_Quiz">
+          <End Role="Quiz" Type="MRZSodel.Store.Quiz" Multiplicity="1" />
+          <End Role="QuizResult" Type="MRZSodel.Store.QuizResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizId" />
+            </Principal>
+            <Dependent Role="QuizResult">
+              <PropertyRef Name="QuizId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizResult_User">
+          <End Role="User" Type="MRZSodel.Store.User" Multiplicity="1" />
+          <End Role="QuizResult" Type="MRZSodel.Store.QuizResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repairmen_Defect">
+          <End Role="Defect" Type="MRZSodel.Store.Defect" Multiplicity="1" />
+          <End Role="Repairmen" Type="MRZSodel.Store.Repairmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Defect">
+              <PropertyRef Name="DefectId" />
+            </Principal>
+            <Dependent Role="Repairmen">
+              <PropertyRef Name="DefectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_Answer">
+          <End Role="Answer" Type="MRZSodel.Store.Answer" Multiplicity="0..1" />
+          <End Role="ResultAnswer" Type="MRZSodel.Store.ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answer">
+              <PropertyRef Name="AnswerId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_Question">
+          <End Role="Question" Type="MRZSodel.Store.Question" Multiplicity="1" />
+          <End Role="ResultAnswer" Type="MRZSodel.Store.ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_QuizResult">
+          <End Role="QuizResult" Type="MRZSodel.Store.QuizResult" Multiplicity="0..1" />
+          <End Role="ResultAnswer" Type="MRZSodel.Store.ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizResult">
+              <PropertyRef Name="QuizResultId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="QuizResultId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Section_Book">
+          <End Role="Book" Type="MRZSodel.Store.Book" Multiplicity="1" />
+          <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectionInterectiveTest_InterectiveTest">
+          <End Role="InterectiveTest" Type="MRZSodel.Store.InterectiveTest" Multiplicity="1" />
+          <End Role="SectionInterectiveTest" Type="MRZSodel.Store.SectionInterectiveTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="SectionInterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SectionInterectiveTest_Section">
+          <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="1" />
+          <End Role="SectionInterectiveTest" Type="MRZSodel.Store.SectionInterectiveTest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="SectionInterectiveTest">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_aspnet_Users">
+          <End Role="aspnet_Users" Type="MRZSodel.Store.aspnet_Users" Multiplicity="1" />
+          <End Role="User" Type="MRZSodel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="aspnet_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Group">
+          <End Role="Group" Type="MRZSodel.Store.Group" Multiplicity="0..1" />
+          <End Role="User" Type="MRZSodel.Store.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSection_Section">
+          <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="1" />
+          <End Role="UserSection" Type="MRZSodel.Store.UserSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="UserSection">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSection_User">
+          <End Role="User" Type="MRZSodel.Store.User" Multiplicity="1" />
+          <End Role="UserSection" Type="MRZSodel.Store.UserSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserSection">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MRZSodel" Alias="Self"
+              xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation"
+              xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MRZSEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Answers" EntityType="MRZSodel.Answer" />
+          <EntitySet Name="aspnet_Applications" EntityType="MRZSodel.aspnet_Applications" />
+          <EntitySet Name="aspnet_Membership" EntityType="MRZSodel.aspnet_Membership" />
+          <EntitySet Name="aspnet_Paths" EntityType="MRZSodel.aspnet_Paths" />
+          <EntitySet Name="aspnet_PersonalizationAllUsers" EntityType="MRZSodel.aspnet_PersonalizationAllUsers" />
+          <EntitySet Name="aspnet_PersonalizationPerUser" EntityType="MRZSodel.aspnet_PersonalizationPerUser" />
+          <EntitySet Name="aspnet_Profile" EntityType="MRZSodel.aspnet_Profile" />
+          <EntitySet Name="aspnet_Roles" EntityType="MRZSodel.aspnet_Roles" />
+          <EntitySet Name="aspnet_SchemaVersions" EntityType="MRZSodel.aspnet_SchemaVersions" />
+          <EntitySet Name="aspnet_Users" EntityType="MRZSodel.aspnet_Users" />
+          <EntitySet Name="aspnet_WebEvent_Events" EntityType="MRZSodel.aspnet_WebEvent_Events" />
+          <EntitySet Name="Books" EntityType="MRZSodel.Book" />
+          <EntitySet Name="Defects" EntityType="MRZSodel.Defect" />
+          <EntitySet Name="Groups" EntityType="MRZSodel.Group" />
+          <EntitySet Name="InterectiveTests" EntityType="MRZSodel.InterectiveTest" />
+          <EntitySet Name="InterectiveTestLogs" EntityType="MRZSodel.InterectiveTestLog" />
+          <EntitySet Name="InterectiveTestParameters" EntityType="MRZSodel.InterectiveTestParameter" />
+          <EntitySet Name="MultimediaContents" EntityType="MRZSodel.MultimediaContent" />
+          <EntitySet Name="Pages" EntityType="MRZSodel.Page" />
+          <EntitySet Name="Questions" EntityType="MRZSodel.Question" />
+          <EntitySet Name="Quizs" EntityType="MRZSodel.Quiz" />
+          <EntitySet Name="QuizResults" EntityType="MRZSodel.QuizResult" />
+          <EntitySet Name="Repairmen" EntityType="MRZSodel.Repairman" />
+          <EntitySet Name="ResultAnswers" EntityType="MRZSodel.ResultAnswer" />
+          <EntitySet Name="Sections" EntityType="MRZSodel.Section" />
+          <EntitySet Name="sysdiagrams" EntityType="MRZSodel.sysdiagram" />
+          <EntitySet Name="Users" EntityType="MRZSodel.User" />
+          <EntitySet Name="UserSections" EntityType="MRZSodel.UserSection" />
+          <AssociationSet Name="FK_Answer_Question" Association="MRZSodel.FK_Answer_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="Answer" EntitySet="Answers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_Answer" Association="MRZSodel.FK_ResultAnswer_Answer">
+            <End Role="Answer" EntitySet="Answers" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__Appli__21B6055D" Association="MRZSodel.FK__aspnet_Me__Appli__21B6055D">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pa__Appli__5AEE82B9" Association="MRZSodel.FK__aspnet_Pa__Appli__5AEE82B9">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Ro__Appli__440B1D61" Association="MRZSodel.FK__aspnet_Ro__Appli__440B1D61">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Us__Appli__0DAF0CB0" Association="MRZSodel.FK__aspnet_Us__Appli__0DAF0CB0">
+            <End Role="aspnet_Applications" EntitySet="aspnet_Applications" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Me__UserI__22AA2996" Association="MRZSodel.FK__aspnet_Me__UserI__22AA2996">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Membership" EntitySet="aspnet_Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__628FA481" Association="MRZSodel.FK__aspnet_Pe__PathI__628FA481">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationAllUsers" EntitySet="aspnet_PersonalizationAllUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__PathI__68487DD7" Association="MRZSodel.FK__aspnet_Pe__PathI__68487DD7">
+            <End Role="aspnet_Paths" EntitySet="aspnet_Paths" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pe__UserI__693CA210" Association="MRZSodel.FK__aspnet_Pe__UserI__693CA210">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_PersonalizationPerUser" EntitySet="aspnet_PersonalizationPerUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK__aspnet_Pr__UserI__38996AB5" Association="MRZSodel.FK__aspnet_Pr__UserI__38996AB5">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="aspnet_Profile" EntitySet="aspnet_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_aspnet_Users" Association="MRZSodel.FK_User_aspnet_Users">
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Section_Book" Association="MRZSodel.FK_Section_Book">
+            <End Role="Book" EntitySet="Books" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Defect_InterectiveTest" Association="MRZSodel.FK_Defect_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTests" />
+            <End Role="Defect" EntitySet="Defects" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repairmen_Defect" Association="MRZSodel.FK_Repairmen_Defect">
+            <End Role="Defect" EntitySet="Defects" />
+            <End Role="Repairman" EntitySet="Repairmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Group" Association="MRZSodel.FK_User_Group">
+            <End Role="Group" EntitySet="Groups" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterectiveTestLog_InterectiveTest"
+                          Association="MRZSodel.FK_InterectiveTestLog_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTests" />
+            <End Role="InterectiveTestLog" EntitySet="InterectiveTestLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InterectiveTestParameter_InterectiveTest"
+                          Association="MRZSodel.FK_InterectiveTestParameter_InterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTests" />
+            <End Role="InterectiveTestParameter" EntitySet="InterectiveTestParameters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MultimediaContent_Page" Association="MRZSodel.FK_MultimediaContent_Page">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="MultimediaContent" EntitySet="MultimediaContents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Page_Section" Association="MRZSodel.FK_Page_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Page" EntitySet="Pages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Question_Quiz" Association="MRZSodel.FK_Question_Quiz">
+            <End Role="Quiz" EntitySet="Quizs" />
+            <End Role="Question" EntitySet="Questions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_Question" Association="MRZSodel.FK_ResultAnswer_Question">
+            <End Role="Question" EntitySet="Questions" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Quiz_Section" Association="MRZSodel.FK_Quiz_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="Quiz" EntitySet="Quizs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizResult_Quiz" Association="MRZSodel.FK_QuizResult_Quiz">
+            <End Role="Quiz" EntitySet="Quizs" />
+            <End Role="QuizResult" EntitySet="QuizResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuizResult_User" Association="MRZSodel.FK_QuizResult_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="QuizResult" EntitySet="QuizResults" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResultAnswer_QuizResult" Association="MRZSodel.FK_ResultAnswer_QuizResult">
+            <End Role="QuizResult" EntitySet="QuizResults" />
+            <End Role="ResultAnswer" EntitySet="ResultAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSection_Section" Association="MRZSodel.FK_UserSection_Section">
+            <End Role="Section" EntitySet="Sections" />
+            <End Role="UserSection" EntitySet="UserSections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserSection_User" Association="MRZSodel.FK_UserSection_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserSection" EntitySet="UserSections" />
+          </AssociationSet>
+          <AssociationSet Name="aspnet_UsersInRoles" Association="MRZSodel.aspnet_UsersInRoles">
+            <End Role="aspnet_Roles" EntitySet="aspnet_Roles" />
+            <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+          </AssociationSet>
+          <AssociationSet Name="SectionInterectiveTest" Association="MRZSodel.SectionInterectiveTest">
+            <End Role="InterectiveTest" EntitySet="InterectiveTests" />
+            <End Role="Section" EntitySet="Sections" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Answer">
+          <Key>
+            <PropertyRef Name="AnswerId" />
+          </Key>
+          <Property Type="Int32" Name="AnswerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="AnswerText" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCorrect" Nullable="false" />
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Question" Relationship="MRZSodel.FK_Answer_Question" FromRole="Answer"
+                              ToRole="Question" />
+          <NavigationProperty Name="ResultAnswers" Relationship="MRZSodel.FK_ResultAnswer_Answer" FromRole="Answer"
+                              ToRole="ResultAnswer" />
+        </EntityType>
+        <EntityType Name="aspnet_Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="LoweredApplicationName" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="MRZSodel.FK__aspnet_Me__Appli__21B6055D"
+                              FromRole="aspnet_Applications" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="MRZSodel.FK__aspnet_Pa__Appli__5AEE82B9"
+                              FromRole="aspnet_Applications" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="MRZSodel.FK__aspnet_Ro__Appli__440B1D61"
+                              FromRole="aspnet_Applications" ToRole="aspnet_Roles" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.FK__aspnet_Us__Appli__0DAF0CB0"
+                              FromRole="aspnet_Applications" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PasswordFormat" Nullable="false" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="MobilePIN" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredEmail" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordQuestion" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordAnswer" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+          <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastPasswordChangedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLockoutDate" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowStart" Nullable="false" />
+          <Property Type="String" Name="Comment" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="MRZSodel.FK__aspnet_Me__Appli__21B6055D"
+                              FromRole="aspnet_Membership" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.FK__aspnet_Me__UserI__22AA2996"
+                              FromRole="aspnet_Membership" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Paths">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="PathId" Nullable="false" />
+          <Property Type="String" Name="Path" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredPath" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="MRZSodel.FK__aspnet_Pa__Appli__5AEE82B9"
+                              FromRole="aspnet_Paths" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_PersonalizationAllUsers"
+                              Relationship="MRZSodel.FK__aspnet_Pe__PathI__628FA481" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationAllUsers" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser"
+                              Relationship="MRZSodel.FK__aspnet_Pe__PathI__68487DD7" FromRole="aspnet_Paths" ToRole="aspnet_PersonalizationPerUser" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationAllUsers">
+          <Key>
+            <PropertyRef Name="PathId" />
+          </Key>
+          <Property Type="Guid" Name="PathId" Nullable="false" />
+          <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="MRZSodel.FK__aspnet_Pe__PathI__628FA481"
+                              FromRole="aspnet_PersonalizationAllUsers" ToRole="aspnet_Paths" />
+        </EntityType>
+        <EntityType Name="aspnet_PersonalizationPerUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Guid" Name="Id" Nullable="false" />
+          <Property Type="Guid" Name="PathId" />
+          <Property Type="Guid" Name="UserId" />
+          <Property Type="Binary" Name="PageSettings" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Paths" Relationship="MRZSodel.FK__aspnet_Pe__PathI__68487DD7"
+                              FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Paths" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.FK__aspnet_Pe__UserI__693CA210"
+                              FromRole="aspnet_PersonalizationPerUser" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="PropertyNames" Nullable="false" MaxLength="Max" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="PropertyValuesString" Nullable="false" MaxLength="Max" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="Binary" Name="PropertyValuesBinary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.FK__aspnet_Pr__UserI__38996AB5"
+                              FromRole="aspnet_Profile" ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredRoleName" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="MRZSodel.FK__aspnet_Ro__Appli__440B1D61"
+                              FromRole="aspnet_Roles" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.aspnet_UsersInRoles" FromRole="aspnet_Roles"
+                              ToRole="aspnet_Users" />
+        </EntityType>
+        <EntityType Name="aspnet_SchemaVersions">
+          <Key>
+            <PropertyRef Name="Feature" />
+            <PropertyRef Name="CompatibleSchemaVersion" />
+          </Key>
+          <Property Type="String" Name="Feature" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CompatibleSchemaVersion" Nullable="false" MaxLength="128" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="Boolean" Name="IsCurrentVersion" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnet_Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LoweredUserName" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="MobileAlias" MaxLength="16" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+          <NavigationProperty Name="aspnet_Applications" Relationship="MRZSodel.FK__aspnet_Us__Appli__0DAF0CB0"
+                              FromRole="aspnet_Users" ToRole="aspnet_Applications" />
+          <NavigationProperty Name="aspnet_Membership" Relationship="MRZSodel.FK__aspnet_Me__UserI__22AA2996"
+                              FromRole="aspnet_Users" ToRole="aspnet_Membership" />
+          <NavigationProperty Name="aspnet_PersonalizationPerUser"
+                              Relationship="MRZSodel.FK__aspnet_Pe__UserI__693CA210" FromRole="aspnet_Users" ToRole="aspnet_PersonalizationPerUser" />
+          <NavigationProperty Name="aspnet_Profile" Relationship="MRZSodel.FK__aspnet_Pr__UserI__38996AB5"
+                              FromRole="aspnet_Users" ToRole="aspnet_Profile" />
+          <NavigationProperty Name="Users" Relationship="MRZSodel.FK_User_aspnet_Users" FromRole="aspnet_Users"
+                              ToRole="User" />
+          <NavigationProperty Name="aspnet_Roles" Relationship="MRZSodel.aspnet_UsersInRoles" FromRole="aspnet_Users"
+                              ToRole="aspnet_Roles" />
+        </EntityType>
+        <EntityType Name="aspnet_WebEvent_Events">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Type="String" Name="EventId" Nullable="false" MaxLength="32" FixedLength="true" Unicode="false" />
+          <Property Type="DateTime" Name="EventTimeUtc" Nullable="false" />
+          <Property Type="DateTime" Name="EventTime" Nullable="false" />
+          <Property Type="String" Name="EventType" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="EventSequence" Nullable="false" Precision="19" Scale="0" />
+          <Property Type="Decimal" Name="EventOccurrence" Nullable="false" Precision="19" Scale="0" />
+          <Property Type="Int32" Name="EventCode" Nullable="false" />
+          <Property Type="Int32" Name="EventDetailCode" Nullable="false" />
+          <Property Type="String" Name="Message" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationPath" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ApplicationVirtualPath" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MachineName" Nullable="false" MaxLength="256" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="RequestUrl" MaxLength="1024" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="ExceptionType" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Details" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="BookId" />
+          </Key>
+          <Property Type="Int32" Name="BookId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Sections" Relationship="MRZSodel.FK_Section_Book" FromRole="Book" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Defect">
+          <Key>
+            <PropertyRef Name="DefectId" />
+          </Key>
+          <Property Type="Int32" Name="DefectId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InterectiveTestId" Nullable="false" />
+          <Property Type="Boolean" Name="IsCorrect" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InterectiveTest" Relationship="MRZSodel.FK_Defect_InterectiveTest"
+                              FromRole="Defect" ToRole="InterectiveTest" />
+          <NavigationProperty Name="Repairmen" Relationship="MRZSodel.FK_Repairmen_Defect" FromRole="Defect"
+                              ToRole="Repairman" />
+        </EntityType>
+        <EntityType Name="Group">
+          <Key>
+            <PropertyRef Name="GroupId" />
+          </Key>
+          <Property Type="Int32" Name="GroupId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="GroupName" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Users" Relationship="MRZSodel.FK_User_Group" FromRole="Group" ToRole="User" />
+        </EntityType>
+        <EntityType Name="InterectiveTest">
+          <Key>
+            <PropertyRef Name="InterectiveTestId" />
+          </Key>
+          <Property Type="Int32" Name="InterectiveTestId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="TestInstanceName" Nullable="false" MaxLength="250" FixedLength="false"
+                    Unicode="true" />
+          <Property Type="String" Name="Message" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TestName" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PreparetionMessage" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="TitleText" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Defects" Relationship="MRZSodel.FK_Defect_InterectiveTest"
+                              FromRole="InterectiveTest" ToRole="Defect" />
+          <NavigationProperty Name="InterectiveTestLogs" Relationship="MRZSodel.FK_InterectiveTestLog_InterectiveTest"
+                              FromRole="InterectiveTest" ToRole="InterectiveTestLog" />
+          <NavigationProperty Name="InterectiveTestParameters"
+                              Relationship="MRZSodel.FK_InterectiveTestParameter_InterectiveTest" FromRole="InterectiveTest"
+                              ToRole="InterectiveTestParameter" />
+          <NavigationProperty Name="Sections" Relationship="MRZSodel.SectionInterectiveTest" FromRole="InterectiveTest"
+                              ToRole="Section" />
+        </EntityType>
+        <EntityType Name="InterectiveTestLog">
+          <Key>
+            <PropertyRef Name="InterectiveTestLogId" />
+          </Key>
+          <Property Type="Int32" Name="InterectiveTestLogId" Nullable="false"
+                    annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" />
+          <Property Type="DateTime" Name="EndTime" />
+          <Property Type="Int32" Name="InterectiveTestId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="Attempts" Nullable="false" />
+          <Property Type="Int32" Name="SectionId" />
+          <NavigationProperty Name="InterectiveTest" Relationship="MRZSodel.FK_InterectiveTestLog_InterectiveTest"
+                              FromRole="InterectiveTestLog" ToRole="InterectiveTest" />
+        </EntityType>
+        <EntityType Name="InterectiveTestParameter">
+          <Key>
+            <PropertyRef Name="InterectiveTestParameterId" />
+          </Key>
+          <Property Type="Int32" Name="InterectiveTestParameterId" Nullable="false"
+                    annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="InterectiveTestId" Nullable="false" />
+          <Property Type="String" Name="ParameterName" Nullable="false" MaxLength="250" FixedLength="false"
+                    Unicode="true" />
+          <NavigationProperty Name="InterectiveTest"
+                              Relationship="MRZSodel.FK_InterectiveTestParameter_InterectiveTest" FromRole="InterectiveTestParameter"
+                              ToRole="InterectiveTest" />
+        </EntityType>
+        <EntityType Name="MultimediaContent">
+          <Key>
+            <PropertyRef Name="MultimediaContentId" />
+          </Key>
+          <Property Type="Int32" Name="MultimediaContentId" Nullable="false"
+                    annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Path" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PageId" />
+          <Property Type="String" Name="ContentName" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Page" Relationship="MRZSodel.FK_MultimediaContent_Page"
+                              FromRole="MultimediaContent" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="PageId" />
+          </Key>
+          <Property Type="Int32" Name="PageId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PageContent" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SectionId" Nullable="false" />
+          <Property Type="String" Name="PagePath" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PageOrder" />
+          <Property Type="Boolean" Name="IsLastPage" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="MultimediaContents" Relationship="MRZSodel.FK_MultimediaContent_Page"
+                              FromRole="Page" ToRole="MultimediaContent" />
+          <NavigationProperty Name="Section" Relationship="MRZSodel.FK_Page_Section" FromRole="Page" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Question">
+          <Key>
+            <PropertyRef Name="QuestionId" />
+          </Key>
+          <Property Type="Int32" Name="QuestionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="QuizId" Nullable="false" />
+          <Property Type="Int32" Name="Difficulty" />
+          <Property Type="String" Name="Text" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Answers" Relationship="MRZSodel.FK_Answer_Question" FromRole="Question"
+                              ToRole="Answer" />
+          <NavigationProperty Name="Quiz" Relationship="MRZSodel.FK_Question_Quiz" FromRole="Question" ToRole="Quiz" />
+          <NavigationProperty Name="ResultAnswers" Relationship="MRZSodel.FK_ResultAnswer_Question" FromRole="Question"
+                              ToRole="ResultAnswer" />
+        </EntityType>
+        <EntityType Name="Quiz">
+          <Key>
+            <PropertyRef Name="QuizId" />
+          </Key>
+          <Property Type="Int32" Name="QuizId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="SectionId" />
+          <Property Type="String" Name="QuizName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <Property Type="Int32" Name="SimpleDifficulty" />
+          <Property Type="Int32" Name="MediumDifficulty" />
+          <Property Type="Int32" Name="HardDifficulty" />
+          <NavigationProperty Name="Questions" Relationship="MRZSodel.FK_Question_Quiz" FromRole="Quiz"
+                              ToRole="Question" />
+          <NavigationProperty Name="Section" Relationship="MRZSodel.FK_Quiz_Section" FromRole="Quiz" ToRole="Section" />
+          <NavigationProperty Name="QuizResults" Relationship="MRZSodel.FK_QuizResult_Quiz" FromRole="Quiz"
+                              ToRole="QuizResult" />
+        </EntityType>
+        <EntityType Name="QuizResult">
+          <Key>
+            <PropertyRef Name="QuizResultId" />
+          </Key>
+          <Property Type="Int32" Name="QuizResultId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartTime" Nullable="false" />
+          <Property Type="DateTime" Name="EndTime" />
+          <Property Type="Int32" Name="QuizId" Nullable="false" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <NavigationProperty Name="Quiz" Relationship="MRZSodel.FK_QuizResult_Quiz" FromRole="QuizResult"
+                              ToRole="Quiz" />
+          <NavigationProperty Name="User" Relationship="MRZSodel.FK_QuizResult_User" FromRole="QuizResult"
+                              ToRole="User" />
+          <NavigationProperty Name="ResultAnswers" Relationship="MRZSodel.FK_ResultAnswer_QuizResult"
+                              FromRole="QuizResult" ToRole="ResultAnswer" />
+        </EntityType>
+        <EntityType Name="Repairman">
+          <Key>
+            <PropertyRef Name="RepeirmenId" />
+          </Key>
+          <Property Type="Int32" Name="RepeirmenId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="DefectId" Nullable="false" />
+          <Property Type="String" Name="Text" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsCorrect" Nullable="false" />
+          <NavigationProperty Name="Defect" Relationship="MRZSodel.FK_Repairmen_Defect" FromRole="Repairman"
+                              ToRole="Defect" />
+        </EntityType>
+        <EntityType Name="ResultAnswer">
+          <Key>
+            <PropertyRef Name="ResultAnswerId" />
+          </Key>
+          <Property Type="Int32" Name="ResultAnswerId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="QuestionId" Nullable="false" />
+          <Property Type="Int32" Name="AnswerId" />
+          <Property Type="DateTime" Name="AnswerTime" />
+          <Property Type="Int32" Name="QuizResultId" />
+          <NavigationProperty Name="Answer" Relationship="MRZSodel.FK_ResultAnswer_Answer" FromRole="ResultAnswer"
+                              ToRole="Answer" />
+          <NavigationProperty Name="Question" Relationship="MRZSodel.FK_ResultAnswer_Question" FromRole="ResultAnswer"
+                              ToRole="Question" />
+          <NavigationProperty Name="QuizResult" Relationship="MRZSodel.FK_ResultAnswer_QuizResult"
+                              FromRole="ResultAnswer" ToRole="QuizResult" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionId" />
+          </Key>
+          <Property Type="Int32" Name="SectionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="BookId" Nullable="false" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="Book" Relationship="MRZSodel.FK_Section_Book" FromRole="Section" ToRole="Book" />
+          <NavigationProperty Name="Pages" Relationship="MRZSodel.FK_Page_Section" FromRole="Section" ToRole="Page" />
+          <NavigationProperty Name="Quizs" Relationship="MRZSodel.FK_Quiz_Section" FromRole="Section" ToRole="Quiz" />
+          <NavigationProperty Name="UserSections" Relationship="MRZSodel.FK_UserSection_Section" FromRole="Section"
+                              ToRole="UserSection" />
+          <NavigationProperty Name="InterectiveTests" Relationship="MRZSodel.SectionInterectiveTest" FromRole="Section"
+                              ToRole="InterectiveTest" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Type="String" Name="name" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="principal_id" Nullable="false" />
+          <Property Type="Int32" Name="diagram_id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="version" />
+          <Property Type="Binary" Name="definition" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Int32" Name="UserId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="GroupId" />
+          <Property Type="Guid" Name="aspnet_UserId" Nullable="false" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsDeleted" />
+          <NavigationProperty Name="aspnet_Users" Relationship="MRZSodel.FK_User_aspnet_Users" FromRole="User"
+                              ToRole="aspnet_Users" />
+          <NavigationProperty Name="Group" Relationship="MRZSodel.FK_User_Group" FromRole="User" ToRole="Group" />
+          <NavigationProperty Name="QuizResults" Relationship="MRZSodel.FK_QuizResult_User" FromRole="User"
+                              ToRole="QuizResult" />
+          <NavigationProperty Name="UserSections" Relationship="MRZSodel.FK_UserSection_User" FromRole="User"
+                              ToRole="UserSection" />
+        </EntityType>
+        <EntityType Name="UserSection">
+          <Key>
+            <PropertyRef Name="UserSectionId" />
+          </Key>
+          <Property Type="Int32" Name="UserSectionId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="Int32" Name="SectionId" Nullable="false" />
+          <Property Type="Boolean" Name="IsPassed" />
+          <NavigationProperty Name="Section" Relationship="MRZSodel.FK_UserSection_Section" FromRole="UserSection"
+                              ToRole="Section" />
+          <NavigationProperty Name="User" Relationship="MRZSodel.FK_UserSection_User" FromRole="UserSection"
+                              ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Answer_Question">
+          <End Type="MRZSodel.Question" Role="Question" Multiplicity="1" />
+          <End Type="MRZSodel.Answer" Role="Answer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="Answer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_Answer">
+          <End Type="MRZSodel.Answer" Role="Answer" Multiplicity="0..1" />
+          <End Type="MRZSodel.ResultAnswer" Role="ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Answer">
+              <PropertyRef Name="AnswerId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="AnswerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__Appli__21B6055D">
+          <End Type="MRZSodel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Membership" Role="aspnet_Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pa__Appli__5AEE82B9">
+          <End Type="MRZSodel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Paths" Role="aspnet_Paths" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Paths">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Ro__Appli__440B1D61">
+          <End Type="MRZSodel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Us__Appli__0DAF0CB0">
+          <End Type="MRZSodel.aspnet_Applications" Role="aspnet_Applications" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="aspnet_Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Me__UserI__22AA2996">
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Membership" Role="aspnet_Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__628FA481">
+          <End Type="MRZSodel.aspnet_Paths" Role="aspnet_Paths" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_PersonalizationAllUsers" Role="aspnet_PersonalizationAllUsers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationAllUsers">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__PathI__68487DD7">
+          <End Type="MRZSodel.aspnet_Paths" Role="aspnet_Paths" Multiplicity="0..1" />
+          <End Type="MRZSodel.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Paths">
+              <PropertyRef Name="PathId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="PathId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pe__UserI__693CA210">
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="0..1" />
+          <End Type="MRZSodel.aspnet_PersonalizationPerUser" Role="aspnet_PersonalizationPerUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_PersonalizationPerUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__aspnet_Pr__UserI__38996AB5">
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="MRZSodel.aspnet_Profile" Role="aspnet_Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="aspnet_Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_aspnet_Users">
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+          <End Type="MRZSodel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnet_Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="aspnet_UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Section_Book">
+          <End Type="MRZSodel.Book" Role="Book" Multiplicity="1" />
+          <End Type="MRZSodel.Section" Role="Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="BookId" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="BookId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Defect_InterectiveTest">
+          <End Type="MRZSodel.InterectiveTest" Role="InterectiveTest" Multiplicity="1" />
+          <End Type="MRZSodel.Defect" Role="Defect" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="Defect">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repairmen_Defect">
+          <End Type="MRZSodel.Defect" Role="Defect" Multiplicity="1" />
+          <End Type="MRZSodel.Repairman" Role="Repairman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Defect">
+              <PropertyRef Name="DefectId" />
+            </Principal>
+            <Dependent Role="Repairman">
+              <PropertyRef Name="DefectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Group">
+          <End Type="MRZSodel.Group" Role="Group" Multiplicity="0..1" />
+          <End Type="MRZSodel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Group">
+              <PropertyRef Name="GroupId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="GroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterectiveTestLog_InterectiveTest">
+          <End Type="MRZSodel.InterectiveTest" Role="InterectiveTest" Multiplicity="1" />
+          <End Type="MRZSodel.InterectiveTestLog" Role="InterectiveTestLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="InterectiveTestLog">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InterectiveTestParameter_InterectiveTest">
+          <End Type="MRZSodel.InterectiveTest" Role="InterectiveTest" Multiplicity="1" />
+          <End Type="MRZSodel.InterectiveTestParameter" Role="InterectiveTestParameter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InterectiveTest">
+              <PropertyRef Name="InterectiveTestId" />
+            </Principal>
+            <Dependent Role="InterectiveTestParameter">
+              <PropertyRef Name="InterectiveTestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MultimediaContent_Page">
+          <End Type="MRZSodel.Page" Role="Page" Multiplicity="0..1" />
+          <End Type="MRZSodel.MultimediaContent" Role="MultimediaContent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="PageId" />
+            </Principal>
+            <Dependent Role="MultimediaContent">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Page_Section">
+          <End Type="MRZSodel.Section" Role="Section" Multiplicity="1" />
+          <End Type="MRZSodel.Page" Role="Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Page">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Question_Quiz">
+          <End Type="MRZSodel.Quiz" Role="Quiz" Multiplicity="1" />
+          <End Type="MRZSodel.Question" Role="Question" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizId" />
+            </Principal>
+            <Dependent Role="Question">
+              <PropertyRef Name="QuizId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_Question">
+          <End Type="MRZSodel.Question" Role="Question" Multiplicity="1" />
+          <End Type="MRZSodel.ResultAnswer" Role="ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Question">
+              <PropertyRef Name="QuestionId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="QuestionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Quiz_Section">
+          <End Type="MRZSodel.Section" Role="Section" Multiplicity="0..1" />
+          <End Type="MRZSodel.Quiz" Role="Quiz" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="Quiz">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizResult_Quiz">
+          <End Type="MRZSodel.Quiz" Role="Quiz" Multiplicity="1" />
+          <End Type="MRZSodel.QuizResult" Role="QuizResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Quiz">
+              <PropertyRef Name="QuizId" />
+            </Principal>
+            <Dependent Role="QuizResult">
+              <PropertyRef Name="QuizId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuizResult_User">
+          <End Type="MRZSodel.User" Role="User" Multiplicity="1" />
+          <End Type="MRZSodel.QuizResult" Role="QuizResult" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="QuizResult">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResultAnswer_QuizResult">
+          <End Type="MRZSodel.QuizResult" Role="QuizResult" Multiplicity="0..1" />
+          <End Type="MRZSodel.ResultAnswer" Role="ResultAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="QuizResult">
+              <PropertyRef Name="QuizResultId" />
+            </Principal>
+            <Dependent Role="ResultAnswer">
+              <PropertyRef Name="QuizResultId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSection_Section">
+          <End Type="MRZSodel.Section" Role="Section" Multiplicity="1" />
+          <End Type="MRZSodel.UserSection" Role="UserSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionId" />
+            </Principal>
+            <Dependent Role="UserSection">
+              <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserSection_User">
+          <End Type="MRZSodel.User" Role="User" Multiplicity="1" />
+          <End Type="MRZSodel.UserSection" Role="UserSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserSection">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aspnet_UsersInRoles">
+          <End Type="MRZSodel.aspnet_Roles" Role="aspnet_Roles" Multiplicity="*" />
+          <End Type="MRZSodel.aspnet_Users" Role="aspnet_Users" Multiplicity="*" />
+        </Association>
+        <Association Name="SectionInterectiveTest">
+          <End Type="MRZSodel.InterectiveTest" Role="InterectiveTest" Multiplicity="*" />
+          <End Type="MRZSodel.Section" Role="Section" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MRZSodelStoreContainer" CdmEntityContainer="MRZSEntities">
+          <EntitySetMapping Name="Answers">
+            <EntityTypeMapping TypeName="MRZSodel.Answer">
+              <MappingFragment StoreEntitySet="Answer">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="AnswerText" ColumnName="AnswerText" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Applications">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Applications">
+              <MappingFragment StoreEntitySet="aspnet_Applications">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="LoweredApplicationName" ColumnName="LoweredApplicationName" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Membership">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Membership">
+              <MappingFragment StoreEntitySet="aspnet_Membership">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart"
+                                ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Paths">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Paths">
+              <MappingFragment StoreEntitySet="aspnet_Paths">
+                <ScalarProperty Name="LoweredPath" ColumnName="LoweredPath" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_PersonalizationAllUsers">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_PersonalizationAllUsers">
+              <MappingFragment StoreEntitySet="aspnet_PersonalizationAllUsers">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_PersonalizationPerUser">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_PersonalizationPerUser">
+              <MappingFragment StoreEntitySet="aspnet_PersonalizationPerUser">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="PageSettings" ColumnName="PageSettings" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="PathId" ColumnName="PathId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Profile">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Profile">
+              <MappingFragment StoreEntitySet="aspnet_Profile">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="PropertyValuesBinary" ColumnName="PropertyValuesBinary" />
+                <ScalarProperty Name="PropertyValuesString" ColumnName="PropertyValuesString" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Roles">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Roles">
+              <MappingFragment StoreEntitySet="aspnet_Roles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_SchemaVersions">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_SchemaVersions">
+              <MappingFragment StoreEntitySet="aspnet_SchemaVersions">
+                <ScalarProperty Name="IsCurrentVersion" ColumnName="IsCurrentVersion" />
+                <ScalarProperty Name="CompatibleSchemaVersion" ColumnName="CompatibleSchemaVersion" />
+                <ScalarProperty Name="Feature" ColumnName="Feature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_Users">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_Users">
+              <MappingFragment StoreEntitySet="aspnet_Users">
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+                <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnet_WebEvent_Events">
+            <EntityTypeMapping TypeName="MRZSodel.aspnet_WebEvent_Events">
+              <MappingFragment StoreEntitySet="aspnet_WebEvent_Events">
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="ExceptionType" ColumnName="ExceptionType" />
+                <ScalarProperty Name="RequestUrl" ColumnName="RequestUrl" />
+                <ScalarProperty Name="MachineName" ColumnName="MachineName" />
+                <ScalarProperty Name="ApplicationVirtualPath" ColumnName="ApplicationVirtualPath" />
+                <ScalarProperty Name="ApplicationPath" ColumnName="ApplicationPath" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="EventDetailCode" ColumnName="EventDetailCode" />
+                <ScalarProperty Name="EventCode" ColumnName="EventCode" />
+                <ScalarProperty Name="EventOccurrence" ColumnName="EventOccurrence" />
+                <ScalarProperty Name="EventSequence" ColumnName="EventSequence" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+                <ScalarProperty Name="EventTimeUtc" ColumnName="EventTimeUtc" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="MRZSodel.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Defects">
+            <EntityTypeMapping TypeName="MRZSodel.Defect">
+              <MappingFragment StoreEntitySet="Defect">
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="InterectiveTestId" ColumnName="InterectiveTestId" />
+                <ScalarProperty Name="DefectId" ColumnName="DefectId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Groups">
+            <EntityTypeMapping TypeName="MRZSodel.Group">
+              <MappingFragment StoreEntitySet="Group">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterectiveTests">
+            <EntityTypeMapping TypeName="MRZSodel.InterectiveTest">
+              <MappingFragment StoreEntitySet="InterectiveTest">
+                <ScalarProperty Name="TitleText" ColumnName="TitleText" />
+                <ScalarProperty Name="PreparetionMessage" ColumnName="PreparetionMessage" />
+                <ScalarProperty Name="TestName" ColumnName="TestName" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="TestInstanceName" ColumnName="TestInstanceName" />
+                <ScalarProperty Name="InterectiveTestId" ColumnName="InterectiveTestId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterectiveTestLogs">
+            <EntityTypeMapping TypeName="MRZSodel.InterectiveTestLog">
+              <MappingFragment StoreEntitySet="InterectiveTestLog">
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="Attempts" ColumnName="Attempts" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="InterectiveTestId" ColumnName="InterectiveTestId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="InterectiveTestLogId" ColumnName="InterectiveTestLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InterectiveTestParameters">
+            <EntityTypeMapping TypeName="MRZSodel.InterectiveTestParameter">
+              <MappingFragment StoreEntitySet="InterectiveTestParameter">
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="InterectiveTestId" ColumnName="InterectiveTestId" />
+                <ScalarProperty Name="InterectiveTestParameterId" ColumnName="InterectiveTestParameterId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MultimediaContents">
+            <EntityTypeMapping TypeName="MRZSodel.MultimediaContent">
+              <MappingFragment StoreEntitySet="MultimediaContent">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ContentName" ColumnName="ContentName" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="Path" ColumnName="Path" />
+                <ScalarProperty Name="MultimediaContentId" ColumnName="MultimediaContentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="MRZSodel.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsLastPage" ColumnName="IsLastPage" />
+                <ScalarProperty Name="PageOrder" ColumnName="PageOrder" />
+                <ScalarProperty Name="PagePath" ColumnName="PagePath" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="PageContent" ColumnName="PageContent" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Questions">
+            <EntityTypeMapping TypeName="MRZSodel.Question">
+              <MappingFragment StoreEntitySet="Question">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Difficulty" ColumnName="Difficulty" />
+                <ScalarProperty Name="QuizId" ColumnName="QuizId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Quizs">
+            <EntityTypeMapping TypeName="MRZSodel.Quiz">
+              <MappingFragment StoreEntitySet="Quiz">
+                <ScalarProperty Name="HardDifficulty" ColumnName="HardDifficulty" />
+                <ScalarProperty Name="MediumDifficulty" ColumnName="MediumDifficulty" />
+                <ScalarProperty Name="SimpleDifficulty" ColumnName="SimpleDifficulty" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="QuizName" ColumnName="QuizName" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="QuizId" ColumnName="QuizId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuizResults">
+            <EntityTypeMapping TypeName="MRZSodel.QuizResult">
+              <MappingFragment StoreEntitySet="QuizResult">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="QuizId" ColumnName="QuizId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="QuizResultId" ColumnName="QuizResultId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repairmen">
+            <EntityTypeMapping TypeName="MRZSodel.Repairman">
+              <MappingFragment StoreEntitySet="Repairmen">
+                <ScalarProperty Name="IsCorrect" ColumnName="IsCorrect" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="DefectId" ColumnName="DefectId" />
+                <ScalarProperty Name="RepeirmenId" ColumnName="RepeirmenId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResultAnswers">
+            <EntityTypeMapping TypeName="MRZSodel.ResultAnswer">
+              <MappingFragment StoreEntitySet="ResultAnswer">
+                <ScalarProperty Name="QuizResultId" ColumnName="QuizResultId" />
+                <ScalarProperty Name="AnswerTime" ColumnName="AnswerTime" />
+                <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+                <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+                <ScalarProperty Name="ResultAnswerId" ColumnName="ResultAnswerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sections">
+            <EntityTypeMapping TypeName="MRZSodel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="BookId" ColumnName="BookId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="MRZSodel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MRZSodel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="aspnet_UserId" ColumnName="aspnet_UserId" />
+                <ScalarProperty Name="GroupId" ColumnName="GroupId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserSections">
+            <EntityTypeMapping TypeName="MRZSodel.UserSection">
+              <MappingFragment StoreEntitySet="UserSection">
+                <ScalarProperty Name="IsPassed" ColumnName="IsPassed" />
+                <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserSectionId" ColumnName="UserSectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="MRZSodel.aspnet_UsersInRoles"
+                                 StoreEntitySet="aspnet_UsersInRoles">
+            <EndProperty Name="aspnet_Users">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="aspnet_Roles">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SectionInterectiveTest" TypeName="MRZSodel.SectionInterectiveTest"
+                                 StoreEntitySet="SectionInterectiveTest">
+            <EndProperty Name="Section">
+              <ScalarProperty Name="SectionId" ColumnName="SectionId" />
+            </EndProperty>
+            <EndProperty Name="InterectiveTest">
+              <ScalarProperty Name="InterectiveTestId" ColumnName="InterectiveTestId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="MRZSodel" ZoomLevel="109">
+        <EntityTypeShape EntityType="MRZSodel.Answer" Width="1.5" PointX="18.75" PointY="10.625"
+                         Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Applications" Width="1.5" PointX="0.75" PointY="10.625"
+                         Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Membership" Width="1.5" PointX="6" PointY="12.25"
+                         Height="5.4417122395833388" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Paths" Width="1.5" PointX="3" PointY="9.25"
+                         Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_PersonalizationAllUsers" Width="1.5" PointX="5.25" PointY="9.5"
+                         Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_PersonalizationPerUser" Width="1.5" PointX="5.25" PointY="6.25"
+                         Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Profile" Width="1.5" PointX="10.5" PointY="14.75"
+                         Height="2.172587890624996" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Roles" Width="1.5" PointX="3" PointY="18.5"
+                         Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="0.75"
+                         Height="1.5956835937500102" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_Users" Width="1.5" PointX="8.25" PointY="14"
+                         Height="3.5186979166666674" />
+        <EntityTypeShape EntityType="MRZSodel.aspnet_WebEvent_Events" Width="1.5" PointX="2.75" PointY="0.75"
+                         Height="3.9033007812500102" />
+        <EntityTypeShape EntityType="MRZSodel.Book" Width="1.5" PointX="9" PointY="19" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MRZSodel.Defect" Width="1.5" PointX="11.25" PointY="28.25"
+                         Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="MRZSodel.Group" Width="1.5" PointX="11.25" PointY="11.875"
+                         Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MRZSodel.InterectiveTest" Width="2" PointX="8" PointY="21.625"
+                         Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="MRZSodel.InterectiveTestLog" Width="2.125" PointX="10.875" PointY="25.5"
+                         Height="2.557190755208353" />
+        <EntityTypeShape EntityType="MRZSodel.InterectiveTestParameter" Width="1.5" PointX="11.25" PointY="31.25"
+                         Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MRZSodel.MultimediaContent" Width="1.5" PointX="15.75" PointY="24.75"
+                         Height="2.1725878906249818" />
+        <EntityTypeShape EntityType="MRZSodel.Page" Width="1.5" PointX="13.5" PointY="24.375"
+                         Height="2.7494921874999818" />
+        <EntityTypeShape EntityType="MRZSodel.Question" Width="1.5" PointX="16.5" PointY="10.5"
+                         Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="MRZSodel.Quiz" Width="1.5" PointX="13.5" PointY="20.375"
+                         Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="MRZSodel.QuizResult" Width="1.5" PointX="15.75" PointY="14.5"
+                         Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="MRZSodel.Repairman" Width="1.5" PointX="13.5" PointY="28.125"
+                         Height="1.980286458333353" />
+        <EntityTypeShape EntityType="MRZSodel.ResultAnswer" Width="1.5" PointX="21" PointY="14.5"
+                         Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="MRZSodel.Section" Width="1.5" PointX="11.25" PointY="20.375"
+                         Height="2.7494921874999818" />
+        <EntityTypeShape EntityType="MRZSodel.sysdiagram" Width="1.5" PointX="4.75" PointY="0.75"
+                         Height="1.9802864583333246" />
+        <EntityTypeShape EntityType="MRZSodel.User" Width="1.5" PointX="13.5" PointY="14.375"
+                         Height="2.9417936197916674" />
+        <EntityTypeShape EntityType="MRZSodel.UserSection" Width="1.5" PointX="18.75" PointY="14.75"
+                         Height="2.1725878906249818" />
+        <AssociationConnector Association="MRZSodel.FK_Answer_Question">
+          <ConnectorPoint PointX="18" PointY="11.807444661458334" />
+          <ConnectorPoint PointX="18.75" PointY="11.807444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_ResultAnswer_Answer">
+          <ConnectorPoint PointX="20.25" PointY="11.807444661458334" />
+          <ConnectorPoint PointX="21.260414166666667" PointY="11.807444661458334" />
+          <ConnectorPoint PointX="21.427080833333331" PointY="11.807444661458334" />
+          <ConnectorPoint PointX="21.75" PointY="11.807444661458334" />
+          <ConnectorPoint PointX="21.75" PointY="14.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Me__Appli__21B6055D">
+          <ConnectorPoint PointX="2.25" PointY="12.716095377604162" />
+          <ConnectorPoint PointX="6" PointY="12.716095377604162" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Pa__Appli__5AEE82B9">
+          <ConnectorPoint PointX="2.25" PointY="11.119944661458334" />
+          <ConnectorPoint PointX="3" PointY="11.119944661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Ro__Appli__440B1D61">
+          <ConnectorPoint PointX="1.5" PointY="13.182190755208325" />
+          <ConnectorPoint PointX="1.5" PointY="19.682444661458334" />
+          <ConnectorPoint PointX="3" PointY="19.682444661458334" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Us__Appli__0DAF0CB0">
+          <ConnectorPoint PointX="2.25" PointY="11.932444661458334" />
+          <ConnectorPoint PointX="8.5104141666666653" PointY="11.932444661458334" />
+          <ConnectorPoint PointX="8.6770808333333331" PointY="11.932444661458334" />
+          <ConnectorPoint PointX="9" PointY="11.932444661458334" />
+          <ConnectorPoint PointX="9" PointY="14" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Me__UserI__22AA2996">
+          <ConnectorPoint PointX="8.25" PointY="15.759348958333334" />
+          <ConnectorPoint PointX="7.5" PointY="15.759348958333334" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Pe__PathI__628FA481">
+          <ConnectorPoint PointX="4.5" PointY="10.393992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="10.393992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Pe__PathI__68487DD7">
+          <ConnectorPoint PointX="3.75" PointY="9.25" />
+          <ConnectorPoint PointX="3.75" PointY="7.4324446614583337" />
+          <ConnectorPoint PointX="5.25" PointY="7.4324446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Pe__UserI__693CA210">
+          <ConnectorPoint PointX="8.5937475" PointY="14" />
+          <ConnectorPoint PointX="8.5937475" PointY="7.4324446614583337" />
+          <ConnectorPoint PointX="6.75" PointY="7.4324446614583337" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK__aspnet_Pr__UserI__38996AB5">
+          <ConnectorPoint PointX="9.75" PointY="15.836293945312498" />
+          <ConnectorPoint PointX="10.5" PointY="15.836293945312498" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_User_aspnet_Users">
+          <ConnectorPoint PointX="9.75" PointY="17.150940755208332" />
+          <ConnectorPoint PointX="13.5" PointY="17.150940755208332" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Section_Book">
+          <ConnectorPoint PointX="10.5" PointY="20.581492513020834" />
+          <ConnectorPoint PointX="11.25" PointY="20.581492513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Defect_InterectiveTest">
+          <ConnectorPoint PointX="9" PointY="24.566793619791667" />
+          <ConnectorPoint PointX="9" PointY="29.336293945312505" />
+          <ConnectorPoint PointX="11.25" PointY="29.336293945312505" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Repairmen_Defect">
+          <ConnectorPoint PointX="12.75" PointY="29.177643229166677" />
+          <ConnectorPoint PointX="13.5" PointY="29.177643229166677" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_User_Group">
+          <ConnectorPoint PointX="12.40625" PointY="13.662985026041667" />
+          <ConnectorPoint PointX="12.40625" PointY="14.53125" />
+          <ConnectorPoint PointX="13.5" PointY="14.53125" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_InterectiveTestLog_InterectiveTest">
+          <ConnectorPoint PointX="9.5312525" PointY="24.566793619791667" />
+          <ConnectorPoint PointX="9.5312525" PointY="26.778595377604177" />
+          <ConnectorPoint PointX="10.875" PointY="26.778595377604177" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_InterectiveTestParameter_InterectiveTest">
+          <ConnectorPoint PointX="8.4687475" PointY="24.566793619791667" />
+          <ConnectorPoint PointX="8.4687475" PointY="32.143992513020834" />
+          <ConnectorPoint PointX="11.25" PointY="32.143992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_MultimediaContent_Page">
+          <ConnectorPoint PointX="15" PointY="25.836293945312491" />
+          <ConnectorPoint PointX="15.75" PointY="25.836293945312491" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Page_Section">
+          <ConnectorPoint PointX="12.75" PointY="21.780998093749986" />
+          <ConnectorPoint PointX="13.25" PointY="21.780998093749986" />
+          <ConnectorPoint PointX="13.25" PointY="23.566793619791667" />
+          <ConnectorPoint PointX="14.25" PointY="23.566793619791667" />
+          <ConnectorPoint PointX="14.25" PointY="24.375" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Question_Quiz">
+          <ConnectorPoint PointX="15" PointY="21.845896809895834" />
+          <ConnectorPoint PointX="17.65625" PointY="21.845896809895834" />
+          <ConnectorPoint PointX="17.65625" PointY="13.057190755208325" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_ResultAnswer_Question">
+          <ConnectorPoint PointX="18" PointY="10.53125" />
+          <ConnectorPoint PointX="21.3437475" PointY="10.53125" />
+          <ConnectorPoint PointX="21.3437475" PointY="14.5" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_Quiz_Section">
+          <ConnectorPoint PointX="12.75" PointY="21.718493593749997" />
+          <ConnectorPoint PointX="13.5" PointY="21.718493593749997" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_QuizResult_Quiz">
+          <ConnectorPoint PointX="15" PointY="21.079195904947923" />
+          <ConnectorPoint PointX="16.5" PointY="21.079195904947923" />
+          <ConnectorPoint PointX="16.5" PointY="17.057190755208325" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_QuizResult_User">
+          <ConnectorPoint PointX="15" PointY="15.778595377604162" />
+          <ConnectorPoint PointX="15.75" PointY="15.778595377604162" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_ResultAnswer_QuizResult">
+          <ConnectorPoint PointX="17.25" PointY="14.59375" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="14.59375" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="14.59375" />
+          <ConnectorPoint PointX="21" PointY="14.59375" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_UserSection_Section">
+          <ConnectorPoint PointX="12.75" PointY="20.375" />
+          <ConnectorPoint PointX="13.125" PointY="20" />
+          <ConnectorPoint PointX="16.416666666666668" PointY="20" />
+          <ConnectorPoint PointX="16.583333333333332" PointY="20" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="20" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="20" />
+          <ConnectorPoint PointX="19.5" PointY="20" />
+          <ConnectorPoint PointX="19.5" PointY="16.922587890624982" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.FK_UserSection_User">
+          <ConnectorPoint PointX="15" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="16.416666666666668" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="16.583333333333332" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="17.572916666666668" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="17.739583333333332" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="19.0937475" PointY="17.218242187499996" />
+          <ConnectorPoint PointX="19.0937475" PointY="16.922587890624982" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.aspnet_UsersInRoles">
+          <ConnectorPoint PointX="4.5" PointY="18.71875" />
+          <ConnectorPoint PointX="8.59375" PointY="18.71875" />
+          <ConnectorPoint PointX="8.59375" PointY="17.518697916666667" />
+        </AssociationConnector>
+        <AssociationConnector Association="MRZSodel.SectionInterectiveTest">
+          <ConnectorPoint PointX="10" PointY="22.374746093749991" />
+          <ConnectorPoint PointX="11.25" PointY="22.374746093749991" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

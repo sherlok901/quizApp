@@ -1,0 +1,78 @@
+﻿<navigation:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" x:Class="MRZS.Views.Student.Test"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Test Page">
+    <Grid x:Name="LayoutRoot">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition/>  	
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="buttonNextQuestion" 
+                    Height="23" 
+                    Width="Auto" 
+                    HorizontalAlignment="Left"
+                    Margin="5,5,5,5" Grid.Row="0" 
+                    Click="buttonNextQuestion_Click">
+                <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Следующий вопрос"></TextBlock>
+                            <Image VerticalAlignment="Center" Margin="3,0,0,0" Width="20" Source="../../Images/1298238222_go-previous-rtl.png"/>
+                </StackPanel>
+            </Button>
+
+            <sdk:Label x:Name="labelTestTime" Grid.Row="0" Margin="5,5,5,5" Width="Auto" FontSize="20" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+        </StackPanel>
+        <TextBlock  x:Name="labelQuestionText" 
+					Grid.Row="1" 
+					Margin="15,5,5,5" 
+					FontSize="14"
+					FontWeight="Bold"
+					TextWrapping="Wrap"
+					Height="Auto" 
+					HorizontalAlignment="Stretch" 
+					VerticalAlignment="Top" Foreground="#FF640000"/>
+        <sdk:DataGrid x:Name="dataGrdiAnswers" 
+                      Grid.Row="2" 
+                      IsReadOnly="True"
+                      AutoGenerateColumns="False" 
+                      HeadersVisibility="None"
+                      HorizontalAlignment="Stretch"
+                      Margin="10,10,10,10" 
+                      VerticalAlignment="Stretch" >
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn Width="*">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                                <RadioButton x:Name="radioButtonAnswer" GroupName="Question" Content="{Binding Path=AnswerText}" IsChecked="{Binding IsCorrectDebug}"
+                                             HorizontalAlignment="Left" Margin="5,0,5,0" VerticalAlignment="Center"/>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+        <Button x:Name="buttonEndTest" 
+                Height="23" 
+                HorizontalAlignment="Right" 
+                Grid.Row="0" 
+                Margin="135,5,10,5" 
+                Width="Auto" 
+                d:LayoutOverrides="Height" 
+                Click="buttonEndTest_Click">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Завершить тест"></TextBlock>
+                <Image  VerticalAlignment="Center" Width="20" Margin="3,0,0,0" Source="../../Images/1298238719_gnome-session-logout.png"/>
+            </StackPanel>
+        </Button>
+
+    </Grid>
+</navigation:Page>

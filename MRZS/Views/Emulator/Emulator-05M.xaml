@@ -1,0 +1,149 @@
+﻿<navigation:Page x:Class="MRZS.Views.Emulator.Emulator_05M" 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           mc:Ignorable="d"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+                 xmlns:MRZS="clr-namespace:MRZS" xmlns:Emulator="clr-namespace:MRZS.Views.Emulator" d:DesignWidth="840" d:DesignHeight="680"
+           Title="Emulator_05M Page">
+    <navigation:Page.Resources>
+        <Style TargetType="Button" x:Key="PanelKey">
+            <Setter Property="Width" Value="45"/>
+            <Setter Property="Height" Value="45"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        <Style TargetType="TextBox" x:Key="LeftSwitch">
+            <Setter Property="Width" Value="225"/>
+            <Setter Property="Height" Value="35"/>
+            <Setter Property="Margin" Value="16,0,0,0"/>
+        </Style>
+    </navigation:Page.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+			<ColumnDefinition Width="Auto"/>
+			<ColumnDefinition Width="Auto"/>
+		</Grid.ColumnDefinitions>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.2*"/>
+                <ColumnDefinition Width="230"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBox Height="80" HorizontalAlignment="Stretch"
+                     Grid.Row="0" Margin="10,0,10,0"
+                     Grid.ColumnSpan="2"
+                     Grid.Column="1" />
+            <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="1" Style="{StaticResource PanelKey}" />
+                    <Button Content="2" Style="{StaticResource PanelKey}" />
+                    <Button Content="3" Style="{StaticResource PanelKey}" />
+                    <Button Content="4" Style="{StaticResource PanelKey}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="5" Style="{StaticResource PanelKey}" />
+                    <Button Content="6" Style="{StaticResource PanelKey}" />
+                    <Button Content="7" Style="{StaticResource PanelKey}" />
+                    <Button Content="8" Style="{StaticResource PanelKey}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="9" Style="{StaticResource PanelKey}" />
+                    <Button Content="0" Style="{StaticResource PanelKey}" />
+                    <Button Content="." Style="{StaticResource PanelKey}" />
+                    <Button Content="F" Style="{StaticResource PanelKey}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="ESC" Style="{StaticResource PanelKey}" />
+                    <Button Content="A" Style="{StaticResource PanelKey}" Margin="60,0" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="&lt;" Style="{StaticResource PanelKey}" Margin="60,5" />
+                    <Button Content="&gt;" Style="{StaticResource PanelKey}" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="ENTER" Style="{StaticResource PanelKey}" />
+                    <Button Content="V" Style="{StaticResource PanelKey}" Margin="60,0" />
+                </StackPanel>
+            </StackPanel>
+        
+            <StackPanel Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="10" 
+                        HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="2" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="3" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="5" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <TextBlock Text="6" VerticalAlignment="Center" Margin="5,0,5,0"/>
+                    <CheckBox VerticalAlignment="Center" />
+                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Content="F1" Style="{StaticResource PanelKey}" />
+                    <TextBox Width="223" Height="45"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Content="F2" Style="{StaticResource PanelKey}" />
+                    <TextBox Width="223" Height="45"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="5">
+                    <Button Content="F3" Style="{StaticResource PanelKey}" />
+                    <TextBox Width="223" Height="45" />
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+		<StackPanel Grid.Column="2" Width="70">
+            <TextBlock Text="Реле" FontSize="20"/>
+            <MRZS:OutputR Width="70" Height="60" OutputName="P01" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P02" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P03" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P04" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P05" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P06" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P07" />
+        </StackPanel>
+        <Grid Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="1">
+                <TextBlock Text="Дискретные входы"  FontSize="16"/>
+                <Emulator:InputDV InputName="ДВ01"/>
+                <Emulator:InputDV InputName="ДВ02"/>
+                <Emulator:InputDV InputName="ДВ03"/>
+                <Emulator:InputDV InputName="ДВ04"/>
+                <Emulator:InputDV InputName="ДВ05"/>
+                <Emulator:InputDV InputName="ДВ06"/>
+                <Emulator:InputDV InputName="ДВ07"/>
+                <Emulator:InputDV InputName="ДВ08"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</navigation:Page>

@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<main>
+	<device name="МРЗС-05_КК" caption="МРЗС-05 з клавішною клавіатурою" path_to_setting_file="Data/МРЗС-05_КК/settings.xml"/>
+	<device name="МРЗС-05_ПК" caption="МРЗС-05 з плівковою клавіатурою та тактильним ефектом" path_to_setting_file="Data/МРЗС-05_ПК/settings.xml"/>
+	<device name="МРЗС-05-01_КК" caption="МРЗС-05-01 з клавішною клавіатурою" path_to_setting_file="Data/МРЗС-05-01_КК/settings.xml"/>
+	<device name="МРЗС-05-01_ПК" caption="МРЗС-05-01 з клавішною клавіатурою та тактильним ефектом" path_to_setting_file="Data/МРЗС-05-01_ПК/settings.xml"/>
+	<device name="МРЗС-05-60" caption="МРЗС-05-60" path_to_setting_file="Data/МРЗС-05-60/settings.xml"/>
+	<device name="МРЗС-05-61" caption="МРЗС-05-61" path_to_setting_file="Data/МРЗС-05-61/settings.xml"/>
+	<device name="МРЗС-05М" caption="МРЗС-05М" path_to_setting_file="Data/МРЗС-05М/settings.xml"/>
+</main>

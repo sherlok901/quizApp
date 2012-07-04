@@ -1,0 +1,80 @@
+﻿<UserControl 
+  x:Class="MRZS.MainPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation" 
+  xmlns:uriMapper="clr-namespace:System.Windows.Navigation;assembly=System.Windows.Controls.Navigation"
+  xmlns:dataControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.DataForm.Toolkit" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+  mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+
+    <Grid x:Name="LayoutRoot" Style="{StaticResource LayoutRootGridStyle}">
+
+        <Border x:Name="ContentBorder" Style="{StaticResource ContentBorderStyle}">
+            <navigation:Frame x:Name="ContentFrame" Style="{StaticResource ContentFrameStyle}" 
+                              Source="/Home" Navigated="ContentFrame_Navigated" NavigationFailed="ContentFrame_NavigationFailed">
+                <navigation:Frame.UriMapper>
+                    <uriMapper:UriMapper>
+                        <uriMapper:UriMapping Uri="" MappedUri="/Views/Home.xaml"/>
+                        <uriMapper:UriMapping Uri="/{pageName}" MappedUri="/Views/{pageName}.xaml"/>
+                    </uriMapper:UriMapper>
+                </navigation:Frame.UriMapper>
+            </navigation:Frame>
+        </Border>
+
+        <Grid Style="{StaticResource NavigationOuterGridStyle}">
+            <Grid x:Name="NavigationGrid" Style="{StaticResource NavigationGridStyle}">
+
+                <Border x:Name="BrandingBorder" Style="{StaticResource BrandingBorderStyle}">
+                    <StackPanel x:Name="BrandingStackPanel" Style="{StaticResource BrandingStackPanelStyle}">
+
+                        <ContentControl Style="{StaticResource LogoIcon}"/>
+                        <TextBlock x:Name="ApplicationNameTextBlock" Style="{StaticResource ApplicationNameStyle}" 
+                               Text="МРЗС"/>
+
+                    </StackPanel>
+                </Border>
+
+                <Border x:Name="LinksBorder" Style="{StaticResource LinksBorderStyle}">
+                    <StackPanel x:Name="LinksStackPanel" Style="{StaticResource LinksStackPanelStyle}">
+
+                        <HyperlinkButton x:Name="LinkEducation" Style="{StaticResource LinkStyle}"  Visibility="Collapsed"
+                    				NavigateUri="/Student/Education" TargetName="ContentFrame" Content="Обучение" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+
+                        <Rectangle x:Name="Divider2" Style="{StaticResource DividerStyle}"  Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,4" d:LayoutOverrides="Height, VerticalMargin"/>
+                        <HyperlinkButton x:Name="LinkCoordinatorStatistics" Style="{StaticResource LinkStyle}"    Visibility="Collapsed"
+                    				NavigateUri="/Coordinator/Statistic" TargetName="ContentFrame" Content="Статистика" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+
+                        <Rectangle x:Name="DividerStatistics" Style="{StaticResource DividerStyle}"  Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,4" d:LayoutOverrides="Height, VerticalMargin"/>
+                        <HyperlinkButton x:Name="LinkCoordination" Style="{StaticResource LinkStyle}"  
+                    				NavigateUri="/Coordinator/Coordination" TargetName="ContentFrame"  Visibility="Collapsed" Content="Координирование" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+                        
+                        <Rectangle x:Name="AdminDividerCoordinator" Style="{StaticResource DividerStyle}" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,4" d:LayoutOverrides="Height, VerticalMargin"/>
+
+                        <HyperlinkButton x:Name="AdminUsers" Style="{StaticResource LinkStyle}"  Visibility="Collapsed"
+                    				NavigateUri="/Admin/Users" TargetName="ContentFrame" Content="Пользователи" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+
+                        <Rectangle x:Name="AdminDividerUsers" Style="{StaticResource DividerStyle}" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,4" d:LayoutOverrides="Height, VerticalMargin"/>
+
+                        <HyperlinkButton x:Name="AdminGroups" Style="{StaticResource LinkStyle}"  Visibility="Collapsed"
+                    				NavigateUri="/Admin/Groups" TargetName="ContentFrame" Content="Группы" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+
+                        <Rectangle x:Name="DividerGroups" Style="{StaticResource DividerStyle}" Visibility="Collapsed" HorizontalAlignment="Right" Margin="0,4" d:LayoutOverrides="Height, VerticalMargin"/>
+
+                        <HyperlinkButton x:Name="AdminBooks" Style="{StaticResource LinkStyle}"  Visibility="Collapsed"
+                    				NavigateUri="/Admin/Books" TargetName="ContentFrame" Content="Книги" Margin="0,0,3,0" d:LayoutOverrides="Width, Height"/>
+
+
+                    </StackPanel>
+                </Border>
+
+            </Grid>
+
+            <Border x:Name="loginContainer" Style="{StaticResource LoginContainerStyle}">
+                <!-- LoginStatus will be added here in code behind. This is required for the designer view to work -->
+            </Border>
+        </Grid>
+
+    </Grid>
+
+</UserControl>

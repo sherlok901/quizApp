@@ -1,0 +1,53 @@
+﻿<sdk:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+		   xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" 
+		   xmlns:my="clr-namespace:MRZS.Web.Services" xmlns:my1="clr-namespace:MRZS.Web.Models" 
+		   xmlns:sr="clr-namespace:Divelements.SandRibbon;assembly=Divelements.SandRibbon" x:Class="MRZS.Views.Coordinator.Coordination"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Coordination Page">
+    <Grid x:Name="LayoutRoot">
+    	<sdk:TabControl HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch">
+    		<sdk:TabItem Header="Студенты">
+    			<Grid Background="#FFE5E5E5">
+                    <sdk:DataGrid AutoGenerateColumns="False" x:Name="gridStudents" ItemsSource="{Binding Data, ElementName=userDomainDataSource}" HorizontalAlignment="Stretch" Margin="5,5,5,5" VerticalAlignment="Stretch" >
+    					<sdk:DataGrid.Columns>
+                            <sdk:DataGridTemplateColumn>
+							  <sdk:DataGridTemplateColumn.CellTemplate>
+							   <DataTemplate>
+							    <StackPanel>
+                                            <Button Style="{StaticResource CImageButton}"  Click="UpdateButton_Click"
+                                             Cursor="Hand" Height="25" Width="25" Content="../../Images/1297289393_graduated.png"/>
+								</StackPanel>
+							   </DataTemplate>
+							  </sdk:DataGridTemplateColumn.CellTemplate>
+							 </sdk:DataGridTemplateColumn>
+                            <sdk:DataGridTextColumn Header="Login" Binding="{Binding UserLogin, Mode=OneWay}"/>
+							<sdk:DataGridTextColumn Header="Имя студента" Binding="{Binding FullName, Mode=OneWay}"/>
+                            <sdk:DataGridTextColumn Header="Группа" Binding="{Binding GroupName, Mode=OneWay}"/>
+							<sdk:DataGridTextColumn Header="Изучаемая книга" Binding="{Binding CurrentBook, Mode=OneWay}"/>
+                            <sdk:DataGridTextColumn Header="Изучаемая секция" Binding="{Binding CurrentSection, Mode=OneWay}"/>
+						</sdk:DataGrid.Columns>
+    				</sdk:DataGrid>
+                    <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="97,-22,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
+                </Grid>
+    		</sdk:TabItem>
+    		<sdk:TabItem Header="Группы" Visibility="Collapsed">
+    			<Grid Background="#FFE5E5E5"/>
+    		</sdk:TabItem>
+    	</sdk:TabControl>
+        <riaControls:DomainDataSource AutoLoad="True" Height="0" LoadedData="userDomainDataSource_LoadedData" x:Name="userDomainDataSource" QueryName="GetStudentsQuery" Width="0">
+            <riaControls:DomainDataSource.DomainContext>
+                <my:UserContext />
+            </riaControls:DomainDataSource.DomainContext>
+        </riaControls:DomainDataSource>
+       
+    	
+       
+    </Grid>
+</sdk:Page>

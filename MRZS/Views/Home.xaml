@@ -1,0 +1,49 @@
+﻿<navigation:Page
+  x:Class="MRZS.Home" 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+  mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480"  
+  Style="{StaticResource PageStyle}">
+
+  <Grid x:Name="LayoutRoot">
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+            <ScrollViewer x:Name="PageScrollViewer" Style="{StaticResource PageScrollViewerStyle}" >
+
+      <StackPanel x:Name="ContentStackPanel" Style="{StaticResource ContentStackPanelStyle}">
+      	<WebBrowser  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" x:Name="webBrowserHomePage" />
+          
+      </StackPanel>
+
+    </ScrollViewer>
+    <TextBlock HorizontalAlignment="Stretch" Grid.Row="0" TextAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  >
+		    <Run Text="ВАС  ПРИВЕТСТВУЕТ" FontSize="24" Foreground="RosyBrown"/>	
+			<LineBreak />
+			<Run Text="ТРЕНАЖЕРНЫЙ  КОМПЛЕКС" FontSize="24" Foreground="RosyBrown"/>	
+		 	<LineBreak />
+			<Run Text="«АТЛАНТ 2»" FontSize="24" Foreground="RosyBrown"/>	
+			<LineBreak />
+			<LineBreak />
+			<Run Text="РЕЖИМЫ  РАБОТЫ  КОМПЛЕКСА:" FontSize="18"/>	
+			<LineBreak />
+			<Run Text="1 – ИЗУЧЕНИЕ  ЭЛЕКТРОННЫХ  УЧЕБНИКОВ" FontSize="16" Foreground="Blue"/>
+			<LineBreak />	
+			<Run Text="(ПРОЦЕДУРНЫЙ  ТРЕНАЖЕР)" FontSize="16" Foreground="Blue"/>	
+			<LineBreak />	
+			<Run Text="2 – ИЗУЧЕНИЕ  ИНСТРУКЦИЙ  ПО  ЛЕТНОЙ  ЭКСПЛУАТАЦИИ" FontSize="16" Foreground="#FF39875A"/>
+			<LineBreak />	
+			<Run Text="(ПРОЦЕДУРНЫЙ  ТРЕНАЖЕР)" FontSize="16" Foreground="#FF39875A"/>	
+			<LineBreak />	
+	</TextBlock>
+        <TextBlock x:Name="textBlokHelp" Grid.Row="1" TextWrapping="Wrap" TextAlignment="Center" Foreground="SaddleBrown">
+            <Run Text="Для входа в систему нажмине на кнопку 'войти' в правом верхнем углу экрана"   FontSize="16" />
+        </TextBlock>
+    <Image HorizontalAlignment="Left" Height="128" Margin="0,8,0,0" VerticalAlignment="Top" Width="136" Source="../Images/image004.jpg"/>
+    <Image HorizontalAlignment="Right" Height="128" Margin="0,8,0,0" VerticalAlignment="Top" Width="128" Source="../Images/image002.jpg"/>
+  </Grid>
+
+</navigation:Page>

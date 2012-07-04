@@ -1,0 +1,158 @@
+﻿<navigation:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:c1grid="clr-namespace:C1.Silverlight.DataGrid;assembly=C1.Silverlight.DataGrid" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" x:Class="MRZS.Views.Coordinator.Statistic"
+		   xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+           mc:Ignorable="d"
+		   xmlns:local="clr-namespace:MRZS"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="Statistic Page">
+	    <UserControl.Resources>
+	        <local:UserStatisticConverter x:Key="UserStatisticConverter" />
+	        <local:VisibilityConverter x:Key="VisibilityConverter" />
+   		</UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+         
+        <c1grid:C1DataGrid ItemsSource="{Binding Students}" 
+                           AutoGenerateColumns="False" 
+                           SelectedItem="{Binding SelectedStudent, Mode=TwoWay}" 
+                           HorizontalAlignment="Stretch" Margin="5,5,5,5" 
+                           VerticalAlignment="Stretch" 
+                           CanUserAddRows="False" 
+                           CanUserFilter="True" 
+                           CanUserEditRows="False"
+                           LoadedRowDetailsPresenter="C1DataGrid_LoadedRowDetailsPresenter">
+            <c1grid:C1DataGrid.Columns>
+                <c1grid:DataGridTextColumn  Binding="{Binding GroupName, Mode=OneWay}" DisplayIndex="0" SortMemberPath="GroupName">
+                    <c1grid:DataGridTextColumn.Header>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Text="Группа" VerticalAlignment="Center" Margin="6,0,6,0"/>
+                            <ComboBox x:Name="comboBoxAvailableGroups" Width="150" ItemsSource="{Binding Groups}" HorizontalAlignment="Left" Grid.Column="1"
+                                              DisplayMemberPath="GroupName" SelectedValue="{Binding SelectedGroup, Mode=TwoWay}"/>
+                        </StackPanel>
+                    </c1grid:DataGridTextColumn.Header>
+                </c1grid:DataGridTextColumn>
+                <c1grid:DataGridTextColumn  Binding="{Binding FullName, Mode=OneWay}" DisplayIndex="1" SortMemberPath="FullName" FilterMemberPath="FullName">
+                    <c1grid:DataGridTextColumn.Header>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="6,0,6,0" Text="Студент" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </c1grid:DataGridTextColumn.Header>
+                </c1grid:DataGridTextColumn>
+                <c1grid:DataGridTextColumn   Binding="{Binding UserLogin, Mode=OneWay}" DisplayIndex="1" SortMemberPath="UserLogin" FilterMemberPath="UserLogin">
+                    <c1grid:DataGridTextColumn.Header>
+                        <StackPanel  Orientation="Horizontal" HorizontalAlignment="Left">
+                            <TextBlock Margin="6,0,6,0" Text="Логин" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </c1grid:DataGridTextColumn.Header>
+
+                </c1grid:DataGridTextColumn>
+                <c1grid:DataGridTemplateColumn Width="100">
+                    <c1grid:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <HyperlinkButton NavigateUri="{Binding Path=UserId, Converter={StaticResource UserStatisticConverter}}" >
+                                <Grid>
+                                	<Grid.ColumnDefinitions>
+                                		<ColumnDefinition Width="Auto"/>
+										<ColumnDefinition Width="Auto"/>
+									</Grid.ColumnDefinitions>
+									<TextBlock Grid.Column="1" Margin="5,0,0,0" VerticalAlignment="Center">Детально</TextBlock>
+                                    <Image Grid.Column="0" Source="../../Images/1296766829_stock_task-assigned-to.png" />
+								</Grid>
+                            </HyperlinkButton>
+                        </DataTemplate>
+                    </c1grid:DataGridTemplateColumn.CellTemplate>
+                </c1grid:DataGridTemplateColumn>
+            </c1grid:C1DataGrid.Columns>
+            <c1grid:C1DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <StackPanel>
+                        <ProgressBar x:Name="progressBarLoadingLog"
+                                     IsIndeterminate="True" 
+                                     Width="150" 
+                                     Height="25" 
+                                     Margin="10"
+                                     HorizontalAlignment="Center"
+									 Visibility="{Binding Path=QuestionNotLoaded, Converter={StaticResource VisibilityConverter}}"
+                                     />
+                        <Grid  Visibility="{Binding Path=QuestionLoaded, Converter={StaticResource VisibilityConverter}}">
+	                        <Grid>
+	                        	<Grid.ColumnDefinitions>
+	                        		<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/> 
+									<ColumnDefinition Width="Auto"/>                 	
+									<ColumnDefinition Width="Auto"/>                  	
+								</Grid.ColumnDefinitions>
+								<TextBlock Text="Результаты недавно пройденного теста" 
+								Margin="5,0,0,0" 
+								Foreground="Gray" 
+								FontWeight="Bold" 
+								FontSize="10"
+								Grid.Column="0"/>
+		                       
+							    <TextBlock Text="Время прохождения:" Grid.Column="1" Margin="15,0,0,0"/>
+								<TextBlock Text="{Binding SelectedQuizResult.StartTime,  Converter={StaticResource DateTimeConverter}}" 
+								FontWeight="Bold" 
+								Grid.Column="2" Margin="5,0,0,0"/>
+								<TextBlock Text="Книга:" Grid.Column="3"
+								Margin="5,0,0,0"/>
+								<TextBlock Text="{Binding SelectedQuizResult.BookName}" 
+								FontWeight="Bold" 
+								Grid.Column="4" Margin="5,0,0,0"/>
+								<TextBlock Text="Раздел:" Grid.Column="5" Margin="5,0,0,0"/>
+								<TextBlock Text="{Binding SelectedQuizResult.SectionName}" 
+								FontWeight="Bold" 
+								Grid.Column="6" Margin="5,0,0,0"/>
+								<TextBlock Text="Оценка:" Grid.Column="7" Margin="5,0,0,0"/>
+								<TextBlock Text="{Binding SelectedQuizResult.CorrectAnswersString}" 
+								FontWeight="Bold" 
+								Foreground="Red"
+								Grid.Column="8" Margin="5,0,0,0"/>
+							</Grid>
+							<c1grid:C1DataGrid Grid.Column="1" 
+				            HorizontalAlignment="Stretch" 
+				            Margin="5,20,5,5"
+				            VerticalAlignment="Stretch"
+				            ItemsSource="{Binding Path=Questions}"
+				            AutoGenerateColumns="False"
+				            CanUserAddRows="False"
+				            CanUserEditRows="False"
+                            LoadingRow="C1DataGrid_LoadingRow"
+                            LoadedRowPresenter="C1DataGrid_LoadedRowPresenter"
+	                        LoadedRowDetailsPresenter="C1DataGridAnswers_LoadedRowDetailsPresenter" FontWeight="Bold"
+				            >
+	                            <c1grid:C1DataGrid.Columns>
+	                                <c1grid:DataGridTextColumn Binding="{Binding Path=QuestionText}" Header="Вопрос"/>
+	                                <c1grid:DataGridTextColumn Binding="{Binding Path=Difficulty}" Header="Сложность"/>
+	                            </c1grid:C1DataGrid.Columns>
+	                            <c1grid:C1DataGrid.RowDetailsTemplate>
+	                                <DataTemplate>
+	                                    <sdk:DataGrid Margin="10,0,0,5"  LoadingRow="DataGrid_LoadingRow"
+							                            AutoGenerateColumns="False"
+							                            IsReadOnly="True"
+							                            ItemsSource="{Binding Answers}"
+							                            >
+	                                        <sdk:DataGrid.Columns>
+	                                            <sdk:DataGridTextColumn Width="Auto" Header="Варианты ответов" FontWeight="Light" Binding="{Binding Path=AnswerText}"/>
+	                                        </sdk:DataGrid.Columns>
+	                                    </sdk:DataGrid>
+	                                </DataTemplate>
+	                            </c1grid:C1DataGrid.RowDetailsTemplate>
+	                        </c1grid:C1DataGrid>
+						</Grid>
+                    </StackPanel>
+                </DataTemplate>
+                <!-- End row details section. -->
+            </c1grid:C1DataGrid.RowDetailsTemplate>
+        </c1grid:C1DataGrid>
+       <toolkit:BusyIndicator Content="busyIndicator" Visibility="{Binding IsBusy, Converter={StaticResource VisibilityConverter}}" IsBusy="{Binding IsBusy}" BusyContent="Загрузка..." HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    </Grid>
+</navigation:Page>

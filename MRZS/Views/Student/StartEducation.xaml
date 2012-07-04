@@ -1,0 +1,38 @@
+﻿<navigation:Page 
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+           xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
+           xmlns:c1ext="clr-namespace:C1.Silverlight.Extended;assembly=C1.Silverlight.Extended" xmlns:c1mediaplayer="clr-namespace:C1.Silverlight.MediaPlayer;assembly=C1.Silverlight.MediaPlayer" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" x:Class="MRZS.Views.Student.StartEducation"
+           mc:Ignorable="d"
+           d:DesignWidth="640" d:DesignHeight="480"
+           Title="StartEducation Page">
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>  	
+			<RowDefinition x:Name="ss"/>
+			<RowDefinition Height="Auto"/>  	
+		</Grid.RowDefinitions>
+		<Button x:Name="buttonPreviousPage" Width="Auto" IsEnabled="False" Height="23" Margin="10" Grid.Row="0"  Content="Предидущая" HorizontalAlignment="Left" Click="buttonPreviousPage_Click" />
+		<Button x:Name="buttonNextPage" Width="Auto" IsEnabled="False" Height="23" Margin="100,10,10,10" Grid.Row="0"  Content="Следующая" HorizontalAlignment="Left" Click="buttonNextPage_Click" />
+
+        <TextBox x:Name="text"  Height="23" Visibility="Collapsed" Margin="320,0,0,0" HorizontalAlignment="Left" Width="231" />
+
+        <Button Content="B" x:Name="bb1" Visibility="Collapsed" HorizontalAlignment="Left" Height="23" Margin="290,0,0,0"  Width="23" d:LayoutOverrides="Height" Click="bb1_Click" />
+
+        <Button Content="Начать тест"  x:Name="buttonStartTest" IsEnabled="False" HorizontalAlignment="Left" Height="23" Margin="185,0,0,0"  Width="100" d:LayoutOverrides="Height" Click="buttonStartTest_Click" />
+
+		<toolkit:Expander x:Name="expander" Header="Медиа" Margin="5,5,5,5" Grid.Row="2" VerticalAlignment="Bottom" d:LayoutOverrides="Width">
+			<Grid Background="#FFE5E5E5">
+				<ScrollViewer HorizontalAlignment="Stretch">
+				<c1mediaplayer:C1MediaPlayer x:Name="mediaPlayer" MaxHeight="400" HorizontalAlignment="Stretch" Margin="2,2,2,2" Grid.Row="1" VerticalAlignment="Bottom"/>
+				</ScrollViewer>
+			</Grid>
+		</toolkit:Expander>
+		<ScrollViewer HorizontalAlignment="Stretch" x:Name="scrollViewHtml" Margin="5,5,5,5" Grid.Row="1">
+			<WebBrowser x:Name="htmlHost" />
+		</ScrollViewer>
+        <CheckBox Content="Origination" Height="16" Visibility="Collapsed" HorizontalAlignment="Left" Margin="563,16,0,0" Name="checkBoxOrigination" VerticalAlignment="Top" />
+    </Grid>
+</navigation:Page>
