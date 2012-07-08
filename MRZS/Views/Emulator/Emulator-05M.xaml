@@ -60,7 +60,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="ESC" Style="{StaticResource PanelKey}" />
-                    <Button Content="A" Style="{StaticResource PanelKey}" Margin="60,0" />
+                    <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="&lt;" Style="{StaticResource PanelKey}" Margin="60,5" />
@@ -68,7 +68,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="ENTER" Style="{StaticResource PanelKey}" />
-                    <Button Content="V" Style="{StaticResource PanelKey}" Margin="60,0" />
+                    <Button Content="v" Style="{StaticResource PanelKey}" Margin="60,0" />
                 </StackPanel>
             </StackPanel>
         

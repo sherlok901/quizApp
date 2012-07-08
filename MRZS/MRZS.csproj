@@ -467,15 +467,21 @@
   <ItemGroup>
     <None Include="Properties\DataSources\MRZS.Web.Services.AnswerContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.BookContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.DefectContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.GroupContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.InterectiveTestContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.InterectiveTestLogContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.MediaContentContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.PageContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.QuestionContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.QuizContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.RepairemenContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.ResultAnswerContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.ResultQuizContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.RoleContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.SectionContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.Services.UserContext.datasource" />
+    <None Include="Properties\DataSources\MRZS.Web.Services.UserSectionContext.datasource" />
     <None Include="Properties\DataSources\MRZS.Web.UserRegistrationContext.datasource" />
     <None Include="Properties\OutOfBrowserSettings.xml" />
   </ItemGroup>
