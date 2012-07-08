@@ -62,7 +62,7 @@
 						x:Name="busyIndicator"
 						HorizontalAlignment="Center" 
 					 	d:LayoutOverrides="Height" d:IsHidden="True"/>
-        <Button HorizontalAlignment="Left" Height="76" Margin="180,317,0,0" VerticalAlignment="Top" Width="280">
+        <Button HorizontalAlignment="Left" Height="76" Margin="180,317,0,0" VerticalAlignment="Top" Width="280" Click="Button_Click_1">
             <TextBlock Height="23" TextWrapping="Wrap" Text="Емулятор МРЗС" Width="270" FontSize="18" TextAlignment="Center" FontFamily="Arial"/>
         </Button>
     </Grid>

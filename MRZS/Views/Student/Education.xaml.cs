@@ -51,10 +51,21 @@ namespace MRZS.Views.Student
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            EmulatorStarter starter = new EmulatorStarter();
-            starter.Start();
-            //NavigationService.Navigate(new Uri("/Student/StartEducation", UriKind.Relative));
+            //EmulatorStarter starter = new EmulatorStarter();
+            //starter.Start();
+            NavigationService.Navigate(new Uri("/Student/StartEducation", UriKind.Relative));
         }
+
+        /// <summary>
+        /// запуск емулятора
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
+        }
+        
 
     }
 }

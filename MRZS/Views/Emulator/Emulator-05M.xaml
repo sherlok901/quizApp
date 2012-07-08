@@ -19,13 +19,13 @@
             <Setter Property="Margin" Value="16,0,0,0"/>
         </Style>
     </navigation:Page.Resources>
-    <Grid x:Name="LayoutRoot">
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+			<ColumnDefinition Width="540"/>
+			<ColumnDefinition Width="80"/>
 		</Grid.ColumnDefinitions>
-        <Grid Grid.Column="1">
+        <Grid Grid.Column="1" Background="Aquamarine">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="0.2*"/>
@@ -59,16 +59,16 @@
                     <Button Content="F" Style="{StaticResource PanelKey}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="ESC" Style="{StaticResource PanelKey}" />
+                    <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" />
                     <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="&lt;" Style="{StaticResource PanelKey}" Margin="60,5" />
-                    <Button Content="&gt;" Style="{StaticResource PanelKey}" />
+                    <Button Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" />
+                    <Button Content="&lt;" Style="{StaticResource PanelKey}"  />
+                    <Button Content="&gt;" Style="{StaticResource PanelKey}" Margin="60,5" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="ENTER" Style="{StaticResource PanelKey}" />
-                    <Button Content="v" Style="{StaticResource PanelKey}" Margin="60,0" />
+                    <Button Content="v" Style="{StaticResource PanelKey}" Margin="115,0" />
                 </StackPanel>
             </StackPanel>
         
@@ -77,32 +77,32 @@
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="2" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="3" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="4" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="5" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="6" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox VerticalAlignment="Center" />
-                    <TextBox Style="{StaticResource LeftSwitch}"/>
+                    <TextBox Style="{StaticResource LeftSwitch}" Width="50"/>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <Button Content="F1" Style="{StaticResource PanelKey}" />
@@ -125,24 +125,20 @@
             <MRZS:OutputR Width="70" Height="60" OutputName="P03" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P04" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P05" />
-            <MRZS:OutputR Width="70" Height="60" OutputName="P06" />
-            <MRZS:OutputR Width="70" Height="60" OutputName="P07" />
         </StackPanel>
         <Grid Grid.Column="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="1">
+            <StackPanel Grid.Column="1" Background="AntiqueWhite">
                 <TextBlock Text="Дискретные входы"  FontSize="16"/>
                 <Emulator:InputDV InputName="ДВ01"/>
                 <Emulator:InputDV InputName="ДВ02"/>
                 <Emulator:InputDV InputName="ДВ03"/>
                 <Emulator:InputDV InputName="ДВ04"/>
                 <Emulator:InputDV InputName="ДВ05"/>
-                <Emulator:InputDV InputName="ДВ06"/>
-                <Emulator:InputDV InputName="ДВ07"/>
-                <Emulator:InputDV InputName="ДВ08"/>
+                <Emulator:InputDV InputName="ДВ06"/>             
             </StackPanel>
         </Grid>
     </Grid>
