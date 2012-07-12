@@ -26,6 +26,60 @@
             <Setter Property="FontStyle" Value="Normal"/>
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
+        <Style TargetType="toolkit:NumericUpDown" x:Key="CustomNumericUpDown">
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Height" Value="22" />
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="toolkit:NumericUpDown">
+                        <Grid Background="{TemplateBinding Background}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition GeneratedDuration="0" />
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" Storyboard.TargetName="DisabledVisualElement" Storyboard.TargetProperty="(UIElement.Opacity)" To="1" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused">
+                                        <Storyboard>
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="FocusVisualElement" Storyboard.TargetProperty="Opacity">
+                                                <SplineDoubleKeyFrame KeyTime="0" Value="1" />
+                                            </DoubleAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unfocused" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <toolkit:ButtonSpinner x:Name="Spinner" MinWidth="35" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
+                                <TextBox BorderThickness="0" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontStretch="{TemplateBinding FontStretch}" FontStyle="{TemplateBinding FontStyle}" FontWeight="{TemplateBinding FontWeight}" Foreground="{TemplateBinding Foreground}" MinWidth="20" x:Name="Text" AcceptsReturn="False" Text="{TemplateBinding Value}" TextAlignment="Right" TextWrapping="NoWrap" >
+                                    <TextBox.Style>
+                                        <Style TargetType="TextBox">
+                                            <Setter Property="Template">
+                                                <Setter.Value>
+                                                    <ControlTemplate TargetType="TextBox">
+                                                        <ScrollViewer x:Name="ContentElement" Padding="0" BorderThickness="0" />
+                                                    </ControlTemplate>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </TextBox.Style>
+                                </TextBox>
+                            </toolkit:ButtonSpinner>
+                            <Border x:Name="DisabledVisualElement" IsHitTestVisible="false" Opacity="0" Background="#A5FFFFFF" CornerRadius="2.5,2.5,2.5,2.5" />
+                            <Border x:Name="FocusVisualElement" IsHitTestVisible="False" Opacity="0" BorderBrush="#FF45D6FA" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="1,1,1,1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
     </navigation:Page.Resources>
     <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -62,35 +116,35 @@
                 <RowDefinition Height="55"></RowDefinition>
             </Grid.RowDefinitions>            
             <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="1"/>
+            <toolkit:NumericUpDown x:Name="f" x:FieldModifier="public" Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  Style="{StaticResource CustomNumericUpDown}" GotFocus="NumericUpDown_f_GotFocus"/>
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="Гц" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="ЗІ0" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="1" Grid.ColumnSpan="5" Content="Ток" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="3" GotFocus="NumericUpDown_GotFocus_1"/>
             <sdk:Label Grid.Row="0" Grid.Column="4" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!--tok -->
             <sdk:Label Grid.Row="2" Grid.Column="0" Content="Ia" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="2" Grid.Column="1"/>
             <sdk:Label Grid.Row="2" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="2" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="3" Grid.Column="0" Content="Ib" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1"/>
             <sdk:Label Grid.Row="3" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="3" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="4" Grid.Column="0" Content="Ic" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="4" Grid.Column="1"/>
             <sdk:Label Grid.Row="4" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="4" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="5" Grid.Column="0" Content="ЗфI" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1"/>
             <sdk:Label Grid.Row="5" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="5" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!-- napryagenie-->
             <sdk:Label Grid.Row="6" Grid.ColumnSpan="5" Content="Напряжение" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
@@ -98,30 +152,30 @@
             <sdk:Label Grid.Row="7" Grid.Column="0" Content="Ua" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="7" Grid.Column="1"/>
             <sdk:Label Grid.Row="7" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="7" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="8" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="8" Grid.Column="1"/>
             <sdk:Label Grid.Row="8" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="8" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="9" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="9" Grid.Column="1"/>
             <sdk:Label Grid.Row="9" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="9" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="10" Grid.Column="0" Content="ЗфU" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1"/>
             <sdk:Label Grid.Row="10" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3"/>
+            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!-- dopolnitelno-->
             <sdk:Label Grid.Row="11" Grid.ColumnSpan="5" Content="Установка значений" HorizontalAlignment="Center" Grid.Column="1" Margin="32,1,32,24" Grid.RowSpan="2" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="12" Grid.Column="0" Content="Шаг" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <TextBox Grid.Row="12" Grid.Column="1"/>
+            <TextBox Grid.Row="12" Grid.Column="1" Text="0.001"/>
             <sdk:Label Grid.Row="12" Grid.Column="2" Content="Мин" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <TextBox Grid.Row="12" Grid.Column="3"/>
             <sdk:Label Grid.Row="13" Grid.Column="2" Content="Макс" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>

@@ -25,5 +25,17 @@ namespace MRZS.Views.Emulator
         {
         }
 
+        private void NumericUpDown_GotFocus_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
+        //f numericUpDown
+        private void NumericUpDown_f_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NumericUpDown f=new NumericUpDown();
+            f.Background = new SolidColorBrush(Colors.Red);
+            
+        }
+
     }
 }
