@@ -142,6 +142,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Display.cs" />
     <Compile Include="Generated_Code\Models\Shared\User.shared.cs">
       <SubType>Code</SubType>
     </Compile>

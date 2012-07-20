@@ -20,35 +20,26 @@ namespace MRZS.Views.Emulator
         public Emulator_05M()
         {
             InitializeComponent();
+            display.TextWrapping = TextWrapping.Wrap;            
+            display.FontFamily = new FontFamily("Arial");
+            display.FontSize = 20.0;                        
+            display.Padding = new Thickness(5.0);            
+            display.Text = "Часы"+Environment.NewLine;
+            display.Text += "Измерения" + Environment.NewLine;
+            display.Text += "Настройка" + Environment.NewLine;
+            display.Text += "Конфигурация" + Environment.NewLine;
+            display.Text += "Авария" + Environment.NewLine;
+            display.Text += "Диагностика" + Environment.NewLine;
+            display.Text += "МТЗ" + Environment.NewLine;
+            display.Text += "АПВ" + Environment.NewLine;            
+            display.SelectionStart = display.Text.Length;
             
         }
 
         // Executes when the user navigates to this page.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }
-
-        private void NumericUpDown_GotFocus_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
-        //f numericUpDown
-        private void NumericUpDown_f_GotFocus(object sender, RoutedEventArgs e)
-        {
-            //NumericUpDown f=new NumericUpDown();
-            //f.Background = new SolidColorBrush(Colors.Red);   
-            
-        }
-
-        private void Border_MouseLeftButtonDown_1(object sender, MouseButtonEventArgs e)
-        {
-           
-        }
-
-        private void slider1_LostFocus(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        }        
 
         private void slider1_MouseLeave(object sender, MouseEventArgs e)
         {
@@ -62,7 +53,7 @@ namespace MRZS.Views.Emulator
 
         private void NumericUpDown_MouseEnter_1(object sender, MouseEventArgs e)
         {
-            ShowPopUp(sender);            
+            ShowPopUp(sender);
         }
         /// <summary>
         /// Show popup under current numericupdown
@@ -72,25 +63,118 @@ namespace MRZS.Views.Emulator
         {
             NumericUpDown numUpDown1 = sender as NumericUpDown;
             if (numUpDown1 != null)
-            {
-                //numUpDown1.ClearValue(NumericUpDown.ValueProperty);
-                //slider1.ClearValue(Slider.ValueProperty);
-                //f.ClearValue(NumericUpDown.ValueProperty);
-                System.Windows.Data.Binding bind = new System.Windows.Data.Binding("Value");
-                bind.Mode = System.Windows.Data.BindingMode.OneTime;
-                bind.Source = slider1;
-                numUpDown1.SetBinding(NumericUpDown.ValueProperty, bind);
+            {                      
+                System.Windows.Data.Binding bind = new System.Windows.Data.Binding("Value") ;
+                bind.Mode = System.Windows.Data.BindingMode.TwoWay;
+                bind.Source = numUpDown1;
+                slider1.SetBinding(Slider.ValueProperty, bind);
+
+                System.Windows.Data.Binding bind2 = new System.Windows.Data.Binding("Text");
+                bind2.Mode = System.Windows.Data.BindingMode.TwoWay;                
+                bind2.Source = stepTextBox;
+                numUpDown1.SetBinding(NumericUpDown.IncrementProperty, bind2);
+                
                 int row = (int)numUpDown1.GetValue(Grid.RowProperty);
                 int col = (int)numUpDown1.GetValue(Grid.ColumnProperty);
                 popUp.SetValue(Grid.RowProperty, row + 1);
                 popUp.SetValue(Grid.ColumnProperty, col);
                 popUp.IsOpen = true;
             }
-        }
+        }        
         
         private void NumericUpDown_MouseEnter_2(object sender, MouseEventArgs e)
         {
             ShowPopUp(sender);
+        }
+
+        private void popUp_MouseLeave(object sender, MouseEventArgs e)
+        {
+            popUp.IsOpen = false;
+        }
+
+        private void closePopUp_MouseEnter(object sender, MouseEventArgs e)
+        {
+            popUp.IsOpen = false;
+        }
+
+        private void closePopUp_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            popUp.IsOpen = false;
+        }
+
+        private void f_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void closePopUp_Click(object sender, RoutedEventArgs e)
+        {
+            popUp.IsOpen = false;
+        }
+
+        private void NumericUpDown_MouseEnter_3(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_4(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_5(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_6(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_7(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_8(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_9(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_10(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_11(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_12(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_13(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void NumericUpDown_MouseEnter_14(object sender, MouseEventArgs e)
+        {
+            ShowPopUp(sender);
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            int start = display.SelectionStart;
         }
 
     }

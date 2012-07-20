@@ -67,7 +67,7 @@
         </Grid.ColumnDefinitions>
         <Button Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0"/>
         <Button Content="ОТКЛ" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="75" Margin="0,15,10,0"/>
-        <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="True" Margin="0,70,0,0">            
+        <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="False" Margin="0,70,0,0">            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
@@ -95,37 +95,38 @@
             <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown ToolTipService.ToolTip="Hi,Igor!" x:Name="f" x:FieldModifier="public" 
                                    Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  
-                                   Style="{StaticResource CustomNumericUpDown}" 
-                                   GotFocus="NumericUpDown_f_GotFocus"
-                                   Value="{Binding ElementName=slider1, Path=Value}" MouseEnter="f_MouseEnter"/>
+                                   Style="{StaticResource CustomNumericUpDown}" DecimalPlaces="2" MouseEnter="f_MouseEnter"/>
             
-            <Popup x:Name="popUp" MaxWidth="200" Grid.Column="1" Grid.Row="1">
-                <StackPanel>
-                    <Border Background="BurlyWood" MouseLeftButtonDown="Border_MouseLeftButtonDown_1">
-                        <Slider x:Name="slider1" MaxWidth="200" 
-                            Grid.Column="1" Grid.Row="1" Maximum="100" 
-                            Height="30" Width="90" Value="10" LostFocus="slider1_LostFocus" 
-                            MouseLeave="slider1_MouseLeave">
+            <Popup x:Name="popUp" MaxWidth="400" Grid.Column="1" Grid.Row="1" MouseLeave="popUp_MouseLeave"
+                   Width="400">
+                <StackPanel x:Name="PopUpStackPanel">
+                    <Border Background="BurlyWood">
+                        <Slider x:Name="slider1" MaxWidth="400" 
+                            Grid.Column="1" Grid.Row="1" Maximum="100" SmallChange="{Binding ElementName=stepTextBox}"
+                            Height="30" Width="90">
                         </Slider>
                     </Border>
-                    <TextBox Text="sdfsf"></TextBox>
+                    <TextBox x:Name="stepTextBox" Text="0.01"></TextBox>
+                    <Border Background="BurlyWood">
+                        <Button x:Name="closePopUp" Width="40" Height="20" Content="Закрить" MouseLeftButtonDown="closePopUp_MouseLeftButtonDown" Click="closePopUp_Click"/>
+                    </Border>
                 </StackPanel>                                            
             </Popup>                        
             
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="Гц" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="ЗІ0" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="1" Grid.ColumnSpan="5" Content="Ток" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="3" GotFocus="NumericUpDown_GotFocus_1" MouseEnter="NumericUpDown_MouseEnter_1"/>
+            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="3" MouseEnter="NumericUpDown_MouseEnter_1" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="0" Grid.Column="4" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!--tok -->
             <sdk:Label Grid.Row="2" Grid.Column="0" Content="Ia" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_2"/>
+            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_2" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="2" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="3" Maximum="360" DecimalPlaces="2" MouseEnter="NumericUpDown_MouseEnter_3"/>
             <sdk:Label Grid.Row="2" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="3" Grid.Column="0" Content="Ib" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_4"/>
             <sdk:Label Grid.Row="3" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3" Maximum="360"/>
             <sdk:Label Grid.Row="3" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
@@ -133,49 +134,40 @@
             <sdk:Label Grid.Row="4" Grid.Column="0" Content="Ic" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="4" Grid.Column="1"/>
             <sdk:Label Grid.Row="4" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_5"/>
             <sdk:Label Grid.Row="4" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="5" Grid.Column="0" Content="ЗфI" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_6"/>
             <sdk:Label Grid.Row="5" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_7"/>
             <sdk:Label Grid.Row="5" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!-- napryagenie-->
             <sdk:Label Grid.Row="6" Grid.ColumnSpan="5" Content="Напряжение" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="7" Grid.Column="0" Content="Ua" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_8"/>
             <sdk:Label Grid.Row="7" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_9"/>
             <sdk:Label Grid.Row="7" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="8" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="8" Grid.Column="1"/>
             <sdk:Label Grid.Row="8" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_10"/>
             <sdk:Label Grid.Row="8" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="9" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_11"/>
             <sdk:Label Grid.Row="9" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_12"/>
             <sdk:Label Grid.Row="9" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="10" Grid.Column="0" Content="ЗфU" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_13"/>
             <sdk:Label Grid.Row="10" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360"/>
-            <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <!-- dopolnitelno-->
-            <sdk:Label Grid.Row="11" Grid.ColumnSpan="5" Content="Установка значений" HorizontalAlignment="Center" Grid.Column="1" Margin="32,1,32,24" Grid.RowSpan="2" Style="{StaticResource LabelFontStyle}"/>
-            <sdk:Label Grid.Row="12" Grid.Column="0" Content="Шаг" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <TextBox Grid.Row="12" Grid.Column="1" Text="0.001"/>
-            <sdk:Label Grid.Row="12" Grid.Column="2" Content="Мин" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <TextBox Grid.Row="12" Grid.Column="3"/>
-            <sdk:Label Grid.Row="13" Grid.Column="2" Content="Макс" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <TextBox Grid.Row="13" Grid.Column="3"/>
-            <Slider Grid.Row="14" Grid.Column="1" Grid.ColumnSpan="3"/>
+            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_14"/>
+            <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>            
         </Grid>
         <StackPanel Grid.Column="1" Background="AntiqueWhite" Margin="0,0,0,0" Height="680" VerticalAlignment="Bottom">
             <TextBlock FontSize="16" Height="67" Margin="0,20,0,0">
@@ -199,9 +191,10 @@
                 <RowDefinition Height="119"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox HorizontalAlignment="Stretch"
-				Grid.Row="0" Margin="86,46,155,0"
+<TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
+				Grid.Row="0" Margin="86,46,155,0" Height="60" Width="200"
 				Grid.ColumnSpan="3" />
+
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
                 <StackPanel Orientation="Horizontal">
                     <Button Content="1" Style="{StaticResource PanelKey}" />
@@ -223,7 +216,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" />
-                    <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" />
+                    <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="Button_Click_1" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" />
