@@ -12,7 +12,6 @@ using System.Windows.Shapes;
 namespace MRZS.Classes
 {
     public class Display
-    {
-        
+    {        
     }
 }

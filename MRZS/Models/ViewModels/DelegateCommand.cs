@@ -31,6 +31,7 @@ namespace MRZS.Models
         ///<summary>
         /// Defines an event to raise when the values that
         /// affect "CanExecute" are changed.
+        
         public event EventHandler CanExecuteChanged;
 
         /// <summary>

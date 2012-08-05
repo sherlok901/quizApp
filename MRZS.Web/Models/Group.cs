@@ -9,11 +9,11 @@ namespace MRZS.Web.Models
         public int StudentCount
         {
             get
-            {
+            { 
                 if (!Users.IsLoaded)
                     Users.Load();
                 return Users.Count();
-            }
+            } 
         }
     }
 }

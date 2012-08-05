@@ -11,6 +11,12 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Windows.Navigation;
 using System.Windows.Controls.Primitives;
+using MRZS.Helpers;
+//using MRZS.Web.Services;
+using MRZS.Web;
+using System.Configuration;
+using System.ServiceModel;
+using System.Windows.Browser;
 
 
 namespace MRZS.Views.Emulator
@@ -34,6 +40,23 @@ namespace MRZS.Views.Emulator
             display.Text += "АПВ" + Environment.NewLine;            
             display.SelectionStart = display.Text.Length;
             
+            
+            
+            //get portaddress for wcf 
+            //MRZS.MyServRef.IgorSClient webserv=new MyServRef.IgorSClient();
+            //webserv.Endpoint.Address = new EndpointAddress(Application.Current.Host.Source.AbsoluteUri);
+            ////turn on webservice handler
+            //webserv.GetMenuElementCompleted += webserv_GetMenuElementCompleted;            
+            ////asynchronous run webservice
+            //webserv.GetMenuElementAsync(1);
+
+            //MRZS.Web.Services.AnswerContext
+            
+        }
+
+        void webserv_GetMenuElementCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+        {
+            string s = e.ToString();
         }
 
         // Executes when the user navigates to this page.

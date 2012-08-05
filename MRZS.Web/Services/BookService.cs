@@ -30,7 +30,7 @@ namespace MRZS.Web.Services
             return
                 ObjectContext.Books.Include("Sections").Where(b => b.IsDeleted == null || b.IsDeleted == false).
                     SingleOrDefault(b => b.BookId == bookId);
-            ;
+            ; 
         }
 
         public void InsertBook(Book book)

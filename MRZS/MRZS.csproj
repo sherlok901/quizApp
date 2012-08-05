@@ -143,12 +143,6 @@
       <DependentUpon>ErrorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Display.cs" />
-    <Compile Include="Generated_Code\Models\Shared\User.shared.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Generated_Code\MRZS.Web.g.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\DateTimeConverter.cs" />
     <Compile Include="Helpers\NullToBoolConverter.cs" />
@@ -525,6 +519,9 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Generated_Code\Models\Shared\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

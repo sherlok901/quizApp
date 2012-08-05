@@ -9,10 +9,12 @@ namespace MRZS.Web.Models
         {
             get
             {
-#if DEBUG
+                MRZSEntities mr = new MRZSEntities();
+                
+                #if DEBUG
                 return _IsCorrect;
-#endif
-                return false;
+                #endif
+                return false;                
             }
         }
     }

@@ -20,7 +20,7 @@ namespace MRZS.Views.Admin.Popups
         public MRZS.Web.Models.Section SelectedSection { get; set; }
         public int PageOrder { get; set; }
 
-        private MRZS.Web.Models.Page page;
+        private MRZS.Web.Models.Page page=null;
         private List<Web.Models.MultimediaContent> medias = new List<Web.Models.MultimediaContent>();
 
         private PageContext pageService = new PageContext();

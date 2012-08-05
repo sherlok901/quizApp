@@ -24,6 +24,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,6 +47,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -83,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\MRZS.xap" />
+    <Content Include="IgorLINQ\IgorS.svc" />
     <Content Include="MRZSTestPage.aspx" />
     <Content Include="MRZSTestPage.html" />
     <Content Include="Silverlight.js" />
@@ -101,6 +104,9 @@
     <Compile Include="Helpers\CollectionHelper.cs" />
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\NullableHelper.cs" />
+    <Compile Include="IgorLINQ\IgorS.svc.cs">
+      <DependentUpon>IgorS.svc</DependentUpon>
+    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\aspnet_Roles.cs" />
     <Compile Include="Models\Group.cs" />
@@ -145,6 +151,7 @@
       <DependentUpon>BookService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\BooleanVal1.cs" />
     <Compile Include="Services\DefectService.cs" />
     <Compile Include="Services\DefectService.metadata.cs">
       <DependentUpon>DefectService.cs</DependentUpon>
@@ -241,6 +248,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ValidationErrorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

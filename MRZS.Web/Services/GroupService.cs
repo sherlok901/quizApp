@@ -31,8 +31,7 @@ namespace MRZS.Web.Services
             }
             else
             {
-                ObjectContext.Groups.AddObject(group);
-                int k = 0;
+                ObjectContext.Groups.AddObject(group);                
             }
         }
 
