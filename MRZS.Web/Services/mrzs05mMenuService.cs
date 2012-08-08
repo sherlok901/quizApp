@@ -24,11 +24,7 @@ namespace MRZS.Web.Services
         
         public IQueryable<int?> GetParentALLID()
         {
-
-            return (from a in ObjectContext.mrzs05mMenu select a.parentID).Distinct<int?>();            
-            //var result = (from a in new DataContext().Persons
-            //              where a.Age > 18
-            //              select new Person { a.Name, a.Age }).ToList();
+            return (from a in ObjectContext.mrzs05mMenu select a.parentID).Distinct<int?>();                        
         }
         // TODO:
         // рассмотрите возможность сокращения результатов метода запроса.  Если необходим дополнительный ввод,
