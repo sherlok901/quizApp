@@ -1084,6 +1084,7 @@ namespace MRZS.Web.Models
     using System.ServiceModel.DomainServices;
     using System.ServiceModel.DomainServices.Client;
     using System.ServiceModel.DomainServices.Client.ApplicationServices;
+    using System.Xml.Serialization;
     
     
     /// <summary>
@@ -1600,6 +1601,399 @@ namespace MRZS.Web.Models
         public override object GetIdentity()
         {
             return this._bookId;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "BooleanVal".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="BooleanVal1"/>.
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class BooleanVal : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _val;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnvalChanging(string value);
+        partial void OnvalChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVal"/>.
+        /// </summary>
+        public BooleanVal()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("BooleanVal_mrzs05mMenu", "id", "BooleanValID")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "val".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(10)]
+        public string val
+        {
+            get
+            {
+                return this._val;
+            }
+            set
+            {
+                if ((this._val != value))
+                {
+                    this.OnvalChanging(value);
+                    this.RaiseDataMemberChanging("val");
+                    this.ValidateProperty("val", value);
+                    this._val = value;
+                    this.RaiseDataMemberChanged("val");
+                    this.OnvalChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.BooleanValID == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "BooleanVal2".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class BooleanVal2 : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _val;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnvalChanging(string value);
+        partial void OnvalChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVal2"/>.
+        /// </summary>
+        public BooleanVal2()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("BooleanVal2_mrzs05mMenu", "id", "BooleanVal2ID")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "val".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(4)]
+        public string val
+        {
+            get
+            {
+                return this._val;
+            }
+            set
+            {
+                if ((this._val != value))
+                {
+                    this.OnvalChanging(value);
+                    this.RaiseDataMemberChanging("val");
+                    this.ValidateProperty("val", value);
+                    this._val = value;
+                    this.RaiseDataMemberChanged("val");
+                    this.OnvalChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal2 = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal2 = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.BooleanVal2ID == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "BooleanVal3".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class BooleanVal3 : Entity
+    {
+        
+        private string _boolVal;
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnboolValChanging(string value);
+        partial void OnboolValChanged();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVal3"/>.
+        /// </summary>
+        public BooleanVal3()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "boolVal".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(4)]
+        public string boolVal
+        {
+            get
+            {
+                return this._boolVal;
+            }
+            set
+            {
+                if ((this._boolVal != value))
+                {
+                    this.OnboolValChanging(value);
+                    this.RaiseDataMemberChanging("boolVal");
+                    this.ValidateProperty("boolVal", value);
+                    this._boolVal = value;
+                    this.RaiseDataMemberChanged("boolVal");
+                    this.OnboolValChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("BooleanVal3_mrzs05mMenu", "id", "BooleanVal3ID")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal3 = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.BooleanVal3 = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.BooleanVal3ID == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
         }
     }
     
@@ -2442,6 +2836,1297 @@ namespace MRZS.Web.Models
     }
     
     /// <summary>
+    /// Класс сущности "kindSignalDC".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class kindSignalDC : Entity
+    {
+        
+        private int _id;
+        
+        private string _kindSignal;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnkindSignalChanging(string value);
+        partial void OnkindSignalChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="kindSignalDC"/>.
+        /// </summary>
+        public kindSignalDC()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "kindSignal".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(10)]
+        public string kindSignal
+        {
+            get
+            {
+                return this._kindSignal;
+            }
+            set
+            {
+                if ((this._kindSignal != value))
+                {
+                    this.OnkindSignalChanging(value);
+                    this.RaiseDataMemberChanging("kindSignal");
+                    this.ValidateProperty("kindSignal", value);
+                    this._kindSignal = value;
+                    this.RaiseDataMemberChanged("kindSignal");
+                    this.OnkindSignalChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("kindSignalDC_mrzs05mMenu", "id", "kindSignalDCid")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.kindSignalDC = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.kindSignalDC = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.kindSignalDCid == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "mrzs05mMenu".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class mrzs05mMenu : Entity
+    {
+        
+        private EntityRef<BooleanVal> _booleanVal;
+        
+        private EntityRef<BooleanVal2> _booleanVal2;
+        
+        private Nullable<int> _booleanVal2ID;
+        
+        private EntityRef<BooleanVal3> _booleanVal3;
+        
+        private Nullable<int> _booleanVal3ID;
+        
+        private Nullable<int> _booleanValID;
+        
+        private int _id;
+        
+        private EntityRef<kindSignalDC> _kindSignalDC;
+        
+        private Nullable<int> _kindSignalDCid;
+        
+        private string _menuElement;
+        
+        private EntityRef<mrzsInOutOption> _mrzsInOutOption;
+        
+        private Nullable<int> _mrzsInOutOptionsID;
+        
+        private EntityRef<mtzVal> _mtzVal;
+        
+        private Nullable<int> _mtzValID;
+        
+        private Nullable<int> _parentID;
+        
+        private Nullable<int> _passwordCheckType;
+        
+        private EntityRef<passwordCheckType> _passwordCheckType1;
+        
+        private EntityRef<typeFuncDC> _typeFuncDC;
+        
+        private Nullable<int> _typeFuncDCid;
+        
+        private EntityRef<typeSignalDC> _typeSignalDC;
+        
+        private Nullable<int> _typeSignalDCid;
+        
+        private string _unitValue;
+        
+        private string _value;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnBooleanVal2IDChanging(Nullable<int> value);
+        partial void OnBooleanVal2IDChanged();
+        partial void OnBooleanVal3IDChanging(Nullable<int> value);
+        partial void OnBooleanVal3IDChanged();
+        partial void OnBooleanValIDChanging(Nullable<int> value);
+        partial void OnBooleanValIDChanged();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnkindSignalDCidChanging(Nullable<int> value);
+        partial void OnkindSignalDCidChanged();
+        partial void OnmenuElementChanging(string value);
+        partial void OnmenuElementChanged();
+        partial void OnmrzsInOutOptionsIDChanging(Nullable<int> value);
+        partial void OnmrzsInOutOptionsIDChanged();
+        partial void OnmtzValIDChanging(Nullable<int> value);
+        partial void OnmtzValIDChanged();
+        partial void OnparentIDChanging(Nullable<int> value);
+        partial void OnparentIDChanged();
+        partial void OnpasswordCheckTypeChanging(Nullable<int> value);
+        partial void OnpasswordCheckTypeChanged();
+        partial void OntypeFuncDCidChanging(Nullable<int> value);
+        partial void OntypeFuncDCidChanged();
+        partial void OntypeSignalDCidChanging(Nullable<int> value);
+        partial void OntypeSignalDCidChanged();
+        partial void OnunitValueChanging(string value);
+        partial void OnunitValueChanged();
+        partial void OnvalueChanging(string value);
+        partial void OnvalueChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        public mrzs05mMenu()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="BooleanVal"/>.
+        /// </summary>
+        [Association("BooleanVal_mrzs05mMenu", "BooleanValID", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public BooleanVal BooleanVal
+        {
+            get
+            {
+                if ((this._booleanVal == null))
+                {
+                    this._booleanVal = new EntityRef<BooleanVal>(this, "BooleanVal", this.FilterBooleanVal);
+                }
+                return this._booleanVal.Entity;
+            }
+            set
+            {
+                BooleanVal previous = this.BooleanVal;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("BooleanVal", value);
+                    if ((previous != null))
+                    {
+                        this._booleanVal.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.BooleanValID = value.id;
+                    }
+                    else
+                    {
+                        this.BooleanValID = default(Nullable<int>);
+                    }
+                    this._booleanVal.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("BooleanVal");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="BooleanVal2"/>.
+        /// </summary>
+        [Association("BooleanVal2_mrzs05mMenu", "BooleanVal2ID", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public BooleanVal2 BooleanVal2
+        {
+            get
+            {
+                if ((this._booleanVal2 == null))
+                {
+                    this._booleanVal2 = new EntityRef<BooleanVal2>(this, "BooleanVal2", this.FilterBooleanVal2);
+                }
+                return this._booleanVal2.Entity;
+            }
+            set
+            {
+                BooleanVal2 previous = this.BooleanVal2;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("BooleanVal2", value);
+                    if ((previous != null))
+                    {
+                        this._booleanVal2.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.BooleanVal2ID = value.id;
+                    }
+                    else
+                    {
+                        this.BooleanVal2ID = default(Nullable<int>);
+                    }
+                    this._booleanVal2.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("BooleanVal2");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "BooleanVal2ID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> BooleanVal2ID
+        {
+            get
+            {
+                return this._booleanVal2ID;
+            }
+            set
+            {
+                if ((this._booleanVal2ID != value))
+                {
+                    this.OnBooleanVal2IDChanging(value);
+                    this.RaiseDataMemberChanging("BooleanVal2ID");
+                    this.ValidateProperty("BooleanVal2ID", value);
+                    this._booleanVal2ID = value;
+                    this.RaiseDataMemberChanged("BooleanVal2ID");
+                    this.OnBooleanVal2IDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="BooleanVal3"/>.
+        /// </summary>
+        [Association("BooleanVal3_mrzs05mMenu", "BooleanVal3ID", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public BooleanVal3 BooleanVal3
+        {
+            get
+            {
+                if ((this._booleanVal3 == null))
+                {
+                    this._booleanVal3 = new EntityRef<BooleanVal3>(this, "BooleanVal3", this.FilterBooleanVal3);
+                }
+                return this._booleanVal3.Entity;
+            }
+            set
+            {
+                BooleanVal3 previous = this.BooleanVal3;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("BooleanVal3", value);
+                    if ((previous != null))
+                    {
+                        this._booleanVal3.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.BooleanVal3ID = value.id;
+                    }
+                    else
+                    {
+                        this.BooleanVal3ID = default(Nullable<int>);
+                    }
+                    this._booleanVal3.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("BooleanVal3");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "BooleanVal3ID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> BooleanVal3ID
+        {
+            get
+            {
+                return this._booleanVal3ID;
+            }
+            set
+            {
+                if ((this._booleanVal3ID != value))
+                {
+                    this.OnBooleanVal3IDChanging(value);
+                    this.RaiseDataMemberChanging("BooleanVal3ID");
+                    this.ValidateProperty("BooleanVal3ID", value);
+                    this._booleanVal3ID = value;
+                    this.RaiseDataMemberChanged("BooleanVal3ID");
+                    this.OnBooleanVal3IDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "BooleanValID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> BooleanValID
+        {
+            get
+            {
+                return this._booleanValID;
+            }
+            set
+            {
+                if ((this._booleanValID != value))
+                {
+                    this.OnBooleanValIDChanging(value);
+                    this.RaiseDataMemberChanging("BooleanValID");
+                    this.ValidateProperty("BooleanValID", value);
+                    this._booleanValID = value;
+                    this.RaiseDataMemberChanged("BooleanValID");
+                    this.OnBooleanValIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="kindSignalDC"/>.
+        /// </summary>
+        [Association("kindSignalDC_mrzs05mMenu", "kindSignalDCid", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public kindSignalDC kindSignalDC
+        {
+            get
+            {
+                if ((this._kindSignalDC == null))
+                {
+                    this._kindSignalDC = new EntityRef<kindSignalDC>(this, "kindSignalDC", this.FilterkindSignalDC);
+                }
+                return this._kindSignalDC.Entity;
+            }
+            set
+            {
+                kindSignalDC previous = this.kindSignalDC;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("kindSignalDC", value);
+                    if ((previous != null))
+                    {
+                        this._kindSignalDC.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.kindSignalDCid = value.id;
+                    }
+                    else
+                    {
+                        this.kindSignalDCid = default(Nullable<int>);
+                    }
+                    this._kindSignalDC.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("kindSignalDC");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "kindSignalDCid".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> kindSignalDCid
+        {
+            get
+            {
+                return this._kindSignalDCid;
+            }
+            set
+            {
+                if ((this._kindSignalDCid != value))
+                {
+                    this.OnkindSignalDCidChanging(value);
+                    this.RaiseDataMemberChanging("kindSignalDCid");
+                    this.ValidateProperty("kindSignalDCid", value);
+                    this._kindSignalDCid = value;
+                    this.RaiseDataMemberChanged("kindSignalDCid");
+                    this.OnkindSignalDCidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "menuElement".
+        /// </summary>
+        [DataMember()]
+        [StringLength(50)]
+        public string menuElement
+        {
+            get
+            {
+                return this._menuElement;
+            }
+            set
+            {
+                if ((this._menuElement != value))
+                {
+                    this.OnmenuElementChanging(value);
+                    this.RaiseDataMemberChanging("menuElement");
+                    this.ValidateProperty("menuElement", value);
+                    this._menuElement = value;
+                    this.RaiseDataMemberChanged("menuElement");
+                    this.OnmenuElementChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="mrzsInOutOption"/>.
+        /// </summary>
+        [Association("mrzsInOutOption_mrzs05mMenu", "mrzsInOutOptionsID", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public mrzsInOutOption mrzsInOutOption
+        {
+            get
+            {
+                if ((this._mrzsInOutOption == null))
+                {
+                    this._mrzsInOutOption = new EntityRef<mrzsInOutOption>(this, "mrzsInOutOption", this.FiltermrzsInOutOption);
+                }
+                return this._mrzsInOutOption.Entity;
+            }
+            set
+            {
+                mrzsInOutOption previous = this.mrzsInOutOption;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("mrzsInOutOption", value);
+                    if ((previous != null))
+                    {
+                        this._mrzsInOutOption.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.mrzsInOutOptionsID = value.id;
+                    }
+                    else
+                    {
+                        this.mrzsInOutOptionsID = default(Nullable<int>);
+                    }
+                    this._mrzsInOutOption.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("mrzsInOutOption");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "mrzsInOutOptionsID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> mrzsInOutOptionsID
+        {
+            get
+            {
+                return this._mrzsInOutOptionsID;
+            }
+            set
+            {
+                if ((this._mrzsInOutOptionsID != value))
+                {
+                    this.OnmrzsInOutOptionsIDChanging(value);
+                    this.RaiseDataMemberChanging("mrzsInOutOptionsID");
+                    this.ValidateProperty("mrzsInOutOptionsID", value);
+                    this._mrzsInOutOptionsID = value;
+                    this.RaiseDataMemberChanged("mrzsInOutOptionsID");
+                    this.OnmrzsInOutOptionsIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="mtzVal"/>.
+        /// </summary>
+        [Association("mtzVal_mrzs05mMenu", "mtzValID", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public mtzVal mtzVal
+        {
+            get
+            {
+                if ((this._mtzVal == null))
+                {
+                    this._mtzVal = new EntityRef<mtzVal>(this, "mtzVal", this.FiltermtzVal);
+                }
+                return this._mtzVal.Entity;
+            }
+            set
+            {
+                mtzVal previous = this.mtzVal;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("mtzVal", value);
+                    if ((previous != null))
+                    {
+                        this._mtzVal.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.mtzValID = value.id;
+                    }
+                    else
+                    {
+                        this.mtzValID = default(Nullable<int>);
+                    }
+                    this._mtzVal.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("mtzVal");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "mtzValID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> mtzValID
+        {
+            get
+            {
+                return this._mtzValID;
+            }
+            set
+            {
+                if ((this._mtzValID != value))
+                {
+                    this.OnmtzValIDChanging(value);
+                    this.RaiseDataMemberChanging("mtzValID");
+                    this.ValidateProperty("mtzValID", value);
+                    this._mtzValID = value;
+                    this.RaiseDataMemberChanged("mtzValID");
+                    this.OnmtzValIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "parentID".
+        /// </summary>
+        [DataMember()]
+        public Nullable<int> parentID
+        {
+            get
+            {
+                return this._parentID;
+            }
+            set
+            {
+                if ((this._parentID != value))
+                {
+                    this.OnparentIDChanging(value);
+                    this.RaiseDataMemberChanging("parentID");
+                    this.ValidateProperty("parentID", value);
+                    this._parentID = value;
+                    this.RaiseDataMemberChanged("parentID");
+                    this.OnparentIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "passwordCheckType".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> passwordCheckType
+        {
+            get
+            {
+                return this._passwordCheckType;
+            }
+            set
+            {
+                if ((this._passwordCheckType != value))
+                {
+                    this.OnpasswordCheckTypeChanging(value);
+                    this.RaiseDataMemberChanging("passwordCheckType");
+                    this.ValidateProperty("passwordCheckType", value);
+                    this._passwordCheckType = value;
+                    this.RaiseDataMemberChanged("passwordCheckType");
+                    this.OnpasswordCheckTypeChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="passwordCheckType"/>.
+        /// </summary>
+        [Association("passwordCheckType_mrzs05mMenu", "passwordCheckType", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public passwordCheckType passwordCheckType1
+        {
+            get
+            {
+                if ((this._passwordCheckType1 == null))
+                {
+                    this._passwordCheckType1 = new EntityRef<passwordCheckType>(this, "passwordCheckType1", this.FilterpasswordCheckType1);
+                }
+                return this._passwordCheckType1.Entity;
+            }
+            set
+            {
+                passwordCheckType previous = this.passwordCheckType1;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("passwordCheckType1", value);
+                    if ((previous != null))
+                    {
+                        this._passwordCheckType1.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.passwordCheckType = value.id;
+                    }
+                    else
+                    {
+                        this.passwordCheckType = default(Nullable<int>);
+                    }
+                    this._passwordCheckType1.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("passwordCheckType1");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="typeFuncDC"/>.
+        /// </summary>
+        [Association("typeFuncDC_mrzs05mMenu", "typeFuncDCid", "int", IsForeignKey=true)]
+        [XmlIgnore()]
+        public typeFuncDC typeFuncDC
+        {
+            get
+            {
+                if ((this._typeFuncDC == null))
+                {
+                    this._typeFuncDC = new EntityRef<typeFuncDC>(this, "typeFuncDC", this.FiltertypeFuncDC);
+                }
+                return this._typeFuncDC.Entity;
+            }
+            set
+            {
+                typeFuncDC previous = this.typeFuncDC;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("typeFuncDC", value);
+                    if ((previous != null))
+                    {
+                        this._typeFuncDC.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.typeFuncDCid = value.@int;
+                    }
+                    else
+                    {
+                        this.typeFuncDCid = default(Nullable<int>);
+                    }
+                    this._typeFuncDC.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("typeFuncDC");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "typeFuncDCid".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> typeFuncDCid
+        {
+            get
+            {
+                return this._typeFuncDCid;
+            }
+            set
+            {
+                if ((this._typeFuncDCid != value))
+                {
+                    this.OntypeFuncDCidChanging(value);
+                    this.RaiseDataMemberChanging("typeFuncDCid");
+                    this.ValidateProperty("typeFuncDCid", value);
+                    this._typeFuncDCid = value;
+                    this.RaiseDataMemberChanged("typeFuncDCid");
+                    this.OntypeFuncDCidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает связанную сущность <see cref="typeSignalDC"/>.
+        /// </summary>
+        [Association("typeSignalDC_mrzs05mMenu", "typeSignalDCid", "id", IsForeignKey=true)]
+        [XmlIgnore()]
+        public typeSignalDC typeSignalDC
+        {
+            get
+            {
+                if ((this._typeSignalDC == null))
+                {
+                    this._typeSignalDC = new EntityRef<typeSignalDC>(this, "typeSignalDC", this.FiltertypeSignalDC);
+                }
+                return this._typeSignalDC.Entity;
+            }
+            set
+            {
+                typeSignalDC previous = this.typeSignalDC;
+                if ((previous != value))
+                {
+                    this.ValidateProperty("typeSignalDC", value);
+                    if ((previous != null))
+                    {
+                        this._typeSignalDC.Entity = null;
+                        previous.mrzs05mMenu.Remove(this);
+                    }
+                    if ((value != null))
+                    {
+                        this.typeSignalDCid = value.id;
+                    }
+                    else
+                    {
+                        this.typeSignalDCid = default(Nullable<int>);
+                    }
+                    this._typeSignalDC.Entity = value;
+                    if ((value != null))
+                    {
+                        value.mrzs05mMenu.Add(this);
+                    }
+                    this.RaisePropertyChanged("typeSignalDC");
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "typeSignalDCid".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> typeSignalDCid
+        {
+            get
+            {
+                return this._typeSignalDCid;
+            }
+            set
+            {
+                if ((this._typeSignalDCid != value))
+                {
+                    this.OntypeSignalDCidChanging(value);
+                    this.RaiseDataMemberChanging("typeSignalDCid");
+                    this.ValidateProperty("typeSignalDCid", value);
+                    this._typeSignalDCid = value;
+                    this.RaiseDataMemberChanged("typeSignalDCid");
+                    this.OntypeSignalDCidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "unitValue".
+        /// </summary>
+        [DataMember()]
+        [StringLength(10)]
+        public string unitValue
+        {
+            get
+            {
+                return this._unitValue;
+            }
+            set
+            {
+                if ((this._unitValue != value))
+                {
+                    this.OnunitValueChanging(value);
+                    this.RaiseDataMemberChanging("unitValue");
+                    this.ValidateProperty("unitValue", value);
+                    this._unitValue = value;
+                    this.RaiseDataMemberChanged("unitValue");
+                    this.OnunitValueChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "value".
+        /// </summary>
+        [DataMember()]
+        [StringLength(10)]
+        public string value
+        {
+            get
+            {
+                return this._value;
+            }
+            set
+            {
+                if ((this._value != value))
+                {
+                    this.OnvalueChanging(value);
+                    this.RaiseDataMemberChanging("value");
+                    this.ValidateProperty("value", value);
+                    this._value = value;
+                    this.RaiseDataMemberChanged("value");
+                    this.OnvalueChanged();
+                }
+            }
+        }
+        
+        private bool FilterBooleanVal(BooleanVal entity)
+        {
+            return (entity.id == this.BooleanValID);
+        }
+        
+        private bool FilterBooleanVal2(BooleanVal2 entity)
+        {
+            return (entity.id == this.BooleanVal2ID);
+        }
+        
+        private bool FilterBooleanVal3(BooleanVal3 entity)
+        {
+            return (entity.id == this.BooleanVal3ID);
+        }
+        
+        private bool FilterkindSignalDC(kindSignalDC entity)
+        {
+            return (entity.id == this.kindSignalDCid);
+        }
+        
+        private bool FiltermrzsInOutOption(mrzsInOutOption entity)
+        {
+            return (entity.id == this.mrzsInOutOptionsID);
+        }
+        
+        private bool FiltermtzVal(mtzVal entity)
+        {
+            return (entity.id == this.mtzValID);
+        }
+        
+        private bool FilterpasswordCheckType1(passwordCheckType entity)
+        {
+            return (entity.id == this.passwordCheckType);
+        }
+        
+        private bool FiltertypeFuncDC(typeFuncDC entity)
+        {
+            return (entity.@int == this.typeFuncDCid);
+        }
+        
+        private bool FiltertypeSignalDC(typeSignalDC entity)
+        {
+            return (entity.id == this.typeSignalDCid);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "mrzsInOutOption".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class mrzsInOutOption : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _optionsName;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnoptionsNameChanging(string value);
+        partial void OnoptionsNameChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="mrzsInOutOption"/>.
+        /// </summary>
+        public mrzsInOutOption()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("mrzsInOutOption_mrzs05mMenu", "id", "mrzsInOutOptionsID")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "optionsName".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(20)]
+        public string optionsName
+        {
+            get
+            {
+                return this._optionsName;
+            }
+            set
+            {
+                if ((this._optionsName != value))
+                {
+                    this.OnoptionsNameChanging(value);
+                    this.RaiseDataMemberChanging("optionsName");
+                    this.ValidateProperty("optionsName", value);
+                    this._optionsName = value;
+                    this.RaiseDataMemberChanged("optionsName");
+                    this.OnoptionsNameChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.mrzsInOutOption = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.mrzsInOutOption = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.mrzsInOutOptionsID == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "mtzVal".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class mtzVal : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _mtzVals;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnmtzValsChanging(string value);
+        partial void OnmtzValsChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="mtzVal"/>.
+        /// </summary>
+        public mtzVal()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("mtzVal_mrzs05mMenu", "id", "mtzValID")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "mtzVals".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(15)]
+        public string mtzVals
+        {
+            get
+            {
+                return this._mtzVals;
+            }
+            set
+            {
+                if ((this._mtzVals != value))
+                {
+                    this.OnmtzValsChanging(value);
+                    this.RaiseDataMemberChanging("mtzVals");
+                    this.ValidateProperty("mtzVals", value);
+                    this._mtzVals = value;
+                    this.RaiseDataMemberChanged("mtzVals");
+                    this.OnmtzValsChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.mtzVal = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.mtzVal = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.mtzValID == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
     /// Класс сущности "MultimediaContent".
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
@@ -2852,6 +4537,136 @@ namespace MRZS.Web.Models
         public override object GetIdentity()
         {
             return this._pageId;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "passwordCheckType".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class passwordCheckType : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _passwordType;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnpasswordTypeChanging(string value);
+        partial void OnpasswordTypeChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="passwordCheckType"/>.
+        /// </summary>
+        public passwordCheckType()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("passwordCheckType_mrzs05mMenu", "id", "passwordCheckType")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "passwordType".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(10)]
+        public string passwordType
+        {
+            get
+            {
+                return this._passwordType;
+            }
+            set
+            {
+                if ((this._passwordType != value))
+                {
+                    this.OnpasswordTypeChanging(value);
+                    this.RaiseDataMemberChanging("passwordType");
+                    this.ValidateProperty("passwordType", value);
+                    this._passwordType = value;
+                    this.RaiseDataMemberChanged("passwordType");
+                    this.OnpasswordTypeChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.passwordCheckType1 = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.passwordCheckType1 = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.passwordCheckType == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
         }
     }
     
@@ -4553,6 +6368,266 @@ namespace MRZS.Web.Models
     }
     
     /// <summary>
+    /// Класс сущности "typeFuncDC".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class typeFuncDC : Entity
+    {
+        
+        private int _int;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _typeFunction;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnintChanging(int value);
+        partial void OnintChanged();
+        partial void OntypeFunctionChanging(string value);
+        partial void OntypeFunctionChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="typeFuncDC"/>.
+        /// </summary>
+        public typeFuncDC()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "int".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int @int
+        {
+            get
+            {
+                return this._int;
+            }
+            set
+            {
+                if ((this._int != value))
+                {
+                    this.OnintChanging(value);
+                    this.ValidateProperty("int", value);
+                    this._int = value;
+                    this.RaisePropertyChanged("int");
+                    this.OnintChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("typeFuncDC_mrzs05mMenu", "int", "typeFuncDCid")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "typeFunction".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(10)]
+        public string typeFunction
+        {
+            get
+            {
+                return this._typeFunction;
+            }
+            set
+            {
+                if ((this._typeFunction != value))
+                {
+                    this.OntypeFunctionChanging(value);
+                    this.RaiseDataMemberChanging("typeFunction");
+                    this.ValidateProperty("typeFunction", value);
+                    this._typeFunction = value;
+                    this.RaiseDataMemberChanged("typeFunction");
+                    this.OntypeFunctionChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.typeFuncDC = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.typeFuncDC = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.typeFuncDCid == this.@int);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._int;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "typeSignalDC".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class typeSignalDC : Entity
+    {
+        
+        private int _id;
+        
+        private EntityCollection<mrzs05mMenu> _mrzs05mMenu;
+        
+        private string _typeSignal;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OntypeSignalChanging(string value);
+        partial void OntypeSignalChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="typeSignalDC"/>.
+        /// </summary>
+        public typeSignalDC()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает коллекцию связанных экземпляров сущности <see cref="mrzs05mMenu"/>.
+        /// </summary>
+        [Association("typeSignalDC_mrzs05mMenu", "id", "typeSignalDCid")]
+        [XmlIgnore()]
+        public EntityCollection<mrzs05mMenu> mrzs05mMenu
+        {
+            get
+            {
+                if ((this._mrzs05mMenu == null))
+                {
+                    this._mrzs05mMenu = new EntityCollection<mrzs05mMenu>(this, "mrzs05mMenu", this.Filtermrzs05mMenu, this.Attachmrzs05mMenu, this.Detachmrzs05mMenu);
+                }
+                return this._mrzs05mMenu;
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "typeSignal".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        [StringLength(10)]
+        public string typeSignal
+        {
+            get
+            {
+                return this._typeSignal;
+            }
+            set
+            {
+                if ((this._typeSignal != value))
+                {
+                    this.OntypeSignalChanging(value);
+                    this.RaiseDataMemberChanging("typeSignal");
+                    this.ValidateProperty("typeSignal", value);
+                    this._typeSignal = value;
+                    this.RaiseDataMemberChanged("typeSignal");
+                    this.OntypeSignalChanged();
+                }
+            }
+        }
+        
+        private void Attachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.typeSignalDC = this;
+        }
+        
+        private void Detachmrzs05mMenu(mrzs05mMenu entity)
+        {
+            entity.typeSignalDC = null;
+        }
+        
+        private bool Filtermrzs05mMenu(mrzs05mMenu entity)
+        {
+            return (entity.typeSignalDCid == this.id);
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
     /// Класс сущности "User".
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
@@ -5453,6 +7528,152 @@ namespace MRZS.Web.Services
     }
     
     /// <summary>
+    /// Контекст DomainContext, соответствующий службе "BooleanVal1" DomainService.
+    /// </summary>
+    public sealed partial class BooleanVal1 : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVal1"/>.
+        /// </summary>
+        public BooleanVal1() : 
+                this(new WebDomainClient<IBooleanVal1Contract>(new Uri("MRZS-Web-Services-BooleanVal1.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVal1"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы BooleanVal1.</param>
+        public BooleanVal1(Uri serviceUri) : 
+                this(new WebDomainClient<IBooleanVal1Contract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVal1"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public BooleanVal1(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal"/>, загруженных в данный экземпляр <see cref="BooleanVal1"/>.
+        /// </summary>
+        public EntitySet<BooleanVal> BooleanVals
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal"/> с помощью запроса "GetBooleanValByID".
+        /// </summary>
+        /// <param name="boolValID">Значение параметра "boolValID" для запроса.</param>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal"/>.</returns>
+        public EntityQuery<BooleanVal> GetBooleanValByIDQuery(int boolValID)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("boolValID", boolValID);
+            this.ValidateMethod("GetBooleanValByIDQuery", parameters);
+            return base.CreateQuery<BooleanVal>("GetBooleanValByID", parameters, false, false);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal"/> с помощью запроса "GetBooleanValByID2".
+        /// </summary>
+        /// <param name="boolValID">Значение параметра "boolValID" для запроса.</param>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal"/>.</returns>
+        public EntityQuery<BooleanVal> GetBooleanValByID2Query(int boolValID)
+        {
+            Dictionary<string, object> parameters = new Dictionary<string, object>();
+            parameters.Add("boolValID", boolValID);
+            this.ValidateMethod("GetBooleanValByID2Query", parameters);
+            return base.CreateQuery<BooleanVal>("GetBooleanValByID2", parameters, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new BooleanVal1EntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "BooleanVal1" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IBooleanVal1Contract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanValByID".
+            /// </summary>
+            /// <param name="boolValID">Значение параметра "boolValID" для данного действия.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVal1/GetBooleanValByIDDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVal1/GetBooleanValByID", ReplyAction="http://tempuri.org/BooleanVal1/GetBooleanValByIDResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanValByID(int boolValID, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanValByID".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanValByID".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanValByID".</returns>
+            QueryResult<BooleanVal> EndGetBooleanValByID(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanValByID2".
+            /// </summary>
+            /// <param name="boolValID">Значение параметра "boolValID" для данного действия.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVal1/GetBooleanValByID2DomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVal1/GetBooleanValByID2", ReplyAction="http://tempuri.org/BooleanVal1/GetBooleanValByID2Response")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanValByID2(int boolValID, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanValByID2".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanValByID2".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanValByID2".</returns>
+            QueryResult<BooleanVal> EndGetBooleanValByID2(IAsyncResult result);
+        }
+        
+        internal sealed class BooleanVal1EntityContainer : EntityContainer
+        {
+            
+            public BooleanVal1EntityContainer()
+            {
+                this.CreateEntitySet<BooleanVal>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
     /// Контекст DomainContext, соответствующий службе "DefectService" DomainService.
     /// </summary>
     public sealed partial class DefectContext : DomainContext
@@ -6291,6 +8512,476 @@ namespace MRZS.Web.Services
             public MediaContentContextEntityContainer()
             {
                 this.CreateEntitySet<MultimediaContent>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "mrzs05mMenuService" DomainService.
+    /// </summary>
+    public sealed partial class mrzs05mMenuContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public mrzs05mMenuContext() : 
+                this(new WebDomainClient<Imrzs05mMenuServiceContract>(new Uri("MRZS-Web-Services-mrzs05mMenuService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="mrzs05mMenuContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы mrzs05mMenuService.</param>
+        public mrzs05mMenuContext(Uri serviceUri) : 
+                this(new WebDomainClient<Imrzs05mMenuServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="mrzs05mMenuContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public mrzs05mMenuContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal2"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<BooleanVal2> BooleanVal2s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal2>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal3"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<BooleanVal3> BooleanVal3s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal3>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<BooleanVal> BooleanVals
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="kindSignalDC"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<kindSignalDC> kindSignalDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<kindSignalDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzsInOutOption"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<mrzsInOutOption> mrzsInOutOptions
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzsInOutOption>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mtzVal"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<mtzVal> mtzVals
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mtzVal>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="passwordCheckType"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<passwordCheckType> passwordCheckTypes
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<passwordCheckType>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="typeFuncDC"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<typeFuncDC> typeFuncDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<typeFuncDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="typeSignalDC"/>, загруженных в данный экземпляр <see cref="mrzs05mMenuContext"/>.
+        /// </summary>
+        public EntitySet<typeSignalDC> typeSignalDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<typeSignalDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal2"/> с помощью запроса "GetBooleanVal2".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal2"/>.</returns>
+        public EntityQuery<BooleanVal2> GetBooleanVal2Query()
+        {
+            this.ValidateMethod("GetBooleanVal2Query", null);
+            return base.CreateQuery<BooleanVal2>("GetBooleanVal2", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal3"/> с помощью запроса "GetBooleanVal3".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal3"/>.</returns>
+        public EntityQuery<BooleanVal3> GetBooleanVal3Query()
+        {
+            this.ValidateMethod("GetBooleanVal3Query", null);
+            return base.CreateQuery<BooleanVal3>("GetBooleanVal3", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal"/> с помощью запроса "GetBooleanVals".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal"/>.</returns>
+        public EntityQuery<BooleanVal> GetBooleanValsQuery()
+        {
+            this.ValidateMethod("GetBooleanValsQuery", null);
+            return base.CreateQuery<BooleanVal>("GetBooleanVals", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="kindSignalDC"/> с помощью запроса "GetKindSignalDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="kindSignalDC"/>.</returns>
+        public EntityQuery<kindSignalDC> GetKindSignalDCsQuery()
+        {
+            this.ValidateMethod("GetKindSignalDCsQuery", null);
+            return base.CreateQuery<kindSignalDC>("GetKindSignalDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzsInOutOption"/> с помощью запроса "GetMrzsInOutOptions".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzsInOutOption"/>.</returns>
+        public EntityQuery<mrzsInOutOption> GetMrzsInOutOptionsQuery()
+        {
+            this.ValidateMethod("GetMrzsInOutOptionsQuery", null);
+            return base.CreateQuery<mrzsInOutOption>("GetMrzsInOutOptions", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mtzVal"/> с помощью запроса "GetMtzVals".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mtzVal"/>.</returns>
+        public EntityQuery<mtzVal> GetMtzValsQuery()
+        {
+            this.ValidateMethod("GetMtzValsQuery", null);
+            return base.CreateQuery<mtzVal>("GetMtzVals", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="passwordCheckType"/> с помощью запроса "GetPasswordCheckTypes".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="passwordCheckType"/>.</returns>
+        public EntityQuery<passwordCheckType> GetPasswordCheckTypesQuery()
+        {
+            this.ValidateMethod("GetPasswordCheckTypesQuery", null);
+            return base.CreateQuery<passwordCheckType>("GetPasswordCheckTypes", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="typeFuncDC"/> с помощью запроса "GetTypeFuncDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="typeFuncDC"/>.</returns>
+        public EntityQuery<typeFuncDC> GetTypeFuncDCsQuery()
+        {
+            this.ValidateMethod("GetTypeFuncDCsQuery", null);
+            return base.CreateQuery<typeFuncDC>("GetTypeFuncDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="typeSignalDC"/> с помощью запроса "GetTypeSignalDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="typeSignalDC"/>.</returns>
+        public EntityQuery<typeSignalDC> GetTypeSignalDCsQuery()
+        {
+            this.ValidateMethod("GetTypeSignalDCsQuery", null);
+            return base.CreateQuery<typeSignalDC>("GetTypeSignalDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new mrzs05mMenuContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "mrzs05mMenuService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface Imrzs05mMenuServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanVal2".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetBooleanVal2DomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetBooleanVal2", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetBooleanVal2Response")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanVal2(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanVal2".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanVal2".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanVal2".</returns>
+            QueryResult<BooleanVal2> EndGetBooleanVal2(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanVal3".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetBooleanVal3DomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetBooleanVal3", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetBooleanVal3Response")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanVal3(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanVal3".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanVal3".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanVal3".</returns>
+            QueryResult<BooleanVal3> EndGetBooleanVal3(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanVals".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetBooleanValsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetBooleanVals", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetBooleanValsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanVals(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanVals".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanVals".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanVals".</returns>
+            QueryResult<BooleanVal> EndGetBooleanVals(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetKindSignalDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetKindSignalDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetKindSignalDCs", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetKindSignalDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetKindSignalDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetKindSignalDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetKindSignalDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetKindSignalDCs".</returns>
+            QueryResult<kindSignalDC> EndGetKindSignalDCs(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzsInOutOptions".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetMrzsInOutOptionsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetMrzsInOutOptions", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetMrzsInOutOptionsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzsInOutOptions(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzsInOutOptions".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzsInOutOptions".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzsInOutOptions".</returns>
+            QueryResult<mrzsInOutOption> EndGetMrzsInOutOptions(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMtzVals".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetMtzValsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetMtzVals", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetMtzValsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMtzVals(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMtzVals".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMtzVals".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMtzVals".</returns>
+            QueryResult<mtzVal> EndGetMtzVals(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetPasswordCheckTypes".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetPasswordCheckTypesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetPasswordCheckTypes", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetPasswordCheckTypesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetPasswordCheckTypes(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetPasswordCheckTypes".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetPasswordCheckTypes".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetPasswordCheckTypes".</returns>
+            QueryResult<passwordCheckType> EndGetPasswordCheckTypes(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTypeFuncDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetTypeFuncDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetTypeFuncDCs", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetTypeFuncDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTypeFuncDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTypeFuncDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTypeFuncDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTypeFuncDCs".</returns>
+            QueryResult<typeFuncDC> EndGetTypeFuncDCs(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTypeSignalDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzs05mMenuService/GetTypeSignalDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzs05mMenuService/GetTypeSignalDCs", ReplyAction="http://tempuri.org/mrzs05mMenuService/GetTypeSignalDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTypeSignalDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTypeSignalDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTypeSignalDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTypeSignalDCs".</returns>
+            QueryResult<typeSignalDC> EndGetTypeSignalDCs(IAsyncResult result);
+        }
+        
+        internal sealed class mrzs05mMenuContextEntityContainer : EntityContainer
+        {
+            
+            public mrzs05mMenuContextEntityContainer()
+            {
+                this.CreateEntitySet<BooleanVal>(EntitySetOperations.None);
+                this.CreateEntitySet<BooleanVal2>(EntitySetOperations.None);
+                this.CreateEntitySet<BooleanVal3>(EntitySetOperations.None);
+                this.CreateEntitySet<kindSignalDC>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzsInOutOption>(EntitySetOperations.None);
+                this.CreateEntitySet<mtzVal>(EntitySetOperations.None);
+                this.CreateEntitySet<passwordCheckType>(EntitySetOperations.None);
+                this.CreateEntitySet<typeFuncDC>(EntitySetOperations.None);
+                this.CreateEntitySet<typeSignalDC>(EntitySetOperations.None);
             }
         }
     }

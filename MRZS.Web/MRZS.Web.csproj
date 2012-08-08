@@ -85,7 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\MRZS.xap" />
-    <Content Include="IgorLINQ\IgorS.svc" />
     <Content Include="MRZSTestPage.aspx" />
     <Content Include="MRZSTestPage.html" />
     <Content Include="Silverlight.js" />
@@ -104,9 +103,6 @@
     <Compile Include="Helpers\CollectionHelper.cs" />
     <Compile Include="Helpers\EntityHelper.cs" />
     <Compile Include="Helpers\NullableHelper.cs" />
-    <Compile Include="IgorLINQ\IgorS.svc.cs">
-      <DependentUpon>IgorS.svc</DependentUpon>
-    </Compile>
     <Compile Include="Models\Answer.cs" />
     <Compile Include="Models\aspnet_Roles.cs" />
     <Compile Include="Models\Group.cs" />
@@ -177,6 +173,8 @@
       <DependentUpon>MediaContentService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\mrzs05mMenuService.cs" />
+    <Compile Include="Services\mrzs05mMenuService.metadata.cs" />
     <Compile Include="Services\PageService.cs" />
     <Compile Include="Services\PageService.metadata.cs">
       <DependentUpon>PageService.cs</DependentUpon>
@@ -272,7 +270,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>5590</DevelopmentServerPort>
+          <DevelopmentServerPort>13091</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost/MRZS.Web</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>

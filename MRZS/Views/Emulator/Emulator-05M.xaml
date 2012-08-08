@@ -4,7 +4,7 @@
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
-                 xmlns:MRZS="clr-namespace:MRZS" xmlns:Emulator="clr-namespace:MRZS.Views.Emulator" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" x:Class="MRZS.Views.Emulator.Emulator_05M"
+                 xmlns:MRZS="clr-namespace:MRZS" xmlns:Emulator="clr-namespace:MRZS.Views.Emulator" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" x:Class="MRZS.Views.Emulator.Emulator_05M"
            mc:Ignorable="d"
            d:DesignWidth="840" d:DesignHeight="680"
            Title="Emulator_05M Page">
@@ -29,11 +29,11 @@
         <Style TargetType="toolkit:NumericUpDown" x:Key="CustomNumericUpDown">
             <Setter Property="BorderThickness" Value="1" />
             <Setter Property="Height" Value="22" />
-            
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="toolkit:NumericUpDown">
-                        <Grid Background="{TemplateBinding Background}">                            
+                        <Grid Background="{TemplateBinding Background}">
                             <toolkit:ButtonSpinner x:Name="Spinner" MinWidth="35" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch">
                                 <TextBox BorderThickness="0" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontStretch="{TemplateBinding FontStretch}" FontStyle="{TemplateBinding FontStyle}" FontWeight="{TemplateBinding FontWeight}" Foreground="{TemplateBinding Foreground}" MinWidth="20" x:Name="Text" AcceptsReturn="False" Text="{TemplateBinding Value}" TextAlignment="Right" TextWrapping="NoWrap" HorizontalAlignment="Left" Width="43" >
                                     <TextBox.Style>
@@ -56,7 +56,7 @@
                 </Setter.Value>
             </Setter>
         </Style>
-        
+
     </navigation:Page.Resources>
     <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -67,52 +67,51 @@
         </Grid.ColumnDefinitions>
         <Button Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0"/>
         <Button Content="ОТКЛ" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="75" Margin="0,15,10,0"/>
-        <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="False" Margin="0,70,0,0">            
+        <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="False" Margin="0,70,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>     
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="40"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="25"></RowDefinition>
-                <RowDefinition Height="55"></RowDefinition>
-            </Grid.RowDefinitions>            
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="25"/>
+                <RowDefinition Height="55"/>
+            </Grid.RowDefinitions>
             <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown ToolTipService.ToolTip="Hi,Igor!" x:Name="f" x:FieldModifier="public" 
                                    Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  
                                    Style="{StaticResource CustomNumericUpDown}" DecimalPlaces="2" MouseEnter="f_MouseEnter"/>
-            
+
             <Popup x:Name="popUp" MaxWidth="400" Grid.Column="1" Grid.Row="1" MouseLeave="popUp_MouseLeave"
                    Width="400">
                 <StackPanel x:Name="PopUpStackPanel">
                     <Border Background="BurlyWood">
                         <Slider x:Name="slider1" MaxWidth="400" 
                             Grid.Column="1" Grid.Row="1" Maximum="100" SmallChange="{Binding ElementName=stepTextBox}"
-                            Height="30" Width="90">
-                        </Slider>
+                            Height="30" Width="90"/>
                     </Border>
-                    <TextBox x:Name="stepTextBox" Text="0.01"></TextBox>
+                    <TextBox x:Name="stepTextBox" Text="0.01"/>
                     <Border Background="BurlyWood">
                         <Button x:Name="closePopUp" Width="40" Height="20" Content="Закрить" MouseLeftButtonDown="closePopUp_MouseLeftButtonDown" Click="closePopUp_Click"/>
                     </Border>
-                </StackPanel>                                            
-            </Popup>                        
-            
+                </StackPanel>
+            </Popup>
+
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="Гц" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="ЗІ0" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="1" Grid.ColumnSpan="5" Content="Ток" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
@@ -167,7 +166,8 @@
             <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_13"/>
             <sdk:Label Grid.Row="10" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_14"/>
-            <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>            
+            <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
+            <sdk:DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Width="120" Grid.ColumnSpan="3" Grid.Column="1" Margin="57,20,0,-15" Grid.Row="12" Grid.RowSpan="3"/>
         </Grid>
         <StackPanel Grid.Column="1" Background="AntiqueWhite" Margin="0,0,0,0" Height="680" VerticalAlignment="Bottom">
             <TextBlock FontSize="16" Height="67" Margin="0,20,0,0">
@@ -179,7 +179,7 @@
             <Emulator:InputDV InputName="ДВ03" HorizontalAlignment="Left" Width="81"/>
             <Emulator:InputDV InputName="ДВ04" HorizontalAlignment="Left" Width="81"/>
             <Emulator:InputDV InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>            
+            <Emulator:InputDV InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
         </StackPanel>
         <Grid Grid.Column="2" Background="Aquamarine">
             <Grid.ColumnDefinitions>
@@ -191,7 +191,7 @@
                 <RowDefinition Height="119"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-<TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
+            <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
 				Grid.Row="0" Margin="86,46,155,0" Height="60" Width="200"
 				Grid.ColumnSpan="3" />
 
@@ -272,6 +272,9 @@
             <MRZS:OutputR Width="70" Height="60" OutputName="P03" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P04" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P05" />
-        </StackPanel>        
+        </StackPanel>
+        <riaControls:DomainDataSource x:Name="mrzs05menuDS" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="137,736,0,-156" VerticalAlignment="Top" Width="100">
+            
+        </riaControls:DomainDataSource>
     </Grid>
 </navigation:Page>

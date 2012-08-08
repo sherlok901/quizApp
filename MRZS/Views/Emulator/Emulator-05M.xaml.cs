@@ -12,17 +12,28 @@ using System.Windows.Shapes;
 using System.Windows.Navigation;
 using System.Windows.Controls.Primitives;
 using MRZS.Helpers;
-//using MRZS.Web.Services;
+using MRZS.Web.Services;
+using MRZS.Web.Models;
 using MRZS.Web;
 using System.Configuration;
 using System.ServiceModel;
 using System.Windows.Browser;
+using System.ServiceModel.DomainServices.Client;
 
 
 namespace MRZS.Views.Emulator
 {
-    public partial class Emulator_05M : Page
+    public partial class Emulator_05M : System.Windows.Controls.Page
     {
+        //properties
+        private BooleanVal1 boolContext;
+        public BooleanVal1 pboolContext
+        {
+            get{ return boolContext;}
+            set { boolContext = value; }
+        }
+        List<int?> parentIDlist;
+    
         public Emulator_05M()
         {
             InitializeComponent();
@@ -30,28 +41,72 @@ namespace MRZS.Views.Emulator
             display.FontFamily = new FontFamily("Arial");
             display.FontSize = 20.0;                        
             display.Padding = new Thickness(5.0);            
-            display.Text = "Часы"+Environment.NewLine;
-            display.Text += "Измерения" + Environment.NewLine;
-            display.Text += "Настройка" + Environment.NewLine;
-            display.Text += "Конфигурация" + Environment.NewLine;
-            display.Text += "Авария" + Environment.NewLine;
-            display.Text += "Диагностика" + Environment.NewLine;
-            display.Text += "МТЗ" + Environment.NewLine;
-            display.Text += "АПВ" + Environment.NewLine;            
-            display.SelectionStart = display.Text.Length;
-            
-            
-            
-            //get portaddress for wcf 
-            //MRZS.MyServRef.IgorSClient webserv=new MyServRef.IgorSClient();
-            //webserv.Endpoint.Address = new EndpointAddress(Application.Current.Host.Source.AbsoluteUri);
-            ////turn on webservice handler
-            //webserv.GetMenuElementCompleted += webserv_GetMenuElementCompleted;            
-            ////asynchronous run webservice
-            //webserv.GetMenuElementAsync(1);
+            //display.Text = "Часы"+Environment.NewLine;
+            //display.Text += "Измерения" + Environment.NewLine;
+            //display.Text += "Настройка" + Environment.NewLine;
+            //display.Text += "Конфигурация" + Environment.NewLine;
+            //display.Text += "Авария" + Environment.NewLine;
+            //display.Text += "Диагностика" + Environment.NewLine;
+            //display.Text += "МТЗ" + Environment.NewLine;
+            //display.Text += "АПВ" + Environment.NewLine;            
+            display.SelectionStart = display.Text.Length;                        
 
-            //MRZS.Web.Services.AnswerContext
+            //generated class by ria service (for client side)
+            boolContext = new Web.Services.BooleanVal1();
+            //using wcf service (DomainService) with my method to load entities
+            LoadOperation<MRZS.Web.Models.BooleanVal> boolEntity = boolContext.Load(boolContext.GetBooleanValByIDQuery(1));                        
             
+            myDataGrid.ItemsSource = boolEntity.Entities;
+            IEnumerable<BooleanVal> list = boolEntity.Entities;            
+            boolEntity.Completed += boolEntity_Completed;
+
+            mrzs05mMenuContext mrzs05mMContxt = new mrzs05mMenuContext();
+            LoadOperation<mrzs05mMenu> mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
+            mrzs05mMModel.Completed += mrzs05mMModel_Completed;
+            
+        }
+        /// <summary>
+        /// igor: load parentID column
+        /// </summary>        
+        void mrzs05mMModel_Completed(object sender, EventArgs e)
+        {
+            System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = sender as LoadOperation<mrzs05mMenu>;
+            if (b != null)
+            {
+                //больше 0
+                if(b.Entities.Count(n=>n!=null)>0)
+                {
+                    //get list of different elem in column parentID
+                    parentIDlist = b.Entities.Select(n => n.parentID).Distinct().ToList();
+                    //get 1 level of menu
+                    List<string> s = b.Entities.Where(n => n.parentID == parentIDlist[0]).Select(n => n.menuElement).ToList();
+                    DisplayMenu(s);
+                }                
+            }
+        }
+        /// <summary>
+        /// Display menu
+        /// </summary>        
+        private void DisplayMenu(List<string> s)
+        {
+            foreach (string str in s)
+            {
+                display.Text += str + Environment.NewLine;
+            }
+        }
+
+        void boolEntity_Completed(object sender, EventArgs e)
+        {                        
+            System.ServiceModel.DomainServices.Client.LoadOperation<BooleanVal> b = sender as LoadOperation<BooleanVal>;
+            if (b!=null)
+            {
+                IEnumerable<BooleanVal> list = b.Entities;
+                foreach (BooleanVal bv in list)
+                {
+                    int id = bv.id;
+                    string val = bv.val;
+                }
+            }
         }
 
         void webserv_GetMenuElementCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)

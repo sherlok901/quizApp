@@ -20,7 +20,19 @@ namespace MRZS.Web.Services
     // [RequiresAuthentication]
     [EnableClientAccess()]
     public class BooleanVal1 : LinqToEntitiesDomainService<MRZSEntities>
-    {
+    {        
+        [Query(IsComposable = false)]
+        public BooleanVal GetBooleanValByID(int boolValID)
+        {
+            return
+                //ObjectContext.Books.Include("Sections").Where(b => b.IsDeleted == null || b.IsDeleted == false).
+                //    SingleOrDefault(b => b.BookId == bookId);
+            ObjectContext.BooleanVals.Where(b => b.id == boolValID).SingleOrDefault(b => b.id == boolValID);
+        }
+        public IQueryable<BooleanVal> GetBooleanValByID2(int boolValID)
+        {
+            return this.ObjectContext.BooleanVals;
+        }
     }
 }
 
