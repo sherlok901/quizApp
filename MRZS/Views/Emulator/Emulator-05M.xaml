@@ -92,22 +92,36 @@
                 <RowDefinition Height="25"/>
                 <RowDefinition Height="55"/>
             </Grid.RowDefinitions>
-            <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
+            <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>            
             <toolkit:NumericUpDown ToolTipService.ToolTip="Hi,Igor!" x:Name="f" x:FieldModifier="public" 
-                                   Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  
+                                   Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  HorizontalAlignment="Right"
                                    Style="{StaticResource CustomNumericUpDown}" DecimalPlaces="2" MouseEnter="f_MouseEnter"/>
-
+            <Popup x:Name="popUpLittle" MaxWidth="40" Width="40" MaxHeight="400" Height="400"
+                   Grid.Column="1" Grid.Row="2" HorizontalOffset="5">
+                <Border Background="BurlyWood" Width="30" Height="30" MouseLeave="Border_MouseLeave_2" x:Name="borderPopLittle">
+                    <Button x:Name="popUpButton" Width="20" Height="20" Content="+" Click="popUpButton_Click"/>
+                </Border>                
+            </Popup>
+            
             <Popup x:Name="popUp" MaxWidth="400" Grid.Column="1" Grid.Row="1" MouseLeave="popUp_MouseLeave"
                    Width="400">
                 <StackPanel x:Name="PopUpStackPanel">
                     <Border Background="BurlyWood">
                         <Slider x:Name="slider1" MaxWidth="400" 
                             Grid.Column="1" Grid.Row="1" Maximum="100" SmallChange="{Binding ElementName=stepTextBox}"
-                            Height="30" Width="90"/>
+                            Height="30" Width="190"/>
                     </Border>
-                    <TextBox x:Name="stepTextBox" Text="0.01"/>
+                    <!--<TextBox x:Name="stepTextBox" Text="0.01"/>-->                    
+                    <StackPanel Orientation="Horizontal" Background="BurlyWood" x:Name="PopUpInnerPanel">                        
+                            <sdk:Label Content="Шаг:" Background="BurlyWood"/>                        
+                        <Border Background="White">
+                            <toolkit:NumericUpDown x:Name="stepNumericUpDown" DecimalPlaces="2" Width="60" Background="White" Value="0.01"></toolkit:NumericUpDown>                            
+                        </Border>
+                    </StackPanel>
+                    
                     <Border Background="BurlyWood">
-                        <Button x:Name="closePopUp" Width="40" Height="20" Content="Закрить" MouseLeftButtonDown="closePopUp_MouseLeftButtonDown" Click="closePopUp_Click"/>
+                        <Button x:Name="closePopUp" Width="60" Height="20" Content="Закрить" 
+                                MouseLeftButtonDown="closePopUp_MouseLeftButtonDown" Click="closePopUp_Click" Margin="0,5,0,0"/>
                     </Border>
                 </StackPanel>
             </Popup>
@@ -125,49 +139,50 @@
             <sdk:Label Grid.Row="2" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="3" Grid.Column="0" Content="Ib" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_4"/>
+            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_4" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="3" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3" Maximum="360"/>
+            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_17" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="3" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="4" Grid.Column="0" Content="Ic" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_16" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="4" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_5"/>
+            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_5" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="4" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="5" Grid.Column="0" Content="ЗфI" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_6"/>
+            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_6" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="5" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_7"/>
+            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_7" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="5" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!-- napryagenie-->
             <sdk:Label Grid.Row="6" Grid.ColumnSpan="5" Content="Напряжение" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="7" Grid.Column="0" Content="Ua" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_8"/>
+            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_8" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="7" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_9"/>
+            <toolkit:NumericUpDown Grid.Row="7" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_9" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="7" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="8" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="1"/>
+            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="1" Maximum="100" MouseEnter="NumericUpDown_MouseEnter_15" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="8" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_10"/>
+            <toolkit:NumericUpDown Grid.Row="8" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_10" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="8" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="9" Grid.Column="0" Content="Ub" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_11"/>
+            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_11" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="9" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_12"/>
+            <toolkit:NumericUpDown Grid.Row="9" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_12" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="9" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="10" Grid.Column="0" Content="ЗфU" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_13"/>
+            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_13" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="10" Grid.Column="2" Content="В" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_14"/>
+            <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_14" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <sdk:DataGrid x:Name="myDataGrid" HorizontalAlignment="Left" Width="120" Grid.ColumnSpan="3" Grid.Column="1" Margin="57,20,0,-15" Grid.Row="12" Grid.RowSpan="3"/>
+            
         </Grid>
         <StackPanel Grid.Column="1" Background="AntiqueWhite" Margin="0,0,0,0" Height="680" VerticalAlignment="Bottom">
             <TextBlock FontSize="16" Height="67" Margin="0,20,0,0">
