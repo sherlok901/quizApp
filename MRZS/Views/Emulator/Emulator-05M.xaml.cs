@@ -33,6 +33,8 @@ namespace MRZS.Views.Emulator
             set { boolContext = value; }
         }
         List<int?> parentIDlist;
+        int? currentParentID;
+        string selectedWord=null;
         private NumericUpDown numUpDown1;
     
         public Emulator_05M()
@@ -41,15 +43,7 @@ namespace MRZS.Views.Emulator
             display.TextWrapping = TextWrapping.Wrap;            
             display.FontFamily = new FontFamily("Arial");
             display.FontSize = 20.0;                        
-            display.Padding = new Thickness(5.0);            
-            //display.Text = "Часы"+Environment.NewLine;
-            //display.Text += "Измерения" + Environment.NewLine;
-            //display.Text += "Настройка" + Environment.NewLine;
-            //display.Text += "Конфигурация" + Environment.NewLine;
-            //display.Text += "Авария" + Environment.NewLine;
-            //display.Text += "Диагностика" + Environment.NewLine;
-            //display.Text += "МТЗ" + Environment.NewLine;
-            //display.Text += "АПВ" + Environment.NewLine;            
+            display.Padding = new Thickness(5.0);                          
             display.SelectionStart = display.Text.Length;                        
 
             //generated class by ria service (for client side)
@@ -82,6 +76,7 @@ namespace MRZS.Views.Emulator
                     //get 1 level of menu
                     List<string> s = b.Entities.Where(n => n.parentID == parentIDlist[0]).Select(n => n.menuElement).ToList();
                     DisplayMenu(s);
+                    currentParentID = parentIDlist[0];
                 }                
             }
         }
@@ -92,7 +87,8 @@ namespace MRZS.Views.Emulator
         {
             foreach (string str in s)
             {
-                display.Text += str + Environment.NewLine;
+                if (s.Last().ToString() == str) display.Text += str;
+                else display.Text += str + Environment.NewLine;
             }
         }
 
@@ -313,6 +309,50 @@ namespace MRZS.Views.Emulator
         private void NumericUpDown_MouseEnter_17(object sender, MouseEventArgs e)
         {
             ShowPopUpLittle(sender);
+        }
+
+        /// <summary>
+        /// Enter button clicked,
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            string selectedWordMenu= GetSelectedWordMenu();
+            //todo: get id selected word by menuElement
+            //todo: get entities where parentID=id of selected word
+        }
+
+        /// <summary>
+        /// get selected menu word
+        /// </summary>
+        /// <returns></returns>
+        private string GetSelectedWordMenu()
+        {
+            int index = display.SelectionStart;
+            //int lengt = display.Text.Length;//for debug
+            if (index > display.Text.Length - 1) index = display.Text.Length - 1;
+            //char a = display.Text[index];//for debug
+            //Мен|ю\r\n                                                            
+            int startWordIndex = index;
+            //search "\n" in left direction
+            while (display.Text[startWordIndex] != '\n' && startWordIndex != 0)
+            {
+                startWordIndex -= 1;
+            }
+            if (display.Text[startWordIndex] == '\n') startWordIndex += 1;
+            //search "\r" in right direction
+            int endWordIndex = index;
+            //a = display.Text[index];//for debug
+            while (display.Text[endWordIndex] != '\r' && (endWordIndex != display.Text.Length - 1))
+            {
+                endWordIndex += 1;
+                //a = display.Text[endWordIndex];//for debug
+            }
+            int leng = endWordIndex - startWordIndex;
+            if (endWordIndex == display.Text.Length - 1) leng += 1;
+            //return selected word
+            return display.Text.Substring(startWordIndex, leng);
         }
 
     }

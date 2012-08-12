@@ -230,7 +230,7 @@
                     <Button Content="F" Style="{StaticResource PanelKey}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" />
+                    <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" Click="Button_Click_2" />
                     <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="Button_Click_1" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
