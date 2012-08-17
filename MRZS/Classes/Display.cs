@@ -12,6 +12,16 @@ using System.Windows.Shapes;
 namespace MRZS.Classes
 {
     public class Display
-    {        
+    {
+        public string menuElement { get; set; }
+        //public int? CurrentParentID{get;set;}
+        //public int selectedOnDisplayIndex{get;set;}
+        public int id { get; set; }    
+        public Display() { }
+        public Display(string menuElem,int _id)
+        {
+            menuElement = menuElem;
+            id = _id;
+        }
     }
 }

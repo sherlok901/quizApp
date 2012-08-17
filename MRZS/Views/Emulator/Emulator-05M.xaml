@@ -55,8 +55,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
-
+        </Style>        
     </navigation:Page.Resources>
     <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
         <Grid.ColumnDefinitions>
@@ -208,7 +207,19 @@
             </Grid.RowDefinitions>
             <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
 				Grid.Row="0" Margin="86,46,155,0" Height="60" Width="200"
-				Grid.ColumnSpan="3" />
+				Grid.ColumnSpan="3" >
+                <TextBox.Triggers>
+                    <EventTrigger RoutedEvent="TextBox.Loaded">
+                        <BeginStoryboard>
+                            <Storyboard x:Name="timer2">
+                                <DoubleAnimation Storyboard.TargetName="display"  
+                                 Storyboard.TargetProperty="Opacity"  
+                                 From="100.0" To="100.0" Duration="0:0:0.3" />                                                                                                  
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </EventTrigger>
+                </TextBox.Triggers>
+            </TextBox>
 
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
                 <StackPanel Orientation="Horizontal">
@@ -231,10 +242,10 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" Click="Button_Click_2" />
-                    <Button Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="Button_Click_1" />
+                    <Button x:Name="upButton" Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="Button_Click_1" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" />
+                    <Button x:Name="escButton" Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" Click="escButton_Click" />
                     <Button Content="&lt;" Style="{StaticResource PanelKey}"  />
                     <Button Content="&gt;" Style="{StaticResource PanelKey}" Margin="60,5" />
                 </StackPanel>
