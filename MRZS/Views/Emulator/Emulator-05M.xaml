@@ -207,7 +207,7 @@
             </Grid.RowDefinitions>
             <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
 				Grid.Row="0" Margin="86,46,155,0" Height="60" Width="200"
-				Grid.ColumnSpan="3" >
+				Grid.ColumnSpan="3" SelectionChanged="display_SelectionChanged" >
                 <TextBox.Triggers>
                     <EventTrigger RoutedEvent="TextBox.Loaded">
                         <BeginStoryboard>
@@ -246,11 +246,11 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="escButton" Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" Click="escButton_Click" />
-                    <Button Content="&lt;" Style="{StaticResource PanelKey}"  />
-                    <Button Content="&gt;" Style="{StaticResource PanelKey}" Margin="60,5" />
+                    <Button x:Name="leftButton" Content="&lt;" Style="{StaticResource PanelKey}" Click="leftButton_Click"  />
+                    <Button x:Name="rightButton" Content="&gt;" Style="{StaticResource PanelKey}" Margin="60,5" Click="rightButton_Click" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="v" Style="{StaticResource PanelKey}" Margin="115,0" />
+                    <Button x:Name="downButton" Content="v" Style="{StaticResource PanelKey}" Margin="115,0" Click="downButton_Click" />
                 </StackPanel>
             </StackPanel>
 

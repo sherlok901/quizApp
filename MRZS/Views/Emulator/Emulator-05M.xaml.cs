@@ -34,11 +34,11 @@ namespace MRZS.Views.Emulator
             set { boolContext = value; }
         }//for experiment
 
+        private int AnimationCursorLineCurntPositionIndex=0;
         List<int?> parentIDlist;
         private bool displayAnimFlag;
         private NumericUpDown numUpDown1;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;
-        //private List<Display> SelectedMenuElementHistory = new List<Display>();
+        private IEnumerable<mrzs05mMenu> mrzs05Entity;        
         private List<mrzs05mMenu> SelectedMenuElemHistory = new List<mrzs05mMenu>(0);
         private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);
 
@@ -70,7 +70,7 @@ namespace MRZS.Views.Emulator
         /// </summary>        
         void mrzs05mMModel_Completed(object sender, EventArgs e)
         {            
-            //get list of different elem in column parentID
+            //get list of different elem in column parentID            
             mrzs05Entity = getEntities(sender);
             if (mrzs05Entity != null)
             {
@@ -78,28 +78,95 @@ namespace MRZS.Views.Emulator
                 //get 1 level of menu 
                 DisplayedEntities.AddRange(getEntitiesByParentID(parentIDlist[0]));
                 DisplayMenu(DisplayedEntities);
-                display.Text = ">" + display.Text;
+                //set cursor animation
+                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
                 timer2.Completed += timer2_Completed;
-                timer2.Begin();
-                //timer.Completed += timer_Completed;                
-                //timer.Begin();
+                timer2.Begin();                
             }
         }
-
+        /// <summary>
+        /// cursor animation
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         void timer2_Completed(object sender, EventArgs e)
         {
+            display.Focus();
+            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+            //switch cursor text
             if (displayAnimFlag)
             {
-                display.Text = "_" + display.Text.Substring(1);
+                //display.Text = "_" + display.Text.Substring(1);
+                display.Text= display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, "_");
                 displayAnimFlag = false;
             }
             else
             {
-                display.Text = ">" + display.Text.Substring(1);
+                //display.Text = ">" + display.Text.Substring(1);
+                display.Text =display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
                 displayAnimFlag = true;
             }
+            //run animation of cursor again
             timer2.Begin();            
         }
+
+        #region cursor events
+        private void downButton_Click(object sender, RoutedEventArgs e)
+        {
+            //debug:
+            //display.Focus();
+            //char a = display.Text[display.SelectionStart];
+            //char b = display.Text[display.SelectionStart + 1];
+            //if (display.Text[display.SelectionStart] == '\r') display.SelectionStart += 2;
+            //else display.SelectionStart += 1;
+
+            display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+            AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
+            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+            display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+            timer2.Begin();
+        }
+        //up button
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            //debug:
+            //display.Focus();
+            //if (display.Text[display.SelectionStart - 1] == '\r') display.SelectionStart -= 2;
+            //else display.SelectionStart -= 1;
+            display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+            AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
+            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+            display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+            timer2.Begin();
+        }
+        private void leftButton_Click(object sender, RoutedEventArgs e)
+        {
+            //debug:
+            //display.Focus();            
+            if (display.SelectionStart != 0)
+            {
+                char a = display.Text[display.SelectionStart];
+                char b = display.Text[display.SelectionStart + 1];
+                if (display.Text[display.SelectionStart - 1] == '\r') display.SelectionStart -= 2;
+                else display.SelectionStart -= 1;
+            }
+        }
+        private void rightButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+            //debug:
+            //display.Focus();            
+            if (display.SelectionStart != display.Text.Length - 1)
+            {
+                char a = display.Text[display.SelectionStart];
+                char b = display.Text[display.SelectionStart + 1];
+                if (display.Text[display.SelectionStart] == '\r') display.SelectionStart += 2;
+                else display.SelectionStart += 1;
+            }
+        } 
+        #endregion
         
         //get menuElement list for displeing in menu
         private List<string> getMenuListByParentID(int? parenID)
@@ -133,7 +200,7 @@ namespace MRZS.Views.Emulator
         /// </summary>        
         private void DisplayMenu(List<string> s)
         {
-            display.ClearValue(TextBox.TextProperty);            
+            if(display.Text!= String.Empty) display.ClearValue(TextBox.TextProperty);            
             foreach (string str in s)
             {
                 if (str == null) return;//заглушка
@@ -258,10 +325,7 @@ namespace MRZS.Views.Emulator
             popUp.IsOpen = false;
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            int start = display.SelectionStart;
-        }
+        
 
         private void popUpLittle_MouseEnter(object sender, MouseEventArgs e)
         {
@@ -444,12 +508,12 @@ namespace MRZS.Views.Emulator
             SelectedMenuElemHistory.Remove(SelectedMenuElemHistory.Last());            
         }
 
-        #region cursor events
-        
-        private void downButton_Click(object sender, RoutedEventArgs e)
+        private void display_SelectionChanged(object sender, RoutedEventArgs e)
         {
-
+            //display.SelectionStart = AnimationCursorLineCurntPositionIndex;
         }
-        #endregion
+               
+
+        
     }
 }

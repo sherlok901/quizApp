@@ -143,6 +143,7 @@
       <DependentUpon>ErrorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Classes\Display.cs" />
+    <Compile Include="Classes\EmulatorDisplayController.cs" />
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\DateTimeConverter.cs" />
     <Compile Include="Helpers\NullToBoolConverter.cs" />
