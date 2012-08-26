@@ -11,7 +11,7 @@ using System.Windows.Shapes;
 
 namespace MRZS.Classes
 {
-     static class EmulatorDisplayController
+     public static class EmulatorDisplayController
     {
          //open methods
         public static void setCursorInNextLine(string displayText,int displaySelectedIndex) 
@@ -22,18 +22,24 @@ namespace MRZS.Classes
         public static int IndexOfnextFirstSymbolFinding(string displayText, int displaySelectedIndex)
         {
             int index= displayText.IndexOf("\r\n", displaySelectedIndex);
-            if (index != -1) return (index + 2);
-            else return index;
+            if (index == -1) return displaySelectedIndex;
+            else return index+2;
         }
         public static int getPreviousIndexOfStartLineDisplay(string displayText, int displaySelectedIndex)
         {
             int temp = displaySelectedIndex;
-            while(temp!=0 && displayText[temp]!='\r')
+            int flag = 0;
+            while(temp!=0)
             {
+                if (displayText[temp] == '\n') flag++;
+                if (flag == 2)
+                {
+                    temp++;
+                    break;
+                }
                 temp-=1;
             }
-            if ((temp - 1) >= 0) return (temp - 1);
-            else return -1;
+            return temp;
         }
     }
 }

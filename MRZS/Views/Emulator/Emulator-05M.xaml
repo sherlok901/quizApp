@@ -109,8 +109,7 @@
                         <Slider x:Name="slider1" MaxWidth="400" 
                             Grid.Column="1" Grid.Row="1" Maximum="100" SmallChange="{Binding ElementName=stepTextBox}"
                             Height="30" Width="190"/>
-                    </Border>
-                    <!--<TextBox x:Name="stepTextBox" Text="0.01"/>-->                    
+                    </Border>                                       
                     <StackPanel Orientation="Horizontal" Background="BurlyWood" x:Name="PopUpInnerPanel">                        
                             <sdk:Label Content="Шаг:" Background="BurlyWood"/>                        
                         <Border Background="White">
@@ -206,8 +205,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
-				Grid.Row="0" Margin="86,46,155,0" Height="60" Width="200"
-				Grid.ColumnSpan="3" SelectionChanged="display_SelectionChanged" >
+				Grid.Row="0" Margin="86,46,155,0" Height="61" Width="216"
+				Grid.ColumnSpan="3" >
                 <TextBox.Triggers>
                     <EventTrigger RoutedEvent="TextBox.Loaded">
                         <BeginStoryboard>
@@ -241,8 +240,8 @@
                     <Button Content="F" Style="{StaticResource PanelKey}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" Click="Button_Click_2" />
-                    <Button x:Name="upButton" Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="Button_Click_1" />
+                    <Button Content="ENTER" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.467,0.533" Click="enterButton_Click_2" />
+                    <Button x:Name="upButton" Content="^" Style="{StaticResource PanelKey}" Margin="60,0" Click="upButton_Click" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="escButton" Content="ESC" Style="{StaticResource PanelKey}" RenderTransformOrigin="0.489,0.422" Click="escButton_Click" />

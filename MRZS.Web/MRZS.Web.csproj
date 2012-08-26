@@ -72,16 +72,14 @@
     <Reference Include="System.ServiceModel.DomainServices.Hosting">
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>4.0</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
-    <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ClientBin\MRZS.xap" />
@@ -148,6 +146,8 @@
       <AutoGen>True</AutoGen>
     </Compile>
     <Compile Include="Services\BooleanVal1.cs" />
+    <Compile Include="Services\BooleanVal2Service.cs" />
+    <Compile Include="Services\BooleanVAl3Service.cs" />
     <Compile Include="Services\DefectService.cs" />
     <Compile Include="Services\DefectService.metadata.cs">
       <DependentUpon>DefectService.cs</DependentUpon>
@@ -168,6 +168,7 @@
       <DependentUpon>InterectiveTestService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\KindSignalDCService.cs" />
     <Compile Include="Services\MediaContentService.cs" />
     <Compile Include="Services\MediaContentService.metadata.cs">
       <DependentUpon>MediaContentService.cs</DependentUpon>
@@ -175,11 +176,14 @@
     </Compile>
     <Compile Include="Services\mrzs05mMenuService.cs" />
     <Compile Include="Services\mrzs05mMenuService.metadata.cs" />
+    <Compile Include="Services\mrzsInOutOptionsContext.cs" />
+    <Compile Include="Services\MtzValService.cs" />
     <Compile Include="Services\PageService.cs" />
     <Compile Include="Services\PageService.metadata.cs">
       <DependentUpon>PageService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\PasswordCheckTypeService.cs" />
     <Compile Include="Services\QuestionService.cs" />
     <Compile Include="Services\QuestionService.metadata.cs">
       <DependentUpon>QuestionService.cs</DependentUpon>
@@ -215,6 +219,8 @@
       <DependentUpon>SectionService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\TypeFuncDCService.cs" />
+    <Compile Include="Services\TypeSignalDCService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="Models\Shared\User.shared.cs" />
     <Compile Include="Services\UserSectionService.cs" />

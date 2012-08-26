@@ -88,7 +88,9 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows">
+      <Private>True</Private>
+    </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="system" />
     <Reference Include="System.Core" />

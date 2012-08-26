@@ -20,6 +20,7 @@ using System.ServiceModel;
 using System.Windows.Browser;
 using System.ServiceModel.DomainServices.Client;
 using MRZS.Classes;
+using System.Windows.Threading;
 
 
 namespace MRZS.Views.Emulator
@@ -33,7 +34,7 @@ namespace MRZS.Views.Emulator
             get{ return boolContext;}
             set { boolContext = value; }
         }//for experiment
-
+  
         private int AnimationCursorLineCurntPositionIndex=0;
         List<int?> parentIDlist;
         private bool displayAnimFlag;
@@ -41,6 +42,15 @@ namespace MRZS.Views.Emulator
         private IEnumerable<mrzs05mMenu> mrzs05Entity;        
         private List<mrzs05mMenu> SelectedMenuElemHistory = new List<mrzs05mMenu>(0);
         private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);
+        LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
+        LoadOperation<passwordCheckType> passwordCheckTypeModel;
+        LoadOperation<kindSignalDC> kindSignalDCModel;
+        LoadOperation<typeSignalDC> typeSignalDCModel;
+        LoadOperation<typeFuncDC> typeFuncDCModel;
+        LoadOperation<BooleanVal2> BooleanVal2Model;
+        LoadOperation<BooleanVal3> BooleanVal3Model;
+        LoadOperation<mtzVal> mtzValModel;        
+        DispatcherTimer Dtimer = new DispatcherTimer();
 
         public Emulator_05M()
         {
@@ -60,36 +70,75 @@ namespace MRZS.Views.Emulator
             IEnumerable<BooleanVal> list = boolEntity.Entities;            
             boolEntity.Completed += boolEntity_Completed;
 
+            mrzsInOutOptionsContext mrzsInOutOptConxt = new mrzsInOutOptionsContext();
+            LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
+            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
+
             mrzs05mMenuContext mrzs05mMContxt = new mrzs05mMenuContext();
-            LoadOperation<mrzs05mMenu> mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
+            LoadOperation<mrzs05mMenu> mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());            
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
-            
+
+            mrzsInOutOptionModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());            
+
+            passwordCheckTypeModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetPasswordCheckTypesQuery());
+            kindSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetKindSignalDCsQuery());
+            typeSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeSignalDCsQuery());
+            typeFuncDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeFuncDCsQuery());
+            BooleanVal2Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal2Query());
+            BooleanVal3Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal3Query());
+            mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
         }
+        #region Entity complited loads ***
         /// <summary>
         /// igor: load parentID column
         /// </summary>        
         void mrzs05mMModel_Completed(object sender, EventArgs e)
-        {            
+        {
             //get list of different elem in column parentID            
             mrzs05Entity = getEntities(sender);
+            if (mrzsInOutOptionModel.IsComplete)
+            {
+                List<mrzsInOutOption> m = mrzsInOutOptionModel.Entities.ToList();
+            }
             if (mrzs05Entity != null)
             {
-                parentIDlist = mrzs05Entity.Select(n => n.parentID).Distinct().ToList();                
+                parentIDlist = mrzs05Entity.Select(n => n.parentID).Distinct().ToList();
                 //get 1 level of menu 
                 DisplayedEntities.AddRange(getEntitiesByParentID(parentIDlist[0]));
                 DisplayMenu(DisplayedEntities);
                 //set cursor animation
-                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
-                timer2.Completed += timer2_Completed;
-                timer2.Begin();                
+                display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+                Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
+                Dtimer.Tick += Dtimer_Tick;
+                //Dtimer.Start();
             }
         }
-        /// <summary>
-        /// cursor animation
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void timer2_Completed(object sender, EventArgs e)
+
+        void mrzsInOutOptModel_Completed(object sender, EventArgs e)
+        {
+
+        }
+        void boolEntity_Completed(object sender, EventArgs e)
+        {
+            System.ServiceModel.DomainServices.Client.LoadOperation<BooleanVal> b = sender as LoadOperation<BooleanVal>;
+            if (b != null)
+            {
+                IEnumerable<BooleanVal> list = b.Entities;
+                foreach (BooleanVal bv in list)
+                {
+                    int id = bv.id;
+                    string val = bv.val;
+                }
+            }
+        }        
+        #endregion        
+               
+        private string insertAnimatCursor(string TextForInserting,int InsertingPosition,string InsertedSymbol)
+        {
+            return TextForInserting.Insert(InsertingPosition, InsertedSymbol);            
+        }
+
+        void Dtimer_Tick(object sender, EventArgs e)
         {
             display.Focus();
             display.SelectionStart = AnimationCursorLineCurntPositionIndex;
@@ -97,49 +146,48 @@ namespace MRZS.Views.Emulator
             if (displayAnimFlag)
             {
                 //display.Text = "_" + display.Text.Substring(1);
-                display.Text= display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, "_");
+                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, "_");
                 displayAnimFlag = false;
             }
             else
             {
                 //display.Text = ">" + display.Text.Substring(1);
-                display.Text =display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-                display.Text= display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
                 displayAnimFlag = true;
             }
             //run animation of cursor again
-            timer2.Begin();            
-        }
+        }        
 
-        #region cursor events
+        #region cursor events ***
         private void downButton_Click(object sender, RoutedEventArgs e)
         {
-            //debug:
-            //display.Focus();
-            //char a = display.Text[display.SelectionStart];
-            //char b = display.Text[display.SelectionStart + 1];
-            //if (display.Text[display.SelectionStart] == '\r') display.SelectionStart += 2;
-            //else display.SelectionStart += 1;
-
-            display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-            AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
-            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
-            display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
-            timer2.Begin();
-        }
-        //up button
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+            if (AnimationCursorLineCurntPositionIndex != -1)
+            {
+                display.Focus();
+                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
+                if (AnimationCursorLineCurntPositionIndex != -1)
+                {
+                    display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+                    display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+                }
+            }
+        }      
+        private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            //debug:
-            //display.Focus();
-            //if (display.Text[display.SelectionStart - 1] == '\r') display.SelectionStart -= 2;
-            //else display.SelectionStart -= 1;
-            display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-            AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
-            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
-            display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
-            timer2.Begin();
+            if (AnimationCursorLineCurntPositionIndex != -1)
+            {
+                display.Focus();            
+                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
+                if (AnimationCursorLineCurntPositionIndex != -1)
+                {
+                    display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+                    display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+                }
+            }
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
@@ -167,7 +215,66 @@ namespace MRZS.Views.Emulator
             }
         } 
         #endregion
-        
+
+        #region == other func buttons ==
+
+        private void enterButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            string selectedWordMenu = GetSelectedWordMenu();
+
+            if (selectedWordMenu != null)
+            {
+                //get id selected word by menuElement
+                mrzs05mMenu selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
+                if (getEntitiesByParentID(selectedEntity.id).Count == 0) return;
+                //add current selected word and id to history list                                
+                SelectedMenuElemHistory.Add(selectedEntity);
+                //get next menu list by parentID of current selected word                
+                List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(selectedEntity.id);
+                //check the mrzsInOutOptionsID column
+                if (newMenuLevel.Count > 0)
+                {
+                    //if mrzsInOutOptionsID column not null
+                    if (newMenuLevel[0].menuElement == null && newMenuLevel[0].mrzsInOutOptionsID != null)
+                    {
+                        DisplayMenu_MrzsInOutOpt(newMenuLevel);
+                    }
+                    else
+                    {
+                        DisplayMenu(newMenuLevel);
+                    }
+                }
+
+
+                DisplayedEntities.AddRange(newMenuLevel);
+                //set animation cursor
+                AnimationCursorLineCurntPositionIndex = 0;
+                display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+            }
+        }
+        private void escButton_Click(object sender, RoutedEventArgs e)
+        {
+            //get parentID of last selected elem in menu
+            if (SelectedMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
+            int? parentId = SelectedMenuElemHistory.Last().parentID;
+            //delete displayed entities                        
+            while (true)
+            {
+                if (DisplayedEntities.Last().parentID == SelectedMenuElemHistory.Last().id)
+                    DisplayedEntities.Remove(DisplayedEntities.Last());
+                else break;
+            }
+            List<string> list = getEntitiesByParentID(parentId).Select(n => n.menuElement).ToList();
+            //set display first line on last selected word and set animation cursor
+            DisplayMenu(list, SelectedMenuElemHistory.Last().menuElement);
+            //delete selected entity
+            SelectedMenuElemHistory.Remove(SelectedMenuElemHistory.Last());
+
+
+        }
+
+        #endregion==
+
         //get menuElement list for displeing in menu
         private List<string> getMenuListByParentID(int? parenID)
         {
@@ -184,7 +291,7 @@ namespace MRZS.Views.Emulator
         /// <returns></returns>
         private IEnumerable<mrzs05mMenu> getEntities(object eventSender)
         {
-            System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = eventSender as LoadOperation<mrzs05mMenu>;
+            System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = eventSender as LoadOperation<mrzs05mMenu>;            
             if (b != null)
             {
                 //больше 0
@@ -195,9 +302,8 @@ namespace MRZS.Views.Emulator
             }
             return null;
         }
-        /// <summary>
-        /// Display menu
-        /// </summary>        
+        
+        #region DisplayMenu functions
         private void DisplayMenu(List<string> s)
         {
             if(display.Text!= String.Empty) display.ClearValue(TextBox.TextProperty);            
@@ -211,29 +317,57 @@ namespace MRZS.Views.Emulator
         private void DisplayMenu(List<string> s, string firstDisplayedWord)
         {
             DisplayMenu(s);
-            display.SelectionStart = display.Text.IndexOf(firstDisplayedWord);
-            //List<string> list= display.Text.Split(new char[2] { '\r', '\n' }).ToList();
-            //int index = list.IndexOf(firstDisplayedWord);
+            AnimationCursorLineCurntPositionIndex = display.Text.IndexOf(firstDisplayedWord);
+            display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+            display.SelectionStart = AnimationCursorLineCurntPositionIndex;
         }
-
         private void DisplayMenu(List<mrzs05mMenu> list)
         {
+            //string strToDisplay = null;
             List<string> s = list.Select(n => n.menuElement).ToList();
             DisplayMenu(s);
+            //foreach (mrzs05mMenu entity in list)            
+            //{
+            //    strToDisplay = null;
+            //    //search in menuElement column text with {value}
+            //    if (entity.menuElement.IndexOf("{value}") >= 0)
+            //    {
+            //        //replace {value} on value of "value" and "unitValue" columns
+            //        string[] temp = entity.menuElement.Split(new string[1] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+            //        if (temp.Count() >= 2)
+            //        {
+            //            temp[1] = entity.value + " " + entity.unitValue;
+            //            strToDisplay += temp[0] + Environment.NewLine + temp[1];                                                                        
+            //        }
+            //    }
+            //    else strToDisplay += entity.menuElement;
+                
+            //    display.Text += strToDisplay;
+            //    //if it is not last entity
+            //    if (entity != list.Last()) display.Text += Environment.NewLine;
+            //}            
         }
-        void boolEntity_Completed(object sender, EventArgs e)
-        {                        
-            System.ServiceModel.DomainServices.Client.LoadOperation<BooleanVal> b = sender as LoadOperation<BooleanVal>;
-            if (b!=null)
+        private void DisplayMenu_MrzsInOutOpt(List<mrzs05mMenu> entityList)
+        {
+            if (display.Text != String.Empty) display.ClearValue(TextBox.TextProperty);
+            foreach (mrzs05mMenu entity in entityList)
             {
-                IEnumerable<BooleanVal> list = b.Entities;
-                foreach (BooleanVal bv in list)
-                {
-                    int id = bv.id;
-                    string val = bv.val;
-                }
+                if (entity == entityList.Last()) display.Text += entity.mrzsInOutOption.optionsName;
+                else display.Text += entity.mrzsInOutOption.optionsName + Environment.NewLine;
+                //if (entity.BooleanVal.val != String.Empty) displayStr(entity.BooleanVal.val);
+                //else if (entity.kindSignalDC.kindSignal != String.Empty) displayStr(entity.kindSignalDC.kindSignal);
+                //else if (entity.typeSignalDC.typeSignal != String.Empty) displayStr(entity.typeSignalDC.typeSignal);
+                //else if (entity.typeFuncDC.typeFunction != String.Empty) displayStr(entity.typeFuncDC.typeFunction);
+                //else if (entity.BooleanVal2.val != String.Empty) displayStr(entity.BooleanVal2.val);
+                //else if (entity.BooleanVal3.boolVal != String.Empty) displayStr(entity.BooleanVal3.boolVal);
+                //else if (entity.mtzVal.mtzVals != String.Empty) displayStr(entity.mtzVal.mtzVals);
             }
-        }        
+        }
+        private void displayStr(string str)
+        {
+            display.Text += str+Environment.NewLine;
+        }
+        #endregion        
 
         // Executes when the user navigates to this page.
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -349,27 +483,7 @@ namespace MRZS.Views.Emulator
         }
         #endregion                
 
-        /// <summary>
-        /// Enter button clicked,
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-            string selectedWordMenu= GetSelectedWordMenu();            
-            if (selectedWordMenu != null)
-            {
-                //get id selected word by menuElement
-                mrzs05mMenu selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
-                if (getEntitiesByParentID(selectedEntity.id).Count == 0) return;
-                //add current selected word and id to history list                                
-                SelectedMenuElemHistory.Add(selectedEntity);
-                //get next menu list by parentID of current selected word                
-                List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(selectedEntity.id);
-                DisplayMenu(newMenuLevel);
-                DisplayedEntities.AddRange(newMenuLevel);                
-            }            
-        }
+        
 
         /// <summary>
         /// get selected menu word
@@ -399,8 +513,15 @@ namespace MRZS.Views.Emulator
             }
             int leng = endWordIndex - startWordIndex;
             if (endWordIndex == display.Text.Length - 1) leng += 1;
+            //check word to animation cursor
+            string temp=display.Text.Substring(startWordIndex, leng);
+            string word=null;
+            for(int i=0;i<temp.Length; i++)
+            {
+                if(temp[i]!='>' && temp[i]!='_') word+=temp[i].ToString();
+            }
             //return selected word
-            return display.Text.Substring(startWordIndex, leng);
+            return word;
         }
 
         //events
@@ -488,32 +609,7 @@ namespace MRZS.Views.Emulator
             ShowPopUpLittle(sender);
         }
         #endregion
-
-        private void escButton_Click(object sender, RoutedEventArgs e)
-        {
-            //get parentID of last selected elem in menu
-            if (SelectedMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
-            int? parentId = SelectedMenuElemHistory.Last().parentID;                                    
-            //delete displayed entities                        
-            while(true)
-            {
-                if(DisplayedEntities.Last().parentID==SelectedMenuElemHistory.Last().id) 
-                    DisplayedEntities.Remove(DisplayedEntities.Last());
-                else break;
-            }          
-            List<string> list =getEntitiesByParentID(parentId).Select(n => n.menuElement).ToList();
-            //set display first line on last selected word
-            DisplayMenu(list, SelectedMenuElemHistory.Last().menuElement);
-            //delete selected entity
-            SelectedMenuElemHistory.Remove(SelectedMenuElemHistory.Last());            
-        }
-
-        private void display_SelectionChanged(object sender, RoutedEventArgs e)
-        {
-            //display.SelectionStart = AnimationCursorLineCurntPositionIndex;
-        }
-               
-
+                             
         
     }
 }

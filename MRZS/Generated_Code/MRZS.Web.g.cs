@@ -1739,6 +1739,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "BooleanVal2".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="BooleanVal2Context"/>.
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class BooleanVal2 : Entity
@@ -1869,6 +1872,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "BooleanVal3".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="BooleanVAl3Context"/>.
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class BooleanVal3 : Entity
@@ -2837,6 +2843,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "kindSignalDC".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="KindSignalDCContext"/>.
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class kindSignalDC : Entity
@@ -2967,6 +2976,16 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "mrzs05mMenu".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="BooleanVal2Context"/>.
+    /// Контекст <see cref="BooleanVAl3Context"/>.
+    /// Контекст <see cref="KindSignalDCContext"/>.
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="mrzsInOutOptionsContext"/>.
+    /// Контекст <see cref="MtzValContext"/>.
+    /// Контекст <see cref="PasswordCheckTypeContext"/>.
+    /// Контекст <see cref="TypeFuncDCContext"/>.
+    /// Контекст <see cref="TypeSignalDCContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class mrzs05mMenu : Entity
@@ -3868,6 +3887,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "mrzsInOutOption".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="mrzsInOutOptionsContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class mrzsInOutOption : Entity
@@ -3998,6 +4020,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "mtzVal".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="MtzValContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class mtzVal : Entity
@@ -4542,6 +4567,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "passwordCheckType".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="PasswordCheckTypeContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class passwordCheckType : Entity
@@ -6369,6 +6397,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "typeFuncDC".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="TypeFuncDCContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class typeFuncDC : Entity
@@ -6499,6 +6530,9 @@ namespace MRZS.Web.Models
     
     /// <summary>
     /// Класс сущности "typeSignalDC".
+    /// Данная сущность совместно используется следующими контекстами:
+    /// Контекст <see cref="mrzs05mMenuContext"/>.
+    /// Контекст <see cref="TypeSignalDCContext"/>.
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
     public sealed partial class typeSignalDC : Entity
@@ -7674,6 +7708,306 @@ namespace MRZS.Web.Services
     }
     
     /// <summary>
+    /// Контекст DomainContext, соответствующий службе "BooleanVal2Service" DomainService.
+    /// </summary>
+    public sealed partial class BooleanVal2Context : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVal2Context"/>.
+        /// </summary>
+        public BooleanVal2Context() : 
+                this(new WebDomainClient<IBooleanVal2ServiceContract>(new Uri("MRZS-Web-Services-BooleanVal2Service.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVal2Context"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы BooleanVal2Service.</param>
+        public BooleanVal2Context(Uri serviceUri) : 
+                this(new WebDomainClient<IBooleanVal2ServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVal2Context"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public BooleanVal2Context(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal2"/>, загруженных в данный экземпляр <see cref="BooleanVal2Context"/>.
+        /// </summary>
+        public EntitySet<BooleanVal2> BooleanVal2s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal2>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="BooleanVal2Context"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal2"/> с помощью запроса "GetBooleanVal2".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal2"/>.</returns>
+        public EntityQuery<BooleanVal2> GetBooleanVal2Query()
+        {
+            this.ValidateMethod("GetBooleanVal2Query", null);
+            return base.CreateQuery<BooleanVal2>("GetBooleanVal2", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new BooleanVal2ContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "BooleanVal2Service" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IBooleanVal2ServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanVal2".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVal2Service/GetBooleanVal2DomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVal2Service/GetBooleanVal2", ReplyAction="http://tempuri.org/BooleanVal2Service/GetBooleanVal2Response")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanVal2(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanVal2".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanVal2".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanVal2".</returns>
+            QueryResult<BooleanVal2> EndGetBooleanVal2(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVal2Service/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVal2Service/GetMrzs05mMenu", ReplyAction="http://tempuri.org/BooleanVal2Service/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+        }
+        
+        internal sealed class BooleanVal2ContextEntityContainer : EntityContainer
+        {
+            
+            public BooleanVal2ContextEntityContainer()
+            {
+                this.CreateEntitySet<BooleanVal2>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "BooleanVAl3Service" DomainService.
+    /// </summary>
+    public sealed partial class BooleanVAl3Context : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="BooleanVAl3Context"/>.
+        /// </summary>
+        public BooleanVAl3Context() : 
+                this(new WebDomainClient<IBooleanVAl3ServiceContract>(new Uri("MRZS-Web-Services-BooleanVAl3Service.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVAl3Context"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы BooleanVAl3Service.</param>
+        public BooleanVAl3Context(Uri serviceUri) : 
+                this(new WebDomainClient<IBooleanVAl3ServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="BooleanVAl3Context"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public BooleanVAl3Context(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="BooleanVal3"/>, загруженных в данный экземпляр <see cref="BooleanVAl3Context"/>.
+        /// </summary>
+        public EntitySet<BooleanVal3> BooleanVal3s
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<BooleanVal3>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="BooleanVAl3Context"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="BooleanVal3"/> с помощью запроса "GetBooleanVal3".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="BooleanVal3"/>.</returns>
+        public EntityQuery<BooleanVal3> GetBooleanVal3Query()
+        {
+            this.ValidateMethod("GetBooleanVal3Query", null);
+            return base.CreateQuery<BooleanVal3>("GetBooleanVal3", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new BooleanVAl3ContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "BooleanVAl3Service" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IBooleanVAl3ServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetBooleanVal3".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVAl3Service/GetBooleanVal3DomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVAl3Service/GetBooleanVal3", ReplyAction="http://tempuri.org/BooleanVAl3Service/GetBooleanVal3Response")]
+            [WebGet()]
+            IAsyncResult BeginGetBooleanVal3(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetBooleanVal3".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetBooleanVal3".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetBooleanVal3".</returns>
+            QueryResult<BooleanVal3> EndGetBooleanVal3(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/BooleanVAl3Service/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/BooleanVAl3Service/GetMrzs05mMenu", ReplyAction="http://tempuri.org/BooleanVAl3Service/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+        }
+        
+        internal sealed class BooleanVAl3ContextEntityContainer : EntityContainer
+        {
+            
+            public BooleanVAl3ContextEntityContainer()
+            {
+                this.CreateEntitySet<BooleanVal3>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
     /// Контекст DomainContext, соответствующий службе "DefectService" DomainService.
     /// </summary>
     public sealed partial class DefectContext : DomainContext
@@ -8356,6 +8690,156 @@ namespace MRZS.Web.Services
     }
     
     /// <summary>
+    /// Контекст DomainContext, соответствующий службе "KindSignalDCService" DomainService.
+    /// </summary>
+    public sealed partial class KindSignalDCContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="KindSignalDCContext"/>.
+        /// </summary>
+        public KindSignalDCContext() : 
+                this(new WebDomainClient<IKindSignalDCServiceContract>(new Uri("MRZS-Web-Services-KindSignalDCService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="KindSignalDCContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы KindSignalDCService.</param>
+        public KindSignalDCContext(Uri serviceUri) : 
+                this(new WebDomainClient<IKindSignalDCServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="KindSignalDCContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public KindSignalDCContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="kindSignalDC"/>, загруженных в данный экземпляр <see cref="KindSignalDCContext"/>.
+        /// </summary>
+        public EntitySet<kindSignalDC> kindSignalDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<kindSignalDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="KindSignalDCContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="kindSignalDC"/> с помощью запроса "GetKindSignalDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="kindSignalDC"/>.</returns>
+        public EntityQuery<kindSignalDC> GetKindSignalDCsQuery()
+        {
+            this.ValidateMethod("GetKindSignalDCsQuery", null);
+            return base.CreateQuery<kindSignalDC>("GetKindSignalDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new KindSignalDCContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "KindSignalDCService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IKindSignalDCServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetKindSignalDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/KindSignalDCService/GetKindSignalDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/KindSignalDCService/GetKindSignalDCs", ReplyAction="http://tempuri.org/KindSignalDCService/GetKindSignalDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetKindSignalDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetKindSignalDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetKindSignalDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetKindSignalDCs".</returns>
+            QueryResult<kindSignalDC> EndGetKindSignalDCs(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/KindSignalDCService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/KindSignalDCService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/KindSignalDCService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+        }
+        
+        internal sealed class KindSignalDCContextEntityContainer : EntityContainer
+        {
+            
+            public KindSignalDCContextEntityContainer()
+            {
+                this.CreateEntitySet<kindSignalDC>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
     /// Контекст DomainContext, соответствующий службе "MediaContentService" DomainService.
     /// </summary>
     public sealed partial class MediaContentContext : DomainContext
@@ -8987,6 +9471,306 @@ namespace MRZS.Web.Services
     }
     
     /// <summary>
+    /// Контекст DomainContext, соответствующий службе "mrzsInOutOptionsContext" DomainService.
+    /// </summary>
+    public sealed partial class mrzsInOutOptionsContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="mrzsInOutOptionsContext"/>.
+        /// </summary>
+        public mrzsInOutOptionsContext() : 
+                this(new WebDomainClient<ImrzsInOutOptionsContextContract>(new Uri("MRZS-Web-Services-mrzsInOutOptionsContext.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="mrzsInOutOptionsContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы mrzsInOutOptionsContext.</param>
+        public mrzsInOutOptionsContext(Uri serviceUri) : 
+                this(new WebDomainClient<ImrzsInOutOptionsContextContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="mrzsInOutOptionsContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public mrzsInOutOptionsContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="mrzsInOutOptionsContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzsInOutOption"/>, загруженных в данный экземпляр <see cref="mrzsInOutOptionsContext"/>.
+        /// </summary>
+        public EntitySet<mrzsInOutOption> mrzsInOutOptions
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzsInOutOption>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzsInOutOption"/> с помощью запроса "GetMrzsInOutOptions".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzsInOutOption"/>.</returns>
+        public EntityQuery<mrzsInOutOption> GetMrzsInOutOptionsQuery()
+        {
+            this.ValidateMethod("GetMrzsInOutOptionsQuery", null);
+            return base.CreateQuery<mrzsInOutOption>("GetMrzsInOutOptions", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new mrzsInOutOptionsContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "mrzsInOutOptionsContext" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ImrzsInOutOptionsContextContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzsInOutOptionsContext/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzsInOutOptionsContext/GetMrzs05mMenu", ReplyAction="http://tempuri.org/mrzsInOutOptionsContext/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzsInOutOptions".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/mrzsInOutOptionsContext/GetMrzsInOutOptionsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/mrzsInOutOptionsContext/GetMrzsInOutOptions", ReplyAction="http://tempuri.org/mrzsInOutOptionsContext/GetMrzsInOutOptionsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzsInOutOptions(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzsInOutOptions".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzsInOutOptions".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzsInOutOptions".</returns>
+            QueryResult<mrzsInOutOption> EndGetMrzsInOutOptions(IAsyncResult result);
+        }
+        
+        internal sealed class mrzsInOutOptionsContextEntityContainer : EntityContainer
+        {
+            
+            public mrzsInOutOptionsContextEntityContainer()
+            {
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<mrzsInOutOption>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "MtzValService" DomainService.
+    /// </summary>
+    public sealed partial class MtzValContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="MtzValContext"/>.
+        /// </summary>
+        public MtzValContext() : 
+                this(new WebDomainClient<IMtzValServiceContract>(new Uri("MRZS-Web-Services-MtzValService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="MtzValContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы MtzValService.</param>
+        public MtzValContext(Uri serviceUri) : 
+                this(new WebDomainClient<IMtzValServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="MtzValContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public MtzValContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="MtzValContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mtzVal"/>, загруженных в данный экземпляр <see cref="MtzValContext"/>.
+        /// </summary>
+        public EntitySet<mtzVal> mtzVals
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mtzVal>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mtzVal"/> с помощью запроса "GetMtzVals".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mtzVal"/>.</returns>
+        public EntityQuery<mtzVal> GetMtzValsQuery()
+        {
+            this.ValidateMethod("GetMtzValsQuery", null);
+            return base.CreateQuery<mtzVal>("GetMtzVals", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new MtzValContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "MtzValService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IMtzValServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MtzValService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MtzValService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/MtzValService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMtzVals".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/MtzValService/GetMtzValsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/MtzValService/GetMtzVals", ReplyAction="http://tempuri.org/MtzValService/GetMtzValsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMtzVals(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMtzVals".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMtzVals".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMtzVals".</returns>
+            QueryResult<mtzVal> EndGetMtzVals(IAsyncResult result);
+        }
+        
+        internal sealed class MtzValContextEntityContainer : EntityContainer
+        {
+            
+            public MtzValContextEntityContainer()
+            {
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<mtzVal>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
     /// Контекст DomainContext, соответствующий службе "PageService" DomainService.
     /// </summary>
     public sealed partial class PageContext : DomainContext
@@ -9244,6 +10028,157 @@ namespace MRZS.Web.Services
             public PageContextEntityContainer()
             {
                 this.CreateEntitySet<Page>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "PasswordCheckTypeService" DomainService.
+    /// </summary>
+    public sealed partial class PasswordCheckTypeContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="PasswordCheckTypeContext"/>.
+        /// </summary>
+        public PasswordCheckTypeContext() : 
+                this(new WebDomainClient<IPasswordCheckTypeServiceContract>(new Uri("MRZS-Web-Services-PasswordCheckTypeService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="PasswordCheckTypeContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы PasswordCheckTypeService.</param>
+        public PasswordCheckTypeContext(Uri serviceUri) : 
+                this(new WebDomainClient<IPasswordCheckTypeServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="PasswordCheckTypeContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public PasswordCheckTypeContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="PasswordCheckTypeContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="passwordCheckType"/>, загруженных в данный экземпляр <see cref="PasswordCheckTypeContext"/>.
+        /// </summary>
+        public EntitySet<passwordCheckType> passwordCheckTypes
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<passwordCheckType>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="passwordCheckType"/> с помощью запроса "GetPasswordCheckTypes".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="passwordCheckType"/>.</returns>
+        public EntityQuery<passwordCheckType> GetPasswordCheckTypesQuery()
+        {
+            this.ValidateMethod("GetPasswordCheckTypesQuery", null);
+            return base.CreateQuery<passwordCheckType>("GetPasswordCheckTypes", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new PasswordCheckTypeContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "PasswordCheckTypeService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface IPasswordCheckTypeServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/PasswordCheckTypeService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/PasswordCheckTypeService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/PasswordCheckTypeService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetPasswordCheckTypes".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/PasswordCheckTypeService/GetPasswordCheckTypesDomainServiceFau" +
+                "lt", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/PasswordCheckTypeService/GetPasswordCheckTypes", ReplyAction="http://tempuri.org/PasswordCheckTypeService/GetPasswordCheckTypesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetPasswordCheckTypes(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetPasswordCheckTypes".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetPasswordCheckTypes".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetPasswordCheckTypes".</returns>
+            QueryResult<passwordCheckType> EndGetPasswordCheckTypes(IAsyncResult result);
+        }
+        
+        internal sealed class PasswordCheckTypeContextEntityContainer : EntityContainer
+        {
+            
+            public PasswordCheckTypeContextEntityContainer()
+            {
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<passwordCheckType>(EntitySetOperations.None);
             }
         }
     }
@@ -10738,6 +11673,306 @@ namespace MRZS.Web.Services
             public SectionContextEntityContainer()
             {
                 this.CreateEntitySet<Section>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TypeFuncDCService" DomainService.
+    /// </summary>
+    public sealed partial class TypeFuncDCContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TypeFuncDCContext"/>.
+        /// </summary>
+        public TypeFuncDCContext() : 
+                this(new WebDomainClient<ITypeFuncDCServiceContract>(new Uri("MRZS-Web-Services-TypeFuncDCService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TypeFuncDCContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TypeFuncDCService.</param>
+        public TypeFuncDCContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITypeFuncDCServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TypeFuncDCContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TypeFuncDCContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="TypeFuncDCContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="typeFuncDC"/>, загруженных в данный экземпляр <see cref="TypeFuncDCContext"/>.
+        /// </summary>
+        public EntitySet<typeFuncDC> typeFuncDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<typeFuncDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="typeFuncDC"/> с помощью запроса "GetTypeFuncDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="typeFuncDC"/>.</returns>
+        public EntityQuery<typeFuncDC> GetTypeFuncDCsQuery()
+        {
+            this.ValidateMethod("GetTypeFuncDCsQuery", null);
+            return base.CreateQuery<typeFuncDC>("GetTypeFuncDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TypeFuncDCContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TypeFuncDCService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITypeFuncDCServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TypeFuncDCService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TypeFuncDCService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/TypeFuncDCService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTypeFuncDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TypeFuncDCService/GetTypeFuncDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TypeFuncDCService/GetTypeFuncDCs", ReplyAction="http://tempuri.org/TypeFuncDCService/GetTypeFuncDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTypeFuncDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTypeFuncDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTypeFuncDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTypeFuncDCs".</returns>
+            QueryResult<typeFuncDC> EndGetTypeFuncDCs(IAsyncResult result);
+        }
+        
+        internal sealed class TypeFuncDCContextEntityContainer : EntityContainer
+        {
+            
+            public TypeFuncDCContextEntityContainer()
+            {
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<typeFuncDC>(EntitySetOperations.None);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TypeSignalDCService" DomainService.
+    /// </summary>
+    public sealed partial class TypeSignalDCContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TypeSignalDCContext"/>.
+        /// </summary>
+        public TypeSignalDCContext() : 
+                this(new WebDomainClient<ITypeSignalDCServiceContract>(new Uri("MRZS-Web-Services-TypeSignalDCService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TypeSignalDCContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TypeSignalDCService.</param>
+        public TypeSignalDCContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITypeSignalDCServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TypeSignalDCContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TypeSignalDCContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="mrzs05mMenu"/>, загруженных в данный экземпляр <see cref="TypeSignalDCContext"/>.
+        /// </summary>
+        public EntitySet<mrzs05mMenu> mrzs05mMenus
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<mrzs05mMenu>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="typeSignalDC"/>, загруженных в данный экземпляр <see cref="TypeSignalDCContext"/>.
+        /// </summary>
+        public EntitySet<typeSignalDC> typeSignalDCs
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<typeSignalDC>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="mrzs05mMenu"/> с помощью запроса "GetMrzs05mMenu".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="mrzs05mMenu"/>.</returns>
+        public EntityQuery<mrzs05mMenu> GetMrzs05mMenuQuery()
+        {
+            this.ValidateMethod("GetMrzs05mMenuQuery", null);
+            return base.CreateQuery<mrzs05mMenu>("GetMrzs05mMenu", null, false, true);
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="typeSignalDC"/> с помощью запроса "GetTypeSignalDCs".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="typeSignalDC"/>.</returns>
+        public EntityQuery<typeSignalDC> GetTypeSignalDCsQuery()
+        {
+            this.ValidateMethod("GetTypeSignalDCsQuery", null);
+            return base.CreateQuery<typeSignalDC>("GetTypeSignalDCs", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TypeSignalDCContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TypeSignalDCService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITypeSignalDCServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetMrzs05mMenu".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TypeSignalDCService/GetMrzs05mMenuDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TypeSignalDCService/GetMrzs05mMenu", ReplyAction="http://tempuri.org/TypeSignalDCService/GetMrzs05mMenuResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetMrzs05mMenu(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetMrzs05mMenu".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetMrzs05mMenu".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetMrzs05mMenu".</returns>
+            QueryResult<mrzs05mMenu> EndGetMrzs05mMenu(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTypeSignalDCs".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TypeSignalDCService/GetTypeSignalDCsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TypeSignalDCService/GetTypeSignalDCs", ReplyAction="http://tempuri.org/TypeSignalDCService/GetTypeSignalDCsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTypeSignalDCs(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTypeSignalDCs".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTypeSignalDCs".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTypeSignalDCs".</returns>
+            QueryResult<typeSignalDC> EndGetTypeSignalDCs(IAsyncResult result);
+        }
+        
+        internal sealed class TypeSignalDCContextEntityContainer : EntityContainer
+        {
+            
+            public TypeSignalDCContextEntityContainer()
+            {
+                this.CreateEntitySet<mrzs05mMenu>(EntitySetOperations.None);
+                this.CreateEntitySet<typeSignalDC>(EntitySetOperations.None);
             }
         }
     }
