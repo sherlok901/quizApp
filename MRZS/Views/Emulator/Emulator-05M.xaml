@@ -205,8 +205,8 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
-				Grid.Row="0" Margin="86,46,155,0" Height="61" Width="216"
-				Grid.ColumnSpan="3" >
+				Grid.Row="0" Margin="86,46,155,0" Height="61" Width="229"
+				Grid.ColumnSpan="3" TextWrapping="Wrap" >
                 <TextBox.Triggers>
                     <EventTrigger RoutedEvent="TextBox.Loaded">
                         <BeginStoryboard>
@@ -222,20 +222,20 @@
 
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="1" Style="{StaticResource PanelKey}" />
-                    <Button Content="2" Style="{StaticResource PanelKey}" />
-                    <Button Content="3" Style="{StaticResource PanelKey}" />
-                    <Button Content="4" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button1" Content="1" Style="{StaticResource PanelKey}" Click="button1_Click" />
+                    <Button x:Name="button2" Content="2" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button3" Content="3" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button4" Content="4" Style="{StaticResource PanelKey}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="5" Style="{StaticResource PanelKey}" />
-                    <Button Content="6" Style="{StaticResource PanelKey}" />
-                    <Button Content="7" Style="{StaticResource PanelKey}" />
-                    <Button Content="8" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button5" Content="5" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button6" Content="6" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button7" Content="7" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button8" Content="8" Style="{StaticResource PanelKey}" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button Content="9" Style="{StaticResource PanelKey}" />
-                    <Button Content="0" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button9" Content="9" Style="{StaticResource PanelKey}" />
+                    <Button x:Name="button0" Content="0" Style="{StaticResource PanelKey}" />
                     <Button Content="." Style="{StaticResource PanelKey}" />
                     <Button Content="F" Style="{StaticResource PanelKey}" />
                 </StackPanel>

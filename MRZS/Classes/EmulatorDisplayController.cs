@@ -20,11 +20,12 @@ namespace MRZS.Classes
         }
          //private methods
         public static int IndexOfnextFirstSymbolFinding(string displayText, int displaySelectedIndex)
-        {
-            int index= displayText.IndexOf("\r\n", displaySelectedIndex);
+        {          
+            int index = displayText.IndexOf("\r\n", displaySelectedIndex);
             if (index == -1) return displaySelectedIndex;
-            else return index+2;
+            else return index + 2;          
         }
+        
         public static int getPreviousIndexOfStartLineDisplay(string displayText, int displaySelectedIndex)
         {
             int temp = displaySelectedIndex;

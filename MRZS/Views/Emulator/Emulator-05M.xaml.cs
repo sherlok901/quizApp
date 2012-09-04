@@ -21,12 +21,13 @@ using System.Windows.Browser;
 using System.ServiceModel.DomainServices.Client;
 using MRZS.Classes;
 using System.Windows.Threading;
+using System.Threading;
 
 
 namespace MRZS.Views.Emulator
 {
     public partial class Emulator_05M : System.Windows.Controls.Page
-    {
+    {                        
         //properties
         private BooleanVal1 boolContext;//for experiment
         public BooleanVal1 pboolContext
@@ -34,13 +35,16 @@ namespace MRZS.Views.Emulator
             get{ return boolContext;}
             set { boolContext = value; }
         }//for experiment
-  
+
+        //fields
+        private bool IsAnimCursorInserted = false;
         private int AnimationCursorLineCurntPositionIndex=0;
         List<int?> parentIDlist;
         private bool displayAnimFlag;
         private NumericUpDown numUpDown1;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;        
-        private List<mrzs05mMenu> SelectedMenuElemHistory = new List<mrzs05mMenu>(0);
+        //entity
+        private IEnumerable<mrzs05mMenu> mrzs05Entity;             
+        private MyList<mrzs05mMenu> SelectMenuElemHistory = new MyList<mrzs05mMenu>();
         private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);
         LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
         LoadOperation<passwordCheckType> passwordCheckTypeModel;
@@ -50,7 +54,31 @@ namespace MRZS.Views.Emulator
         LoadOperation<BooleanVal2> BooleanVal2Model;
         LoadOperation<BooleanVal3> BooleanVal3Model;
         LoadOperation<mtzVal> mtzValModel;        
+        //timer
         DispatcherTimer Dtimer = new DispatcherTimer();
+        //for jumping in display through 2 line
+        mrzs05mMenu tempDisplayedEntity = null;
+        List<mrzs05mMenu> tempDisplayedEntities = new List<mrzs05mMenu>(0);
+        //inputing numbers
+        List<int> numIndexesList = null;
+        string inputedSymbol = null;
+        string tempSymbol = null;
+        private int currInputPosition = -1;
+        Thread thread1 = null;        
+        //password
+        private bool passwordInputing = false;
+        private bool passwordCorrect = false;
+        enum PasswordStates
+        {
+            inputingPassword,
+            passwordCorrect,
+            passwordInCorrect,
+            allowedEnterValue,
+            askedMemoriseOrNotInputedVal,
+            none
+        };
+        PasswordStates PassStates;
+        
 
         public Emulator_05M()
         {
@@ -59,8 +87,12 @@ namespace MRZS.Views.Emulator
             display.FontFamily = new FontFamily("Arial");
             display.FontSize = 20.0;                        
             display.Padding = new Thickness(5.0);                          
-            display.SelectionStart = display.Text.Length;                        
+            display.SelectionStart = display.Text.Length;
 
+            //SelectMenuElemHistory.OnAdd += SelectMenuElemHistory_OnAdd;
+            //SelectMenuElemHistory.OnDelete += SelectMenuElemHistory_OnDelete;
+
+            //LOAD DATA ===============
             //generated class by ria service (for client side)
             boolContext = new Web.Services.BooleanVal1();
             //using wcf service (DomainService) with my method to load entities
@@ -96,20 +128,18 @@ namespace MRZS.Views.Emulator
         {
             //get list of different elem in column parentID            
             mrzs05Entity = getEntities(sender);
-            if (mrzsInOutOptionModel.IsComplete)
-            {
-                List<mrzsInOutOption> m = mrzsInOutOptionModel.Entities.ToList();
-            }
+            
             if (mrzs05Entity != null)
             {
                 parentIDlist = mrzs05Entity.Select(n => n.parentID).Distinct().ToList();
                 //get 1 level of menu 
                 DisplayedEntities.AddRange(getEntitiesByParentID(parentIDlist[0]));
-                DisplayMenu(DisplayedEntities);
+                DisplayMenu(DisplayedEntities.Select(n => n.menuElement).ToList());
                 //set cursor animation
                 display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+                IsAnimCursorInserted = true;
                 Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
-                Dtimer.Tick += Dtimer_Tick;
+                //Dtimer.Tick += Dtimer_Tick;
                 //Dtimer.Start();
             }
         }
@@ -162,119 +192,283 @@ namespace MRZS.Views.Emulator
 
         #region cursor events ***
         private void downButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (AnimationCursorLineCurntPositionIndex != -1)
+        {            
+            //display entity with {value} in menuElement column
+            if (tempDisplayedEntity != null && DisplayedEntities.Count != 0)
+            {
+                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+                if ((index + 1 )< tempDisplayedEntities.Count && index!= -1)
+                {
+                    index += 1;
+                    tempDisplayedEntity = tempDisplayedEntities[index];
+                    display.Text = DisplayEntity(tempDisplayedEntity);
+                }
+            }
+            else if(AnimationCursorLineCurntPositionIndex != -1)
             {
                 display.Focus();
-                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                if (IsAnimCursorInserted)
+                {
+                    display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                }
                 AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
                 if (AnimationCursorLineCurntPositionIndex != -1)
                 {
-                    display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+                    if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
                     display.SelectionStart = AnimationCursorLineCurntPositionIndex;
                 }
             }
         }      
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            if (AnimationCursorLineCurntPositionIndex != -1)
+            //display entity with {value} in menuElement column
+            if (tempDisplayedEntity != null && tempDisplayedEntities.Count != 0)
             {
-                display.Focus();            
-                display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);                
+                if (index > 0)
+                {
+                    index -= 1;
+                    tempDisplayedEntity = tempDisplayedEntities[index];
+                    if (tempDisplayedEntity.menuElement.IndexOf("{value}") != -1)
+                        display.Text = DisplayEntity(tempDisplayedEntity);
+                }
+            }
+            else if (AnimationCursorLineCurntPositionIndex != -1)
+            {
+                display.Focus();
+                if (IsAnimCursorInserted) display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
                 AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
                 if (AnimationCursorLineCurntPositionIndex != -1)
                 {
-                    display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+                    if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
                     display.SelectionStart = AnimationCursorLineCurntPositionIndex;
                 }
             }
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
-            //debug:
-            //display.Focus();            
-            if (display.SelectionStart != 0)
+            if (tempSymbol != null) insertSymbol(display, ref tempSymbol, ref currInputPosition, ref displayAnimFlag);
+            int index = numIndexesList.IndexOf(currInputPosition);
+            if ((index - 1) >= 0)
             {
-                char a = display.Text[display.SelectionStart];
-                char b = display.Text[display.SelectionStart + 1];
-                if (display.Text[display.SelectionStart - 1] == '\r') display.SelectionStart -= 2;
-                else display.SelectionStart -= 1;
+                index--;
+                currInputPosition = numIndexesList[index];
             }
         }
         private void rightButton_Click(object sender, RoutedEventArgs e)
         {
-           
-            //debug:
-            //display.Focus();            
-            if (display.SelectionStart != display.Text.Length - 1)
+            if(tempSymbol!=null) insertSymbol(display, ref tempSymbol,ref currInputPosition,ref displayAnimFlag);
+            int index = numIndexesList.IndexOf(currInputPosition);
+            if ((index + 1) <= (numIndexesList.Count - 1))
             {
-                char a = display.Text[display.SelectionStart];
-                char b = display.Text[display.SelectionStart + 1];
-                if (display.Text[display.SelectionStart] == '\r') display.SelectionStart += 2;
-                else display.SelectionStart += 1;
+                index++;
+                currInputPosition = numIndexesList[index];
             }
         } 
         #endregion
 
-        #region == other func buttons ==
+        #region == other func buttons ==        
 
         private void enterButton_Click_2(object sender, RoutedEventArgs e)
         {
-            string selectedWordMenu = GetSelectedWordMenu();
-
-            if (selectedWordMenu != null)
+            mrzs05mMenu selectedEntity = null;
+            if (tempDisplayedEntity != null) selectedEntity=tempDisplayedEntity;
+            else
             {
-                //get id selected word by menuElement
-                mrzs05mMenu selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
-                if (getEntitiesByParentID(selectedEntity.id).Count == 0) return;
-                //add current selected word and id to history list                                
-                SelectedMenuElemHistory.Add(selectedEntity);
-                //get next menu list by parentID of current selected word                
-                List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(selectedEntity.id);
-                //check the mrzsInOutOptionsID column
-                if (newMenuLevel.Count > 0)
+                string selectedWordMenu = GetSelectedWordMenu();
+                if (selectedWordMenu != null)
                 {
-                    //if mrzsInOutOptionsID column not null
-                    if (newMenuLevel[0].menuElement == null && newMenuLevel[0].mrzsInOutOptionsID != null)
+                    //get id selected word by menuElement
+                    selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
+                }
+            }
+                                
+            //get next menu list by parentID of current selected word                
+            List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(selectedEntity.id);
+            //check the mrzsInOutOptionsID column
+            if (newMenuLevel.Count > 0)
+            {
+                //add current selected word and id to history list                                               
+                SelectMenuElemHistory.Add(selectedEntity);
+                //display mrzsInOutOptionsID column
+                if (newMenuLevel[0].menuElement == null && newMenuLevel[0].mrzsInOutOptionsID != null)
+                {
+                    DisplayMenu_MrzsInOutOpt(newMenuLevel);
+                }
+                else
+                {
+                    //display menuElement 
+                    if (newMenuLevel[0].menuElement.IndexOf("{value}") == -1)
                     {
-                        DisplayMenu_MrzsInOutOpt(newMenuLevel);
+                        List<string> s = newMenuLevel.Select(n => n.menuElement).ToList();
+                        DisplayMenu(s);
                     }
+                    //display menuElement with {value}
                     else
                     {
-                        DisplayMenu(newMenuLevel);
+                        clearTextBox(display);
+                        display.Text = replaceValueInColumn(newMenuLevel[0]);
+                        //add entities to temp displayed list
+                        tempDisplayedEntities.AddRange(newMenuLevel);
+                        tempDisplayedEntity = newMenuLevel[0];
                     }
                 }
 
-
                 DisplayedEntities.AddRange(newMenuLevel);
+
                 //set animation cursor
                 AnimationCursorLineCurntPositionIndex = 0;
-                display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+                //if it is not last menu level
+                if (!isLastElem(newMenuLevel[0].id))
+                {
+                    display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
+                    IsAnimCursorInserted = true;
+                }
+                else IsAnimCursorInserted = false;
             }
+                //no new deep menu level ================================
+                //inputing numbers
+            else
+            {
+                if (!passwordInputing) inputing(display);
+                else
+                {
+                    switch (PassStates)
+                    {
+                        case PasswordStates.inputingPassword:
+                            passwordCheck();
+                            if (passwordCorrect) passwordAnswerDisplay(display);
+                            break;
+                        case PasswordStates.passwordCorrect:
+                            PassStates=PasswordStates.allowedEnterValue;
+                            passwordCorrect = false;
+                            //user can input some value in menu
+                            clearTextBox(display);
+                            display.Text = replaceValueInColumn(tempDisplayedEntity);
+                            numIndexesList = Inputing.getIndexes(display.Text);
+                        
+                            //Dtimer.Tick += Dtimer_Tick2;
+                            currInputPosition = numIndexesList[0];                            
+                            break;
+                        case PasswordStates.allowedEnterValue:
+                            display.Text = allowedInputedValue();
+                            PassStates = PasswordStates.askedMemoriseOrNotInputedVal;
+                            break;
+                        case PasswordStates.askedMemoriseOrNotInputedVal:
+                            PassStates = PasswordStates.none;                                    
+                            break;
+                        case PasswordStates.none:
+                            clearTextBox(display);
+                            display.Text = replaceValueInColumn(tempDisplayedEntity);
+                            numIndexesList = Inputing.getIndexes(display.Text);
+                            break;
+                    }
+                    //if (passwordCorrect)
+                    //{
+                    //    PassStates=PasswordStates.allowedEnterValue;
+                    //    passwordCorrect = false;
+                    //    //user can input some value in menu
+                    //    clearTextBox(display);
+                    //    display.Text = replaceValueInColumn(tempDisplayedEntity);
+                    //    numIndexesList = Inputing.getIndexes(display.Text);
+                        
+                    //    Dtimer.Tick += Dtimer_Tick2;
+                    //    currInputPosition = numIndexesList[0];
+                    //    thread1 = new Thread(new ThreadStart(Dtimer.Start));
+                    //    thread1.Start();
+
+                    //    //Dtimer.Start();
+                    //}
+                    //else//check the password
+                    //{
+                    //    passwordCheck();
+                    //    if (passwordCorrect) passwordAnswerDisplay(display);
+                    //}
+                }
+            }           
+            
+            
         }
+
+        void Dtimer_Tick2(object sender, EventArgs e)
+        {
+            display.Focus();
+            if(tempSymbol==null)tempSymbol = display.Text[currInputPosition].ToString();
+            //switch cursor text
+            if (!displayAnimFlag)
+            {
+                
+                display.Text = display.Text.Remove(currInputPosition, 1);
+                display.Text = display.Text.Insert(currInputPosition, "_");
+                displayAnimFlag = true;
+            }
+            else
+            {
+                display.Text = display.Text.Remove(currInputPosition, 1);
+                display.Text = display.Text.Insert(currInputPosition, tempSymbol);
+                tempSymbol = null;
+                displayAnimFlag = false;
+            }
+            //run animation of cursor again
+        }
+        private void insertSymbol(TextBox tb,ref string symbol,ref int position,ref bool animationFlag)
+        {
+            tb.Text = tb.Text.Remove(position, 1);
+            display.Text = display.Text.Insert(position, symbol);
+            symbol = null;
+            animationFlag = false;
+        }
+        
         private void escButton_Click(object sender, RoutedEventArgs e)
         {
+            //clear temp displayed entities
+            if(tempDisplayedEntities.Count>0) tempDisplayedEntities.RemoveRange(0, tempDisplayedEntities.Count);
+            tempDisplayedEntity = null;
             //get parentID of last selected elem in menu
-            if (SelectedMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
-            int? parentId = SelectedMenuElemHistory.Last().parentID;
+            if (SelectMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
+            int? parentId = SelectMenuElemHistory.Last().parentID;
             //delete displayed entities                        
             while (true)
             {
-                if (DisplayedEntities.Last().parentID == SelectedMenuElemHistory.Last().id)
+                if (DisplayedEntities.Last().parentID == SelectMenuElemHistory.Last().id)
                     DisplayedEntities.Remove(DisplayedEntities.Last());
                 else break;
             }
             List<string> list = getEntitiesByParentID(parentId).Select(n => n.menuElement).ToList();
             //set display first line on last selected word and set animation cursor
-            DisplayMenu(list, SelectedMenuElemHistory.Last().menuElement);
+            DisplayMenu(list, SelectMenuElemHistory.Last().menuElement);
             //delete selected entity
-            SelectedMenuElemHistory.Remove(SelectedMenuElemHistory.Last());
-
-
+            SelectMenuElemHistory.Remove(SelectMenuElemHistory.Last());
+            IsAnimCursorInserted = true;            
         }
 
+        void SelectMenuElemHistory_OnDelete(object sender, EventArgs e)
+        {
+            
+        }
+        //Adding new item
+        void SelectMenuElemHistory_OnAdd(object sender, EventArgs e)
+        {
+            
+
+        }
+        
         #endregion==
 
+        #region ====Addition Functions=======================================
+
+        private bool isLastElem(int? ElemId)
+        {
+            List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(ElemId);
+            if (newMenuLevel.Count > 0) return false;
+            else return true;
+        }
+
+        private void clearTextBox(TextBox text)
+        {
+            if (text.Text != String.Empty) text.ClearValue(TextBox.TextProperty);
+        }        
+        #endregion=======================
         //get menuElement list for displeing in menu
         private List<string> getMenuListByParentID(int? parenID)
         {
@@ -321,39 +515,41 @@ namespace MRZS.Views.Emulator
             display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
             display.SelectionStart = AnimationCursorLineCurntPositionIndex;
         }
-        private void DisplayMenu(List<mrzs05mMenu> list)
+        private string DisplayEntity(mrzs05mMenu entity)
         {
-            //string strToDisplay = null;
-            List<string> s = list.Select(n => n.menuElement).ToList();
-            DisplayMenu(s);
-            //foreach (mrzs05mMenu entity in list)            
-            //{
-            //    strToDisplay = null;
-            //    //search in menuElement column text with {value}
-            //    if (entity.menuElement.IndexOf("{value}") >= 0)
-            //    {
-            //        //replace {value} on value of "value" and "unitValue" columns
-            //        string[] temp = entity.menuElement.Split(new string[1] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
-            //        if (temp.Count() >= 2)
-            //        {
-            //            temp[1] = entity.value + " " + entity.unitValue;
-            //            strToDisplay += temp[0] + Environment.NewLine + temp[1];                                                                        
-            //        }
-            //    }
-            //    else strToDisplay += entity.menuElement;
-                
-            //    display.Text += strToDisplay;
-            //    //if it is not last entity
-            //    if (entity != list.Last()) display.Text += Environment.NewLine;
-            //}            
+            //clear textbox
+            if (display.Text != String.Empty) display.ClearValue(TextBox.TextProperty);
+            //display menuElement column with replaced {value}
+            return replaceValueInColumn(entity);
+        }
+        
+        //replace {value} in menuElement column
+        private string replaceValueInColumn(mrzs05mMenu entity)
+        {
+            string strToDisplay = null;
+            //search in menuElement column text with {value}
+            if (entity.menuElement.IndexOf("{value}") >= 0)
+            {
+                //replace {value} on value of "value" and "unitValue" columns
+                string[] temp = entity.menuElement.Split(new string[1] { "\\" }, StringSplitOptions.RemoveEmptyEntries);
+                if (temp.Count() >= 2)
+                {
+                    temp[1] = entity.value + " " + entity.unitValue;
+                    strToDisplay = temp[0] + Environment.NewLine + temp[1];                    
+                }
+            }
+            return strToDisplay;
         }
         private void DisplayMenu_MrzsInOutOpt(List<mrzs05mMenu> entityList)
-        {
+        {            
             if (display.Text != String.Empty) display.ClearValue(TextBox.TextProperty);
             foreach (mrzs05mMenu entity in entityList)
             {
                 if (entity == entityList.Last()) display.Text += entity.mrzsInOutOption.optionsName;
                 else display.Text += entity.mrzsInOutOption.optionsName + Environment.NewLine;
+
+                
+
                 //if (entity.BooleanVal.val != String.Empty) displayStr(entity.BooleanVal.val);
                 //else if (entity.kindSignalDC.kindSignal != String.Empty) displayStr(entity.kindSignalDC.kindSignal);
                 //else if (entity.typeSignalDC.typeSignal != String.Empty) displayStr(entity.typeSignalDC.typeSignal);
@@ -609,7 +805,81 @@ namespace MRZS.Views.Emulator
             ShowPopUpLittle(sender);
         }
         #endregion
-                             
-        
+
+        #region Numeric buttons events
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            inputedSymbol += "1";
+            if (passwordInputing) passwordInputsDisplay(display, "1");
+        }
+        #endregion                                     
+        #region Inputing symbols=======================
+        private void inputing(TextBox tb)
+        {
+            if (Inputing.CurrentNumPositionInputing != -1)
+            {
+            }
+            else
+            {
+                string tempText = tb.Text;
+                clearTextBox(tb);
+                passwordAskDisplay(tb);
+
+                //numIndexesList = Inputing.getIndexes(tempText);
+            }
+        }
+        private void passwordAskDisplay(TextBox tb)
+        {
+            tb.Text = "Введите пароль" + Environment.NewLine;
+            passwordInputing = true;
+            PassStates = PasswordStates.inputingPassword;
+        }
+        private void passwordAnswerDisplay(TextBox tb)
+        {
+            tb.Text = "Пароль введен" + Environment.NewLine;
+            tb.Text += "  верно";
+        }
+        private string allowedInputedValue()
+        {
+            return " Вы уверены?"+Environment.NewLine + "Enter-ДА, Esc-НЕТ";
+        }
+        private void passwordInputsDisplay(TextBox tb,string inputSymbol)
+        {
+            tb.Text += inputSymbol;
+        }
+
+        private void passwordCheck()
+        {
+            if (inputedSymbol == "1111")
+            {
+                passwordCorrect = true;
+                PassStates = PasswordStates.passwordCorrect;
+                inputedSymbol = null;
+            }
+            else
+            {
+                passwordCorrect = false;
+                PassStates = PasswordStates.passwordInCorrect;
+            }
+        }
+        #endregion====================================
+    }
+
+    class MyList<T> : List<T>
+    {
+
+        public event EventHandler OnAdd;
+        public event EventHandler OnDelete;
+
+        public void Add(T item)
+        {
+            if (null != OnAdd) OnAdd(this, null);            
+            base.Add(item);
+        }
+        public bool Remove(T item)
+        {
+            if (OnDelete != null) OnDelete(this, null);
+            return base.Remove(item);
+        }
     }
 }
