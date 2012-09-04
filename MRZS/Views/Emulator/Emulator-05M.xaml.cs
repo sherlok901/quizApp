@@ -246,24 +246,28 @@ namespace MRZS.Views.Emulator
             }
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (tempSymbol != null) insertSymbol(display, ref tempSymbol, ref currInputPosition, ref displayAnimFlag);
+        {            
             int index = numIndexesList.IndexOf(currInputPosition);
             if ((index - 1) >= 0)
             {
                 index--;
                 currInputPosition = numIndexesList[index];
             }
+            display.Focus();
+            display.SelectionStart = currInputPosition;
+            display.SelectionLength = 1;
         }
         private void rightButton_Click(object sender, RoutedEventArgs e)
-        {
-            if(tempSymbol!=null) insertSymbol(display, ref tempSymbol,ref currInputPosition,ref displayAnimFlag);
+        {            
             int index = numIndexesList.IndexOf(currInputPosition);
             if ((index + 1) <= (numIndexesList.Count - 1))
             {
                 index++;
                 currInputPosition = numIndexesList[index];
             }
+            display.Focus();
+            display.SelectionStart = currInputPosition;
+            display.SelectionLength = 1;
         } 
         #endregion
 
@@ -346,48 +350,31 @@ namespace MRZS.Views.Emulator
                             clearTextBox(display);
                             display.Text = replaceValueInColumn(tempDisplayedEntity);
                             numIndexesList = Inputing.getIndexes(display.Text);
-                        
-                            //Dtimer.Tick += Dtimer_Tick2;
-                            currInputPosition = numIndexesList[0];                            
+                                                        
+                            currInputPosition = numIndexesList[0];
+                            selectOneNumInTextBox(display,currInputPosition);
                             break;
                         case PasswordStates.allowedEnterValue:
                             display.Text = allowedInputedValue();
                             PassStates = PasswordStates.askedMemoriseOrNotInputedVal;
                             break;
-                        case PasswordStates.askedMemoriseOrNotInputedVal:
-                            PassStates = PasswordStates.none;                                    
-                            break;
-                        case PasswordStates.none:
+                        case PasswordStates.askedMemoriseOrNotInputedVal:                            
                             clearTextBox(display);
                             display.Text = replaceValueInColumn(tempDisplayedEntity);
                             numIndexesList = Inputing.getIndexes(display.Text);
-                            break;
-                    }
-                    //if (passwordCorrect)
-                    //{
-                    //    PassStates=PasswordStates.allowedEnterValue;
-                    //    passwordCorrect = false;
-                    //    //user can input some value in menu
-                    //    clearTextBox(display);
-                    //    display.Text = replaceValueInColumn(tempDisplayedEntity);
-                    //    numIndexesList = Inputing.getIndexes(display.Text);
-                        
-                    //    Dtimer.Tick += Dtimer_Tick2;
-                    //    currInputPosition = numIndexesList[0];
-                    //    thread1 = new Thread(new ThreadStart(Dtimer.Start));
-                    //    thread1.Start();
-
-                    //    //Dtimer.Start();
-                    //}
-                    //else//check the password
-                    //{
-                    //    passwordCheck();
-                    //    if (passwordCorrect) passwordAnswerDisplay(display);
-                    //}
+                            break;                        
+                    }                    
                 }
             }           
             
             
+        }
+        //select one number in textbox for inputing process
+        private void selectOneNumInTextBox(TextBox tb,int position)
+        {
+            tb.Focus();
+            tb.SelectionStart = position;
+            tb.SelectionLength = 1;
         }
 
         void Dtimer_Tick2(object sender, EventArgs e)
@@ -805,14 +792,7 @@ namespace MRZS.Views.Emulator
             ShowPopUpLittle(sender);
         }
         #endregion
-
-        #region Numeric buttons events
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            inputedSymbol += "1";
-            if (passwordInputing) passwordInputsDisplay(display, "1");
-        }
-        #endregion                                     
+                                          
         #region Inputing symbols=======================
         private void inputing(TextBox tb)
         {
@@ -863,6 +843,109 @@ namespace MRZS.Views.Emulator
             }
         }
         #endregion====================================
+
+        #region Numeric buttons events =============================================
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {            
+            //for inputing password
+            if (PassStates == PasswordStates.inputingPassword)
+            {
+                inputedSymbol += "1";
+                if (passwordInputing) passwordInputsDisplay(display, "1");
+            }
+            else
+            {//for inputing num
+                display.Text = replaceSymbol(display.Text, currInputPosition, "1");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+        private void button2_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "2");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+        //replace symbol in textbox on new inputed symbol
+        private string replaceSymbol(string textBoxStr, int position, string symbol)
+        {
+            textBoxStr = textBoxStr.Remove(position, 1);
+            return textBoxStr.Insert(position, symbol);             
+        }
+        private void button3_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "3");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button4_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "4");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button5_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "5");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button6_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "6");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button7_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "7");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button8_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "8");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button9_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "9");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+
+        private void button0_Click(object sender, RoutedEventArgs e)
+        {
+            if (PassStates != PasswordStates.inputingPassword && currInputPosition != -1)
+            {
+                display.Text = replaceSymbol(display.Text, currInputPosition, "0");
+                selectOneNumInTextBox(display, currInputPosition);
+            }
+        }
+        #endregion   ================================================================        
+        
     }
 
     class MyList<T> : List<T>
