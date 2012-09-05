@@ -16,7 +16,7 @@ namespace MRZS.Classes
     static public class Inputing
     {
         public static int CurrentNumPositionInputing = -1;
-        //get first index of 0002.0000 in string
+        //return 0002.0000 in string from "Уставка МТЗ1\r\n0002.0000 A"
         public static string getNumIndexes(string StringForParse)
         {                                                
             return Regex.Match(StringForParse, @"\d\d\d\d\.\d\d\d\d").Value;            

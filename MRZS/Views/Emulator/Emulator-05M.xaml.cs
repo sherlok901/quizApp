@@ -53,7 +53,8 @@ namespace MRZS.Views.Emulator
         LoadOperation<typeFuncDC> typeFuncDCModel;
         LoadOperation<BooleanVal2> BooleanVal2Model;
         LoadOperation<BooleanVal3> BooleanVal3Model;
-        LoadOperation<mtzVal> mtzValModel;        
+        LoadOperation<mtzVal> mtzValModel;
+        mrzs05mMenuContext mrzs05mMContxt;
         //timer
         DispatcherTimer Dtimer = new DispatcherTimer();
         //for jumping in display through 2 line
@@ -106,7 +107,7 @@ namespace MRZS.Views.Emulator
             LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
             mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
 
-            mrzs05mMenuContext mrzs05mMContxt = new mrzs05mMenuContext();
+            mrzs05mMContxt = new mrzs05mMenuContext();
             LoadOperation<mrzs05mMenu> mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());            
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
 
@@ -355,10 +356,15 @@ namespace MRZS.Views.Emulator
                             selectOneNumInTextBox(display,currInputPosition);
                             break;
                         case PasswordStates.allowedEnterValue:
+                            //ask to memorise or not the inputed value
                             display.Text = allowedInputedValue();
                             PassStates = PasswordStates.askedMemoriseOrNotInputedVal;
                             break;
-                        case PasswordStates.askedMemoriseOrNotInputedVal:                            
+                        case PasswordStates.askedMemoriseOrNotInputedVal:
+                            //memorise inputed value
+                            tempDisplayedEntity.value = Inputing.getNumIndexes(display.Text);
+                            mrzs05mMContxt.SubmitChanges();
+                            //show again
                             clearTextBox(display);
                             display.Text = replaceValueInColumn(tempDisplayedEntity);
                             numIndexesList = Inputing.getIndexes(display.Text);
