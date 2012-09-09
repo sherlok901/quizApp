@@ -19,6 +19,11 @@ namespace MRZS.Views.Emulator
             get { return textBlockInputName.Text; }
             set { textBlockInputName.Text = value; }
         }
+        public bool? IsChecked
+        {
+            get { return dv.IsChecked; }
+            set { dv.IsChecked = value; }
+        }
 
         public InputDV()
         {

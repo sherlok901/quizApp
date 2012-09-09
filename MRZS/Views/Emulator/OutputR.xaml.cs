@@ -16,7 +16,7 @@ namespace MRZS
 	    {
             get { return OutName.Text; }
             set { OutName.Text = value; }
-	    }
+	    }      
 
 	    public OutputR()
 		{

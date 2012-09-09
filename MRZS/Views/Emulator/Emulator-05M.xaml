@@ -64,7 +64,7 @@
             <ColumnDefinition Width="530"/>
             <ColumnDefinition Width="78"/>
         </Grid.ColumnDefinitions>
-        <Button Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0"/>
+        <Button x:Name="DeviceON_button" Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0" Click="DeviceON_button_Click"/>
         <Button Content="ОТКЛ" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="75" Margin="0,15,10,0"/>
         <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="False" Margin="0,70,0,0">
             <Grid.ColumnDefinitions>
@@ -131,19 +131,19 @@
             <sdk:Label Grid.Row="0" Grid.Column="4" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!--tok -->
             <sdk:Label Grid.Row="2" Grid.Column="0" Content="Ia" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="2" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_2" DecimalPlaces="2"/>
+            <toolkit:NumericUpDown x:Name="Ia" Grid.Row="2" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_2" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="2" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="2" Grid.Column="3" Maximum="360" DecimalPlaces="2" MouseEnter="NumericUpDown_MouseEnter_3"/>
             <sdk:Label Grid.Row="2" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="3" Grid.Column="0" Content="Ib" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="3" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_4" DecimalPlaces="2"/>
+            <toolkit:NumericUpDown x:Name="Ib" Grid.Row="3" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_4" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="3" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="3" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_17" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="3" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="4" Grid.Column="0" Content="Ic" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="4" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_16" DecimalPlaces="2"/>
+            <toolkit:NumericUpDown x:Name="Ic" Grid.Row="4" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_16" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="4" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="4" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_5" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="4" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
@@ -187,12 +187,12 @@
 				<Run Text="Дискретны"/>
 				<Run Text="е входы"/>
             </TextBlock>
-            <Emulator:InputDV InputName="ДВ01" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ02" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ03" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ04" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv1" InputName="ДВ01" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv2" InputName="ДВ02" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv3" InputName="ДВ03" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv4" InputName="ДВ04" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv5" InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv6" InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
         </StackPanel>
         <Grid Grid.Column="2" Background="Aquamarine">
             <Grid.ColumnDefinitions>
@@ -292,11 +292,13 @@
         </Grid>
         <StackPanel Grid.Column="3" Margin="0,0,18,0">
             <TextBlock Text="Реле" FontSize="20"/>
-            <MRZS:OutputR Width="70" Height="60" OutputName="P01" />
+            <Image HorizontalAlignment="Left" Height="42" Width="104"/>
+            <!--<MRZS:OutputR Width="70" Height="60" OutputName="P01" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P02" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P03" />
             <MRZS:OutputR Width="70" Height="60" OutputName="P04" />
-            <MRZS:OutputR Width="70" Height="60" OutputName="P05" />
+            <MRZS:OutputR Width="70" Height="60" OutputName="P05" />-->
+            
         </StackPanel>
         <riaControls:DomainDataSource x:Name="mrzs05menuDS" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="137,736,0,-156" VerticalAlignment="Top" Width="100">
             

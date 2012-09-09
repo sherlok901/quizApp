@@ -29,24 +29,7 @@
           <EntitySet Name="InterectiveTestLog" EntityType="MRZSodel.Store.InterectiveTestLog" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="InterectiveTestParameter" EntityType="MRZSodel.Store.InterectiveTestParameter" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="kindSignalDC" EntityType="MRZSodel.Store.kindSignalDC" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="mrzs05mMenu" EntityType="MRZSodel.Store.mrzs05mMenu" store:Type="Tables" store:Schema="dbo" store:Name="mrzs05mMenu">
-            <DefiningQuery>SELECT 
-      [mrzs05mMenu].[id] AS [id], 
-      [mrzs05mMenu].[menuElement] AS [menuElement], 
-      [mrzs05mMenu].[value] AS [value], 
-      [mrzs05mMenu].[unitValue] AS [unitValue], 
-      [mrzs05mMenu].[parentID] AS [parentID], 
-      [mrzs05mMenu].[passwordCheckType] AS [passwordCheckType], 
-      [mrzs05mMenu].[mrzsInOutOptionsID] AS [mrzsInOutOptionsID], 
-      [mrzs05mMenu].[BooleanValID] AS [BooleanValID], 
-      [mrzs05mMenu].[kindSignalDCid] AS [kindSignalDCid], 
-      [mrzs05mMenu].[typeSignalDCid] AS [typeSignalDCid], 
-      [mrzs05mMenu].[typeFuncDCid] AS [typeFuncDCid], 
-      [mrzs05mMenu].[BooleanVal2ID] AS [BooleanVal2ID], 
-      [mrzs05mMenu].[BooleanVal3ID] AS [BooleanVal3ID], 
-      [mrzs05mMenu].[mtzValID] AS [mtzValID]
-      FROM [dbo].[mrzs05mMenu] AS [mrzs05mMenu]</DefiningQuery>
-          </EntitySet>
+          <EntitySet Name="mrzs05mMenu" EntityType="MRZSodel.Store.mrzs05mMenu" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="mrzsInOutOptions" EntityType="MRZSodel.Store.mrzsInOutOptions" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="mtzVal" EntityType="MRZSodel.Store.mtzVal" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="MultimediaContent" EntityType="MRZSodel.Store.MultimediaContent" store:Type="Tables" Schema="dbo" />
@@ -454,9 +437,6 @@
           <Property Name="id" Type="int" Nullable="false" />
           <Property Name="kindSignal" Type="varchar" Nullable="false" MaxLength="10" />
         </EntityType>
-        <!--Ошибки, обнаруженные при создании:
-      предупреждение 6002: В таблице или представлении "mrzs.dbo.mrzs05mMenu" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.
-      -->
         <EntityType Name="mrzs05mMenu">
           <Key>
             <PropertyRef Name="id" />
@@ -1288,7 +1268,6 @@
           <EntitySet Name="mrzsInOutOptions" EntityType="MRZSodel.mrzsInOutOption" />
           <EntitySet Name="mtzVals" EntityType="MRZSodel.mtzVal" />
           <EntitySet Name="passwordCheckTypes" EntityType="MRZSodel.passwordCheckType" />
-          <EntitySet Name="typeFuncDCs" EntityType="MRZSodel.typeFuncDC" />
           <EntitySet Name="typeSignalDCs" EntityType="MRZSodel.typeSignalDC" />
           <AssociationSet Name="FK_mrzs05mMenu_BooleanVal" Association="MRZSodel.FK_mrzs05mMenu_BooleanVal">
             <End Role="BooleanVal" EntitySet="BooleanVals" />
@@ -1318,12 +1297,13 @@
             <End Role="passwordCheckType" EntitySet="passwordCheckTypes" />
             <End Role="mrzs05mMenu" EntitySet="mrzs05mMenu" />
           </AssociationSet>
-          <AssociationSet Name="FK_mrzs05mMenu_typeFuncDC" Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC">
-            <End Role="typeFuncDC" EntitySet="typeFuncDCs" />
-            <End Role="mrzs05mMenu" EntitySet="mrzs05mMenu" />
-          </AssociationSet>
           <AssociationSet Name="FK_mrzs05mMenu_typeSignalDC" Association="MRZSodel.FK_mrzs05mMenu_typeSignalDC">
             <End Role="typeSignalDC" EntitySet="typeSignalDCs" />
+            <End Role="mrzs05mMenu" EntitySet="mrzs05mMenu" />
+          </AssociationSet>
+          <EntitySet Name="typeFuncDCs" EntityType="MRZSodel.typeFuncDC" />
+          <AssociationSet Name="FK_mrzs05mMenu_typeFuncDC" Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC">
+            <End Role="typeFuncDC" EntitySet="typeFuncDCs" />
             <End Role="mrzs05mMenu" EntitySet="mrzs05mMenu" />
           </AssociationSet>
         </EntityContainer>
@@ -2157,8 +2137,8 @@
           <NavigationProperty Name="mrzsInOutOption" Relationship="MRZSodel.FK_mrzs05mMenu_mrzsInOutOptions" FromRole="mrzs05mMenu" ToRole="mrzsInOutOption" />
           <NavigationProperty Name="mtzVal" Relationship="MRZSodel.FK_mrzs05mMenu_mtzVal" FromRole="mrzs05mMenu" ToRole="mtzVal" />
           <NavigationProperty Name="passwordCheckType1" Relationship="MRZSodel.FK_mrzs05mMenu_passwordCheckType" FromRole="mrzs05mMenu" ToRole="passwordCheckType" />
-          <NavigationProperty Name="typeFuncDC" Relationship="MRZSodel.FK_mrzs05mMenu_typeFuncDC" FromRole="mrzs05mMenu" ToRole="typeFuncDC" />
           <NavigationProperty Name="typeSignalDC" Relationship="MRZSodel.FK_mrzs05mMenu_typeSignalDC" FromRole="mrzs05mMenu" ToRole="typeSignalDC" />
+          <NavigationProperty Name="typeFuncDC" Relationship="MRZSodel.FK_mrzs05mMenu_typeFuncDC" FromRole="mrzs05mMenu" ToRole="typeFuncDC" />
         </EntityType>
         <EntityType Name="mrzsInOutOption">
           <Key>
@@ -2183,14 +2163,6 @@
           <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="passwordType" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="mrzs05mMenu" Relationship="MRZSodel.FK_mrzs05mMenu_passwordCheckType" FromRole="passwordCheckType" ToRole="mrzs05mMenu" />
-        </EntityType>
-        <EntityType Name="typeFuncDC">
-          <Key>
-            <PropertyRef Name="int" />
-          </Key>
-          <Property Type="Int32" Name="int" Nullable="false" />
-          <Property Type="String" Name="typeFunction" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="mrzs05mMenu" Relationship="MRZSodel.FK_mrzs05mMenu_typeFuncDC" FromRole="typeFuncDC" ToRole="mrzs05mMenu" />
         </EntityType>
         <EntityType Name="typeSignalDC">
           <Key>
@@ -2284,18 +2256,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_mrzs05mMenu_typeFuncDC">
-          <End Type="MRZSodel.typeFuncDC" Role="typeFuncDC" Multiplicity="0..1" />
-          <End Type="MRZSodel.mrzs05mMenu" Role="mrzs05mMenu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="typeFuncDC">
-              <PropertyRef Name="int" />
-            </Principal>
-            <Dependent Role="mrzs05mMenu">
-              <PropertyRef Name="typeFuncDCid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_mrzs05mMenu_typeSignalDC">
           <End Type="MRZSodel.typeSignalDC" Role="typeSignalDC" Multiplicity="0..1" />
           <End Type="MRZSodel.mrzs05mMenu" Role="mrzs05mMenu" Multiplicity="*" />
@@ -2305,6 +2265,26 @@
             </Principal>
             <Dependent Role="mrzs05mMenu">
               <PropertyRef Name="typeSignalDCid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="typeFuncDC">
+          <Key>
+            <PropertyRef Name="int" />
+          </Key>
+          <Property Type="Int32" Name="int" Nullable="false" />
+          <Property Type="String" Name="typeFunction" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="mrzs05mMenu" Relationship="MRZSodel.FK_mrzs05mMenu_typeFuncDC" FromRole="typeFuncDC" ToRole="mrzs05mMenu" />
+        </EntityType>
+        <Association Name="FK_mrzs05mMenu_typeFuncDC">
+          <End Type="MRZSodel.typeFuncDC" Role="typeFuncDC" Multiplicity="0..1" />
+          <End Type="MRZSodel.mrzs05mMenu" Role="mrzs05mMenu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="typeFuncDC">
+              <PropertyRef Name="int" />
+            </Principal>
+            <Dependent Role="mrzs05mMenu">
+              <PropertyRef Name="typeFuncDCid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2737,19 +2717,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="typeFuncDCs">
-            <EntityTypeMapping TypeName="MRZSodel.typeFuncDC">
-              <MappingFragment StoreEntitySet="typeFuncDC">
-                <ScalarProperty Name="typeFunction" ColumnName="typeFunction" />
-                <ScalarProperty Name="int" ColumnName="int" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="typeSignalDCs">
             <EntityTypeMapping TypeName="MRZSodel.typeSignalDC">
               <MappingFragment StoreEntitySet="typeSignalDC">
                 <ScalarProperty Name="typeSignal" ColumnName="typeSignal" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="typeFuncDCs">
+            <EntityTypeMapping TypeName="MRZSodel.typeFuncDC">
+              <MappingFragment StoreEntitySet="typeFuncDC">
+                <ScalarProperty Name="typeFunction" ColumnName="typeFunction" />
+                <ScalarProperty Name="int" ColumnName="int" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -2990,7 +2970,6 @@
         <EntityTypeShape EntityType="MRZSodel.mrzsInOutOption" Width="1.5" PointX="0.5392978361525097" PointY="9.0182683360847964" />
         <EntityTypeShape EntityType="MRZSodel.mtzVal" Width="1.5" PointX="1.5418886176971203" PointY="24.111338745854486" />
         <EntityTypeShape EntityType="MRZSodel.passwordCheckType" Width="1.5" PointX="1.8491560117570476" PointY="19.755228364726168" />
-        <EntityTypeShape EntityType="MRZSodel.typeFuncDC" Width="1.5" PointX="0.75897628104266546" PointY="12.550169473770154" />
         <EntityTypeShape EntityType="MRZSodel.typeSignalDC" Width="1.5" PointX="6.1753699081835194" PointY="20.232918614630083" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_BooleanVal" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_BooleanVal2" />
@@ -2999,8 +2978,9 @@
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_mrzsInOutOptions" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_mtzVal" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_passwordCheckType" />
-        <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_typeSignalDC" />
+        <EntityTypeShape EntityType="MRZSodel.typeFuncDC" Width="1.5" PointX="8.115147139930702" PointY="17.963278212567456" />
+        <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC" />
       </Diagram>
     </Diagrams>
   </Designer>

@@ -26,14 +26,19 @@
 			StrokeThickness="3" 
 			VerticalAlignment="Top" 
 			Width="60"/>
-		<Path Data="M2,12 L24,12" Fill="#FFF4F4F5" 
+		<Path x:Name="horLine" Data="M2,12 L20,12" Fill="#FFF4F4F5" 
 			HorizontalAlignment="Left" Height="3.25" Margin="1,11.5,0,0" 
 			Stretch="Fill" Stroke="Black" StrokeThickness="3" 
-			UseLayoutRounding="False" VerticalAlignment="Top" Width="25.25"/>
-		<Path Data="M23.5,11.5 L41,2.75" Fill="#FFF4F4F5" 
+			UseLayoutRounding="False" VerticalAlignment="Top" Width="24.25"/>
+		<Path  x:Name="upLine"
+              Fill="#FFF4F4F5" 
 			HorizontalAlignment="Left" Height="11.75" Margin="21.5,3,0,0" 
 			Stretch="Fill" Stroke="Black" StrokeThickness="3" 
-			UseLayoutRounding="False" VerticalAlignment="Top" Width="20.5"/>
+			UseLayoutRounding="False" 
+            VerticalAlignment="Top" 
+            Width="20.5"
+            Data="M23.5,11.5 L41,2.75">
+        </Path>
 		<Path Data="M47,11.5 L61,11.5" Fill="#FFF4F4F5" 
 			HorizontalAlignment="Left" Height="3.25"
 			Margin="39.25,11.5,0,0" Stretch="Fill" Stroke="Black" 

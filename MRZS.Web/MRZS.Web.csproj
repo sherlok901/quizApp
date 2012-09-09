@@ -219,7 +219,6 @@
       <DependentUpon>SectionService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
-    <Compile Include="Services\TypeFuncDCService.cs" />
     <Compile Include="Services\TypeSignalDCService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="Models\Shared\User.shared.cs" />
@@ -255,6 +254,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ClassDiagram1.cd" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

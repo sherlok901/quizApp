@@ -9,7 +9,7 @@
     <Grid x:Name="LayoutRoot" Margin="2" Background="White">
         <StackPanel Orientation="Horizontal">
             <TextBlock Text="DV01" x:Name="textBlockInputName"/>
-            <CheckBox/>
+            <CheckBox x:Name="dv"/>
         </StackPanel>
     </Grid>
 </UserControl>

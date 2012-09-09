@@ -16,7 +16,6 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 
-
 [assembly: EdmSchemaAttribute()]
 #region Метаданные связи EDM
 
@@ -57,8 +56,8 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_mrzsInOutOptions", "mrzsInOutOption", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.mrzsInOutOption), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_mtzVal", "mtzVal", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.mtzVal), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_passwordCheckType", "passwordCheckType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.passwordCheckType), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
-[assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_typeFuncDC", "typeFuncDC", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.typeFuncDC), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_typeSignalDC", "typeSignalDC", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.typeSignalDC), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
+[assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_typeFuncDC", "typeFuncDC", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.typeFuncDC), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 
 #endregion
 
@@ -689,22 +688,6 @@ namespace MRZS.Web.Models
         /// <summary>
         /// Нет доступной документации по метаданным.
         /// </summary>
-        public ObjectSet<typeFuncDC> typeFuncDCs
-        {
-            get
-            {
-                if ((_typeFuncDCs == null))
-                {
-                    _typeFuncDCs = base.CreateObjectSet<typeFuncDC>("typeFuncDCs");
-                }
-                return _typeFuncDCs;
-            }
-        }
-        private ObjectSet<typeFuncDC> _typeFuncDCs;
-    
-        /// <summary>
-        /// Нет доступной документации по метаданным.
-        /// </summary>
         public ObjectSet<typeSignalDC> typeSignalDCs
         {
             get
@@ -717,6 +700,22 @@ namespace MRZS.Web.Models
             }
         }
         private ObjectSet<typeSignalDC> _typeSignalDCs;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<typeFuncDC> typeFuncDCs
+        {
+            get
+            {
+                if ((_typeFuncDCs == null))
+                {
+                    _typeFuncDCs = base.CreateObjectSet<typeFuncDC>("typeFuncDCs");
+                }
+                return _typeFuncDCs;
+            }
+        }
+        private ObjectSet<typeFuncDC> _typeFuncDCs;
 
         #endregion
 
@@ -1011,19 +1010,19 @@ namespace MRZS.Web.Models
         }
     
         /// <summary>
-        /// Устаревший метод для добавления новых объектов в набор EntitySet typeFuncDCs. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
-        /// </summary>
-        public void AddTotypeFuncDCs(typeFuncDC typeFuncDC)
-        {
-            base.AddObject("typeFuncDCs", typeFuncDC);
-        }
-    
-        /// <summary>
         /// Устаревший метод для добавления новых объектов в набор EntitySet typeSignalDCs. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
         /// </summary>
         public void AddTotypeSignalDCs(typeSignalDC typeSignalDC)
         {
             base.AddObject("typeSignalDCs", typeSignalDC);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet typeFuncDCs. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddTotypeFuncDCs(typeFuncDC typeFuncDC)
+        {
+            base.AddObject("typeFuncDCs", typeFuncDC);
         }
 
         #endregion
@@ -6309,44 +6308,6 @@ namespace MRZS.Web.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_mrzs05mMenu_typeFuncDC", "typeFuncDC")]
-        public typeFuncDC typeFuncDC
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC").Value = value;
-            }
-        }
-        /// <summary>
-        /// Нет доступной документации по метаданным.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<typeFuncDC> typeFuncDCReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// Нет доступной документации по метаданным.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_mrzs05mMenu_typeSignalDC", "typeSignalDC")]
         public typeSignalDC typeSignalDC
         {
@@ -6375,6 +6336,44 @@ namespace MRZS.Web.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<typeSignalDC>("MRZSodel.FK_mrzs05mMenu_typeSignalDC", "typeSignalDC", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_mrzs05mMenu_typeFuncDC", "typeFuncDC")]
+        public typeFuncDC typeFuncDC
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<typeFuncDC> typeFuncDCReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<typeFuncDC>("MRZSodel.FK_mrzs05mMenu_typeFuncDC", "typeFuncDC", value);
                 }
             }
         }
