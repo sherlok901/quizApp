@@ -28,15 +28,7 @@ using System.Globalization;
 namespace MRZS.Views.Emulator
 {
     public partial class Emulator_05M : System.Windows.Controls.Page
-    {                        
-        //properties
-        private BooleanVal1 boolContext;//for experiment
-        public BooleanVal1 pboolContext
-        {
-            get{ return boolContext;}
-            set { boolContext = value; }
-        }//for experiment
-
+    {                                
         //fields
         private bool IsAnimCursorInserted = false;
         private int AnimationCursorLineCurntPositionIndex=0;
@@ -52,19 +44,21 @@ namespace MRZS.Views.Emulator
         IEnumerable<BooleanVal2> BooleanVal2List=null;
         IEnumerable<BooleanVal3> BooleanVal3List=null;
         IEnumerable<mtzVal> mtzValList=null;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;             
+        IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
+        private IEnumerable<mrzs05mMenu> mrzs05Entity;              
         private MyList<mrzs05mMenu> SelectMenuElemHistory = new MyList<mrzs05mMenu>();
-        private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);
-        LoadOperation<MRZS.Web.Models.BooleanVal> boolEntityModel;
+        private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);        
         LoadOperation<mrzs05mMenu> mrzs05mMModel;
         LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
         LoadOperation<passwordCheckType> passwordCheckTypeModel;
         LoadOperation<kindSignalDC> kindSignalDCModel;
         LoadOperation<typeSignalDC> typeSignalDCModel;
         LoadOperation<typeFuncDC> typeFuncDCModel;
+        LoadOperation<BooleanVal> BooleanValModel;
         LoadOperation<BooleanVal2> BooleanVal2Model;
         LoadOperation<BooleanVal3> BooleanVal3Model;
         LoadOperation<mtzVal> mtzValModel;
+        LoadOperation<mrzsInOutOption> mrzsInOutOptModel;
         mrzs05mMenuContext mrzs05mMContxt;
         //timer
         DispatcherTimer Dtimer = new DispatcherTimer();
@@ -93,14 +87,23 @@ namespace MRZS.Views.Emulator
         PasswordStates PassStates=PasswordStates.passwordAsk;
         //choose another value by enter
         bool getAnother = false;
+        bool getAnotherVal = false;
         //modes of changing values in menu by user
         enum InputingMode
         {
             InputingNum,
             ChoosingByEnter,
+            ChoosingByEnterAndShowNextEntity,
             none
         };
         InputingMode InputingModeStates=InputingMode.InputingNum;
+        //get info of inputs
+        public enum Inputs
+        {
+            ДВ01, ДВ02, ДВ03, ДВ04, ДВ05, ДВ06,
+            СДИ1, СДИ2, СДИ3, СДИ4, СДИ5, СДИ6,
+            P01, P02, P03, P04, P05
+        }
 
         public Emulator_05M()
         {
@@ -116,16 +119,13 @@ namespace MRZS.Views.Emulator
 
             //LOAD DATA ===============
             //generated class by ria service (for client side)
-            boolContext = new Web.Services.BooleanVal1();
+            //boolContext = new Web.Services.BooleanVal1();
             //using wcf service (DomainService) with my method to load entities
-            boolEntityModel = boolContext.Load(boolContext.GetBooleanValByIDQuery(1));                        
-            
-            myDataGrid.ItemsSource = boolEntityModel.Entities;            
-            boolEntityModel.Completed += boolEntity_Completed;
-
-            mrzsInOutOptionsContext mrzsInOutOptConxt = new mrzsInOutOptionsContext();
-            LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
-            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
+            //boolEntityModel = boolContext.Load(boolContext.GetBooleanValByIDQuery(1));                        
+                       
+            //mrzsInOutOptionsContext mrzsInOutOptConxt = new mrzsInOutOptionsContext();
+            //LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
+            //mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
 
             mrzs05mMContxt = new mrzs05mMenuContext();
             mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());            
@@ -141,13 +141,17 @@ namespace MRZS.Views.Emulator
             typeSignalDCModel.Completed += typeSignalDCModel_Completed;
             typeFuncDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeFuncDCsQuery());
             typeFuncDCModel.Completed += typeFuncDCModel_Completed;
+            BooleanValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanValsQuery());
+            BooleanValModel.Completed += BooleanValModel_Completed;
             BooleanVal2Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal2Query());
             BooleanVal2Model.Completed += BooleanVal2Model_Completed;
             BooleanVal3Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal3Query());
             BooleanVal3Model.Completed += BooleanVal3Model_Completed;
             mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
             mtzValModel.Completed += mtzValModel_Completed;
-        }
+            mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
+            mrzsInOutOptModel.Completed+=mrzsInOutOptModel_Completed;
+        }        
         
         #region Entity complited loads ***
         /// <summary>
@@ -176,13 +180,16 @@ namespace MRZS.Views.Emulator
 
         void mrzsInOutOptModel_Completed(object sender, EventArgs e)
         {
-
+            mrzsInOutOptionList = mrzsInOutOptionModel.Entities;
         }
         void mtzValModel_Completed(object sender, EventArgs e)
         {
             mtzValList = mtzValModel.Entities;
         }
-
+        void BooleanValModel_Completed(object sender, EventArgs e)
+        {
+            BooleanValList = BooleanValModel.Entities;
+        }
         void BooleanVal3Model_Completed(object sender, EventArgs e)
         {
             BooleanVal3List = BooleanVal3Model.Entities;
@@ -212,15 +219,12 @@ namespace MRZS.Views.Emulator
         {
             listPass2 = passwordCheckTypeModel.Entities;
         }
-        void boolEntity_Completed(object sender, EventArgs e)
-        {
-            BooleanValList = boolEntityModel.Entities;
-        }        
+               
         #endregion        
                
         private string insertAnimatCursor(string TextForInserting,int InsertingPosition,string InsertedSymbol)
         {
-            return TextForInserting.Insert(InsertingPosition, InsertedSymbol);            
+            return TextForInserting.Insert(InsertingPosition, InsertedSymbol);       
         }
 
         void Dtimer_Tick(object sender, EventArgs e)
@@ -249,9 +253,21 @@ namespace MRZS.Views.Emulator
         private void downButton_Click(object sender, RoutedEventArgs e)
         {
             if (InputingModeStates == InputingMode.ChoosingByEnter) return;
+            else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+            {
+                //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
+                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+                if ((index + 1) < tempDisplayedEntities.Count && index != -1)
+                {
+                    index += 1;
+                    tempDisplayedEntity = tempDisplayedEntities[index];
+                    showMrzsInOutOptions();                    
+                }
+                return;
+            }
 
             //display entity with {value} in menuElement column
-            if (tempDisplayedEntity != null && DisplayedEntities.Count != 0)
+            if (tempDisplayedEntity != null && DisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
             {
                 int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
                 if ((index + 1 )< tempDisplayedEntities.Count && index!= -1)
@@ -280,9 +296,20 @@ namespace MRZS.Views.Emulator
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
             if (InputingModeStates == InputingMode.ChoosingByEnter) return;
-
+            else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+            {
+                //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
+                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+                if (index > 0)
+                {
+                    index -= 1;
+                    tempDisplayedEntity = tempDisplayedEntities[index];
+                    showMrzsInOutOptions();                    
+                }
+                return;                              
+            }
             //display entity with {value} in menuElement column
-            if (tempDisplayedEntity != null && tempDisplayedEntities.Count != 0)
+            if (tempDisplayedEntity != null && tempDisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
             {
                 int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);                
                 if (index > 0)
@@ -347,11 +374,16 @@ namespace MRZS.Views.Emulator
             if (tempDisplayedEntity != null) selectedEntity=tempDisplayedEntity;
             else
             {
-                string selectedWordMenu = GetSelectedWordMenu();
-                if (selectedWordMenu != null)
+                if (DisplayedEntities.Last().mrzsInOutOptionsID != null)
                 {
+                    selectedEntity = tempDisplayedEntities[0];
+                    tempDisplayedEntity = tempDisplayedEntities[0];
+                }
+                else
+                {                                        
+                    string selectedWordMenu = GetSelectedWordMenu();
                     //get id selected word by menuElement
-                    selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
+                    if (selectedWordMenu != null) selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);                    
                 }
             }
                                 
@@ -366,6 +398,7 @@ namespace MRZS.Views.Emulator
                 if (newMenuLevel[0].menuElement == null && newMenuLevel[0].mrzsInOutOptionsID != null)
                 {
                     DisplayMenu_MrzsInOutOpt(newMenuLevel);
+                    tempDisplayedEntities.AddRange(newMenuLevel);
                 }
                 else
                 {
@@ -427,53 +460,22 @@ namespace MRZS.Views.Emulator
                             break;
                         case PasswordStates.passwordCorrect:
                             //user can input or choose some value in menu                            
-                            passwordCorrect = false;                            
-                            //clearTextBox(display);
-                            display.Text = replaceValueInColumn(tempDisplayedEntity);
-                            //if displayed entity not have "0002.0000" num
-                            if (Inputing.getNumIndexes(display.Text) == "")
+                            passwordCorrect = false;
+                            //show MrzsInOutOptions
+                            if (tempDisplayedEntity.menuElement == null)
                             {
+                                InputingModeStates = InputingMode.ChoosingByEnterAndShowNextEntity;
+                                showMrzsInOutOptions(ref getAnotherVal);
+                                
+                            }
+                            else if(tempDisplayedEntity.menuElement.IndexOf("{value}")!=-1)
+                            {
+                                //if menuElement have {value}: Тип МТЗ//{value}
+                                //where {value} choosed by Enter
+                                forValueInMenuElement();
                                 //for turn off down\up button
-                                InputingModeStates = InputingMode.ChoosingByEnter;
-                                //for first displaying
-                                if (getAnother == false)
-                                {
-                                    getAnother=true;
-                                    string tempVal = getValueFromNotNullColumn(tempDisplayedEntity);
-                                    display.Focus();
-                                    display.SelectionStart = display.Text.IndexOf(tempVal);
-                                    display.SelectionLength = tempVal.Length;
-                                }
-                                else
-                                {
-                                    //display another value, because enter clicked
-                                    getAnother = false;
-                                    string rez = null;
-                                    if (tempDisplayedEntity.BooleanValID != null)
-                                        rez = BooleanValList.Where(n => n.id != tempDisplayedEntity.BooleanVal.id).Single().val;
-                                    else if (tempDisplayedEntity.mtzValID != null) rez = mtzValList.Where(n => n.id != tempDisplayedEntity.mtzVal.id).Single().mtzVals;
-                                    else if (tempDisplayedEntity.kindSignalDCid != null) rez = kindSignalDCList.Where(n => n.id != tempDisplayedEntity.kindSignalDCid).Single().kindSignal;
-                                    //else if (tempDisplayedEntity.typeSignalDCid != null) rez = typ
-                                    //else if (entity.typeFuncDCid != null) rez = entity.typeFuncDC.typeFunction;
-                                    //else if (entity.BooleanVal2ID != null) rez = entity.BooleanVal2.val;
-                                    //else if (entity.BooleanVal3ID != null) rez = entity.BooleanVal3.boolVal;
-                                    //else if (entity.mtzValID != null) rez = entity.mtzVal.mtzVals;
-                                    display.Text = replaceVelueInColumnOnStr(tempDisplayedEntity.menuElement, rez);
-                                    display.Focus();
-                                    display.SelectionStart = display.Text.IndexOf(rez);
-                                    display.SelectionLength = rez.Length;
-                                }
-                            }
-                            else
-                            {                                
-                                //in next case show EscEnter dialog if would be pressed Enter
-                                PassStates = PasswordStates.allowedEnterValue;
-                                numIndexesList = Inputing.getIndexes(display.Text);
-                                currInputPosition = numIndexesList[0];
-                                selectOneNumInTextBox(display, currInputPosition);
-                            }
-                            //for turn off down\up button
-                            InputingModeStates = InputingMode.InputingNum;
+                                InputingModeStates = InputingMode.InputingNum;
+                            }                                                        
                             break;
                         case PasswordStates.allowedEnterValue:
                             //temporary memorise textbox text
@@ -502,13 +504,21 @@ namespace MRZS.Views.Emulator
                                         if (display.Text.Contains(val.mtzVals)) tempDisplayedEntity.mtzValID = val.id;
                                     }
                                 }
-                                //and all tables
+                                //and all tables                                
                                 mrzs05mMContxt.SubmitChanges();
                                 //showing memorised
                                 display.Text = replaceValueInColumn(tempDisplayedEntity);
                             }
+                            else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+                            {
+                                //memorising choosed by Enter value                                
+                                mrzs05mMContxt.SubmitChanges();
+                                getAnotherVal = false;
+                                DisplayMenu_MrzsInOutOpt(tempDisplayedEntities);
+                                InputingModeStates = InputingMode.none;
+                            }
                             else
-                            {                                
+                            {
                                 //memorise inputed value (temporary memorised text)
                                 tempDisplayedEntity.value = Inputing.getNumIndexes(display.Text);
                                 mrzs05mMContxt.SubmitChanges();
@@ -525,6 +535,89 @@ namespace MRZS.Views.Emulator
             }           
             
             
+        }
+        //show entity where mrzsInOutOption and BooleanValID columns not null
+        private void showMrzsInOutOptions()
+        {
+            string boolVal = null;            
+            boolVal = BooleanValList.Where(n => n.id == tempDisplayedEntity.BooleanValID).Single().val;                        
+            //show one tempentity
+            display.Text = "";
+            display.Text += tempDisplayedEntity.mrzsInOutOption.optionsName + Environment.NewLine;
+            display.Text += boolVal;
+            //select show value                                
+            display.Focus();
+            display.SelectionStart = display.Text.IndexOf(boolVal);
+            display.SelectionLength = boolVal.Length;
+        }
+        private void showMrzsInOutOptions(ref bool getAnother)
+        {
+            string boolVal = null;
+            if (getAnother == false)
+            {
+                boolVal = BooleanValList.Where(n => n.id == tempDisplayedEntity.BooleanValID).Single().val;
+                getAnother = true;
+            }
+            else
+            {
+                boolVal = BooleanValList.Where(n => n.id != tempDisplayedEntity.BooleanValID).Single().val;
+                tempDisplayedEntity.BooleanValID = BooleanValList.Where(n => n.id != tempDisplayedEntity.BooleanValID).Single().id;                
+            }
+            //show one tempentity
+            display.Text = "";
+            display.Text += tempDisplayedEntity.mrzsInOutOption.optionsName + Environment.NewLine;
+            display.Text += boolVal;
+
+            //select show value                                
+            display.Focus();
+            display.SelectionStart = display.Text.IndexOf(boolVal);
+            display.SelectionLength = boolVal.Length;
+        }
+        private void forValueInMenuElement()
+        {
+            display.Text = replaceValueInColumn(tempDisplayedEntity);
+            //if displayed entity not have "0002.0000" num
+            if (Inputing.getNumIndexes(display.Text) == "")
+            {
+                //for turn off down\up button
+                InputingModeStates = InputingMode.ChoosingByEnter;
+                //for first displaying
+                if (getAnother == false)
+                {
+                    getAnother = true;
+                    string tempVal = getValueFromNotNullColumn(tempDisplayedEntity);
+                    display.Focus();
+                    display.SelectionStart = display.Text.IndexOf(tempVal);
+                    display.SelectionLength = tempVal.Length;
+                }
+                else
+                {
+                    //display another value, because enter clicked
+                    getAnother = false;
+                    string rez = null;
+                    if (tempDisplayedEntity.BooleanValID != null)
+                        rez = BooleanValList.Where(n => n.id != tempDisplayedEntity.BooleanVal.id).Single().val;
+                    else if (tempDisplayedEntity.mtzValID != null) rez = mtzValList.Where(n => n.id != tempDisplayedEntity.mtzVal.id).Single().mtzVals;
+                    else if (tempDisplayedEntity.kindSignalDCid != null) rez = kindSignalDCList.Where(n => n.id != tempDisplayedEntity.kindSignalDCid).Single().kindSignal;
+                    //else if (tempDisplayedEntity.typeSignalDCid != null) rez = typ
+                    //else if (entity.typeFuncDCid != null) rez = entity.typeFuncDC.typeFunction;
+                    //else if (entity.BooleanVal2ID != null) rez = entity.BooleanVal2.val;
+                    //else if (entity.BooleanVal3ID != null) rez = entity.BooleanVal3.boolVal;
+                    //else if (entity.mtzValID != null) rez = entity.mtzVal.mtzVals;
+                    display.Text = replaceVelueInColumnOnStr(tempDisplayedEntity.menuElement, rez);
+                    display.Focus();
+                    display.SelectionStart = display.Text.IndexOf(rez);
+                    display.SelectionLength = rez.Length;
+                }
+            }
+            else
+            {
+                //in next case show EscEnter dialog if would be pressed Enter
+                PassStates = PasswordStates.allowedEnterValue;
+                numIndexesList = Inputing.getIndexes(display.Text);
+                currInputPosition = numIndexesList[0];
+                selectOneNumInTextBox(display, currInputPosition);
+            }
         }
         //select one number in textbox for inputing process
         private void selectOneNumInTextBox(TextBox tb,int position)
@@ -575,7 +668,15 @@ namespace MRZS.Views.Emulator
             else if ((PassStates == PasswordStates.MemoriseInputedVal || PassStates == PasswordStates.onlyView)
                 && tempDisplayedEntity != null)
             {
-                display.Text = replaceValueInColumn(tempDisplayedEntity);
+                if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+                {
+                    mrzs05mMContxt.RejectChanges();
+                    InputingModeStates = InputingMode.none;
+                    getAnotherVal = false;
+                    //display MrzsInOutOptions
+                    DisplayMenu_MrzsInOutOpt(tempDisplayedEntities);
+                }
+                else display.Text = replaceValueInColumn(tempDisplayedEntity);                     
                 PassStates = PasswordStates.passwordAsk;
                 return;
             }
@@ -621,7 +722,17 @@ namespace MRZS.Views.Emulator
         }
         private void DeviceON_button_Click(object sender, RoutedEventArgs e)
         {
+            //set to DeviceOff_button default style
+            DeviceOff_button.Background = new SolidColorBrush(Colors.Gray);
+            DeviceOff_button.BorderBrush = new SolidColorBrush(Colors.Gray);
+            DeviceOff_button.BorderThickness = new Thickness(1);
+            //set another style for DeviceON_button
+            DeviceON_button.Background = new SolidColorBrush(Colors.Green);            
+            DeviceON_button.BorderBrush = new SolidColorBrush(Colors.Green);            
+            DeviceON_button.BorderThickness = new Thickness(3);
+            //defences
             CheckDefence_MTZ1();
+            CheckDefence_MTZ2();
         }
         private void CheckDefence_MTZ1()
         {
@@ -629,24 +740,252 @@ namespace MRZS.Views.Emulator
             string rez= mrzs05Entity.Where(n=>n.menuElement=="Уставка МТЗ1\\{value}").Single().value;            
             double val = Double.Parse(rez, CultureInfo.InvariantCulture);
             //get МТЗ-Управление-1 Ступень МТЗ-ВКЛ
-            string rez2=mrzs05Entity.Where(n=>n.menuElement=="1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+            string stupen1MTZ=mrzs05Entity.Where(n=>n.menuElement=="1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+
+            bool flag = IsInDVArrayValue("Блок МТЗ 1");
             if ((Ia.Value > val || Ib.Value > val || Ic.Value > val)
-                && (rez2 == "ВКЛ")
-                && !checkAllDV() )                
+                && (stupen1MTZ.IndexOf("ВКЛ")!=-1)
+                && !IsInDVArrayValue("Блок МТЗ 1"))//ДВ не включены; если вкл, то на них нет ф-ции "Блок МТЗ 1"
             {
-                //засвитыть реле 1,4,5
+                //turn on/off rele
+                CheckR("Сраб МТЗ 1", true);
+                //
+                CheckSDI("Сраб МТЗ 1", true);
+                CheckDefence_APV(1);
+                //засветить реле 1,4,5
+                //r1.turnOn = false;
+                //r4.turnOn = false;
+                //r5.turnOn = false;
+                //засветить лампочки sdi 1,2,4
+                //sdi1.IsChecked = true;
+                //sdi2.IsChecked = true;
+                //sdi4.IsChecked = true;
             }
         }
-        //check all DV on true or false
-        private bool checkAllDV()
+        private void CheckDefence_MTZ2()
         {
-            if (dv1.IsChecked == true
-                || dv2.IsChecked == true
-                || dv3.IsChecked == true
-                || dv4.IsChecked == true
-                || dv5.IsChecked == true
-                || dv6.IsChecked == true) return true;
-            else return false;
+            //если 1й DVI не вкл, то: если вкл реле 1,4,5 - то выкл их
+        }
+        private void CheckDefence_ZZ()
+        {
+
+        }
+        //check all DV on true or false
+        private bool IsInDVArrayValue(string functionName)
+        {
+            List<InputDV> list = new List<InputDV>(6);
+            list.Add(dv1);
+            list.Add(dv2);
+            list.Add(dv3);
+            list.Add(dv4);
+            list.Add(dv5);
+            list.Add(dv6);
+            List<string> functions = null;
+
+            foreach (InputDV dv in list)
+            {
+                //if (dv.IsChecked == false) continue;
+                if(dv.IsChecked==true)
+                {
+                    //check what "MrzsInOutOption" functions are turn on for current DV
+                    //functions= getTurnONFunctions(Inputs.ДВ01, mrzs05Entity);
+                    //if (functions.Contains(functionName)) return true;
+
+                    if (list.IndexOf(dv) == 0)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ01, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                    else if (list.IndexOf(dv) == 1)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ02, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                    else if (list.IndexOf(dv) == 2)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ03, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                    else if (list.IndexOf(dv) == 3)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ04, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                    else if (list.IndexOf(dv) == 4)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ05, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                    else if (list.IndexOf(dv) == 5)
+                    {
+                        functions = getTurnONFunctions(Inputs.ДВ06, mrzs05Entity);
+                        if (functions.Contains(functionName)) return true;
+                    }
+                }                
+            }
+            return false;
+            //if (dv1.IsChecked == true
+            //    || dv2.IsChecked == true
+            //    || dv3.IsChecked == true
+            //    || dv4.IsChecked == true
+            //    || dv5.IsChecked == true
+            //    || dv6.IsChecked == true) return true;
+            //else return false;
+        }
+        private void CheckR(string functionName,bool turnOff)
+        {
+            List<CheckBox> listCheckbox = new List<CheckBox>(5);
+            listCheckbox.Add(r1c);
+            listCheckbox.Add(r2c);
+            listCheckbox.Add(r3c);
+            listCheckbox.Add(r4c);
+            listCheckbox.Add(r5c);
+            List<string> functions=null;
+
+            foreach (CheckBox cb in listCheckbox)
+            {
+                if (listCheckbox.IndexOf(cb) == 0)
+                {
+                    functions = getTurnONFunctions(Inputs.P01, mrzs05Entity);
+                    if (functions.Contains(functionName)) r1c.IsChecked = turnOff;
+                    r1c_Click_1(null, null);
+                }
+                else if (listCheckbox.IndexOf(cb) == 1)
+                {
+                    functions = getTurnONFunctions(Inputs.P02, mrzs05Entity);
+                    if (functions.Contains(functionName)) r2c.IsChecked = turnOff;
+                    r2c_Click_1(null, null);
+                }
+                else if (listCheckbox.IndexOf(cb) == 2)
+                {
+                    functions = getTurnONFunctions(Inputs.P03, mrzs05Entity);
+                    if (functions.Contains(functionName)) r3c.IsChecked = turnOff;
+                    r3c_Click_1(null, null);
+                }
+                else if (listCheckbox.IndexOf(cb) == 3)
+                {
+                    functions = getTurnONFunctions(Inputs.P04, mrzs05Entity);
+                    if (functions.Contains(functionName)) r4c.IsChecked = turnOff;
+                    r4c_Click_1(null, null);
+                }
+                else if (listCheckbox.IndexOf(cb) == 4)
+                {
+                    functions = getTurnONFunctions(Inputs.P05, mrzs05Entity);
+                    if (functions.Contains(functionName)) r5c.IsChecked = turnOff;
+                    r5c_Click_1(null, null);
+                }
+            }
+        }
+        private void CheckSDI(string functionName, bool turnOn)
+        {
+            List<CheckBox> listCheckBox = new List<CheckBox>(6);
+            listCheckBox.Add(sdi1);
+            listCheckBox.Add(sdi2);
+            listCheckBox.Add(sdi3);
+            listCheckBox.Add(sdi4);
+            listCheckBox.Add(sdi5);
+            listCheckBox.Add(sdi6);
+            List<string> functions = null;
+            foreach(CheckBox cb in listCheckBox)
+            {
+                if((cb.IsChecked==true&&turnOn) || (cb.IsChecked==false&& !turnOn)) continue;
+
+                if (listCheckBox.IndexOf(cb) == 0)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ1, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi1.IsChecked = turnOn;
+                }
+                else if (listCheckBox.IndexOf(cb) == 1)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ2, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi2.IsChecked = turnOn;
+                }
+                else if (listCheckBox.IndexOf(cb) == 2)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ3, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi3.IsChecked = turnOn;
+                }
+                else if (listCheckBox.IndexOf(cb) == 3)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ4, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi4.IsChecked = turnOn;
+                }
+                else if (listCheckBox.IndexOf(cb) == 4)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ5, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi5.IsChecked = turnOn;
+                }
+                else if (listCheckBox.IndexOf(cb) == 5)
+                {
+                    functions = getTurnONFunctions(Inputs.СДИ6, mrzs05Entity);
+                    if (functions.Contains(functionName)) sdi6.IsChecked = turnOn;
+                }
+            }
+        }
+        private void CheckDefence_APV(int MTZnumber)
+        {
+            int? puskOtMTZ1= getMrzs05mMenuByMenuElement(mrzs05Entity,"Пуск от МТЗ1").Single().BooleanVal3ID;
+            int? puskOtMTZ2 = getMrzs05mMenuByMenuElement(mrzs05Entity, "Пуск от МТЗ2").Single().BooleanVal3ID;
+            //get МТЗ->Уставки->Уставка МТЗ1
+            string rez= mrzs05Entity.Where(n=>n.menuElement=="Уставка МТЗ1\\{value}").Single().value;            
+            double UstavkaMTZ1 = Double.Parse(rez, CultureInfo.InvariantCulture);
+            string stupen1MTZ=mrzs05Entity.Where(n=>n.menuElement=="1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+            string rez2 = mrzs05Entity.Where(n => n.menuElement == "Уставка МТЗ2\\{value}").Single().value;
+            double UstavkaMTZ2 = Double.Parse(rez2, CultureInfo.InvariantCulture);
+            string stupen2MTZ = mrzs05Entity.Where(n => n.menuElement == "2 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+
+            if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
+                && (!IsInDVArrayValue("АЧР/ЧАПВ")))
+            {
+                if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                {
+                    CheckR("Сраб МТЗ 1", false);
+                }
+
+                if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
+                {
+                    CheckR("Сраб МТЗ 2", false);
+                }
+                CheckSDI("Сраб АПВ", true);
+            }               
+            
+        }
+        private void DeviceOff_button_Click(object sender, RoutedEventArgs e)
+        {
+            //set to DeviceON_button default style
+            DeviceON_button.Background = new SolidColorBrush(Colors.Gray);
+            DeviceON_button.BorderBrush = new SolidColorBrush(Colors.Gray);
+            DeviceON_button.BorderThickness = new Thickness(1);
+            //set another style for DeviceOff_button         
+            DeviceOff_button.Background = new SolidColorBrush(Colors.Red);
+            DeviceOff_button.BorderBrush = new SolidColorBrush(Colors.Red);
+            DeviceOff_button.BorderThickness = new Thickness(3);
+
+            //turn off all indicators
+            dv1.IsChecked = false;
+            dv2.IsChecked = false;
+            dv3.IsChecked = false;
+            dv4.IsChecked = false;
+            dv5.IsChecked = false;
+            dv6.IsChecked = false;
+
+            sdi1.IsChecked = false;
+            sdi2.IsChecked = false;
+            sdi3.IsChecked = false;
+            sdi4.IsChecked = false;
+            sdi5.IsChecked = false;
+            sdi6.IsChecked = false;
+
+            r1c.IsChecked = false;
+            r1c_Click_1(null, null);
+            r2c.IsChecked = false;
+            r2c_Click_1(null, null);
+            r3c.IsChecked = false;
+            r3c_Click_1(null, null);
+            r4c.IsChecked = false;
+            r4c_Click_1(null, null);
+            r5c.IsChecked = false;
+            r5c_Click_1(null, null);
         }
         #endregion==
 
@@ -678,19 +1017,19 @@ namespace MRZS.Views.Emulator
         /// </summary>
         /// <param name="eventSender"></param>
         /// <returns></returns>
-        private IEnumerable<mrzs05mMenu> getEntities(object eventSender)
-        {
-            System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = eventSender as LoadOperation<mrzs05mMenu>;            
-            if (b != null)
-            {
-                //больше 0
-                if (b.Entities.Count(n => n != null) > 0)
-                {
-                    return b.Entities;
-                }
-            }
-            return null;
-        }
+        //private IEnumerable<mrzs05mMenu> getEntities(object eventSender)
+        //{
+        //    System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = eventSender as LoadOperation<mrzs05mMenu>;            
+        //    if (b != null)
+        //    {
+        //        //больше 0
+        //        if (b.Entities.Count(n => n != null) > 0)
+        //        {
+        //            return b.Entities;
+        //        }
+        //    }
+        //    return null;
+        //}
         
         #region DisplayMenu functions===================================
         private void DisplayMenu(List<string> s)
@@ -1190,7 +1529,61 @@ namespace MRZS.Views.Emulator
                 selectOneNumInTextBox(display, currInputPosition);
             }
         }
-        #endregion   ================================================================                                
+        #endregion   ================================================================                                        
+
+        //return inputsTurnONFunctionIDs
+        private List<int?> getmrzsInOutOptionsID(Inputs input, IEnumerable<mrzs05mMenu> mrzs05Entitys)
+        {
+            List<mrzs05mMenu> list= mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).ToList();
+            int inputIDInMenu = mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).Single().id;
+            //int inputIDInMenu = mrzs05Entitys.Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).Single().id;
+            //return inputsTurnONFunctionIDs
+            return getEntitiesByParentID(inputIDInMenu).Where(n => n.BooleanValID == 1).Select(n => n.mrzsInOutOptionsID).ToList();            
+        }
+        private List<string> getInputsTurnONFunctionsByID(List<int?> ids)
+        {
+            return mrzsInOutOptionList.Where(n => ids.Contains(n.id)).Select(n => n.optionsName).ToList();
+        }
+        private List<string> getTurnONFunctions(Inputs input, IEnumerable<mrzs05mMenu> mrzs05Entities)
+        {
+            List<int?> list= getmrzsInOutOptionsID(input, mrzs05Entities);
+            return getInputsTurnONFunctionsByID(list);
+        }
+        private List<mrzs05mMenu> getMrzs05mMenuByMenuElement(IEnumerable<mrzs05mMenu> mrzs05Entities, string menuElement)
+        {
+            return mrzs05Entities.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(menuElement)).ToList();
+        }
+
+
+        private void r1c_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (r1c.IsChecked == true) r1.turnOn = true;
+            else if (r1c.IsChecked == false) r1.turnOn = false;
+        }
+
+        private void r2c_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (r2c.IsChecked == true) r2.turnOn = true;
+            else if (r1c.IsChecked == false) r2.turnOn = false;
+        }
+
+        private void r3c_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (r3c.IsChecked == true) r3.turnOn = true;
+            else if (r3c.IsChecked == false) r3.turnOn = false;
+        }
+
+        private void r4c_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (r4c.IsChecked == true) r4.turnOn = true;
+            else if (r4c.IsChecked == false) r4.turnOn = false;
+        }
+
+        private void r5c_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (r5c.IsChecked == true) r5.turnOn = true;
+            else if (r5c.IsChecked == false) r5.turnOn = false;
+        }        
     }
 
     class MyList<T> : List<T>
@@ -1209,5 +1602,5 @@ namespace MRZS.Views.Emulator
             if (OnDelete != null) OnDelete(this, null);
             return base.Remove(item);
         }
-    }
+    }    
 }
