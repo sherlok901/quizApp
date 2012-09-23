@@ -57,13 +57,13 @@
             </Setter>
         </Style>        
     </navigation:Page.Resources>
-    <Grid x:Name="LayoutRoot" HorizontalAlignment="Center">
+    <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" >
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="100"/>
             <ColumnDefinition Width="530"/>
             <ColumnDefinition Width="78"/>
-        </Grid.ColumnDefinitions>
+        </Grid.ColumnDefinitions>        
         <Button x:Name="DeviceON_button" Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0" Click="DeviceON_button_Click">
             
         </Button>
@@ -183,8 +183,8 @@
             <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
 
         </Grid>
-        <StackPanel Grid.Column="1" Background="AntiqueWhite" Margin="0,0,0,0" Height="680" VerticalAlignment="Bottom">
-            <TextBlock FontSize="16" Height="20" Margin="0,15,0,0">
+        <StackPanel Grid.Column="1"  Margin="0,0,0,0" VerticalAlignment="Top">
+            <TextBlock FontSize="16" Height="20" Margin="0,15,0,0" VerticalAlignment="Top">
 				<Run Text="Дискретные"/>
             </TextBlock>
             <TextBlock  FontSize="16" Height="20" Margin="0,10,0,15">
@@ -197,7 +197,7 @@
             <Emulator:InputDV x:Name="dv5" InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
             <Emulator:InputDV x:Name="dv6" InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
         </StackPanel>
-        <Grid Grid.Column="2" Background="Aquamarine">
+        <Grid Grid.Column="2" Background="Beige">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140*"/>
                 <ColumnDefinition Width="19*"/>
@@ -222,7 +222,9 @@
                     </EventTrigger>
                 </TextBox.Triggers>
             </TextBox>
-
+            <sdk:Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="120" Content="LABEL"/>
+            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0 30 0 0">Ssdff</TextBlock>
+            
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="button1" Content="1" Style="{StaticResource PanelKey}" Click="button1_Click" />
@@ -292,6 +294,7 @@
                 <StackPanel Orientation="Horizontal" Margin="5"/>
                 <StackPanel Orientation="Horizontal" Margin="5"/>
             </StackPanel>
+            
         </Grid>
         <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,0,18,0">
             <TextBlock Text="Реле" FontSize="20"/>            
@@ -304,10 +307,7 @@
             <MRZS:OutputR x:Name="r4" Width="70" Height="35" OutputName="P04" Margin="0 10 0 0"/>
             <CheckBox x:Name="r4c" VerticalAlignment="Top" Click="r4c_Click_1"/>
             <MRZS:OutputR x:Name="r5" Width="70" Height="35" OutputName="P05" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r5c" VerticalAlignment="Top" Click="r5c_Click_1"/>
-            
-            <Image HorizontalAlignment="Left" Height="100" Width="60"/>
-
+            <CheckBox x:Name="r5c" VerticalAlignment="Top" Click="r5c_Click_1"/>                        
         </StackPanel>
         <riaControls:DomainDataSource x:Name="mrzs05menuDS" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="137,736,0,-156" VerticalAlignment="Top" Width="100">
             

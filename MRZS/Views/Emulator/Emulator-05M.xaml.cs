@@ -23,14 +23,13 @@ using MRZS.Classes;
 using System.Windows.Threading;
 using System.Threading;
 using System.Globalization;
-
+using System.ServiceModel.DomainServices;
 
 namespace MRZS.Views.Emulator
 {
     public partial class Emulator_05M : System.Windows.Controls.Page
     {                                
-        //fields
-        private bool IsAnimCursorInserted = false;
+        //fields        
         private int AnimationCursorLineCurntPositionIndex=0;
         List<int?> parentIDlist;
         private bool displayAnimFlag;
@@ -105,6 +104,8 @@ namespace MRZS.Views.Emulator
             P01, P02, P03, P04, P05
         }
 
+        bool IsAnimCursorInserted = false;
+
         public Emulator_05M()
         {
             InitializeComponent();
@@ -159,6 +160,7 @@ namespace MRZS.Views.Emulator
         /// </summary>        
         void mrzs05mMModel_Completed(object sender, EventArgs e)
         {
+            
             mrzs05Entity = mrzs05mMModel.Entities;
             //get list of different elem in column parentID            
             //mrzs05Entity = getEntities(sender);
@@ -171,7 +173,7 @@ namespace MRZS.Views.Emulator
                 DisplayMenu(DisplayedEntities.Select(n => n.menuElement).ToList());
                 //set cursor animation
                 display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
-                IsAnimCursorInserted = true;
+                //IsAnimCursorInserted = true;
                 Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
                 //Dtimer.Tick += Dtimer_Tick;
                 //Dtimer.Start();
