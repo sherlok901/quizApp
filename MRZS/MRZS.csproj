@@ -142,9 +142,15 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ErrorResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Classes\AddFunctions.cs" />
     <Compile Include="Classes\Display.cs" />
+    <Compile Include="Classes\DisplayCode\DisplayViewModel.cs" />
     <Compile Include="Classes\EmulatorDisplayController.cs" />
     <Compile Include="Classes\Inputing.cs" />
+    <Compile Include="Classes\LoadData.cs" />
+    <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
+      <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Helpers\DateTimeConverter.cs" />
     <Compile Include="Helpers\NullToBoolConverter.cs" />
@@ -295,6 +301,14 @@
     <Page Include="Controls\BusyIndicator.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Emulator\EmulatorDisplay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Resources\EmulatorViewResourceDict.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Admin\Books.xaml">
       <SubType>Designer</SubType>

@@ -24,6 +24,9 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Globalization;
 using System.ServiceModel.DomainServices;
+using MRZS.Classes.DisplayCode;
+using MRZS.Views.Emulator;
+using System.Windows.Data;
 
 namespace MRZS.Views.Emulator
 {
@@ -44,7 +47,8 @@ namespace MRZS.Views.Emulator
         IEnumerable<BooleanVal3> BooleanVal3List=null;
         IEnumerable<mtzVal> mtzValList=null;
         IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;              
+        private IEnumerable<mrzs05mMenu> mrzs05Entity;       
+       
         private MyList<mrzs05mMenu> SelectMenuElemHistory = new MyList<mrzs05mMenu>();
         private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);        
         LoadOperation<mrzs05mMenu> mrzs05mMModel;
@@ -103,7 +107,7 @@ namespace MRZS.Views.Emulator
             СДИ1, СДИ2, СДИ3, СДИ4, СДИ5, СДИ6,
             P01, P02, P03, P04, P05
         }
-
+        DisplayViewModel dispViewModel;
         bool IsAnimCursorInserted = false;
 
         public Emulator_05M()
@@ -115,15 +119,15 @@ namespace MRZS.Views.Emulator
             display.Padding = new Thickness(5.0);                          
             display.SelectionStart = display.Text.Length;
 
+            dispViewModel = new DisplayViewModel { FirstMenuStr = "sfs", SecondMenuStr = "sfsf" };
+            emju.DataContext = dispViewModel;
+            dispViewModel.FirstMenuStr = "dddddd";
+            
+
             //SelectMenuElemHistory.OnAdd += SelectMenuElemHistory_OnAdd;
             //SelectMenuElemHistory.OnDelete += SelectMenuElemHistory_OnDelete;
 
-            //LOAD DATA ===============
-            //generated class by ria service (for client side)
-            //boolContext = new Web.Services.BooleanVal1();
-            //using wcf service (DomainService) with my method to load entities
-            //boolEntityModel = boolContext.Load(boolContext.GetBooleanValByIDQuery(1));                        
-                       
+            //LOAD DATA ===============                                   
             //mrzsInOutOptionsContext mrzsInOutOptConxt = new mrzsInOutOptionsContext();
             //LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
             //mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
@@ -174,7 +178,7 @@ namespace MRZS.Views.Emulator
                 //set cursor animation
                 display.Text = insertAnimatCursor(display.Text, AnimationCursorLineCurntPositionIndex, ">");
                 //IsAnimCursorInserted = true;
-                Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
+                //Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
                 //Dtimer.Tick += Dtimer_Tick;
                 //Dtimer.Start();
             }

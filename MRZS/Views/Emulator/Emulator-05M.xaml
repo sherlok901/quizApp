@@ -3,8 +3,12 @@
            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"
-                 xmlns:MRZS="clr-namespace:MRZS" xmlns:Emulator="clr-namespace:MRZS.Views.Emulator" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" x:Class="MRZS.Views.Emulator.Emulator_05M"
+           xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"            
+           xmlns:MRZS="clr-namespace:MRZS" 
+           xmlns:Emulator="clr-namespace:MRZS.Views.Emulator"            
+           xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
+           xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" 
+           x:Class="MRZS.Views.Emulator.Emulator_05M"
            mc:Ignorable="d"
            d:DesignWidth="840" d:DesignHeight="680"
            Title="Emulator_05M Page">
@@ -55,7 +59,10 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>        
+        </Style>      
+        
+            
+        
     </navigation:Page.Resources>
     <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" >
         <Grid.ColumnDefinitions>
@@ -64,8 +71,7 @@
             <ColumnDefinition Width="530"/>
             <ColumnDefinition Width="78"/>
         </Grid.ColumnDefinitions>        
-        <Button x:Name="DeviceON_button" Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0" Click="DeviceON_button_Click">
-            
+        <Button x:Name="DeviceON_button" Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0" Click="DeviceON_button_Click">            
         </Button>
         <Button x:Name="DeviceOff_button" Content="ОТКЛ" HorizontalAlignment="Right" VerticalAlignment="Top" Height="50" Width="75" Margin="0,15,10,0" Click="DeviceOff_button_Click"/>
         <Grid  x:Name="leftGrid" Grid.Column="0" ShowGridLines="False" Margin="0,70,0,0">
@@ -222,8 +228,8 @@
                     </EventTrigger>
                 </TextBox.Triggers>
             </TextBox>
-            <sdk:Label Grid.Row="1" Grid.Column="4" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="120" Content="LABEL"/>
-            <TextBlock Grid.Row="2" Grid.Column="4" Margin="0 30 0 0">Ssdff</TextBlock>
+            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="1" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-225,0,0,0"></Emulator:EmulatorDisplay>
+            
             
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
                 <StackPanel Orientation="Horizontal">
