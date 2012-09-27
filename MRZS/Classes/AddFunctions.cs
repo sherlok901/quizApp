@@ -20,5 +20,9 @@ namespace MRZS.Classes
         {
             return mrzsList.Select(n => n.parentID).Distinct().ToList();
         }
+        internal static List<mrzs05mMenu> getEntitiesByParentID(IEnumerable<mrzs05mMenu> mrzsTables,int? parentID)
+        {
+            return (from t in mrzsTables where t.parentID == parentID select t).ToList();
+        }  
     }
 }

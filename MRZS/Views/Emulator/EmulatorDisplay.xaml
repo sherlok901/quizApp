@@ -11,8 +11,8 @@
             BorderThickness="1" BorderBrush="Black" 
             Width="230" Height="62">
             <StackPanel x:Name="DisplayPanel" Width="229" Height="61" Background="GreenYellow">
-                <TextBlock x:Name="FirstTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding FirstMenuStr,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" ></TextBlock>
-                <TextBlock x:Name="SecondTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"></TextBlock>
+                <TextBlock x:Name="FirstTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding FirstMenuStr,Mode=OneWay,UpdateSourceTrigger=Default}" ></TextBlock>
+                <TextBlock x:Name="SecondTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=OneWay}"></TextBlock>
             </StackPanel>
         </Border>
     </Grid>

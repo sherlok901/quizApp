@@ -16,7 +16,7 @@ using MRZS.Web.Models;
 
 namespace MRZS.Classes.DisplayCode
 {
-    internal class DisplayViewModel: INotifyPropertyChanged
+    public class DisplayViewModel: INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         //check event and in not null notify about it
@@ -49,13 +49,19 @@ namespace MRZS.Classes.DisplayCode
             }
         }
         public bool IsCursorEnabled { get; set; }
-        public bool IsCursorInFirstStr { get; set; }
+        public bool IsCursorInFirstStr 
+        { 
+            get; 
+            set; 
+        }
         public bool IsCursorInSecondStr { get; set; }
+        //data load vars
+        LoadData ld = new LoadData();
 
         public DisplayViewModel()
         {
-            AddFunctions.selectDistinctMrzsId(mrzs05Entity);
         }
+        
         public void getNext()
         {
         }
@@ -68,6 +74,12 @@ namespace MRZS.Classes.DisplayCode
         internal void setMrzsTables(IEnumerable<mrzs05mMenu>list)
         {
             mrzs05Entity = list;
+        }
+        public DisplayViewModel showMenu(Menu m)
+        {
+            FirstMenuStr = m.Children[0].Name;
+            SecondMenuStr = m.Children[1].Name;
+            return this;
         }
     }
 }

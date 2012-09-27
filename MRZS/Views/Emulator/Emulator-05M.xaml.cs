@@ -38,7 +38,7 @@ namespace MRZS.Views.Emulator
         private bool displayAnimFlag;
         private NumericUpDown numUpDown1;
         //entity        
-        IEnumerable<passwordCheckType> listPass2 = null;
+        IEnumerable<passwordCheckType> passwordCheckTypeList = null;
         IEnumerable<kindSignalDC> kindSignalDCList = null;
         IEnumerable<typeSignalDC> typeSignalDCList=null;
         IEnumerable<typeFuncDC> typeFuncDCList=null;
@@ -52,16 +52,16 @@ namespace MRZS.Views.Emulator
         private MyList<mrzs05mMenu> SelectMenuElemHistory = new MyList<mrzs05mMenu>();
         private List<mrzs05mMenu> DisplayedEntities = new List<mrzs05mMenu>(0);        
         LoadOperation<mrzs05mMenu> mrzs05mMModel;
-        LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
-        LoadOperation<passwordCheckType> passwordCheckTypeModel;
-        LoadOperation<kindSignalDC> kindSignalDCModel;
-        LoadOperation<typeSignalDC> typeSignalDCModel;
-        LoadOperation<typeFuncDC> typeFuncDCModel;
-        LoadOperation<BooleanVal> BooleanValModel;
-        LoadOperation<BooleanVal2> BooleanVal2Model;
-        LoadOperation<BooleanVal3> BooleanVal3Model;
-        LoadOperation<mtzVal> mtzValModel;
-        LoadOperation<mrzsInOutOption> mrzsInOutOptModel;
+        //LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
+        //LoadOperation<passwordCheckType> passwordCheckTypeModel;
+        //LoadOperation<kindSignalDC> kindSignalDCModel;
+        //LoadOperation<typeSignalDC> typeSignalDCModel;
+        //LoadOperation<typeFuncDC> typeFuncDCModel;
+        //LoadOperation<BooleanVal> BooleanValModel;
+        //LoadOperation<BooleanVal2> BooleanVal2Model;
+        //LoadOperation<BooleanVal3> BooleanVal3Model;
+        //LoadOperation<mtzVal> mtzValModel;
+        //LoadOperation<mrzsInOutOption> mrzsInOutOptModel;
         mrzs05mMenuContext mrzs05mMContxt;
         //timer
         DispatcherTimer Dtimer = new DispatcherTimer();
@@ -109,6 +109,7 @@ namespace MRZS.Views.Emulator
         }
         DisplayViewModel dispViewModel;
         bool IsAnimCursorInserted = false;
+        LoadData ld = new LoadData();
 
         public Emulator_05M()
         {
@@ -119,43 +120,36 @@ namespace MRZS.Views.Emulator
             display.Padding = new Thickness(5.0);                          
             display.SelectionStart = display.Text.Length;
 
-            dispViewModel = new DisplayViewModel { FirstMenuStr = "sfs", SecondMenuStr = "sfsf" };
-            emju.DataContext = dispViewModel;
-            dispViewModel.FirstMenuStr = "dddddd";
+         
+            //dispViewModel = new DisplayViewModel { FirstMenuStr = "sfs", SecondMenuStr = "sfsf" };
+            //emju.DataContext = dispViewModel;
+            //dispViewModel.FirstMenuStr = "dddddd";
+          
+            ld.DataLoaded += ld_DataLoaded;
             
-
-            //SelectMenuElemHistory.OnAdd += SelectMenuElemHistory_OnAdd;
-            //SelectMenuElemHistory.OnDelete += SelectMenuElemHistory_OnDelete;
-
-            //LOAD DATA ===============                                   
-            //mrzsInOutOptionsContext mrzsInOutOptConxt = new mrzsInOutOptionsContext();
-            //LoadOperation<mrzsInOutOption> mrzsInOutOptModel = mrzsInOutOptConxt.Load(mrzsInOutOptConxt.GetMrzsInOutOptionsQuery());
-            //mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
-
             mrzs05mMContxt = new mrzs05mMenuContext();
-            mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());            
+            mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
 
-            mrzsInOutOptionModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
+        }
 
-            passwordCheckTypeModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetPasswordCheckTypesQuery());
-            passwordCheckTypeModel.Completed += passwordCheckTypeModel_Completed;
-            kindSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetKindSignalDCsQuery());
-            kindSignalDCModel.Completed += kindSignalDCModel_Completed;
-            typeSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeSignalDCsQuery());
-            typeSignalDCModel.Completed += typeSignalDCModel_Completed;
-            typeFuncDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeFuncDCsQuery());
-            typeFuncDCModel.Completed += typeFuncDCModel_Completed;
-            BooleanValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanValsQuery());
-            BooleanValModel.Completed += BooleanValModel_Completed;
-            BooleanVal2Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal2Query());
-            BooleanVal2Model.Completed += BooleanVal2Model_Completed;
-            BooleanVal3Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal3Query());
-            BooleanVal3Model.Completed += BooleanVal3Model_Completed;
-            mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
-            mtzValModel.Completed += mtzValModel_Completed;
-            mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
-            mrzsInOutOptModel.Completed+=mrzsInOutOptModel_Completed;
+        void ld_DataLoaded(object sender, EventArgs e)
+        {
+            passwordCheckTypeList = ld.passwordCheckTypeTable;
+            kindSignalDCList = ld.kindSignalDCTable;
+            typeSignalDCList = ld.typeSignalDCTable;
+            typeFuncDCList = ld.typeFuncDCTable;
+            BooleanValList = ld.BooleanValTable;
+            BooleanVal2List = ld.BooleanVal2Table;
+            BooleanVal3List = ld.BooleanVal3Table;
+            mtzValList = ld.mtzValTable;
+            mrzsInOutOptionList = ld.mrzsInOutOptionTable;
+            if(mrzs05Entity==null) mrzs05Entity = ld.MrzsTable;
+                        
+            MenuController MenuControllr = new MenuController();
+            emju.DataContext = MenuControllr.setDefaultMenu(mrzs05Entity);
+
+            
         }        
         
         #region Entity complited loads ***
@@ -164,8 +158,8 @@ namespace MRZS.Views.Emulator
         /// </summary>        
         void mrzs05mMModel_Completed(object sender, EventArgs e)
         {
-            
-            mrzs05Entity = mrzs05mMModel.Entities;
+
+            if (mrzs05Entity == null) mrzs05Entity = mrzs05mMModel.Entities;
             //get list of different elem in column parentID            
             //mrzs05Entity = getEntities(sender);
             
@@ -181,51 +175,10 @@ namespace MRZS.Views.Emulator
                 //Dtimer.Interval = new TimeSpan(0, 0, 0, 0, 300);
                 //Dtimer.Tick += Dtimer_Tick;
                 //Dtimer.Start();
+
             }
         }
-
-        void mrzsInOutOptModel_Completed(object sender, EventArgs e)
-        {
-            mrzsInOutOptionList = mrzsInOutOptionModel.Entities;
-        }
-        void mtzValModel_Completed(object sender, EventArgs e)
-        {
-            mtzValList = mtzValModel.Entities;
-        }
-        void BooleanValModel_Completed(object sender, EventArgs e)
-        {
-            BooleanValList = BooleanValModel.Entities;
-        }
-        void BooleanVal3Model_Completed(object sender, EventArgs e)
-        {
-            BooleanVal3List = BooleanVal3Model.Entities;
-        }
-
-        void BooleanVal2Model_Completed(object sender, EventArgs e)
-        {
-            BooleanVal2List = BooleanVal2Model.Entities;
-        }
-
-        void typeFuncDCModel_Completed(object sender, EventArgs e)
-        {
-            typeFuncDCList = typeFuncDCModel.Entities;
-        }
-
-        void typeSignalDCModel_Completed(object sender, EventArgs e)
-        {
-            typeSignalDCList = typeSignalDCModel.Entities;
-        }
-
-        void kindSignalDCModel_Completed(object sender, EventArgs e)
-        {
-            kindSignalDCList = kindSignalDCModel.Entities;
-        }
-
-        void passwordCheckTypeModel_Completed(object sender, EventArgs e)
-        {
-            listPass2 = passwordCheckTypeModel.Entities;
-        }
-               
+                       
         #endregion        
                
         private string insertAnimatCursor(string TextForInserting,int InsertingPosition,string InsertedSymbol)
@@ -1017,25 +970,7 @@ namespace MRZS.Views.Emulator
         private List<mrzs05mMenu> getEntitiesByParentID(int? parentID)
         {
             return (from t in mrzs05Entity where t.parentID == parentID select t).ToList();
-        }
-        /// <summary>
-        /// Get mrzs05m entities by object sender
-        /// </summary>
-        /// <param name="eventSender"></param>
-        /// <returns></returns>
-        //private IEnumerable<mrzs05mMenu> getEntities(object eventSender)
-        //{
-        //    System.ServiceModel.DomainServices.Client.LoadOperation<mrzs05mMenu> b = eventSender as LoadOperation<mrzs05mMenu>;            
-        //    if (b != null)
-        //    {
-        //        //больше 0
-        //        if (b.Entities.Count(n => n != null) > 0)
-        //        {
-        //            return b.Entities;
-        //        }
-        //    }
-        //    return null;
-        //}
+        }       
         
         #region DisplayMenu functions===================================
         private void DisplayMenu(List<string> s)

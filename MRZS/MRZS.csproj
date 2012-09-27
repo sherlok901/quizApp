@@ -144,10 +144,13 @@
     </Compile>
     <Compile Include="Classes\AddFunctions.cs" />
     <Compile Include="Classes\Display.cs" />
+    <Compile Include="Classes\DisplayCode\DisplayListViewModel.cs" />
     <Compile Include="Classes\DisplayCode\DisplayViewModel.cs" />
     <Compile Include="Classes\EmulatorDisplayController.cs" />
     <Compile Include="Classes\Inputing.cs" />
     <Compile Include="Classes\LoadData.cs" />
+    <Compile Include="Classes\Menu.cs" />
+    <Compile Include="Classes\MenuController.cs" />
     <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
       <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
     </Compile>
