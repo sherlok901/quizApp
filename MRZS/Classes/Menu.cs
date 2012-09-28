@@ -15,29 +15,26 @@ namespace MRZS.Classes
 {
     public class Menu
     {
+        mrzs05mMenu CurrentRow;
+        public int ID { get; set; }
+        public int? ParentID { get; set; }
         List<Menu> children=new List<Menu>();
         public List<Menu> Children
         {
             get { return children; }
         }
-        string name;
+
+
         public string Name
         {
-            get { return name; }
+            get;
+            set;
         }
-        string value;
         public string Value
         {
-            get { return value; }
+            get;
+            set;
         }
-        internal void setChildren(List<mrzs05mMenu> MrzsTables)
-        {
-            foreach (mrzs05mMenu table in MrzsTables)
-            {
-                Menu m = new Menu();
-                m.name = table.menuElement;
-                children.Add(m);
-            }
-        }
+        
     }
 }

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using MRZS.Views.Emulator;
 using MRZS.Web.Models;
 
 
@@ -24,10 +25,13 @@ namespace MRZS.Classes.DisplayCode
         {
             if (PropertyChanged != null) PropertyChanged(this, e);
         }
+        
+        
+        private List<Menu> MenuList;
+        private Menu ShowedOne;
+        private Menu ShowedTwo;
+        Menu CurrentMenu;
 
-        private ObservableCollection<mrzs05mMenu> currentMenuMembers;
-        private mrzs05mMenu child;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;
         private string firstMenuStr;
         public string FirstMenuStr 
         { 
@@ -49,37 +53,81 @@ namespace MRZS.Classes.DisplayCode
             }
         }
         public bool IsCursorEnabled { get; set; }
+        private bool isCursorInFirstStr;
         public bool IsCursorInFirstStr 
-        { 
-            get; 
-            set; 
+        {
+            get { return isCursorInFirstStr; }
+            set
+            {
+                isCursorInFirstStr = value;
+                if (isCursorInFirstStr)
+                {
+                    //adding cursor
+                    int CursorIndex = FirstMenuStr.IndexOf(">");
+                    if (CursorIndex == -1)
+                    {
+                        FirstMenuStr = FirstMenuStr.Insert(0, ">");
+                    }
+                }
+            }
         }
         public bool IsCursorInSecondStr { get; set; }
         //data load vars
-        LoadData ld = new LoadData();
-
+        
+        //===== Methods ======
         public DisplayViewModel()
         {
         }
         
-        public void getNext()
+        //show or move to next line with cursor
+        public void moveToNextLine()
         {
+            if (IsCursorInSecondStr)
+            {
+                //show next menuline
+                if (getNextMenuClass(ShowedTwo) != null)
+                {
+                    ShowedOne = ShowedTwo;
+                    ShowedTwo = getNextMenuClass(ShowedOne);
+                    setDisplayingText(ShowedOne, ShowedTwo);
+                    IsCursorInFirstStr = true;
+                    IsCursorInSecondStr = false;
+                }                
+            }
+            else
+            {
+                //move cursor to second menuline
+                FirstMenuStr= FirstMenuStr.Remove(FirstMenuStr.IndexOf(">"), 1);
+                SecondMenuStr = SecondMenuStr.Insert(0, ">");
+                IsCursorInFirstStr = false;
+                IsCursorInSecondStr = true;
+            }
         }
-        public void getPrevious()
+        //get next Menu class for displaying
+        Menu getNextMenuClass(Menu CurrentMenu)
         {
+            int index = MenuList.IndexOf(CurrentMenu);
+            if (index > -1 && 
+                ((index + 1) <= (MenuList.Count - 1))) return MenuList[(index + 1)];
+            else return null;
+        }
+        void setDisplayingText(Menu one, Menu two)
+        {
+            FirstMenuStr = one.Name;
+            SecondMenuStr = two.Name;
         }
         public void getNextTwo()
         {
         }
-        internal void setMrzsTables(IEnumerable<mrzs05mMenu>list)
+        
+        public DisplayViewModel showMenu(List<Menu> list)
         {
-            mrzs05Entity = list;
-        }
-        public DisplayViewModel showMenu(Menu m)
-        {
-            FirstMenuStr = m.Children[0].Name;
-            SecondMenuStr = m.Children[1].Name;
+            ShowedOne = list[0];
+            ShowedTwo = list[1];
+            setDisplayingText(ShowedOne, ShowedTwo);
+            IsCursorInFirstStr = true;
+            MenuList = list;
             return this;
-        }
+        }        
     }
 }

@@ -36,7 +36,7 @@ namespace MRZS.Views.Emulator
         private int AnimationCursorLineCurntPositionIndex=0;
         List<int?> parentIDlist;
         private bool displayAnimFlag;
-        private NumericUpDown numUpDown1;
+        private NumericUpDown numUpDown1;        
         //entity        
         IEnumerable<passwordCheckType> passwordCheckTypeList = null;
         IEnumerable<kindSignalDC> kindSignalDCList = null;
@@ -110,6 +110,7 @@ namespace MRZS.Views.Emulator
         DisplayViewModel dispViewModel;
         bool IsAnimCursorInserted = false;
         LoadData ld = new LoadData();
+        MenuController MenuControllr = new MenuController();
 
         public Emulator_05M()
         {
@@ -124,13 +125,19 @@ namespace MRZS.Views.Emulator
             //dispViewModel = new DisplayViewModel { FirstMenuStr = "sfs", SecondMenuStr = "sfsf" };
             //emju.DataContext = dispViewModel;
             //dispViewModel.FirstMenuStr = "dddddd";
-          
+            //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
-            
+            MenuControllr.DataLoad += MenuControllr_DataLoad;
+
             mrzs05mMContxt = new mrzs05mMenuContext();
             mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
 
+        }
+
+        void MenuControllr_DataLoad(object sender, EventArgs e)
+        {
+            emju.DataContext = MenuControllr.setDefaultMenu();
         }
 
         void ld_DataLoaded(object sender, EventArgs e)
@@ -144,11 +151,7 @@ namespace MRZS.Views.Emulator
             BooleanVal3List = ld.BooleanVal3Table;
             mtzValList = ld.mtzValTable;
             mrzsInOutOptionList = ld.mrzsInOutOptionTable;
-            if(mrzs05Entity==null) mrzs05Entity = ld.MrzsTable;
-                        
-            MenuController MenuControllr = new MenuController();
-            emju.DataContext = MenuControllr.setDefaultMenu(mrzs05Entity);
-
+            if(mrzs05Entity==null) mrzs05Entity = ld.MrzsTable;            
             
         }        
         
@@ -210,7 +213,9 @@ namespace MRZS.Views.Emulator
 
         #region cursor events ***
         private void downButton_Click(object sender, RoutedEventArgs e)
-        {
+        {            
+            MenuControllr.showNextMenuLine();
+
             if (InputingModeStates == InputingMode.ChoosingByEnter) return;
             else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
             {

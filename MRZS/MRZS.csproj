@@ -151,6 +151,7 @@
     <Compile Include="Classes\LoadData.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\MenuController.cs" />
+    <Compile Include="Classes\DisplayController.cs" />
     <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
       <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
     </Compile>
