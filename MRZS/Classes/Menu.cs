@@ -35,6 +35,6 @@ namespace MRZS.Classes
             get;
             set;
         }
-        
+        public string Unit { get; set; }
     }
 }

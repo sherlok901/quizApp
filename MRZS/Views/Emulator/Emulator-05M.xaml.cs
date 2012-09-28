@@ -259,6 +259,8 @@ namespace MRZS.Views.Emulator
         }      
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
+            MenuControllr.showPreviousMenuLine();
+
             if (InputingModeStates == InputingMode.ChoosingByEnter) return;
             else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
             {
@@ -334,8 +336,16 @@ namespace MRZS.Views.Emulator
 
         private void enterButton_Click_2(object sender, RoutedEventArgs e)
         {
+            MenuControllr.enterButtonClicked();
+
+            //enterFunc();
+            
+        }
+
+        private void enterFunc()
+        {
             mrzs05mMenu selectedEntity = null;
-            if (tempDisplayedEntity != null) selectedEntity=tempDisplayedEntity;
+            if (tempDisplayedEntity != null) selectedEntity = tempDisplayedEntity;
             else
             {
                 if (DisplayedEntities.Last().mrzsInOutOptionsID != null)
@@ -344,13 +354,13 @@ namespace MRZS.Views.Emulator
                     tempDisplayedEntity = tempDisplayedEntities[0];
                 }
                 else
-                {                                        
+                {
                     string selectedWordMenu = GetSelectedWordMenu();
                     //get id selected word by menuElement
-                    if (selectedWordMenu != null) selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);                    
+                    if (selectedWordMenu != null) selectedEntity = DisplayedEntities.Last(n => n.menuElement == selectedWordMenu);
                 }
             }
-                                
+
             //get next menu list by parentID of current selected word                
             List<mrzs05mMenu> newMenuLevel = getEntitiesByParentID(selectedEntity.id);
             //check the mrzsInOutOptionsID column
@@ -397,8 +407,8 @@ namespace MRZS.Views.Emulator
                 }
                 else IsAnimCursorInserted = false;
             }
-                //no new deep menu level ================================
-                //inputing numbers
+            //no new deep menu level ================================
+            //inputing numbers
             else
             {
                 //if (!passwordInputing) inputing(display);
@@ -430,16 +440,16 @@ namespace MRZS.Views.Emulator
                             {
                                 InputingModeStates = InputingMode.ChoosingByEnterAndShowNextEntity;
                                 showMrzsInOutOptions(ref getAnotherVal);
-                                
+
                             }
-                            else if(tempDisplayedEntity.menuElement.IndexOf("{value}")!=-1)
+                            else if (tempDisplayedEntity.menuElement.IndexOf("{value}") != -1)
                             {
                                 //if menuElement have {value}: Тип МТЗ//{value}
                                 //where {value} choosed by Enter
                                 forValueInMenuElement();
                                 //for turn off down\up button
                                 InputingModeStates = InputingMode.InputingNum;
-                            }                                                        
+                            }
                             break;
                         case PasswordStates.allowedEnterValue:
                             //temporary memorise textbox text
@@ -458,7 +468,7 @@ namespace MRZS.Views.Emulator
                                 {
                                     foreach (BooleanVal val in BooleanValList)
                                     {
-                                        if (display.Text.Contains(val.val)) tempDisplayedEntity.BooleanValID = val.id;                                                                                                                          
+                                        if (display.Text.Contains(val.val)) tempDisplayedEntity.BooleanValID = val.id;
                                     }
                                 }
                                 else if (tempDisplayedEntity.mtzValID != null)
@@ -493,12 +503,11 @@ namespace MRZS.Views.Emulator
                             //    if (mrzs05mMContxt.HasChanges) mrzs05mMContxt.SubmitChanges();
                             //}
                             PassStates = PasswordStates.passwordAsk;
-                            break;                        
-                    }                    
+                            break;
+                    }
                 }
-            }           
-            
-            
+            }
+
         }
         //show entity where mrzsInOutOption and BooleanValID columns not null
         private void showMrzsInOutOptions()

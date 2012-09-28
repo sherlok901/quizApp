@@ -62,6 +62,7 @@ namespace MRZS.Classes.DisplayCode
                 isCursorInFirstStr = value;
                 if (isCursorInFirstStr)
                 {
+                    IsCursorInSecondStr = false;
                     //adding cursor
                     int CursorIndex = FirstMenuStr.IndexOf(">");
                     if (CursorIndex == -1)
@@ -71,14 +72,20 @@ namespace MRZS.Classes.DisplayCode
                 }
             }
         }
-        public bool IsCursorInSecondStr { get; set; }
+        private bool isCursorInSecondStr;
+        public bool IsCursorInSecondStr 
+        {
+            get { return isCursorInSecondStr; }
+            set
+            {
+                isCursorInSecondStr=value;
+                if (IsCursorInSecondStr) IsCursorInFirstStr = false;
+            }
+        }
         //data load vars
         
-        //===== Methods ======
-        public DisplayViewModel()
-        {
-        }
-        
+        //===== Methods ======                
+
         //show or move to next line with cursor
         public void moveToNextLine()
         {
@@ -90,17 +97,35 @@ namespace MRZS.Classes.DisplayCode
                     ShowedOne = ShowedTwo;
                     ShowedTwo = getNextMenuClass(ShowedOne);
                     setDisplayingText(ShowedOne, ShowedTwo);
-                    IsCursorInFirstStr = true;
-                    IsCursorInSecondStr = false;
+                    SecondMenuStr = SecondMenuStr.Insert(0, ">");
                 }                
             }
             else
             {
                 //move cursor to second menuline
                 FirstMenuStr= FirstMenuStr.Remove(FirstMenuStr.IndexOf(">"), 1);
-                SecondMenuStr = SecondMenuStr.Insert(0, ">");
-                IsCursorInFirstStr = false;
+                SecondMenuStr = SecondMenuStr.Insert(0, ">");                
                 IsCursorInSecondStr = true;
+            }
+        }
+        public void moveToPreviousLine()
+        {
+            //cursor in second line
+            if (IsCursorInSecondStr)
+            {
+                SecondMenuStr=SecondMenuStr.Remove(secondMenuStr.IndexOf(">"),1);
+                FirstMenuStr = FirstMenuStr.Insert(0, ">");               
+                IsCursorInFirstStr=true;
+            }
+            else
+            {
+                if (getPreviousMenuClass(ShowedOne) != null)
+                {
+                    ShowedTwo = ShowedOne;
+                    ShowedOne = getPreviousMenuClass(ShowedTwo);
+                    setDisplayingText(ShowedOne, ShowedTwo);
+                    IsCursorInFirstStr = true;                    
+                }
             }
         }
         //get next Menu class for displaying
@@ -111,23 +136,37 @@ namespace MRZS.Classes.DisplayCode
                 ((index + 1) <= (MenuList.Count - 1))) return MenuList[(index + 1)];
             else return null;
         }
+        Menu getPreviousMenuClass(Menu CurrentMenu)
+        {
+            int index = MenuList.IndexOf(CurrentMenu);
+            if (index > 0) return MenuList[(index - 1)];
+            else return null;
+        }
         void setDisplayingText(Menu one, Menu two)
         {
             FirstMenuStr = one.Name;
             SecondMenuStr = two.Name;
         }
-        public void getNextTwo()
-        {
-        }
-        
-        public DisplayViewModel showMenu(List<Menu> list)
+                
+        public void showMenu(List<Menu> list)
         {
             ShowedOne = list[0];
             ShowedTwo = list[1];
             setDisplayingText(ShowedOne, ShowedTwo);
             IsCursorInFirstStr = true;
-            MenuList = list;
+            MenuList = list;            
+        }
+        internal DisplayViewModel getThisInstance()
+        {
             return this;
-        }        
+        }
+
+        //get choosed Menu class by user clicking on Enter button
+        public Menu getChoosedMenuClass()
+        {
+            if (IsCursorInFirstStr) return ShowedOne;
+            else if (IsCursorInSecondStr) return ShowedTwo;
+            else return null;
+        }
     }
 }
