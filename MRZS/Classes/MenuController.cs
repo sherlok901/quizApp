@@ -20,7 +20,7 @@ namespace MRZS.Classes
         IEnumerable<mrzs05mMenu> MrzsTables;        
         DisplayViewModel dispControllr = new DisplayViewModel();
         LoadData ld = new LoadData();
-        List<int?> SelectedID = new List<int?>(0);
+        List<int> SelectedID = new List<int>(0);
         List<int?> AllParentID;
 
         public event EventHandler DataLoad;        
@@ -61,46 +61,74 @@ namespace MRZS.Classes
             Menu m;
             foreach (mrzs05mMenu entity in MrzsTables)
             {
-                m = new Menu();
-                //set ids
-                m.ID = entity.id;
-                m.ParentID = entity.parentID;
-                if (entity.unitValue != null) m.Unit = entity.unitValue.Replace(" ",string.Empty);
-                if (entity.value != null) m.Value = entity.value.Replace(" ", string.Empty);
-                //check column
-                if (entity.menuElement.IndexOf("{value}") != -1)
-                {
-                    string temp = null;
-                    //if column "value" is null
-                    if (entity.value == null)
-                    {
-                    }
-                    else
-                    {
-                        temp=entity.menuElement.Replace("{value}", entity.value);
-                        m.Value = entity.value;
-                        temp = replaceUnit(entity, temp);                        
-                    }
-                    m.Name = temp;
-                }
-                else if (entity.menuElement.IndexOf("{0000.0000}") != -1)
-                {
-                    replaceNulls(entity, m);                    
-                }
-                else if (entity.menuElement.IndexOf("{dd:mm:year\\hh:mm:ss}") != -1)
-                {
-                }
-                else if(entity.menuElement==null)
-                {
-
-                }
-                else
-                {
-                    m.Name = entity.menuElement;
-                }
+                m = getTransformedMenuClass(entity);
                 list.Add(m);
             }
             return list;
+        }
+
+        //transform mrzsmenu05 entity to Menu class
+        private Menu getTransformedMenuClass(mrzs05mMenu entity)
+        {
+            Menu m = new Menu();
+            //set ids
+            m.ID = entity.id;
+            m.ParentID = entity.parentID;
+            if (entity.unitValue != null) m.Unit = entity.unitValue.Replace(" ", string.Empty);
+            if (entity.value != null) m.Value = entity.value.Replace(" ", string.Empty);
+            m.HasChildren = checkMenuOnShowOneOrTwo(m);
+            //check column MenuElement
+            if (entity.menuElement == null)
+            {
+                m.FirstLine = entity.mrzsInOutOption.optionsName;
+                m.SecondLine = entity.BooleanVal.val;
+            }
+            else if (entity.menuElement.IndexOf("{value}") != -1)
+            {
+                string temp = null;
+                //if column "value" is null
+                if (entity.value == null)
+                {
+                    string val = checkColumnsForNotNULL(entity);
+                    temp = entity.menuElement.Replace("{value}", val);
+                    string[] s = temp.Split(new char[1] { '\\' });
+                    m.FirstLine = s[0];
+                    m.SecondLine = s[1];
+                }
+                //when "value" column is not null
+                else
+                {
+                    string val = entity.value.Replace(" ", string.Empty);
+                    temp = entity.menuElement.Replace("{value}", val);
+                    //m.Value = entity.value;
+                    temp = replaceUnit(entity, temp);
+                    if (temp.IndexOf("\\") != -1)
+                    {
+                        string[] s = temp.Split(new char[1] { '\\' });
+                        m.FirstLine = s[0];
+                        m.SecondLine = s[1];
+                    }
+                    else m.FirstLine = temp;
+                }
+                m.Name = temp;
+            }
+            else if (entity.menuElement.IndexOf("{0000.0000}") != -1)
+            {
+                replaceNulls(entity, m);
+            }
+            else if (entity.menuElement.IndexOf("{dd:mm:year\\hh:mm:ss}") != -1)
+            {
+                //m.FirstLine = DateTime.Now.ToShortDateString();
+                string s = "dd.MM.yyyy";
+                m.FirstLine = DateTime.Now.ToString(s);
+                string s2 = "hh:mm:ss";
+                m.SecondLine = DateTime.Now.ToString(s2);
+            }            
+            else
+            {
+                m.FirstLine = entity.menuElement;
+            }
+            return m;
         }
         
         internal DisplayViewModel setDefaultMenu()
@@ -117,14 +145,34 @@ namespace MRZS.Classes
         {
             dispControllr.moveToPreviousLine();
         }
+
         internal void enterButtonClicked()
         {
+            //get choosed Menu
             Menu ChoosedMenu = dispControllr.getChoosedMenuClass();
             if (ChoosedMenu != null)
             {
                 //get deeper Menu level by ID choosed menu
-                dispControllr.showMenu(getMenu(ChoosedMenu.ID));
+                List<Menu> list=getMenu(ChoosedMenu.ID);
+                if (list.Count == 0) return;
+
+                dispControllr.showMenu(list);
+                //add choosed Menu id to list
+                SelectedID.Add(ChoosedMenu.ID);
             }
+        }
+        internal void escButtonClicked()
+        {            
+            //get selected mrzs05menu entity
+            if (SelectedID.Count == 0) return;
+            mrzs05mMenu temp=ld.MrzsTable.Where(n=>n.id==SelectedID.Last()).Single();
+            if (temp == null) return;
+
+            //transform entity to Menu class
+            Menu LastChoosedMenu= getTransformedMenuClass(temp);
+            dispControllr.showMenu(getMenu(LastChoosedMenu.ParentID), LastChoosedMenu);
+            //delete last selected Menu class
+            SelectedID.RemoveAt(SelectedID.IndexOf(SelectedID.Last()));
         }
 
         //methods for replace strings
@@ -150,11 +198,29 @@ namespace MRZS.Classes
             if (ent.unitValue != null) strForReplace = strForReplace + " " + ent.unitValue;            
             if (strForReplace.IndexOf("\\") != -1)
             {
-                strForReplace = strForReplace.Replace("\\", Environment.NewLine);
-            }
-            //replace spaces
-            strForReplace = strForReplace.Replace(" ", string.Empty);
-            menuForSaveRezults.Name = strForReplace;            
+                string[] s= strForReplace.Split(new char[1] { '\\' });
+                menuForSaveRezults.FirstLine = s[0];
+                menuForSaveRezults.SecondLine = s[1];
+            }            
+        }
+        //has Menu children or not
+        bool checkMenuOnShowOneOrTwo(Menu m)
+        {
+            List<mrzs05mMenu> mrzsTables = AddFunctions.getEntitiesByParentID(ld.MrzsTable, m.ID);
+            if (mrzsTables == null) return false;
+            else if (mrzsTables.Count == 0) return false;
+            else return true;            
+        }
+        //check some columns in mrzs05menu for not null
+        string checkColumnsForNotNULL(mrzs05mMenu ent)
+        {
+            if (ent.kindSignalDCid != null) return ent.kindSignalDC.kindSignal;
+            else if (ent.typeSignalDCid != null) return ent.typeSignalDC.typeSignal;
+            else if (ent.typeFuncDCid != null) return ent.typeFuncDC.typeFunction;
+            else if (ent.BooleanVal2ID != null) return ent.BooleanVal2.val;
+            else if (ent.BooleanVal3ID != null) return ent.BooleanVal3.boolVal;
+            else if (ent.mtzValID != null) return ent.mtzVal.mtzVals;
+            else return null;
         }
     }
 }

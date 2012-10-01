@@ -216,45 +216,45 @@ namespace MRZS.Views.Emulator
         {            
             MenuControllr.showNextMenuLine();
 
-            if (InputingModeStates == InputingMode.ChoosingByEnter) return;
-            else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
-            {
-                //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
-                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
-                if ((index + 1) < tempDisplayedEntities.Count && index != -1)
-                {
-                    index += 1;
-                    tempDisplayedEntity = tempDisplayedEntities[index];
-                    showMrzsInOutOptions();                    
-                }
-                return;
-            }
+            //if (InputingModeStates == InputingMode.ChoosingByEnter) return;
+            //else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+            //{
+            //    //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
+            //    int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+            //    if ((index + 1) < tempDisplayedEntities.Count && index != -1)
+            //    {
+            //        index += 1;
+            //        tempDisplayedEntity = tempDisplayedEntities[index];
+            //        showMrzsInOutOptions();                    
+            //    }
+            //    return;
+            //}
 
-            //display entity with {value} in menuElement column
-            if (tempDisplayedEntity != null && DisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
-            {
-                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
-                if ((index + 1 )< tempDisplayedEntities.Count && index!= -1)
-                {
-                    index += 1;
-                    tempDisplayedEntity = tempDisplayedEntities[index];
-                    display.Text = DisplayEntity(tempDisplayedEntity);
-                }
-            }
-            else if(AnimationCursorLineCurntPositionIndex != -1)
-            {
-                display.Focus();
-                if (IsAnimCursorInserted)
-                {
-                    display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-                }
-                AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
-                if (AnimationCursorLineCurntPositionIndex != -1)
-                {
-                    if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
-                    display.SelectionStart = AnimationCursorLineCurntPositionIndex;
-                }
-            }
+            ////display entity with {value} in menuElement column
+            //if (tempDisplayedEntity != null && DisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
+            //{
+            //    int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+            //    if ((index + 1 )< tempDisplayedEntities.Count && index!= -1)
+            //    {
+            //        index += 1;
+            //        tempDisplayedEntity = tempDisplayedEntities[index];
+            //        display.Text = DisplayEntity(tempDisplayedEntity);
+            //    }
+            //}
+            //else if(AnimationCursorLineCurntPositionIndex != -1)
+            //{
+            //    display.Focus();
+            //    if (IsAnimCursorInserted)
+            //    {
+            //        display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+            //    }
+            //    AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.IndexOfnextFirstSymbolFinding(display.Text, AnimationCursorLineCurntPositionIndex);
+            //    if (AnimationCursorLineCurntPositionIndex != -1)
+            //    {
+            //        if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+            //        display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+            //    }
+            //}
 
         }      
         private void upButton_Click(object sender, RoutedEventArgs e)
@@ -631,56 +631,58 @@ namespace MRZS.Views.Emulator
         
         private void escButton_Click(object sender, RoutedEventArgs e)
         {
-            //canseled inputing password
-            if (PassStates == PasswordStates.inputingPasswordStart)
-            {
-                display.Text = "Пароль введен" + Environment.NewLine + "  " + "неверно";
-                PassStates = PasswordStates.onlyView;                
-                return;
-            }//second canseled for back to view menu
-            else if ((PassStates == PasswordStates.MemoriseInputedVal || PassStates == PasswordStates.onlyView)
-                && tempDisplayedEntity != null)
-            {
-                if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
-                {
-                    mrzs05mMContxt.RejectChanges();
-                    InputingModeStates = InputingMode.none;
-                    getAnotherVal = false;
-                    //display MrzsInOutOptions
-                    DisplayMenu_MrzsInOutOpt(tempDisplayedEntities);
-                }
-                else display.Text = replaceValueInColumn(tempDisplayedEntity);                     
-                PassStates = PasswordStates.passwordAsk;
-                return;
-            }
-            if (PassStates == PasswordStates.passwordCorrect)
-            {
-                //when user choosing values in menu by clicked Enter and then press Esc
-                PassStates = PasswordStates.MemoriseInputedVal;
-                //temporary memorise textbox text
-                tempDisplayedText = display.Text;
-                display.Text = allowedInputedValue();
-                return;
-            }
-            //clear temp displayed entities
-            if(tempDisplayedEntities.Count>0) tempDisplayedEntities.RemoveRange(0, tempDisplayedEntities.Count);
-            tempDisplayedEntity = null;
-            //get parentID of last selected elem in menu
-            if (SelectMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
-            int? parentId = SelectMenuElemHistory.Last().parentID;
-            //delete displayed entities                        
-            while (true)
-            {
-                if (DisplayedEntities.Last().parentID == SelectMenuElemHistory.Last().id)
-                    DisplayedEntities.Remove(DisplayedEntities.Last());
-                else break;
-            }
-            List<string> list = getEntitiesByParentID(parentId).Select(n => n.menuElement).ToList();
-            //set display first line on last selected word and set animation cursor
-            DisplayMenu(list, SelectMenuElemHistory.Last().menuElement);
-            //delete selected entity
-            SelectMenuElemHistory.Remove(SelectMenuElemHistory.Last());
-            IsAnimCursorInserted = true;            
+            MenuControllr.escButtonClicked();
+
+            ////canseled inputing password
+            //if (PassStates == PasswordStates.inputingPasswordStart)
+            //{
+            //    display.Text = "Пароль введен" + Environment.NewLine + "  " + "неверно";
+            //    PassStates = PasswordStates.onlyView;                
+            //    return;
+            //}//second canseled for back to view menu
+            //else if ((PassStates == PasswordStates.MemoriseInputedVal || PassStates == PasswordStates.onlyView)
+            //    && tempDisplayedEntity != null)
+            //{
+            //    if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+            //    {
+            //        mrzs05mMContxt.RejectChanges();
+            //        InputingModeStates = InputingMode.none;
+            //        getAnotherVal = false;
+            //        //display MrzsInOutOptions
+            //        DisplayMenu_MrzsInOutOpt(tempDisplayedEntities);
+            //    }
+            //    else display.Text = replaceValueInColumn(tempDisplayedEntity);                     
+            //    PassStates = PasswordStates.passwordAsk;
+            //    return;
+            //}
+            //if (PassStates == PasswordStates.passwordCorrect)
+            //{
+            //    //when user choosing values in menu by clicked Enter and then press Esc
+            //    PassStates = PasswordStates.MemoriseInputedVal;
+            //    //temporary memorise textbox text
+            //    tempDisplayedText = display.Text;
+            //    display.Text = allowedInputedValue();
+            //    return;
+            //}
+            ////clear temp displayed entities
+            //if(tempDisplayedEntities.Count>0) tempDisplayedEntities.RemoveRange(0, tempDisplayedEntities.Count);
+            //tempDisplayedEntity = null;
+            ////get parentID of last selected elem in menu
+            //if (SelectMenuElemHistory.Count == 0) return; //!возможна DisplayedEntities будет содержать елем
+            //int? parentId = SelectMenuElemHistory.Last().parentID;
+            ////delete displayed entities                        
+            //while (true)
+            //{
+            //    if (DisplayedEntities.Last().parentID == SelectMenuElemHistory.Last().id)
+            //        DisplayedEntities.Remove(DisplayedEntities.Last());
+            //    else break;
+            //}
+            //List<string> list = getEntitiesByParentID(parentId).Select(n => n.menuElement).ToList();
+            ////set display first line on last selected word and set animation cursor
+            //DisplayMenu(list, SelectMenuElemHistory.Last().menuElement);
+            ////delete selected entity
+            //SelectMenuElemHistory.Remove(SelectMenuElemHistory.Last());
+            //IsAnimCursorInserted = true;            
         }
 
         void SelectMenuElemHistory_OnDelete(object sender, EventArgs e)

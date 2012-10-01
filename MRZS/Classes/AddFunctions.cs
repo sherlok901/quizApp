@@ -23,6 +23,10 @@ namespace MRZS.Classes
         internal static List<mrzs05mMenu> getEntitiesByParentID(IEnumerable<mrzs05mMenu> mrzsTables,int? parentID)
         {
             return (from t in mrzsTables where t.parentID == parentID select t).ToList();
-        }  
+        }
+        internal static mrzs05mMenu getEntityByID(IEnumerable<mrzs05mMenu> mrzsTables, int id)
+        {
+            return (from t in mrzsTables where t.id == id select t).Single();
+        }
     }
 }

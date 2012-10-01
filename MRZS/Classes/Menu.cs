@@ -14,10 +14,10 @@ using MRZS.Web.Models;
 namespace MRZS.Classes
 {
     public class Menu
-    {
-        mrzs05mMenu CurrentRow;
+    {        
         public int ID { get; set; }
         public int? ParentID { get; set; }
+        public bool HasChildren = true;
         List<Menu> children=new List<Menu>();
         public List<Menu> Children
         {
@@ -36,5 +36,7 @@ namespace MRZS.Classes
             set;
         }
         public string Unit { get; set; }
+        public string FirstLine { get; set; }
+        public string SecondLine { get; set; }
     }
 }

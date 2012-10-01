@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Net;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -27,10 +28,10 @@ namespace MRZS.Classes.DisplayCode
         }
         
         
-        private List<Menu> MenuList;
-        private Menu ShowedOne;
-        private Menu ShowedTwo;
-        Menu CurrentMenu;
+        private List<Menu> CurrentMenuList;
+        Menu ShowedFirst;
+        Menu ShowedSecond;        
+        int CurrentMenuWithCursorIndex = -1;
 
         private string firstMenuStr;
         public string FirstMenuStr 
@@ -51,110 +52,130 @@ namespace MRZS.Classes.DisplayCode
                 secondMenuStr = value;
                 OnPropertyChanged(new PropertyChangedEventArgs("SecondMenuStr"));
             }
-        }
-        public bool IsCursorEnabled { get; set; }
-        private bool isCursorInFirstStr;
-        public bool IsCursorInFirstStr 
-        {
-            get { return isCursorInFirstStr; }
-            set
-            {
-                isCursorInFirstStr = value;
-                if (isCursorInFirstStr)
-                {
-                    IsCursorInSecondStr = false;
-                    //adding cursor
-                    int CursorIndex = FirstMenuStr.IndexOf(">");
-                    if (CursorIndex == -1)
-                    {
-                        FirstMenuStr = FirstMenuStr.Insert(0, ">");
-                    }
-                }
-            }
-        }
-        private bool isCursorInSecondStr;
-        public bool IsCursorInSecondStr 
-        {
-            get { return isCursorInSecondStr; }
-            set
-            {
-                isCursorInSecondStr=value;
-                if (IsCursorInSecondStr) IsCursorInFirstStr = false;
-            }
-        }
-        //data load vars
+        }               
         
         //===== Methods ======                
 
         //show or move to next line with cursor
         public void moveToNextLine()
         {
-            if (IsCursorInSecondStr)
+            //for two Menu classes
+            if (ShowedFirst.HasChildren)
             {
-                //show next menuline
-                if (getNextMenuClass(ShowedTwo) != null)
+                //cursor in first line
+                if (FirstMenuStr.IndexOf(">") != -1)
                 {
-                    ShowedOne = ShowedTwo;
-                    ShowedTwo = getNextMenuClass(ShowedOne);
-                    setDisplayingText(ShowedOne, ShowedTwo);
-                    SecondMenuStr = SecondMenuStr.Insert(0, ">");
-                }                
+                    FirstMenuStr = FirstMenuStr.Remove(FirstMenuStr.IndexOf(">"), 1);
+                    SecondMenuStr = SecondMenuStr.Insert(0, ">");                                        
+                }
+                else if (SecondMenuStr.IndexOf(">") != -1)
+                {
+                    if (getNextMenuClass(ShowedSecond) != null)
+                    {                        
+                        ShowedFirst = ShowedSecond;
+                        ShowedSecond = getNextMenuClass(ShowedSecond);
+                        FirstMenuStr = ShowedFirst.FirstLine;
+                        SecondMenuStr = ShowedSecond.FirstLine.Insert(0,">");
+                    }
+                }
             }
+            //for one Menu class
             else
             {
-                //move cursor to second menuline
-                FirstMenuStr= FirstMenuStr.Remove(FirstMenuStr.IndexOf(">"), 1);
-                SecondMenuStr = SecondMenuStr.Insert(0, ">");                
-                IsCursorInSecondStr = true;
-            }
+                if (getNextMenuClass(ShowedFirst) != null)
+                {
+                    ShowedFirst = getNextMenuClass(ShowedFirst);
+                    ShowedSecond = null;
+                    FirstMenuStr = ShowedFirst.FirstLine;
+                    SecondMenuStr = ShowedFirst.SecondLine;
+                }
+            } 
         }
         public void moveToPreviousLine()
         {
-            //cursor in second line
-            if (IsCursorInSecondStr)
-            {
-                SecondMenuStr=SecondMenuStr.Remove(secondMenuStr.IndexOf(">"),1);
-                FirstMenuStr = FirstMenuStr.Insert(0, ">");               
-                IsCursorInFirstStr=true;
-            }
-            else
-            {
-                if (getPreviousMenuClass(ShowedOne) != null)
+            //for two Menu classes
+            if (ShowedFirst.HasChildren)
+            {    
+                //cursor in first line
+                if (FirstMenuStr.IndexOf(">") != -1)
                 {
-                    ShowedTwo = ShowedOne;
-                    ShowedOne = getPreviousMenuClass(ShowedTwo);
-                    setDisplayingText(ShowedOne, ShowedTwo);
-                    IsCursorInFirstStr = true;                    
+                    if(getPreviousMenuClass(ShowedFirst)!=null)
+                    {
+                        ShowedSecond=ShowedFirst;
+                        ShowedFirst=getPreviousMenuClass(ShowedFirst);
+                        FirstMenuStr = ShowedFirst.FirstLine.Insert(0, ">");
+                        SecondMenuStr = ShowedSecond.FirstLine;
+                    }                   
+                }
+                else if (SecondMenuStr.IndexOf(">") != -1)
+                {
+                    SecondMenuStr = SecondMenuStr.Remove(secondMenuStr.IndexOf(">"), 1);
+                    FirstMenuStr = FirstMenuStr.Insert(0, ">");
                 }
             }
+            //for one Menu class
+            else
+            {
+                if (getPreviousMenuClass(ShowedFirst) != null)
+                {                    
+                    ShowedFirst = getPreviousMenuClass(ShowedFirst);
+                    ShowedSecond = null;
+                    FirstMenuStr = ShowedFirst.FirstLine;
+                    SecondMenuStr = ShowedFirst.SecondLine;
+                }
+            }                        
         }
         //get next Menu class for displaying
         Menu getNextMenuClass(Menu CurrentMenu)
         {
-            int index = MenuList.IndexOf(CurrentMenu);
+            Menu m = CurrentMenuList.Where(n => n.ID == CurrentMenu.ID).Single();
+            int index = CurrentMenuList.IndexOf(m);
             if (index > -1 && 
-                ((index + 1) <= (MenuList.Count - 1))) return MenuList[(index + 1)];
+                ((index + 1) <= (CurrentMenuList.Count - 1))) return CurrentMenuList[(index + 1)];
             else return null;
         }
         Menu getPreviousMenuClass(Menu CurrentMenu)
         {
-            int index = MenuList.IndexOf(CurrentMenu);
-            if (index > 0) return MenuList[(index - 1)];
+            Menu m = CurrentMenuList.Where(n => n.ID == CurrentMenu.ID).Single();
+            int index = CurrentMenuList.IndexOf(m);
+            if (index > 0) return CurrentMenuList[(index - 1)];
             else return null;
         }
         void setDisplayingText(Menu one, Menu two)
         {
+            
             FirstMenuStr = one.Name;
             SecondMenuStr = two.Name;
         }
-                
+           
+        //=== PUBLIC METHODS ===
         public void showMenu(List<Menu> list)
         {
-            ShowedOne = list[0];
-            ShowedTwo = list[1];
-            setDisplayingText(ShowedOne, ShowedTwo);
-            IsCursorInFirstStr = true;
-            MenuList = list;            
+            //for displaying two lines of text
+            if (list.Count > 1) ShowedLogic(list[0], list[1], true);
+            //for one text line
+            else ShowedLogic(list[0], null,true); 
+            CurrentMenuList = list;            
+        }
+        //show previous parent Menu class what was choosed by user
+        internal void showMenu(List<Menu> list, Menu ParentChoosedMenu)
+        {
+            Menu MenuCurrent = list.Where(n => n.ID == (ParentChoosedMenu.ID)).Single();                        
+            int index=list.IndexOf(MenuCurrent);
+            Menu next = null;
+            //if it is last Menu in list
+            if (index == (list.Count - 1))
+            {
+                next = list[(index - 1)];
+                ShowedLogic(ParentChoosedMenu, next,false);
+            }
+            else if ((index > -1) && ((index + 1) < list.Count))
+            {
+                next = list[(index + 1)];
+                ShowedLogic(ParentChoosedMenu, next,true);
+            }
+            
+            CurrentMenuList = list;
         }
         internal DisplayViewModel getThisInstance()
         {
@@ -164,9 +185,53 @@ namespace MRZS.Classes.DisplayCode
         //get choosed Menu class by user clicking on Enter button
         public Menu getChoosedMenuClass()
         {
-            if (IsCursorInFirstStr) return ShowedOne;
-            else if (IsCursorInSecondStr) return ShowedTwo;
-            else return null;
+            //for two Menu classes
+            if (ShowedFirst.HasChildren)
+            {                
+                //for two Menu classes
+                if (FirstMenuStr.IndexOf(">") != -1) 
+                {
+                    if (FirstMenuStr.IndexOf(ShowedFirst.FirstLine) != -1) return ShowedFirst;
+                    else if (FirstMenuStr.IndexOf(ShowedSecond.FirstLine) != -1) return ShowedSecond;
+                    else return null;
+                }
+                else if (SecondMenuStr.IndexOf(">") != -1)
+                {
+                    if (SecondMenuStr.IndexOf(ShowedFirst.FirstLine) != -1) return ShowedFirst;
+                    else if (SecondMenuStr.IndexOf(ShowedSecond.FirstLine) != -1) return ShowedSecond;
+                    else return null;
+                }
+                else return null;
+            }
+            //for one Menu classes
+            else return ShowedFirst;            
+        }
+
+        //logic for displaying one Menu or two Menu classes
+        void ShowedLogic(Menu one,Menu two,bool IsCursorInFirst)
+        {
+            if (one != null && one.HasChildren && two!=null)
+            {
+                if (IsCursorInFirst)
+                {
+                    FirstMenuStr = one.FirstLine.Insert(0, ">");
+                    SecondMenuStr = two.FirstLine;
+                }
+                else
+                {
+                    FirstMenuStr = two.FirstLine;
+                    SecondMenuStr = one.FirstLine.Insert(0, ">");                    
+                }
+                ShowedFirst = one;
+                ShowedSecond = two;
+            }            
+            else if (one != null && (!one.HasChildren))
+            {
+                FirstMenuStr = one.FirstLine;
+                SecondMenuStr = one.SecondLine;
+                ShowedFirst = one;
+                ShowedSecond = null;
+            }
         }
     }
 }
