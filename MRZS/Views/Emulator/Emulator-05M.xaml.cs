@@ -121,10 +121,14 @@ namespace MRZS.Views.Emulator
             display.Padding = new Thickness(5.0);                          
             display.SelectionStart = display.Text.Length;
 
-         
-            //dispViewModel = new DisplayViewModel { FirstMenuStr = "sfs", SecondMenuStr = "sfsf" };
-            //emju.DataContext = dispViewModel;
-            //dispViewModel.FirstMenuStr = "dddddd";
+            Color a = new Color();
+            a.A = Convert.ToByte(100);
+            a.B = Convert.ToByte(47);
+            a.G = Convert.ToByte(255);
+            a.R = Convert.ToByte(173);                                    
+            //emju.Background = new SolidColorBrush(a);
+            //emju.SecondTextBlock.Background = new SolidColorBrush(a);
+                        
             //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
             MenuControllr.DataLoad += MenuControllr_DataLoad;
@@ -137,7 +141,10 @@ namespace MRZS.Views.Emulator
 
         void MenuControllr_DataLoad(object sender, EventArgs e)
         {
-            emju.DataContext = MenuControllr.setDefaultMenu();
+            DisplayViewModel DispControlr=MenuControllr.setDefaultMenu();
+            emju.DataContext = DispControlr;
+            //give DisplayViewModel instance
+            PasswordController.setDisplayController(DispControlr);
         }
 
         void ld_DataLoaded(object sender, EventArgs e)
@@ -336,10 +343,9 @@ namespace MRZS.Views.Emulator
 
         private void enterButton_Click_2(object sender, RoutedEventArgs e)
         {
-            MenuControllr.enterButtonClicked();
-
-            //enterFunc();
+            MenuControllr.enterButtonClicked(emju);
             
+            //enterFunc();            
         }
 
         private void enterFunc()
@@ -631,7 +637,7 @@ namespace MRZS.Views.Emulator
         
         private void escButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.escButtonClicked();
+            MenuControllr.escButtonClicked(emju);
 
             ////canseled inputing password
             //if (PassStates == PasswordStates.inputingPasswordStart)
@@ -1388,18 +1394,19 @@ namespace MRZS.Views.Emulator
 
         #region Numeric buttons events =============================================
         private void button1_Click(object sender, RoutedEventArgs e)
-        {            
-            //for inputing password
-            if (PassStates == PasswordStates.inputingPasswordStart)
-            {
-                inputedSymbol += "1";
-                passwordInputsDisplay(display, "1");
-            }
-            else
-            {//for inputing num                
-                display.Text = replaceSymbol(display.Text, currInputPosition, "1");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+        {
+            MenuControllr.num1Clicked();
+            ////for inputing password
+            //if (PassStates == PasswordStates.inputingPasswordStart)
+            //{
+            //    inputedSymbol += "1";
+            //    passwordInputsDisplay(display, "1");
+            //}
+            //else
+            //{//for inputing num                
+            //    display.Text = replaceSymbol(display.Text, currInputPosition, "1");
+            //    selectOneNumInTextBox(display, currInputPosition);
+            //}
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {

@@ -49,10 +49,11 @@ namespace MRZS.Classes
         public IEnumerable<mtzVal> mtzValTable {get{return  mtzValList; }}
         public IEnumerable<mrzsInOutOption> mrzsInOutOptionTable {get{return  mrzsInOutOptionList; }}
         public event EventHandler DataLoaded;
+        mrzs05mMenuContext mrzs05mMContxt = null;
 
         internal LoadData()
         {
-            mrzs05mMenuContext mrzs05mMContxt = new mrzs05mMenuContext();
+            mrzs05mMContxt = new mrzs05mMenuContext();
             mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
             passwordCheckTypeModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetPasswordCheckTypesQuery());
@@ -72,10 +73,17 @@ namespace MRZS.Classes
             mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
             mtzValModel.Completed += mtzValModel_Completed;
             mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
-            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
-            
+            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;            
         }
 
+        internal void rejectAllChanges()
+        {
+            mrzs05mMContxt.RejectChanges();
+        }
+        internal void savingAllChanges()
+        {
+            mrzs05mMContxt.SubmitChanges();
+        }
         void mrzsInOutOptModel_Completed(object sender, EventArgs e)
         {
             mrzsInOutOptionList = mrzsInOutOptModel.Entities;

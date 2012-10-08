@@ -25,8 +25,7 @@ namespace MRZS.Classes.DisplayCode
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null) PropertyChanged(this, e);
-        }
-        
+        }        
         
         private List<Menu> CurrentMenuList;
         Menu ShowedFirst;
@@ -185,6 +184,8 @@ namespace MRZS.Classes.DisplayCode
         //get choosed Menu class by user clicking on Enter button
         public Menu getChoosedMenuClass()
         {
+            if (ShowedFirst == null) return null;
+
             //for two Menu classes
             if (ShowedFirst.HasChildren)
             {                
@@ -233,5 +234,15 @@ namespace MRZS.Classes.DisplayCode
                 ShowedSecond = null;
             }
         }
+
+        //show text
+        internal void showText(string FirstLine,string SecondLine)
+        {
+            //ShowedFirst = null;
+            //ShowedSecond = null;
+            FirstMenuStr = FirstLine;
+            SecondMenuStr = SecondLine;
+        }
+        
     }
 }

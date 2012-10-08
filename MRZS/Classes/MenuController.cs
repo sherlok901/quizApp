@@ -12,6 +12,7 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
+using MRZS.Views.Emulator;
 
 namespace MRZS.Classes
 {
@@ -26,7 +27,7 @@ namespace MRZS.Classes
         public event EventHandler DataLoad;        
         //current parentID of menu
         int? CurrentParentID = null;
-        
+        bool Showed = false;        
 
         internal MenuController()
         {
@@ -146,33 +147,81 @@ namespace MRZS.Classes
             dispControllr.moveToPreviousLine();
         }
 
-        internal void enterButtonClicked()
-        {
+        internal void enterButtonClicked(EmulatorDisplay d)
+        {            
             //get choosed Menu
             Menu ChoosedMenu = dispControllr.getChoosedMenuClass();
             if (ChoosedMenu != null)
             {
                 //get deeper Menu level by ID choosed menu
-                List<Menu> list=getMenu(ChoosedMenu.ID);
-                if (list.Count == 0) return;
-
-                dispControllr.showMenu(list);
-                //add choosed Menu id to list
-                SelectedID.Add(ChoosedMenu.ID);
+                List<Menu> list = getMenu(ChoosedMenu.ID);
+                //no deeper menu
+                if (list.Count == 0)
+                {                    
+                    PasswordController.passwordProcess();
+                    //first show text with selected second line
+                    if (PasswordController.canShowValueWithSelection())
+                    {                        
+                        dispControllr.showText(dispControllr.getChoosedMenuClass().FirstLine, dispControllr.getChoosedMenuClass().SecondLine);
+                        d.IsSecondLineSelected = true;                        
+                    }
+                    else if (PasswordController.canShowChangebleValue())
+                    {
+                        //user can change value\values
+                        //and showing selected changed value
+                        changingValue(dispControllr.getChoosedMenuClass());
+                        //select selecond line on display
+                        d.IsSecondLineSelected = true;
+                    }
+                    //if user want save inputed\choosed value
+                    else if (PasswordController.isWaitingState())
+                    {
+                        ld.savingAllChanges();
+                        //set first state
+                        PasswordController.setPasswordAsk();
+                        //show parent last selected menu
+                        returnToParentMenu();
+                    }
+                }
+                //still exist deeper menu
+                else
+                {
+                    dispControllr.showMenu(list);
+                    //add choosed Menu id to list
+                    SelectedID.Add(ChoosedMenu.ID);
+                }
             }
+            
         }
-        internal void escButtonClicked()
-        {            
-            //get selected mrzs05menu entity
-            if (SelectedID.Count == 0) return;
-            mrzs05mMenu temp=ld.MrzsTable.Where(n=>n.id==SelectedID.Last()).Single();
-            if (temp == null) return;
+        internal void escButtonClicked(EmulatorDisplay d)
+        {
+            //if user canseled after entering\choosing value
+            if (PasswordController.canShowChangebleValue())
+            {
+                //turn off selection
+                d.IsSecondLineSelected = false;
+                dispControllr.showText("Вы уверены?", "Enter-ДА, Esc-НЕТ");
+                //set waiting state of confirming value by user
+                PasswordController.setWaintingState();
+                return;
+            }
 
-            //transform entity to Menu class
-            Menu LastChoosedMenu= getTransformedMenuClass(temp);
-            dispControllr.showMenu(getMenu(LastChoosedMenu.ParentID), LastChoosedMenu);
-            //delete last selected Menu class
-            SelectedID.RemoveAt(SelectedID.IndexOf(SelectedID.Last()));
+            //if user want reject entered\choosed value
+            if (PasswordController.isWaitingState())
+            {
+                ld.rejectAllChanges();
+                //set first state
+                PasswordController.setPasswordAsk();
+            }
+            
+            //if no selected mrzs05menu entity
+            if (SelectedID.Count == 0) return;
+
+            returnToParentMenu();
+        }
+        internal void num1Clicked()
+        {
+            dispControllr.SecondMenuStr += "1";
         }
 
         //methods for replace strings
@@ -221,6 +270,73 @@ namespace MRZS.Classes
             else if (ent.BooleanVal3ID != null) return ent.BooleanVal3.boolVal;
             else if (ent.mtzValID != null) return ent.mtzVal.mtzVals;
             else return null;
+        }
+        
+        //give user opportunity input\choose value\values
+        //this method get next choosed value and set it to mrzs entity
+        void changingValue(Menu CurrMenu)
+        {
+            //get current entity
+            mrzs05mMenu ent = ld.MrzsTable.Where(n => n.id == CurrMenu.ID).Single();
+            if (ent.value == null)
+            {
+                string val = null;
+                if (ent.kindSignalDCid != null)
+                {
+                    kindSignalDC KindEnt = ld.kindSignalDCTable.Where(n => n.id != ent.kindSignalDCid).Single();
+                    val = KindEnt.kindSignal;
+                    ent.kindSignalDCid = Convert.ToInt32(KindEnt.id);
+                }
+                else if (ent.typeSignalDCid != null)
+                {
+                    typeSignalDC TypeEnt = ld.typeSignalDCTable.Where(n => n.id != ent.typeSignalDCid).Single();
+                    val = TypeEnt.typeSignal;
+                    ent.typeSignalDCid = Convert.ToInt32(TypeEnt.id);
+                }
+                else if (ent.typeFuncDCid != null)
+                {
+                    typeFuncDC TypeFunc = ld.typeFuncDCTable.Where(n => n.@int != ent.typeFuncDCid).Single();
+                    val = TypeFunc.typeFunction;
+                    ent.typeFuncDCid = Convert.ToInt32(TypeFunc.@int);
+                }
+                else if (ent.BooleanVal2ID != null)
+                {
+                    BooleanVal2 Bool2Ent = ld.BooleanVal2Table.Where(n => n.id != ent.BooleanVal2ID).Single();
+                    val = Bool2Ent.val;
+                    //set new value to current mrzs05Menu entity
+                    ent.BooleanVal2ID = Convert.ToInt32(Bool2Ent.id);
+                }
+                else if (ent.BooleanVal3ID != null)
+                {
+                    BooleanVal3 Bool3 = ld.BooleanVal3Table.Where(n => n.id != ent.BooleanVal3ID).Single();
+                    val = Bool3.boolVal;
+                    ent.BooleanVal3ID = Convert.ToInt32(Bool3.id);
+                }
+                else if (ent.mtzValID != null)
+                {
+                    mtzVal MtzEnt = ld.mtzValTable.Where(n => n.id != ent.mtzValID).Single();
+                    val = MtzEnt.mtzVals;
+                    ent.mtzValID = Convert.ToInt32(MtzEnt.id);
+                }
+
+                CurrMenu.SecondLine = val;
+                dispControllr.SecondMenuStr = val;
+                
+            }
+        }
+
+        //return to parent selected menu
+        void returnToParentMenu()
+        {
+            //get selected mrzs05menu entity
+            mrzs05mMenu temp = ld.MrzsTable.Where(n => n.id == SelectedID.Last()).Single();
+            if (temp == null) return;
+
+            //transform entity to Menu class
+            Menu LastChoosedMenu = getTransformedMenuClass(temp);
+            dispControllr.showMenu(getMenu(LastChoosedMenu.ParentID), LastChoosedMenu);
+            //delete last selected Menu class
+            SelectedID.RemoveAt(SelectedID.IndexOf(SelectedID.Last()));
         }
     }
 }

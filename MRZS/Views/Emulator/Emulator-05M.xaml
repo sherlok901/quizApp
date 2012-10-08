@@ -228,7 +228,7 @@
                     </EventTrigger>
                 </TextBox.Triggers>
             </TextBox>
-            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="1" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-225,0,0,0"></Emulator:EmulatorDisplay>
+            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="1" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-225,0,0,0" AllowDrop="True" ></Emulator:EmulatorDisplay>
             
             
             <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
