@@ -128,6 +128,8 @@ namespace MRZS.Views.Emulator
             a.R = Convert.ToByte(173);                                    
             //emju.Background = new SolidColorBrush(a);
             //emju.SecondTextBlock.Background = new SolidColorBrush(a);
+            
+            
                         
             //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
@@ -221,7 +223,7 @@ namespace MRZS.Views.Emulator
         #region cursor events ***
         private void downButton_Click(object sender, RoutedEventArgs e)
         {            
-            MenuControllr.showNextMenuLine();
+            MenuControllr.showNextMenuLine(emju);
 
             //if (InputingModeStates == InputingMode.ChoosingByEnter) return;
             //else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
@@ -266,44 +268,44 @@ namespace MRZS.Views.Emulator
         }      
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.showPreviousMenuLine();
+            MenuControllr.showPreviousMenuLine(emju);
 
-            if (InputingModeStates == InputingMode.ChoosingByEnter) return;
-            else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
-            {
-                //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
-                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
-                if (index > 0)
-                {
-                    index -= 1;
-                    tempDisplayedEntity = tempDisplayedEntities[index];
-                    showMrzsInOutOptions();                    
-                }
-                return;                              
-            }
-            //display entity with {value} in menuElement column
-            if (tempDisplayedEntity != null && tempDisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
-            {
-                int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);                
-                if (index > 0)
-                {
-                    index -= 1;
-                    tempDisplayedEntity = tempDisplayedEntities[index];
-                    if (tempDisplayedEntity.menuElement.IndexOf("{value}") != -1)
-                        display.Text = DisplayEntity(tempDisplayedEntity);
-                }
-            }
-            else if (AnimationCursorLineCurntPositionIndex != -1)
-            {
-                display.Focus();
-                if (IsAnimCursorInserted) display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
-                AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
-                if (AnimationCursorLineCurntPositionIndex != -1)
-                {
-                    if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
-                    display.SelectionStart = AnimationCursorLineCurntPositionIndex;
-                }
-            }
+            //if (InputingModeStates == InputingMode.ChoosingByEnter) return;
+            //else if (InputingModeStates == InputingMode.ChoosingByEnterAndShowNextEntity)
+            //{
+            //    //show next mrzs05Menu entity where mrzsInOutOption and BooleanValId not null
+            //    int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);
+            //    if (index > 0)
+            //    {
+            //        index -= 1;
+            //        tempDisplayedEntity = tempDisplayedEntities[index];
+            //        showMrzsInOutOptions();                    
+            //    }
+            //    return;                              
+            //}
+            ////display entity with {value} in menuElement column
+            //if (tempDisplayedEntity != null && tempDisplayedEntities.Count != 0 &&tempDisplayedEntity.menuElement!=null)
+            //{
+            //    int index = tempDisplayedEntities.IndexOf(tempDisplayedEntity);                
+            //    if (index > 0)
+            //    {
+            //        index -= 1;
+            //        tempDisplayedEntity = tempDisplayedEntities[index];
+            //        if (tempDisplayedEntity.menuElement.IndexOf("{value}") != -1)
+            //            display.Text = DisplayEntity(tempDisplayedEntity);
+            //    }
+            //}
+            //else if (AnimationCursorLineCurntPositionIndex != -1)
+            //{
+            //    display.Focus();
+            //    if (IsAnimCursorInserted) display.Text = display.Text.Remove(AnimationCursorLineCurntPositionIndex, 1);
+            //    AnimationCursorLineCurntPositionIndex = EmulatorDisplayController.getPreviousIndexOfStartLineDisplay(display.Text, AnimationCursorLineCurntPositionIndex);
+            //    if (AnimationCursorLineCurntPositionIndex != -1)
+            //    {
+            //        if (IsAnimCursorInserted) display.Text = display.Text.Insert(AnimationCursorLineCurntPositionIndex, ">");
+            //        display.SelectionStart = AnimationCursorLineCurntPositionIndex;
+            //    }
+            //}
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {

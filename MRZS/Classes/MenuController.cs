@@ -138,13 +138,24 @@ namespace MRZS.Classes
             dispControllr.showMenu(getFirstMenu());
             return dispControllr.getThisInstance();
         }
-        internal void showNextMenuLine()
+        internal void showNextMenuLine(EmulatorDisplay d)
         {
             dispControllr.moveToNextLine();
+            impruveSelection(d);
         }
-        internal void showPreviousMenuLine()
+        //impruve selection
+        private static void impruveSelection(EmulatorDisplay d)
+        {
+            //check width of selection
+            if (d.IsSecondLineSelected)
+            {
+                d.SecondBorder.Width = d.SecondTextBlock.Text.Length * 16;
+            }
+        }
+        internal void showPreviousMenuLine(EmulatorDisplay d)
         {
             dispControllr.moveToPreviousLine();
+            impruveSelection(d);
         }
 
         internal void enterButtonClicked(EmulatorDisplay d)
@@ -157,14 +168,24 @@ namespace MRZS.Classes
                 List<Menu> list = getMenu(ChoosedMenu.ID);
                 //no deeper menu
                 if (list.Count == 0)
-                {                    
+                {
+                    //if showed that password entered incorrect
+                    if (PasswordController.IsPasswordCorrect() == false)
+                    {
+                        PasswordController.setPasswordAsk();
+                        //show parent menu
+                        returnToParentMenu();
+                        return;
+                    }
+
                     PasswordController.passwordProcess();
-                    //first show text with selected second line
+                        //first show text with selected second line
                     if (PasswordController.canShowValueWithSelection())
                     {                        
                         dispControllr.showText(dispControllr.getChoosedMenuClass().FirstLine, dispControllr.getChoosedMenuClass().SecondLine);
                         d.IsSecondLineSelected = true;                        
                     }
+                        //show next value
                     else if (PasswordController.canShowChangebleValue())
                     {
                         //user can change value\values
@@ -173,7 +194,7 @@ namespace MRZS.Classes
                         //select selecond line on display
                         d.IsSecondLineSelected = true;
                     }
-                    //if user want save inputed\choosed value
+                        //if user want save inputed\choosed value
                     else if (PasswordController.isWaitingState())
                     {
                         ld.savingAllChanges();
@@ -181,7 +202,7 @@ namespace MRZS.Classes
                         PasswordController.setPasswordAsk();
                         //show parent last selected menu
                         returnToParentMenu();
-                    }
+                    }                                                                    
                 }
                 //still exist deeper menu
                 else
@@ -195,6 +216,7 @@ namespace MRZS.Classes
         }
         internal void escButtonClicked(EmulatorDisplay d)
         {
+            
             //if user canseled after entering\choosing value
             if (PasswordController.canShowChangebleValue())
             {
@@ -205,15 +227,19 @@ namespace MRZS.Classes
                 PasswordController.setWaintingState();
                 return;
             }
-
             //if user want reject entered\choosed value
-            if (PasswordController.isWaitingState())
+            else if (PasswordController.isWaitingState())
             {
                 ld.rejectAllChanges();
                 //set first state
                 PasswordController.setPasswordAsk();
             }
-            
+            //if showed that password entered incorrect or canseled entering password process
+            else if (PasswordController.IsPasswordCorrect() == false||PasswordController.IsCheckPassword())
+            {
+                PasswordController.setPasswordAsk();                
+            }            
+
             //if no selected mrzs05menu entity
             if (SelectedID.Count == 0) return;
 
@@ -321,8 +347,15 @@ namespace MRZS.Classes
 
                 CurrMenu.SecondLine = val;
                 dispControllr.SecondMenuStr = val;
-                
+
             }
+                //if changed\entered numerical value
+            else changingNumValue(ent);
+        }
+        //changing\enter numerical value
+        void changingNumValue(mrzs05mMenu CurrEntity)
+        {
+
         }
 
         //return to parent selected menu

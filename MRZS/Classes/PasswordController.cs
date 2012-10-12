@@ -23,8 +23,7 @@ namespace MRZS.Classes
         {            
             CheckPassword,
             passwordCorrect,
-            passwordInCorrect,
-            onlyView,
+            passwordInCorrect,           
             allowedEnterOrChooseValue,
             canShowValue,
             confirmOrCanseledMemorize,
@@ -102,6 +101,22 @@ namespace MRZS.Classes
         {
             if (St == states.confirmOrCanseledMemorize) return true;
             else return false;
+        }
+        static internal bool? IsPasswordCorrect()
+        {
+            if (St == states.passwordInCorrect) return false;
+            else if (St == states.passwordAsk || St == states.CheckPassword) return null;
+            else return true;//careful there
+        }
+        static internal bool IsCheckPassword()
+        {
+            if (St == states.CheckPassword) return true;
+            else return false;
+        }
+        static internal bool? IsPasswordIncorrect()
+        {
+            if (St == states.passwordInCorrect) return true;
+            else return false;//careful there
         }
         static internal bool CanChangeValue()
         {
