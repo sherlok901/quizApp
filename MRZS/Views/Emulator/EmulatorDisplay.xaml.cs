@@ -49,20 +49,25 @@ namespace MRZS.Views.Emulator
                 SecondLineSelected = value;
                 if (SecondLineSelected)
                 {
-                    SecondBorder.Width = 16 * SecondTextBlock.Text.Length;                    
-                    SecondBorder.Background = new SolidColorBrush(Colors.Black);
-                    SecondTextBlock.Foreground = new SolidColorBrush(Colors.White);                                      
+                    //SecondBorder.Width = 16 * SecondTextBlock.Text.Length;      
+                    SecondTextBlock.Focus();
+                    SecondTextBlock.SelectionStart = 0;
+                    SecondTextBlock.SelectionLength = SecondTextBlock.Text.Length;
+                    //SecondBorder.Background = new SolidColorBrush(Colors.Black);
+                    //SecondTextBlock.Foreground = new SolidColorBrush(Colors.White);                                      
                 }
                 else
                 {
-                    Color a = new Color();
-                    a.A = Convert.ToByte(100);
-                    a.B = Convert.ToByte(47);
-                    a.G = Convert.ToByte(255);
-                    a.R = Convert.ToByte(173);
-                    SecondBorder.Background = new SolidColorBrush(a);
-                    SecondTextBlock.Foreground = new SolidColorBrush(Colors.Black);
-                    SecondBorder.Width = 229;
+                    SecondTextBlock.Focus();
+                    SecondTextBlock.SelectionLength = 0;
+                    //Color a = new Color();
+                    //a.A = Convert.ToByte(100);
+                    //a.B = Convert.ToByte(47);
+                    //a.G = Convert.ToByte(255);
+                    //a.R = Convert.ToByte(173);
+                    //SecondBorder.Background = new SolidColorBrush(a);
+                    //SecondTextBlock.Foreground = new SolidColorBrush(Colors.Black);
+                    //SecondBorder.Width = 229;
                 }
             }
         }

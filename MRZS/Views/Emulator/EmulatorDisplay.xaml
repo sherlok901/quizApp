@@ -4,7 +4,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="61" d:DesignWidth="229">
+    d:DesignHeight="61" d:DesignWidth="229" >
+
+    
     
     <Grid x:Name="LayoutRoot" Background="White">
         <Border             
@@ -13,7 +15,9 @@
             <StackPanel x:Name="DisplayPanel" Width="229" Height="61" Background="GreenYellow">
                 <TextBlock x:Name="FirstTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding FirstMenuStr,Mode=OneWay,UpdateSourceTrigger=Default}" ></TextBlock>
                 <Border x:Name="SecondBorder" Background="GreenYellow" HorizontalAlignment="Left">
-                    <TextBlock x:Name="SecondTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=OneWay}" HorizontalAlignment="Left"></TextBlock>
+                    <!--<TextBlock x:Name="SecondTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=OneWay}" HorizontalAlignment="Left"></TextBlock>-->
+                    <TextBox x:Name="SecondTextBlock"  IsReadOnly="True"  Background="GreenYellow" HorizontalAlignment="Left" Style="{StaticResource ReadOnlyStyle}"
+                             FontFamily="Arial" Padding="5,1,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=TwoWay}" Width="229"></TextBox>
                 </Border>
                 <!--<TextBox x:Name="SecondTextBlock" FontFamily="Arial" Padding="5,3,0,3" FontSize="20" Text="{Binding SecondMenuStr,Mode=OneWay}" BorderThickness="0" IsReadOnly="True"/>-->
             </StackPanel>

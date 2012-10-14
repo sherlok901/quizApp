@@ -69,13 +69,17 @@ namespace MRZS.Classes
                     break;
                 case states.allowedEnterOrChooseValue:
                     St = states.canShowValue;
-                    break;
+                    break;                
             }
         }
         //set first state
         static internal void setPasswordAsk()
         {
             St = states.passwordAsk;
+        }
+        static internal void setMemorizeValue()
+        {
+            St = states.MemoriseInputedVal;
         }
         //set waiting state
         static internal void setWaintingState()
@@ -117,6 +121,11 @@ namespace MRZS.Classes
         {
             if (St == states.passwordInCorrect) return true;
             else return false;//careful there
+        }
+        static internal bool isPasswordAsk()
+        {
+            if (St == states.passwordAsk) return true;
+            else return false;
         }
         static internal bool CanChangeValue()
         {

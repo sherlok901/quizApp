@@ -18,13 +18,13 @@ namespace UnitTestProject1
         [TestMethod]
         public void TestREGEX()
         {            
-            string rez = Inputing.getNumIndexes(s);
+            string rez = Inputing.getNumsFromStr(s);
             Assert.AreEqual("0002.0000", rez);
         }
         [TestMethod]
         public void TestIndexOf()
         {
-            string rez = Inputing.getNumIndexes(s);
+            string rez = Inputing.getNumsFromStr(s);
             int index = s.IndexOf(rez);
             Assert.AreEqual(14, index);
         }

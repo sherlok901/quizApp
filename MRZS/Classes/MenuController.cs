@@ -17,11 +17,12 @@ using MRZS.Views.Emulator;
 namespace MRZS.Classes
 {
     internal class MenuController
-    {
+    {       
         IEnumerable<mrzs05mMenu> MrzsTables;        
         DisplayViewModel dispControllr = new DisplayViewModel();
         LoadData ld = new LoadData();
         List<int> SelectedID = new List<int>(0);
+        NumValueChanging NumValue = new NumValueChanging();
         List<int?> AllParentID;
 
         public event EventHandler DataLoad;        
@@ -30,7 +31,7 @@ namespace MRZS.Classes
         bool Showed = false;        
 
         internal MenuController()
-        {
+        {            
             //subcribe to data load event
             ld.DataLoaded += ld_DataLoaded;
         }
@@ -181,18 +182,40 @@ namespace MRZS.Classes
                     PasswordController.passwordProcess();
                         //first show text with selected second line
                     if (PasswordController.canShowValueWithSelection())
-                    {                        
-                        dispControllr.showText(dispControllr.getChoosedMenuClass().FirstLine, dispControllr.getChoosedMenuClass().SecondLine);
-                        d.IsSecondLineSelected = true;                        
+                    {   
+                        //show menu
+                        Menu m=dispControllr.getChoosedMenuClass();
+                        dispControllr.showText(m.FirstLine, m.SecondLine);
+
+                        //select first digit
+                        if (Inputing.isNumericValue(m.SecondLine))
+                        {
+                            changingNumValue2(d, dispControllr.getChoosedMenuClass());                            
+                        }
+                        //select all value
+                        else d.IsSecondLineSelected = true;                        
+                        
                     }
                         //show next value
                     else if (PasswordController.canShowChangebleValue())
-                    {
-                        //user can change value\values
-                        //and showing selected changed value
-                        changingValue(dispControllr.getChoosedMenuClass());
-                        //select selecond line on display
-                        d.IsSecondLineSelected = true;
+                    {                        
+                        Menu m = dispControllr.getChoosedMenuClass();
+                        if (Inputing.isNumericValue(m.SecondLine))
+                        {                                                        
+                            //canseled\saving dialog
+                            changingNumValue2(d, dispControllr.getChoosedMenuClass());                            
+                            d.IsSecondLineSelected = false;
+                            dispControllr.showText("Вы уверены?", "Enter-ДА, Esc-НЕТ");
+                            //set waiting state of confirming value by user
+                            PasswordController.setWaintingState();
+                            return;
+                        }
+                        else
+                        {
+                            //select all value
+                            changingValue(d, dispControllr.getChoosedMenuClass());
+                            d.IsSecondLineSelected = true;
+                        }                        
                     }
                         //if user want save inputed\choosed value
                     else if (PasswordController.isWaitingState())
@@ -218,8 +241,15 @@ namespace MRZS.Classes
         {
             
             //if user canseled after entering\choosing value
-            if (PasswordController.canShowChangebleValue())
+            if (PasswordController.canShowChangebleValue()||PasswordController.canShowValueWithSelection())
             {
+                Menu m = dispControllr.getChoosedMenuClass();
+                if (Inputing.isNumericValue(m.SecondLine))
+                {
+                    //saving numeric value
+                    changingNumValue2(d, m);
+                }
+
                 //turn off selection
                 d.IsSecondLineSelected = false;
                 dispControllr.showText("Вы уверены?", "Enter-ДА, Esc-НЕТ");
@@ -245,9 +275,24 @@ namespace MRZS.Classes
 
             returnToParentMenu();
         }
-        internal void num1Clicked()
+        internal void numButtonClicked(TextBox t,int num)
         {
-            dispControllr.SecondMenuStr += "1";
+            if (PasswordController.canShowChangebleValue() || PasswordController.canShowValueWithSelection())
+            {
+                NumValue.enteredNumeric(t,num);                
+            }
+            else if (PasswordController.IsCheckPassword()) dispControllr.SecondMenuStr += num.ToString();
+        }
+        
+        internal void leftButtonClicked(TextBox t)
+        {
+            Menu m = dispControllr.getChoosedMenuClass();
+            if (Inputing.isNumericValue(m.SecondLine) && PasswordController.canShowValueWithSelection()) NumValue.leftButtonClicked(t);
+        }
+        internal void rightButtonClicked(TextBox t)
+        {
+            Menu m = dispControllr.getChoosedMenuClass();
+            if (Inputing.isNumericValue(m.SecondLine) && PasswordController.canShowValueWithSelection()) NumValue.rightButtonclicked(t);
         }
 
         //methods for replace strings
@@ -300,17 +345,22 @@ namespace MRZS.Classes
         
         //give user opportunity input\choose value\values
         //this method get next choosed value and set it to mrzs entity
-        void changingValue(Menu CurrMenu)
+        void changingValue(EmulatorDisplay d,Menu CurrMenu)
         {
             //get current entity
-            mrzs05mMenu ent = ld.MrzsTable.Where(n => n.id == CurrMenu.ID).Single();
+            mrzs05mMenu ent = AddFunctions.getEntityByID(ld.MrzsTable, CurrMenu.ID);
+            
+            //if value can be choosed by Enter
             if (ent.value == null)
             {
                 string val = null;
                 if (ent.kindSignalDCid != null)
                 {
+                    //get entity by another id that not equale id of Menu
                     kindSignalDC KindEnt = ld.kindSignalDCTable.Where(n => n.id != ent.kindSignalDCid).Single();
+                    //get val from entity
                     val = KindEnt.kindSignal;
+
                     ent.kindSignalDCid = Convert.ToInt32(KindEnt.id);
                 }
                 else if (ent.typeSignalDCid != null)
@@ -349,13 +399,24 @@ namespace MRZS.Classes
                 dispControllr.SecondMenuStr = val;
 
             }
-                //if changed\entered numerical value
-            else changingNumValue(ent);
+            //if changed\entered numerical value
+            //else
+            //{
+            //    //changing\enter numerical value
+            //    NumValue.parseNumeric(d.SecondTextBlock, d.SecondTextBlock.Text);
+            //}
         }
-        //changing\enter numerical value
-        void changingNumValue(mrzs05mMenu CurrEntity)
+        
+        //select inputed numeric value and temporary saving
+        void changingNumValue2(EmulatorDisplay d, Menu CurrMenu)
         {
-
+            //get current entity
+            mrzs05mMenu ent = AddFunctions.getEntityByID(ld.MrzsTable, CurrMenu.ID);
+            NumValue.parseNumeric(d.SecondTextBlock, d.SecondTextBlock.Text);
+            //temporary saved value
+            NumValue.setValue(dispControllr.SecondMenuStr);
+            CurrMenu.SecondLine = NumValue.getValue() + CurrMenu.Unit;
+            if (ent.value.Equals(NumValue.getValue()) == false) ent.value = NumValue.getValue();
         }
 
         //return to parent selected menu
@@ -371,5 +432,7 @@ namespace MRZS.Classes
             //delete last selected Menu class
             SelectedID.RemoveAt(SelectedID.IndexOf(SelectedID.Last()));
         }
+
+        
     }
 }

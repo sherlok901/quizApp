@@ -121,15 +121,13 @@ namespace MRZS.Views.Emulator
             display.Padding = new Thickness(5.0);                          
             display.SelectionStart = display.Text.Length;
 
-            Color a = new Color();
-            a.A = Convert.ToByte(100);
-            a.B = Convert.ToByte(47);
-            a.G = Convert.ToByte(255);
-            a.R = Convert.ToByte(173);                                    
+            //Color a = new Color();
+            //a.A = Convert.ToByte(100);
+            //a.B = Convert.ToByte(47);
+            //a.G = Convert.ToByte(255);
+            //a.R = Convert.ToByte(173);                                    
             //emju.Background = new SolidColorBrush(a);
-            //emju.SecondTextBlock.Background = new SolidColorBrush(a);
-            
-            
+            //emju.SecondTextBlock.Background = new SolidColorBrush(a);                        
                         
             //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
@@ -140,7 +138,10 @@ namespace MRZS.Views.Emulator
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;
 
         }
+       
 
+        
+        public class a { void p() { } }
         void MenuControllr_DataLoad(object sender, EventArgs e)
         {
             DisplayViewModel DispControlr=MenuControllr.setDefaultMenu();
@@ -309,34 +310,36 @@ namespace MRZS.Views.Emulator
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
+            MenuControllr.leftButtonClicked(emju.SecondTextBlock);
             //if current mode if inputing nums
-            if (InputingModeStates == InputingMode.InputingNum)
-            {
-                int index = numIndexesList.IndexOf(currInputPosition);
-                if ((index - 1) >= 0)
-                {
-                    index--;
-                    currInputPosition = numIndexesList[index];
-                }
-                display.Focus();
-                display.SelectionStart = currInputPosition;
-                display.SelectionLength = 1;
-            }
+            //if (InputingModeStates == InputingMode.InputingNum)
+            //{
+            //    int index = numIndexesList.IndexOf(currInputPosition);
+            //    if ((index - 1) >= 0)
+            //    {
+            //        index--;
+            //        currInputPosition = numIndexesList[index];
+            //    }
+            //    display.Focus();
+            //    display.SelectionStart = currInputPosition;
+            //    display.SelectionLength = 1;
+            //}
         }
         private void rightButton_Click(object sender, RoutedEventArgs e)
         {
+            MenuControllr.rightButtonClicked(emju.SecondTextBlock);
             //if current mode if inputing nums
             if (InputingModeStates == InputingMode.InputingNum)
             {
-                int index = numIndexesList.IndexOf(currInputPosition);
-                if ((index + 1) <= (numIndexesList.Count - 1))
-                {
-                    index++;
-                    currInputPosition = numIndexesList[index];
-                }
-                display.Focus();
-                display.SelectionStart = currInputPosition;
-                display.SelectionLength = 1;
+                //int index = numIndexesList.IndexOf(currInputPosition);
+                //if ((index + 1) <= (numIndexesList.Count - 1))
+                //{
+                //    index++;
+                //    currInputPosition = numIndexesList[index];
+                //}
+                //display.Focus();
+                //display.SelectionStart = currInputPosition;
+                //display.SelectionLength = 1;
             }
         } 
         #endregion
@@ -502,7 +505,7 @@ namespace MRZS.Views.Emulator
                             else
                             {
                                 //memorise inputed value (temporary memorised text)
-                                tempDisplayedEntity.value = Inputing.getNumIndexes(display.Text);
+                                tempDisplayedEntity.value = Inputing.getNumsFromStr(display.Text);
                                 mrzs05mMContxt.SubmitChanges();
                             }
 
@@ -558,7 +561,7 @@ namespace MRZS.Views.Emulator
         {
             display.Text = replaceValueInColumn(tempDisplayedEntity);
             //if displayed entity not have "0002.0000" num
-            if (Inputing.getNumIndexes(display.Text) == "")
+            if (Inputing.getNumsFromStr(display.Text) == "")
             {
                 //for turn off down\up button
                 InputingModeStates = InputingMode.ChoosingByEnter;
@@ -1397,7 +1400,7 @@ namespace MRZS.Views.Emulator
         #region Numeric buttons events =============================================
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.num1Clicked();
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 1);
             ////for inputing password
             //if (PassStates == PasswordStates.inputingPasswordStart)
             //{
@@ -1412,11 +1415,12 @@ namespace MRZS.Views.Emulator
         }
         private void button2_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "2");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            //if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
+            //{
+            //    display.Text = replaceSymbol(display.Text, currInputPosition, "2");
+            //    selectOneNumInTextBox(display, currInputPosition);
+            //}
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 2);
         }
         //replace symbol in textbox on new inputed symbol
         private string replaceSymbol(string textBoxStr, int position, string symbol)
@@ -1426,74 +1430,42 @@ namespace MRZS.Views.Emulator
         }
         private void button3_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "3");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 3);
         }
 
         private void button4_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "4");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 4);
         }
 
         private void button5_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "5");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 5);
         }
 
         private void button6_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "6");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 6);
         }
 
         private void button7_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "7");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 7);
         }
 
         private void button8_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "8");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 8);
         }
 
         private void button9_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "9");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 9);
         }
 
         private void button0_Click(object sender, RoutedEventArgs e)
         {
-            if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            {
-                display.Text = replaceSymbol(display.Text, currInputPosition, "0");
-                selectOneNumInTextBox(display, currInputPosition);
-            }
+            MenuControllr.numButtonClicked(emju.SecondTextBlock, 0);
         }
         #endregion   ================================================================                                        
 
