@@ -203,17 +203,16 @@
             <Emulator:InputDV x:Name="dv5" InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
             <Emulator:InputDV x:Name="dv6" InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
         </StackPanel>
-        <Grid Grid.Column="2" Background="Beige">
+        <Grid Grid.Column="2" Background="Beige" Width="416">            
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="140*"/>
-                <ColumnDefinition Width="19*"/>
-                <ColumnDefinition Width="376"/>
+                <ColumnDefinition Width="130"/>
+                <ColumnDefinition Width="*"/>                
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="119"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
+            <!--<TextBox HorizontalAlignment="Stretch" Background="GreenYellow" x:Name="display"
 				Grid.Row="0" Margin="86,46,155,0" Height="61" Width="229"
 				Grid.ColumnSpan="3" TextWrapping="Wrap" >
                 <TextBox.Triggers>
@@ -227,13 +226,22 @@
                         </BeginStoryboard>
                     </EventTrigger>
                 </TextBox.Triggers>
-            </TextBox>
-            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="1" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-225,0,0,0" AllowDrop="True" ></Emulator:EmulatorDisplay>            
+            </TextBox>-->
+            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="0" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-225,45,0,0" AllowDrop="True" ></Emulator:EmulatorDisplay>            
             
             
-            <StackPanel Grid.Row="1" Grid.Column="2" HorizontalAlignment="Right" Margin="0,105,122,-101" Width="222">
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="button1" Content="1" Style="{StaticResource PanelKey}" Click="button1_Click" />
+            <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Right" Margin="0,105,0,0" Width="286">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    
+                        <Button x:Name="button1" Style="{StaticResource PanelKey}" Click="button1_Click">
+                            <Button.Content>
+                            <ImageBrush ImageSource="d:\Diplom\QuizApplication\Emulator\Data\МРЗС-05М\pic\1.bmp"></ImageBrush>
+                            </Button.Content>
+                            <!--<Button.Background>
+                                <ImageBrush ImageSource="/Emulator/Data/МРЗС-05М/pic/1.bmp" Stretch="Fill"></ImageBrush>
+                            </Button.Background>-->
+                        </Button>
+                    
                     <Button x:Name="button2" Content="2" Style="{StaticResource PanelKey}" Click="button2_Click" />
                     <Button x:Name="button3" Content="3" Style="{StaticResource PanelKey}" Click="button3_Click" />
                     <Button x:Name="button4" Content="4" Style="{StaticResource PanelKey}" Click="button4_Click" />
@@ -265,7 +273,7 @@
             </StackPanel>
 
             <StackPanel Grid.Column="0" Grid.Row="1" Margin="0,65,6,-45" 
-				HorizontalAlignment="Right" Width="153" Grid.ColumnSpan="2">
+				HorizontalAlignment="Left" Width="130">
                 <StackPanel Orientation="Horizontal" Margin="5">
                     <TextBlock Text="1" VerticalAlignment="Center" Margin="5,0,5,0"/>
                     <CheckBox x:Name="sdi1" VerticalAlignment="Center" />
