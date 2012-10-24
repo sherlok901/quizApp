@@ -12,6 +12,22 @@
         <ResourceDictionary Source="../Controls/BusyIndicator.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
+    <Style x:Key="AddButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="150" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+        <Setter Property="ContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/ButtonsWithIcons;component/Assets/Icons/Silk/add.png" 
+								Width="16" 
+								Height="16" />
+                        <ContentPresenter Content="{Binding}" Margin="10,0,0,0" />
+                    </StackPanel>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
     <!-- ******MAIN PAGE STYLES****** -->
     <!-- **************************** -->
     <!-- Primary Color Brushes -->

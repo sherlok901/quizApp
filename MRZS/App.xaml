@@ -17,9 +17,8 @@
                     <app:NotOperatorValueConverter x:Key="NotOperatorValueConverter" />
                     <apph:DateTimeConverter x:Key="DateTimeConverter" />                    
                 </ResourceDictionary>
-            </ResourceDictionary.MergedDictionaries>
-
-        </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>            
+        </ResourceDictionary>                
     </Application.Resources>
-
+    
 </Application>

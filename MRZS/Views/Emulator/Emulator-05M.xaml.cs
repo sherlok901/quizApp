@@ -6,7 +6,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using System.Windows.Threading;
 using MRZS.Classes;
 using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
@@ -45,7 +47,32 @@ namespace MRZS.Views.Emulator
             
             //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
-            MenuControllr.DataLoad += MenuControllr_DataLoad;            
+            MenuControllr.DataLoad += MenuControllr_DataLoad;
+            
+            //ImageSource imgS1=this.Resources["Img1"] as ImageSource;
+            //ImageSource imgS2 = this.Resources["Img2"] as ImageSource;
+            
+            //Style st=this.Resources["ButtonStyle1"] as Style;
+            //ControlTemplate ct=null;
+            //foreach (Setter setter in st.Setters)
+            //{
+            //    DependencyProperty dp = setter.Property;
+            //    string dpName = setter.Property.ToString();
+            //    object dpValue= setter.Value;
+            //    if (setter.Value is System.Windows.Controls.ControlTemplate) ct = setter.Value as ControlTemplate;
+            //}
+            //if (ct != null)
+            //{
+            //    string GridName = ct.GetValue(Grid.NameProperty).ToString();
+            //}
+            //new BitmapImage(new Uri("/MRZS;component/Assets/1.png", UriKind.Relative));
+            //DependencyObject dp2 = this.GetTemplateChild("ButtonStyle1");
+            //DependencyObject dp3 = this.GetTemplateChild("grid");
+            //DependencyObject dp4 = this.GetTemplateChild("clicked");
+            
+            //FrameworkElement root = App.Current.RootVisual as FrameworkElement;
+            //Image im= root.FindName("clicked") as Image;
+            //string str= ct.GetValue(Button.ContentProperty).ToString();
         }
                        
         void MenuControllr_DataLoad(object sender, EventArgs e)
@@ -74,32 +101,19 @@ namespace MRZS.Views.Emulator
         #region cursor events ***
         private void downButton_Click(object sender, RoutedEventArgs e)
         {            
-            MenuControllr.showNextMenuLine(emju);
+            
         }      
         private void upButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.showPreviousMenuLine(emju);
+            
         }
         private void leftButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.leftButtonClicked(emju.SecondTextBlock);
-            //if current mode if inputing nums
-            //if (InputingModeStates == InputingMode.InputingNum)
-            //{
-            //    int index = numIndexesList.IndexOf(currInputPosition);
-            //    if ((index - 1) >= 0)
-            //    {
-            //        index--;
-            //        currInputPosition = numIndexesList[index];
-            //    }
-            //    display.Focus();
-            //    display.SelectionStart = currInputPosition;
-            //    display.SelectionLength = 1;
-            //}
+                        
         }
         private void rightButton_Click(object sender, RoutedEventArgs e)
         {
-            MenuControllr.rightButtonClicked(emju.SecondTextBlock);           
+                       
         } 
         #endregion
 
@@ -615,25 +629,14 @@ namespace MRZS.Views.Emulator
         private void button1_Click(object sender, RoutedEventArgs e)
         {
             MenuControllr.numButtonClicked(emju.SecondTextBlock, 1);
-            ////for inputing password
-            //if (PassStates == PasswordStates.inputingPasswordStart)
-            //{
-            //    inputedSymbol += "1";
-            //    passwordInputsDisplay(display, "1");
-            //}
-            //else
-            //{//for inputing num                
-            //    display.Text = replaceSymbol(display.Text, currInputPosition, "1");
-            //    selectOneNumInTextBox(display, currInputPosition);
-            //}
+
+            
+            //System.Threading.Thread.Sleep(700);
+            //(button1.Content as Image).Source = new BitmapImage(new Uri("/MRZS;component/Assets/1.png", UriKind.Relative));
         }
+       
         private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            //if (PassStates != PasswordStates.inputingPasswordStart && currInputPosition != -1)
-            //{
-            //    display.Text = replaceSymbol(display.Text, currInputPosition, "2");
-            //    selectOneNumInTextBox(display, currInputPosition);
-            //}
+        {            
             MenuControllr.numButtonClicked(emju.SecondTextBlock, 2);
         }
         //replace symbol in textbox on new inputed symbol
@@ -735,7 +738,70 @@ namespace MRZS.Views.Emulator
         {
             if (r5c.IsChecked == true) r5.turnOn = true;
             else if (r5c.IsChecked == false) r5.turnOn = false;
-        }        
+        }
+
+        private void button1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            
+        }
+
+        private void button1_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            (button1.Content as Image).Source = new BitmapImage(new Uri("/MRZS;component/Assets/1_active.png", UriKind.Relative));
+        }
+
+        private void Image_MouseLeftButtonUp_1(object sender, MouseButtonEventArgs e)
+        {
+
+        }
+        
+        //BMK:
+        private void leftButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //set other clicked image
+            leftButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/left_active.png", UriKind.Relative));
+            //functionality
+            MenuControllr.leftButtonClicked(emju.SecondTextBlock);
+        }
+        //set other unclicked image
+        private void leftButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            leftButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/left.png", UriKind.Relative));
+        }
+
+        private void upButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            upButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/up_active.png", UriKind.Relative));
+            MenuControllr.showPreviousMenuLine(emju);
+        }
+
+        private void upButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            upButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/up.png", UriKind.Relative));
+        }
+
+        private void rightButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            rightButton.Source= new BitmapImage(new Uri("/MRZS;component/Assets/right_active.png", UriKind.Relative));
+            MenuControllr.rightButtonClicked(emju.SecondTextBlock);
+        }
+
+        private void rightButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            rightButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/right.png", UriKind.Relative));
+        }
+
+        private void bottomButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom_active.png", UriKind.Relative));
+            MenuControllr.showNextMenuLine(emju);
+        }
+
+        private void bottomButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom.png", UriKind.Relative));
+        }
+             
     }
     
 }
