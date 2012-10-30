@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
 using MRZS.Views.Emulator;
+using System.Globalization;
 
 namespace MRZS.Classes
 {
@@ -394,7 +395,12 @@ namespace MRZS.Classes
                     val = MtzEnt.mtzVals;
                     ent.mtzValID = Convert.ToInt32(MtzEnt.id);
                 }
-
+                else if (ent.BooleanValID != null)
+                {
+                    BooleanVal bEnt = ld.BooleanValTable.Where(n => n.id != ent.BooleanValID).Single();
+                    val = bEnt.val;
+                    ent.BooleanValID = bEnt.id;
+                }
                 CurrMenu.SecondLine = val;
                 dispControllr.SecondMenuStr = val;
 
@@ -433,6 +439,82 @@ namespace MRZS.Classes
             SelectedID.RemoveAt(SelectedID.IndexOf(SelectedID.Last()));
         }
 
-        
+        internal string getValueByMenuElement(string name)
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == name).Single().value;
+        }
+
+        //заменить в строке точку на комму
+        internal string replaceDotOnComma(string InStr)
+        {
+            return InStr.Replace('.', ',');
+        }
+        //возвращает Выдержка МТЗ1
+        internal double getExcerptMTZ1()
+        {
+            string timespanMTZ1 = getValueByMenuElement("Выдержка МТЗ1\\{value}");
+            timespanMTZ1 = replaceDotOnComma(timespanMTZ1);
+            return double.Parse(timespanMTZ1);
+        }
+        //возвращает Выдержка МТЗ2
+        internal double getExcerptMTZ2()
+        {
+            string timespanMTZ1 = getValueByMenuElement("Выдержка МТЗ2\\{value}");
+            timespanMTZ1 = replaceDotOnComma(timespanMTZ1);
+            return double.Parse(timespanMTZ1);
+        }
+        //уставка мтз1
+        internal double getSetpointMTZ1()
+        {
+            return getValFromMenuElement("Уставка МТЗ1\\{value}");            
+        }
+        //уставка мтз2
+        internal double getSetpointMTZ2()
+        {
+            return getValFromMenuElement("Уставка МТЗ2\\{value}");            
+        }
+        internal double getTUskorMTZ()
+        {
+            return getValFromMenuElement("Т Ускор МТЗ\\{value}");
+        }
+        double getValFromMenuElement(string searchedStr)
+        {
+            string rez = getValueByMenuElement(searchedStr);
+            return Double.Parse(replaceDotOnComma(rez));
+        }
+        //1 Ступень МТЗ
+        internal string getStupenMTZ()
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == "1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+        }
+        //2 Ступень МТЗ
+        internal string getStupenMTZ2()
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == "2 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+        }
+        //ускор мтз2
+        internal string getUskorMTZ2()
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == "Ускор МТЗ2\\{value}").Single().BooleanVal3.boolVal;
+        }
+        //пуск от мтз1
+        internal int? puskOtMtz1()
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ1\\{value}").Single().BooleanVal3.id;
+        }
+        //пуск от мтз2
+        internal int? puskOtMtz2()
+        {
+            return ld.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ2\\{value}").Single().BooleanVal3.id;
+        }
+        internal double get1CycleAPV()
+        {
+            return getValFromMenuElement("1 Цикл АПВ\\{value}");
+        }
+        //возрврат выдержка ЗЗ
+        internal double getZZExcerpt()
+        {
+            return getValFromMenuElement("Выдержка ЗЗ\\{value}");
+        }
     }
 }

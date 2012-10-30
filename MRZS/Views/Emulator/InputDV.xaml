@@ -4,12 +4,95 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="20" d:DesignWidth="50">
-    
+    d:DesignHeight="30" d:DesignWidth="80">
+    <UserControl.Resources>
+        <Style x:Key="CheckBoxStyle2" TargetType="CheckBox">
+            <Setter Property="Background" Value="#FF448DCA"/>
+            <Setter Property="Foreground" Value="#FF000000"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="BorderBrush">
+                <Setter.Value>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FFA3AEB9" Offset="0"/>
+                        <GradientStop Color="#FF8399A9" Offset="0.375"/>
+                        <GradientStop Color="#FF718597" Offset="0.375"/>
+                        <GradientStop Color="#FF617584" Offset="1"/>
+                    </LinearGradientBrush>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="25"/>
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="25" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="25" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Image.Stretch)" Storyboard.TargetName="_checked">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Stretch>Fill</Stretch>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="25" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="25" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_checked" d:IsOptimized="True"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="Valid"/>
+                                    <VisualState x:Name="InvalidUnfocused"/>
+                                    <VisualState x:Name="InvalidFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="25" Height="25" Grid.ColumnSpan="2" d:LayoutOverrides="GridBox">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="25" MinHeight="25"/>
+                                </Grid.RowDefinitions>
+                                <Image x:Name="_unchecked" HorizontalAlignment="Left" Height="0" Opacity="0" Width="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Top" Source="/MRZS;component/Assets/checkr_false.png">
+                                    <Image.RenderTransform>
+                                        <CompositeTransform/>
+                                    </Image.RenderTransform>
+                                </Image>
+                                <Image x:Name="_checked" Width="25" Height="25" Source="/MRZS;component/Assets/checkr_true.png"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="LayoutRoot" Margin="2" Background="White">
         <StackPanel Orientation="Horizontal">
-            <TextBlock Text="DV01" x:Name="textBlockInputName"/>
-            <CheckBox x:Name="dv"/>
+            <TextBlock Text="DV01" x:Name="textBlockInputName" VerticalAlignment="Center"/>
+            <CheckBox x:Name="dv" Style="{StaticResource CheckBoxStyle2}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="30"/>
         </StackPanel>
     </Grid>
 </UserControl>

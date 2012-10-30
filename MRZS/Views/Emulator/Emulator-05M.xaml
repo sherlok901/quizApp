@@ -20,7 +20,13 @@
             <Setter Property="Margin" Value="4"/>
             <Setter Property="Padding" Value="0"/>           
         </Style>
-        
+        <Style TargetType="Emulator:InputDV" x:Key="InDV">
+            <Setter Property="Margin" Value="8,15,0,0"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Left"></Setter>
+            <Setter Property="Width" Value="81"></Setter>
+            <Setter Property="Height" Value="30"></Setter>
+        </Style>        
         <Style x:Key="RoundButton"  TargetType="Button">
             <Setter Property="Margin" Value="0"/>    
             <Setter Property="Template">
@@ -168,6 +174,87 @@
                 </Setter.Value>
             </Setter>
         </Style>        
+        <Style x:Key="CheckBoxStyleRELE" TargetType="CheckBox">
+            
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="VerticalContentAlignment" Value="Top"/>
+            <Setter Property="Padding" Value="0,0,0,0"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="CheckBox">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                            </Grid.ColumnDefinitions>
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal"/>
+                                    <VisualState x:Name="MouseOver"/>
+                                    <VisualState x:Name="Pressed"/>
+                                    <VisualState x:Name="Disabled"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="70" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="30" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Image.Stretch)" Storyboard.TargetName="_checked">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Stretch>Fill</Stretch>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked">
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0" To="1" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="70" Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="30" Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="_unchecked" d:IsOptimized="True"/>
+                                            <DoubleAnimation Duration="0" To="0" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="_checked" d:IsOptimized="True"/>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Indeterminate"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="FocusStates">
+                                    <VisualState x:Name="Focused"/>
+                                    <VisualState x:Name="Unfocused"/>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="ValidationStates">
+                                    <VisualState x:Name="Valid"/>
+                                    <VisualState x:Name="InvalidUnfocused"/>
+                                    <VisualState x:Name="InvalidFocused"/>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="70" Height="30" Grid.ColumnSpan="2" d:LayoutOverrides="GridBox">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" MinHeight="30"/>
+                                </Grid.RowDefinitions>
+                                <Image x:Name="_unchecked" HorizontalAlignment="Left" Height="0" Opacity="0" Width="0" RenderTransformOrigin="0.5,0.5" Stretch="Fill" VerticalAlignment="Top" Source="/MRZS;component/Assets/check_false.png">
+                                    <Image.RenderTransform>
+                                        <CompositeTransform/>
+                                    </Image.RenderTransform>
+                                </Image>
+                                <Image x:Name="_checked" Width="70" Height="30" Source="/MRZS;component/Assets/check_true.png"/>
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ReleTitleStyle" TargetType="TextBlock">
+            <Setter Property="Margin" Value="0,0,5,0"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+        </Style>
+
+        
+
+        
         <ImageSource x:Key="Img1">/MRZS;Component/Assets/1_active.png</ImageSource>
         <ImageSource x:Key="Img2">/MRZS;Component/Assets/1.png</ImageSource>
         <Style x:Key="ButtonStyle1" TargetType="Button">
@@ -2286,9 +2373,9 @@
     <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="530">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="100"/>
-            <ColumnDefinition Width="530"/>
-            <ColumnDefinition Width="78"/>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>        
         <Button x:Name="DeviceON_button" Content="ВКЛ" HorizontalAlignment="Left" VerticalAlignment="Top" Height="50" Width="75" Margin="10,15,0,0" Click="DeviceON_button_Click">            
         </Button>
@@ -2407,19 +2494,19 @@
             <toolkit:NumericUpDown Grid.Row="10" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_14" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="10" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>            
         </Grid>
-        <StackPanel Grid.Column="1"  Margin="0,0,0,0" VerticalAlignment="Top">
-            <TextBlock FontSize="16" Height="20" Margin="0,15,0,0" VerticalAlignment="Top">
+        <StackPanel Grid.Column="1"  Margin="0,0,0,0" VerticalAlignment="Top" Width="120">
+            <TextBlock FontSize="16" Height="20" Margin="0,15,0,0" VerticalAlignment="Top" HorizontalAlignment="Center">
 				<Run Text="Дискретные"/>
             </TextBlock>
-            <TextBlock  FontSize="16" Height="20" Margin="0,10,0,15">
+            <TextBlock  FontSize="16" Height="20" Margin="0,10,0,15" HorizontalAlignment="Center">
                 <Run Text="входы" ></Run>
             </TextBlock>
-            <Emulator:InputDV x:Name="dv1" InputName="ДВ01" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV x:Name="dv2" InputName="ДВ02" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV x:Name="dv3" InputName="ДВ03" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV x:Name="dv4" InputName="ДВ04" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV x:Name="dv5" InputName="ДВ05" HorizontalAlignment="Left" Width="81"/>
-            <Emulator:InputDV x:Name="dv6" InputName="ДВ06" HorizontalAlignment="Left" Width="81"/>
+            <Emulator:InputDV x:Name="dv1" InputName="ДВ01" Style="{StaticResource InDV}"/>
+            <Emulator:InputDV x:Name="dv2" InputName="ДВ02" Style="{StaticResource InDV}"/>
+            <Emulator:InputDV x:Name="dv3" InputName="ДВ03" Style="{StaticResource InDV}"/>
+            <Emulator:InputDV x:Name="dv4" InputName="ДВ04" Style="{StaticResource InDV}"/>
+            <Emulator:InputDV x:Name="dv5" InputName="ДВ05" Style="{StaticResource InDV}"/>
+            <Emulator:InputDV x:Name="dv6" InputName="ДВ06" Style="{StaticResource InDV}"/>
         </StackPanel>
         <Grid Grid.Column="2" Width="350">            
             <Grid.Background>
@@ -2433,7 +2520,7 @@
                 <RowDefinition Height="119"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>            
-            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="0" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-119,55,0,0" AllowDrop="True" ></Emulator:EmulatorDisplay>            
+            <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="0" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-119,55,0,0" AllowDrop="True" Loaded="emju_Loaded" ></Emulator:EmulatorDisplay>            
             
             
             <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,133,0,0" Width="220">
@@ -2498,18 +2585,28 @@
             </StackPanel>
             
         </Grid>
-        <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,0,18,0">
-            <TextBlock Text="Реле" FontSize="20"/>            
-            <MRZS:OutputR x:Name="r1" Width="70" Height="35" OutputName="P01" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r1c" VerticalAlignment="Top" Click="r1c_Click_1"/>
-            <MRZS:OutputR x:Name="r2" Width="70" Height="35" OutputName="P02" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r2c" VerticalAlignment="Top" Click="r2c_Click_1"/>
-            <MRZS:OutputR x:Name="r3" Width="70" Height="35" OutputName="P03" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r3c" VerticalAlignment="Top" Click="r3c_Click_1"/>
-            <MRZS:OutputR x:Name="r4" Width="70" Height="35" OutputName="P04" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r4c" VerticalAlignment="Top" Click="r4c_Click_1"/>
-            <MRZS:OutputR x:Name="r5" Width="70" Height="35" OutputName="P05" Margin="0 10 0 0"/>
-            <CheckBox x:Name="r5c" VerticalAlignment="Top" Click="r5c_Click_1"/>                     
+        <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,0,0,0">
+            <TextBlock Text="Реле" FontSize="20"/>                        
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Реле01" Style="{StaticResource ReleTitleStyle}"></TextBlock>
+                <CheckBox x:Name="r1c" VerticalAlignment="Top" Style="{StaticResource CheckBoxStyleRELE}"/>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Реле02" Style="{StaticResource ReleTitleStyle}"></TextBlock>
+                <CheckBox x:Name="r2c" VerticalAlignment="Top" Style="{StaticResource CheckBoxStyleRELE}"/>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Реле03" Style="{StaticResource ReleTitleStyle}"></TextBlock>
+                <CheckBox x:Name="r3c" VerticalAlignment="Top" Style="{StaticResource CheckBoxStyleRELE}"/>               
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Реле04" Style="{StaticResource ReleTitleStyle}"></TextBlock>
+                <CheckBox x:Name="r4c" VerticalAlignment="Top" Style="{StaticResource CheckBoxStyleRELE}"/>                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                <TextBlock Text="Реле05" Style="{StaticResource ReleTitleStyle}"></TextBlock>
+                <CheckBox x:Name="r5c" VerticalAlignment="Top" Style="{StaticResource CheckBoxStyleRELE}"/>                
+            </StackPanel>                        
         </StackPanel>
         
         <riaControls:DomainDataSource x:Name="mrzs05menuDS" Grid.Column="2" HorizontalAlignment="Left" Height="100" Margin="137,736,0,-156" VerticalAlignment="Top" Width="100">            

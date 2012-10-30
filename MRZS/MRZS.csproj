@@ -568,6 +568,10 @@
     <Resource Include="Assets\right_active.png" />
     <Resource Include="Assets\up.png" />
     <Resource Include="Assets\up_active.png" />
+    <Resource Include="Assets\checkr_false.png" />
+    <Resource Include="Assets\checkr_true.png" />
+    <Resource Include="Assets\check_false.png" />
+    <Resource Include="Assets\check_true.png" />
     <Content Include="Images\1299358394_arrow_cycle.ico" />
     <Resource Include="Images\1300912148_back.png" />
     <Content Include="Libs\C1.Silverlight.Chart.dll" />

@@ -27,6 +27,6 @@ namespace MRZS.Classes
         internal static mrzs05mMenu getEntityByID(IEnumerable<mrzs05mMenu> mrzsTables, int id)
         {
             return (from t in mrzsTables where t.id == id select t).Single();
-        }
+        }        
     }
 }

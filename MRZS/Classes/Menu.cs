@@ -38,5 +38,6 @@ namespace MRZS.Classes
         public string Unit { get; set; }
         public string FirstLine { get; set; }
         public string SecondLine { get; set; }
+        public double Value2 { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -28,8 +29,9 @@ namespace MRZS.Views.Emulator
         IEnumerable<BooleanVal3> BooleanVal3List=null;
         IEnumerable<mtzVal> mtzValList=null;
         IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
-        private IEnumerable<mrzs05mMenu> mrzs05Entity;                    
-                                              
+        private IEnumerable<mrzs05mMenu> mrzs05Entity;
+        DispatcherTimer timer = new DispatcherTimer();
+
         //get info of inputs
         public enum Inputs
         {
@@ -48,32 +50,8 @@ namespace MRZS.Views.Emulator
             //subcribing for loaded data event
             ld.DataLoaded += ld_DataLoaded;
             MenuControllr.DataLoad += MenuControllr_DataLoad;
-            
-            //ImageSource imgS1=this.Resources["Img1"] as ImageSource;
-            //ImageSource imgS2 = this.Resources["Img2"] as ImageSource;
-            
-            //Style st=this.Resources["ButtonStyle1"] as Style;
-            //ControlTemplate ct=null;
-            //foreach (Setter setter in st.Setters)
-            //{
-            //    DependencyProperty dp = setter.Property;
-            //    string dpName = setter.Property.ToString();
-            //    object dpValue= setter.Value;
-            //    if (setter.Value is System.Windows.Controls.ControlTemplate) ct = setter.Value as ControlTemplate;
-            //}
-            //if (ct != null)
-            //{
-            //    string GridName = ct.GetValue(Grid.NameProperty).ToString();
-            //}
-            //new BitmapImage(new Uri("/MRZS;component/Assets/1.png", UriKind.Relative));
-            //DependencyObject dp2 = this.GetTemplateChild("ButtonStyle1");
-            //DependencyObject dp3 = this.GetTemplateChild("grid");
-            //DependencyObject dp4 = this.GetTemplateChild("clicked");
-            
-            //FrameworkElement root = App.Current.RootVisual as FrameworkElement;
-            //Image im= root.FindName("clicked") as Image;
-            //string str= ct.GetValue(Button.ContentProperty).ToString();
-        }
+         
+        }        
                        
         void MenuControllr_DataLoad(object sender, EventArgs e)
         {
@@ -139,41 +117,78 @@ namespace MRZS.Views.Emulator
             DeviceON_button.Background = new SolidColorBrush(Colors.Green);            
             DeviceON_button.BorderBrush = new SolidColorBrush(Colors.Green);            
             DeviceON_button.BorderThickness = new Thickness(3);
+            
             //defences
+            //выдержка мтз1
+            double MTZ1TimeSpan = MenuControllr.getExcerptMTZ1();            
+            Thread.Sleep(TimeSpan.FromSeconds(MTZ1TimeSpan));
             CheckDefence_MTZ1();
-            CheckDefence_MTZ2();
-        }
-        private void CheckDefence_MTZ1()
-        {
-            //get МТЗ->Уставки->Уставка МТЗ1
-            string rez= mrzs05Entity.Where(n=>n.menuElement=="Уставка МТЗ1\\{value}").Single().value;            
-            double val = Double.Parse(rez, CultureInfo.InvariantCulture);
-            //get МТЗ-Управление-1 Ступень МТЗ-ВКЛ
-            string stupen1MTZ=mrzs05Entity.Where(n=>n.menuElement=="1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
 
-            bool flag = IsInDVArrayValue("Блок МТЗ 1");
+            //выдержка мтз2
+            string uskorMTZ2 = MenuControllr.getUskorMTZ2();
+            double temp = 0;
+            if (uskorMTZ2.IndexOf("ВКЛ") != -1)
+            {
+                //Т Ускор МТЗ
+                temp = MenuControllr.getTUskorMTZ();
+            }//Выдержка МТЗ2
+            else temp = MenuControllr.getExcerptMTZ2();
+            //sleep
+            Thread.Sleep(TimeSpan.FromSeconds(temp));
+            CheckDefence_MTZ2();
+
+            //выдержка ЗЗ
+            double ZZtimespan = MenuControllr.getZZExcerpt();
+            Thread.Sleep(TimeSpan.FromSeconds(ZZtimespan));
+            CheckDefence_ZZ();
+        }
+        
+        void CheckDefence_MTZ1()
+        {            
+            //get МТЗ->Уставки->Уставка МТЗ1
+            double val = MenuControllr.getSetpointMTZ1();
+            //get МТЗ-Управление-1 Ступень МТЗ-ВКЛ
+            string stupen1MTZ = MenuControllr.getStupenMTZ();
+            
             if ((Ia.Value > val || Ib.Value > val || Ic.Value > val)
                 && (stupen1MTZ.IndexOf("ВКЛ")!=-1)
                 && !IsInDVArrayValue("Блок МТЗ 1"))//ДВ не включены; если вкл, то на них нет ф-ции "Блок МТЗ 1"
             {
                 //turn on/off rele
-                CheckR("Сраб МТЗ 1", true);
-                //
+                //выкл (засветить) те реле, в которых включен параметр='Сраб МТЗ 1'
+                CheckR("Сраб МТЗ 1", true);                
                 CheckSDI("Сраб МТЗ 1", true);
-                CheckDefence_APV(1);
-                //засветить реле 1,4,5
-                //r1.turnOn = false;
-                //r4.turnOn = false;
-                //r5.turnOn = false;
-                //засветить лампочки sdi 1,2,4
-                //sdi1.IsChecked = true;
-                //sdi2.IsChecked = true;
-                //sdi4.IsChecked = true;
-            }
+                CheckDefence_APV(1);  
+                
+            }            
         }
-        private void CheckDefence_MTZ2()
-        {
-            //если 1й DVI не вкл, то: если вкл реле 1,4,5 - то выкл их
+        
+        void CheckDefence_MTZ2()
+        {            
+            //get МТЗ->Уставки->Уставка МТЗ2
+            double val = MenuControllr.getSetpointMTZ2();
+            //get МТЗ-Управление-2 Ступень МТЗ-ВКЛ
+            string stupen2MTZ = MenuControllr.getStupenMTZ2();
+
+            //есть хотябы в одном ДВ устан. параметр "Блок. МТЗ 2"
+            if ((Ia.Value > val || Ib.Value > val || Ic.Value > val)
+                && (stupen2MTZ.IndexOf("ВКЛ") != -1)
+                && !IsInDVArrayValue("Блок МТЗ 2"))//ДВ не включены; если вкл, то на них нет ф-ции "Блок МТЗ 1"
+            {
+                string uskorMTZ2 = MenuControllr.getUskorMTZ2();
+                //Ускор МТЗ2=ВКЛ
+                if (uskorMTZ2.IndexOf("ВКЛ") != -1)
+                {
+                    CheckR("Блок ускор. МТЗ", true);
+                    CheckSDI("Блок ускор. МТЗ", true);
+                }
+                else
+                {
+                    CheckR("Сраб МТЗ 2", true);
+                    CheckSDI("Сраб МТЗ 2", true);
+                }
+                CheckDefence_APV(2);
+            }
         }
         private void CheckDefence_ZZ()
         {
@@ -196,9 +211,7 @@ namespace MRZS.Views.Emulator
                 //if (dv.IsChecked == false) continue;
                 if(dv.IsChecked==true)
                 {
-                    //check what "MrzsInOutOption" functions are turn on for current DV
-                    //functions= getTurnONFunctions(Inputs.ДВ01, mrzs05Entity);
-                    //if (functions.Contains(functionName)) return true;
+                    //check what "MrzsInOutOption" functions are turn on for current DV              
 
                     if (list.IndexOf(dv) == 0)
                     {
@@ -257,31 +270,31 @@ namespace MRZS.Views.Emulator
                 {
                     functions = getTurnONFunctions(Inputs.P01, mrzs05Entity);
                     if (functions.Contains(functionName)) r1c.IsChecked = turnOff;
-                    r1c_Click_1(null, null);
+                    //r1c_Click_1(null, null);
                 }
                 else if (listCheckbox.IndexOf(cb) == 1)
                 {
                     functions = getTurnONFunctions(Inputs.P02, mrzs05Entity);
                     if (functions.Contains(functionName)) r2c.IsChecked = turnOff;
-                    r2c_Click_1(null, null);
+                    //r2c_Click_1(null, null);
                 }
                 else if (listCheckbox.IndexOf(cb) == 2)
                 {
                     functions = getTurnONFunctions(Inputs.P03, mrzs05Entity);
                     if (functions.Contains(functionName)) r3c.IsChecked = turnOff;
-                    r3c_Click_1(null, null);
+                    //r3c_Click_1(null, null);
                 }
                 else if (listCheckbox.IndexOf(cb) == 3)
                 {
                     functions = getTurnONFunctions(Inputs.P04, mrzs05Entity);
                     if (functions.Contains(functionName)) r4c.IsChecked = turnOff;
-                    r4c_Click_1(null, null);
+                    //r4c_Click_1(null, null);
                 }
                 else if (listCheckbox.IndexOf(cb) == 4)
                 {
                     functions = getTurnONFunctions(Inputs.P05, mrzs05Entity);
                     if (functions.Contains(functionName)) r5c.IsChecked = turnOff;
-                    r5c_Click_1(null, null);
+                    //r5c_Click_1(null, null);
                 }
             }
         }
@@ -333,19 +346,22 @@ namespace MRZS.Views.Emulator
         }
         private void CheckDefence_APV(int MTZnumber)
         {
-            int? puskOtMTZ1= getMrzs05mMenuByMenuElement(mrzs05Entity,"Пуск от МТЗ1").Single().BooleanVal3ID;
-            int? puskOtMTZ2 = getMrzs05mMenuByMenuElement(mrzs05Entity, "Пуск от МТЗ2").Single().BooleanVal3ID;
-            //get МТЗ->Уставки->Уставка МТЗ1
-            string rez= mrzs05Entity.Where(n=>n.menuElement=="Уставка МТЗ1\\{value}").Single().value;            
-            double UstavkaMTZ1 = Double.Parse(rez, CultureInfo.InvariantCulture);
-            string stupen1MTZ=mrzs05Entity.Where(n=>n.menuElement=="1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
-            string rez2 = mrzs05Entity.Where(n => n.menuElement == "Уставка МТЗ2\\{value}").Single().value;
-            double UstavkaMTZ2 = Double.Parse(rez2, CultureInfo.InvariantCulture);
-            string stupen2MTZ = mrzs05Entity.Where(n => n.menuElement == "2 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+            double cycle1APV = MenuControllr.get1CycleAPV();
+            Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
+            //int? puskOtMTZ1= getMrzs05mMenuByMenuElement(mrzs05Entity,"Пуск от МТЗ1").Single().BooleanVal3ID;
+            //int? puskOtMTZ2 = getMrzs05mMenuByMenuElement(mrzs05Entity, "Пуск от МТЗ2").Single().BooleanVal3ID;
+            int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
+            int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
+            //get МТЗ->Уставки->Уставка МТЗ1                       
+            double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
+            string stupen1MTZ = MenuControllr.getStupenMTZ();
+            double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
+            string stupen2MTZ = MenuControllr.getStupenMTZ2();
 
             if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
-                && (!IsInDVArrayValue("АЧР/ЧАПВ")))
+                && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
             {
+
                 if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
                 {
                     CheckR("Сраб МТЗ 1", false);
@@ -386,15 +402,15 @@ namespace MRZS.Views.Emulator
             sdi6.IsChecked = false;
 
             r1c.IsChecked = false;
-            r1c_Click_1(null, null);
+            //r1c_Click_1(null, null);
             r2c.IsChecked = false;
-            r2c_Click_1(null, null);
+            //r2c_Click_1(null, null);
             r3c.IsChecked = false;
-            r3c_Click_1(null, null);
+            //r3c_Click_1(null, null);
             r4c.IsChecked = false;
-            r4c_Click_1(null, null);
+            //r4c_Click_1(null, null);
             r5c.IsChecked = false;
-            r5c_Click_1(null, null);
+            //r5c_Click_1(null, null);
         }
         #endregion==
 
@@ -708,37 +724,7 @@ namespace MRZS.Views.Emulator
         {
             return mrzs05Entities.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(menuElement)).ToList();
         }
-
-
-        private void r1c_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (r1c.IsChecked == true) r1.turnOn = true;
-            else if (r1c.IsChecked == false) r1.turnOn = false;
-        }
-
-        private void r2c_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (r2c.IsChecked == true) r2.turnOn = true;
-            else if (r1c.IsChecked == false) r2.turnOn = false;
-        }
-
-        private void r3c_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (r3c.IsChecked == true) r3.turnOn = true;
-            else if (r3c.IsChecked == false) r3.turnOn = false;
-        }
-
-        private void r4c_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (r4c.IsChecked == true) r4.turnOn = true;
-            else if (r4c.IsChecked == false) r4.turnOn = false;
-        }
-
-        private void r5c_Click_1(object sender, RoutedEventArgs e)
-        {
-            if (r5c.IsChecked == true) r5.turnOn = true;
-            else if (r5c.IsChecked == false) r5.turnOn = false;
-        }
+       
 
         private void button1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -801,7 +787,12 @@ namespace MRZS.Views.Emulator
         {
             bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom.png", UriKind.Relative));
         }
-             
+
+        private void emju_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+       
     }
     
 }
