@@ -6395,6 +6395,525 @@ namespace MRZS.Web.Models
     }
     
     /// <summary>
+    /// Класс сущности "TestAnswer".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class TestAnswer : Entity
+    {
+        
+        private string _answer;
+        
+        private int _id;
+        
+        private Nullable<bool> _isTrue;
+        
+        private Nullable<int> _questionID;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnanswerChanging(string value);
+        partial void OnanswerChanged();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnIsTrueChanging(Nullable<bool> value);
+        partial void OnIsTrueChanged();
+        partial void OnquestionIDChanging(Nullable<int> value);
+        partial void OnquestionIDChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestAnswer"/>.
+        /// </summary>
+        public TestAnswer()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "answer".
+        /// </summary>
+        [DataMember()]
+        public string answer
+        {
+            get
+            {
+                return this._answer;
+            }
+            set
+            {
+                if ((this._answer != value))
+                {
+                    this.OnanswerChanging(value);
+                    this.RaiseDataMemberChanging("answer");
+                    this.ValidateProperty("answer", value);
+                    this._answer = value;
+                    this.RaiseDataMemberChanged("answer");
+                    this.OnanswerChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "IsTrue".
+        /// </summary>
+        [DataMember()]
+        public Nullable<bool> IsTrue
+        {
+            get
+            {
+                return this._isTrue;
+            }
+            set
+            {
+                if ((this._isTrue != value))
+                {
+                    this.OnIsTrueChanging(value);
+                    this.RaiseDataMemberChanging("IsTrue");
+                    this.ValidateProperty("IsTrue", value);
+                    this._isTrue = value;
+                    this.RaiseDataMemberChanged("IsTrue");
+                    this.OnIsTrueChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "questionID".
+        /// </summary>
+        [DataMember()]
+        [RoundtripOriginal()]
+        public Nullable<int> questionID
+        {
+            get
+            {
+                return this._questionID;
+            }
+            set
+            {
+                if ((this._questionID != value))
+                {
+                    this.OnquestionIDChanging(value);
+                    this.RaiseDataMemberChanging("questionID");
+                    this.ValidateProperty("questionID", value);
+                    this._questionID = value;
+                    this.RaiseDataMemberChanged("questionID");
+                    this.OnquestionIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "TestingImage".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class TestingImage : Entity
+    {
+        
+        private int _id;
+        
+        private string _imgPath;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnimgPathChanging(string value);
+        partial void OnimgPathChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestingImage"/>.
+        /// </summary>
+        public TestingImage()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "imgPath".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        public string imgPath
+        {
+            get
+            {
+                return this._imgPath;
+            }
+            set
+            {
+                if ((this._imgPath != value))
+                {
+                    this.OnimgPathChanging(value);
+                    this.RaiseDataMemberChanging("imgPath");
+                    this.ValidateProperty("imgPath", value);
+                    this._imgPath = value;
+                    this.RaiseDataMemberChanged("imgPath");
+                    this.OnimgPathChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "TestQuestion".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class TestQuestion : Entity
+    {
+        
+        private int _id;
+        
+        private string _question;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnquestionChanging(string value);
+        partial void OnquestionChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestQuestion"/>.
+        /// </summary>
+        public TestQuestion()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Editable(false, AllowInitialValue=true)]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaisePropertyChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "question".
+        /// </summary>
+        [DataMember()]
+        [Required()]
+        public string question
+        {
+            get
+            {
+                return this._question;
+            }
+            set
+            {
+                if ((this._question != value))
+                {
+                    this.OnquestionChanging(value);
+                    this.RaiseDataMemberChanging("question");
+                    this.ValidateProperty("question", value);
+                    this._question = value;
+                    this.RaiseDataMemberChanged("question");
+                    this.OnquestionChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
+    /// Класс сущности "TestResult".
+    /// </summary>
+    [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
+    public sealed partial class TestResult : Entity
+    {
+        
+        private int _id;
+        
+        private Nullable<DateTime> _testDateEnd;
+        
+        private Nullable<DateTime> _testDateStart;
+        
+        private Nullable<int> _testMark;
+        
+        private int _userID;
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+        partial void OnidChanging(int value);
+        partial void OnidChanged();
+        partial void OnTestDateEndChanging(Nullable<DateTime> value);
+        partial void OnTestDateEndChanged();
+        partial void OnTestDateStartChanging(Nullable<DateTime> value);
+        partial void OnTestDateStartChanged();
+        partial void OnTestMarkChanging(Nullable<int> value);
+        partial void OnTestMarkChanged();
+        partial void OnUserIDChanging(int value);
+        partial void OnUserIDChanged();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestResult"/>.
+        /// </summary>
+        public TestResult()
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "id".
+        /// </summary>
+        [DataMember()]
+        [Key()]
+        [RoundtripOriginal()]
+        public int id
+        {
+            get
+            {
+                return this._id;
+            }
+            set
+            {
+                if ((this._id != value))
+                {
+                    this.OnidChanging(value);
+                    this.RaiseDataMemberChanging("id");
+                    this.ValidateProperty("id", value);
+                    this._id = value;
+                    this.RaiseDataMemberChanged("id");
+                    this.OnidChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "TestDateEnd".
+        /// </summary>
+        [DataMember()]
+        public Nullable<DateTime> TestDateEnd
+        {
+            get
+            {
+                return this._testDateEnd;
+            }
+            set
+            {
+                if ((this._testDateEnd != value))
+                {
+                    this.OnTestDateEndChanging(value);
+                    this.RaiseDataMemberChanging("TestDateEnd");
+                    this.ValidateProperty("TestDateEnd", value);
+                    this._testDateEnd = value;
+                    this.RaiseDataMemberChanged("TestDateEnd");
+                    this.OnTestDateEndChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "TestDateStart".
+        /// </summary>
+        [DataMember()]
+        public Nullable<DateTime> TestDateStart
+        {
+            get
+            {
+                return this._testDateStart;
+            }
+            set
+            {
+                if ((this._testDateStart != value))
+                {
+                    this.OnTestDateStartChanging(value);
+                    this.RaiseDataMemberChanging("TestDateStart");
+                    this.ValidateProperty("TestDateStart", value);
+                    this._testDateStart = value;
+                    this.RaiseDataMemberChanged("TestDateStart");
+                    this.OnTestDateStartChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "TestMark".
+        /// </summary>
+        [DataMember()]
+        public Nullable<int> TestMark
+        {
+            get
+            {
+                return this._testMark;
+            }
+            set
+            {
+                if ((this._testMark != value))
+                {
+                    this.OnTestMarkChanging(value);
+                    this.RaiseDataMemberChanging("TestMark");
+                    this.ValidateProperty("TestMark", value);
+                    this._testMark = value;
+                    this.RaiseDataMemberChanged("TestMark");
+                    this.OnTestMarkChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает или задает значение параметра "UserID".
+        /// </summary>
+        [DataMember()]
+        public int UserID
+        {
+            get
+            {
+                return this._userID;
+            }
+            set
+            {
+                if ((this._userID != value))
+                {
+                    this.OnUserIDChanging(value);
+                    this.RaiseDataMemberChanging("UserID");
+                    this.ValidateProperty("UserID", value);
+                    this._userID = value;
+                    this.RaiseDataMemberChanged("UserID");
+                    this.OnUserIDChanged();
+                }
+            }
+        }
+        
+        /// <summary>
+        /// Вычисляет значение ключевых полей, уникально идентифицирующее данный экземпляр сущности.
+        /// </summary>
+        /// <returns>Экземпляр объекта, уникально идентифицирующий данный экземпляр сущности.</returns>
+        public override object GetIdentity()
+        {
+            return this._id;
+        }
+    }
+    
+    /// <summary>
     /// Класс сущности "typeFuncDC".
     /// </summary>
     [DataContract(Namespace="http://schemas.datacontract.org/2004/07/MRZS.Web.Models")]
@@ -11687,6 +12206,518 @@ namespace MRZS.Web.Services
             public SectionContextEntityContainer()
             {
                 this.CreateEntitySet<Section>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TestAnswerService" DomainService.
+    /// </summary>
+    public sealed partial class TestAnswerContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestAnswerContext"/>.
+        /// </summary>
+        public TestAnswerContext() : 
+                this(new WebDomainClient<ITestAnswerServiceContract>(new Uri("MRZS-Web-Services-TestAnswerService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestAnswerContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TestAnswerService.</param>
+        public TestAnswerContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITestAnswerServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestAnswerContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TestAnswerContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="TestAnswer"/>, загруженных в данный экземпляр <see cref="TestAnswerContext"/>.
+        /// </summary>
+        public EntitySet<TestAnswer> TestAnswers
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<TestAnswer>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="TestAnswer"/> с помощью запроса "GetTestAnswers".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="TestAnswer"/>.</returns>
+        public EntityQuery<TestAnswer> GetTestAnswersQuery()
+        {
+            this.ValidateMethod("GetTestAnswersQuery", null);
+            return base.CreateQuery<TestAnswer>("GetTestAnswers", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TestAnswerContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TestAnswerService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITestAnswerServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTestAnswers".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestAnswerService/GetTestAnswersDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestAnswerService/GetTestAnswers", ReplyAction="http://tempuri.org/TestAnswerService/GetTestAnswersResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTestAnswers(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTestAnswers".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTestAnswers".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTestAnswers".</returns>
+            QueryResult<TestAnswer> EndGetTestAnswers(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "SubmitChanges".
+            /// </summary>
+            /// <param name="changeSet">Набор изменений для отправки.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestAnswerService/SubmitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestAnswerService/SubmitChanges", ReplyAction="http://tempuri.org/TestAnswerService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginSubmitChanges".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginSubmitChanges".</param>
+            /// <returns>Коллекция элементов набора изменений, возвращенного операцией SubmitChanges.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class TestAnswerContextEntityContainer : EntityContainer
+        {
+            
+            public TestAnswerContextEntityContainer()
+            {
+                this.CreateEntitySet<TestAnswer>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TestImagesService" DomainService.
+    /// </summary>
+    public sealed partial class TestImagesContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestImagesContext"/>.
+        /// </summary>
+        public TestImagesContext() : 
+                this(new WebDomainClient<ITestImagesServiceContract>(new Uri("MRZS-Web-Services-TestImagesService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestImagesContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TestImagesService.</param>
+        public TestImagesContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITestImagesServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestImagesContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TestImagesContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="TestingImage"/>, загруженных в данный экземпляр <see cref="TestImagesContext"/>.
+        /// </summary>
+        public EntitySet<TestingImage> TestingImages
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<TestingImage>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="TestingImage"/> с помощью запроса "GetTestingImages".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="TestingImage"/>.</returns>
+        public EntityQuery<TestingImage> GetTestingImagesQuery()
+        {
+            this.ValidateMethod("GetTestingImagesQuery", null);
+            return base.CreateQuery<TestingImage>("GetTestingImages", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TestImagesContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TestImagesService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITestImagesServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTestingImages".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestImagesService/GetTestingImagesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestImagesService/GetTestingImages", ReplyAction="http://tempuri.org/TestImagesService/GetTestingImagesResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTestingImages(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTestingImages".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTestingImages".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTestingImages".</returns>
+            QueryResult<TestingImage> EndGetTestingImages(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "SubmitChanges".
+            /// </summary>
+            /// <param name="changeSet">Набор изменений для отправки.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestImagesService/SubmitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestImagesService/SubmitChanges", ReplyAction="http://tempuri.org/TestImagesService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginSubmitChanges".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginSubmitChanges".</param>
+            /// <returns>Коллекция элементов набора изменений, возвращенного операцией SubmitChanges.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class TestImagesContextEntityContainer : EntityContainer
+        {
+            
+            public TestImagesContextEntityContainer()
+            {
+                this.CreateEntitySet<TestingImage>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TestQuestionService" DomainService.
+    /// </summary>
+    public sealed partial class TestQuestionContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestQuestionContext"/>.
+        /// </summary>
+        public TestQuestionContext() : 
+                this(new WebDomainClient<ITestQuestionServiceContract>(new Uri("MRZS-Web-Services-TestQuestionService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestQuestionContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TestQuestionService.</param>
+        public TestQuestionContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITestQuestionServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestQuestionContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TestQuestionContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="TestQuestion"/>, загруженных в данный экземпляр <see cref="TestQuestionContext"/>.
+        /// </summary>
+        public EntitySet<TestQuestion> TestQuestions
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<TestQuestion>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="TestQuestion"/> с помощью запроса "GetTestQuestions".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="TestQuestion"/>.</returns>
+        public EntityQuery<TestQuestion> GetTestQuestionsQuery()
+        {
+            this.ValidateMethod("GetTestQuestionsQuery", null);
+            return base.CreateQuery<TestQuestion>("GetTestQuestions", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TestQuestionContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TestQuestionService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITestQuestionServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTestQuestions".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestQuestionService/GetTestQuestionsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestQuestionService/GetTestQuestions", ReplyAction="http://tempuri.org/TestQuestionService/GetTestQuestionsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTestQuestions(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTestQuestions".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTestQuestions".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTestQuestions".</returns>
+            QueryResult<TestQuestion> EndGetTestQuestions(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "SubmitChanges".
+            /// </summary>
+            /// <param name="changeSet">Набор изменений для отправки.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestQuestionService/SubmitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestQuestionService/SubmitChanges", ReplyAction="http://tempuri.org/TestQuestionService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginSubmitChanges".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginSubmitChanges".</param>
+            /// <returns>Коллекция элементов набора изменений, возвращенного операцией SubmitChanges.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class TestQuestionContextEntityContainer : EntityContainer
+        {
+            
+            public TestQuestionContextEntityContainer()
+            {
+                this.CreateEntitySet<TestQuestion>(EntitySetOperations.All);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Контекст DomainContext, соответствующий службе "TestResultsService" DomainService.
+    /// </summary>
+    public sealed partial class TestResultsContext : DomainContext
+    {
+        
+        #region Определение методов расширяемости
+
+        /// <summary>
+        /// Этот метод вызывается из конструктора по завершении инициализации и
+        /// не может быть использован для последующей настройки объекта.
+        /// </summary>
+        partial void OnCreated();
+
+        #endregion
+        
+        
+        /// <summary>
+        /// Инициализация нового экземпляра класса <see cref="TestResultsContext"/>.
+        /// </summary>
+        public TestResultsContext() : 
+                this(new WebDomainClient<ITestResultsServiceContract>(new Uri("MRZS-Web-Services-TestResultsService.svc", UriKind.Relative)))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestResultsContext"/> с указанным URI службы.
+        /// </summary>
+        /// <param name="serviceUri">Идентификатор URI службы TestResultsService.</param>
+        public TestResultsContext(Uri serviceUri) : 
+                this(new WebDomainClient<ITestResultsServiceContract>(serviceUri))
+        {
+        }
+        
+        /// <summary>
+        /// Инициализирует новый экземпляр класса <see cref="TestResultsContext"/> с указанным параметром <paramref name="domainClient"/>.
+        /// </summary>
+        /// <param name="domainClient">Экземпляр DomainClient для использования в этом контексте DomainContext.</param>
+        public TestResultsContext(DomainClient domainClient) : 
+                base(domainClient)
+        {
+            this.OnCreated();
+        }
+        
+        /// <summary>
+        /// Возвращает набор экземпляров сущностей <see cref="TestResult"/>, загруженных в данный экземпляр <see cref="TestResultsContext"/>.
+        /// </summary>
+        public EntitySet<TestResult> TestResults
+        {
+            get
+            {
+                return base.EntityContainer.GetEntitySet<TestResult>();
+            }
+        }
+        
+        /// <summary>
+        /// Возвращает экземпляр EntityQuery, который может быть использован для загрузки экземпляров сущностей <see cref="TestResult"/> с помощью запроса "GetTestResults".
+        /// </summary>
+        /// <returns>Значение EntityQuery, которое может быть загружено для извлечения экземпляров сущностей <see cref="TestResult"/>.</returns>
+        public EntityQuery<TestResult> GetTestResultsQuery()
+        {
+            this.ValidateMethod("GetTestResultsQuery", null);
+            return base.CreateQuery<TestResult>("GetTestResults", null, false, true);
+        }
+        
+        /// <summary>
+        /// Создает новый объект EntityContainer для наборов сущностей EntitySets данного контекста DomainContext.
+        /// </summary>
+        /// <returns>Новый экземпляр контейнера.</returns>
+        protected override EntityContainer CreateEntityContainer()
+        {
+            return new TestResultsContextEntityContainer();
+        }
+        
+        /// <summary>
+        /// Контракт службы (Service) "TestResultsService" DomainService.
+        /// </summary>
+        [ServiceContract()]
+        public interface ITestResultsServiceContract
+        {
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "GetTestResults".
+            /// </summary>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestResultsService/GetTestResultsDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestResultsService/GetTestResults", ReplyAction="http://tempuri.org/TestResultsService/GetTestResultsResponse")]
+            [WebGet()]
+            IAsyncResult BeginGetTestResults(AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginGetTestResults".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginGetTestResults".</param>
+            /// <returns>Объект "QueryResult", возвращенный из операции "GetTestResults".</returns>
+            QueryResult<TestResult> EndGetTestResults(IAsyncResult result);
+            
+            /// <summary>
+            /// Асинхронно вызывает операцию "SubmitChanges".
+            /// </summary>
+            /// <param name="changeSet">Набор изменений для отправки.</param>
+            /// <param name="callback">Функция обратного вызова вызывается после завершения.</param>
+            /// <param name="asyncState">Необязательный объект состояния.</param>
+            /// <returns>Интерфейс IAsyncResult, который может быть использован для отслеживания запроса.</returns>
+            [FaultContract(typeof(DomainServiceFault), Action="http://tempuri.org/TestResultsService/SubmitChangesDomainServiceFault", Name="DomainServiceFault", Namespace="DomainServices")]
+            [OperationContract(AsyncPattern=true, Action="http://tempuri.org/TestResultsService/SubmitChanges", ReplyAction="http://tempuri.org/TestResultsService/SubmitChangesResponse")]
+            IAsyncResult BeginSubmitChanges(IEnumerable<ChangeSetEntry> changeSet, AsyncCallback callback, object asyncState);
+            
+            /// <summary>
+            /// Завершает асинхронную операцию, начатую "BeginSubmitChanges".
+            /// </summary>
+            /// <param name="result">Интерфейс IAsyncResult, возвращенный из "BeginSubmitChanges".</param>
+            /// <returns>Коллекция элементов набора изменений, возвращенного операцией SubmitChanges.</returns>
+            IEnumerable<ChangeSetEntry> EndSubmitChanges(IAsyncResult result);
+        }
+        
+        internal sealed class TestResultsContextEntityContainer : EntityContainer
+        {
+            
+            public TestResultsContextEntityContainer()
+            {
+                this.CreateEntitySet<TestResult>(EntitySetOperations.All);
             }
         }
     }

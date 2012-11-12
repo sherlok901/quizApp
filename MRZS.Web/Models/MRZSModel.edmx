@@ -36,6 +36,7 @@
           <EntitySet Name="Page" EntityType="MRZSodel.Store.Page" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="passwordCheckType" EntityType="MRZSodel.Store.passwordCheckType" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Question" EntityType="MRZSodel.Store.Question" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="QuestionAnswer" EntityType="MRZSodel.Store.QuestionAnswer" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Quiz" EntityType="MRZSodel.Store.Quiz" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="QuizResult" EntityType="MRZSodel.Store.QuizResult" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Repairmen" EntityType="MRZSodel.Store.Repairmen" store:Type="Tables" Schema="dbo" />
@@ -43,6 +44,10 @@
           <EntitySet Name="Section" EntityType="MRZSodel.Store.Section" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SectionInterectiveTest" EntityType="MRZSodel.Store.SectionInterectiveTest" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sysdiagrams" EntityType="MRZSodel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TestAnswer" EntityType="MRZSodel.Store.TestAnswer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TestingImages" EntityType="MRZSodel.Store.TestingImages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TestQuestion" EntityType="MRZSodel.Store.TestQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="TestResults" EntityType="MRZSodel.Store.TestResults" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="typeFuncDC" EntityType="MRZSodel.Store.typeFuncDC" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="typeSignalDC" EntityType="MRZSodel.Store.typeSignalDC" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="User" EntityType="MRZSodel.Store.User" store:Type="Tables" Schema="dbo" />
@@ -155,6 +160,14 @@
             <End Role="Quiz" EntitySet="Quiz" />
             <End Role="Question" EntitySet="Question" />
           </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_QuestionAnswer" Association="MRZSodel.Store.FK_QuestionAnswer_QuestionAnswer">
+            <End Role="TestAnswer" EntitySet="TestAnswer" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_TestQuestion" Association="MRZSodel.Store.FK_QuestionAnswer_TestQuestion">
+            <End Role="TestQuestion" EntitySet="TestQuestion" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswer" />
+          </AssociationSet>
           <AssociationSet Name="FK_Quiz_Section" Association="MRZSodel.Store.FK_Quiz_Section">
             <End Role="Section" EntitySet="Section" />
             <End Role="Quiz" EntitySet="Quiz" />
@@ -194,6 +207,14 @@
           <AssociationSet Name="FK_SectionInterectiveTest_Section" Association="MRZSodel.Store.FK_SectionInterectiveTest_Section">
             <End Role="Section" EntitySet="Section" />
             <End Role="SectionInterectiveTest" EntitySet="SectionInterectiveTest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestAnswer_TestQuestion" Association="MRZSodel.Store.FK_TestAnswer_TestQuestion">
+            <End Role="TestQuestion" EntitySet="TestQuestion" />
+            <End Role="TestAnswer" EntitySet="TestAnswer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestResults_User" Association="MRZSodel.Store.FK_TestResults_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TestResults" EntitySet="TestResults" />
           </AssociationSet>
           <AssociationSet Name="FK_User_aspnet_Users" Association="MRZSodel.Store.FK_User_aspnet_Users">
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
@@ -509,6 +530,14 @@
           <Property Name="Text" Type="nvarchar" MaxLength="500" />
           <Property Name="IsDeleted" Type="bit" />
         </EntityType>
+        <EntityType Name="QuestionAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="TestQuestionID" Type="int" Nullable="false" />
+          <Property Name="TestAnswerID" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Quiz">
           <Key>
             <PropertyRef Name="QuizId" />
@@ -576,6 +605,39 @@
           <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="version" Type="int" />
           <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TestAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="questionID" Type="int" />
+          <Property Name="answer" Type="varchar(max)" />
+          <Property Name="IsTrue" Type="bit" />
+        </EntityType>
+        <EntityType Name="TestingImages">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="imgPath" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestQuestion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="question" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestResults">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="TestMark" Type="int" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TestDateStart" Type="datetime" />
+          <Property Name="TestDateEnd" Type="datetime" />
         </EntityType>
         <EntityType Name="typeFuncDC">
           <Key>
@@ -935,6 +997,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_QuestionAnswer_QuestionAnswer">
+          <End Role="TestAnswer" Type="MRZSodel.Store.TestAnswer" Multiplicity="1" />
+          <End Role="QuestionAnswer" Type="MRZSodel.Store.QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestAnswer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="TestAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionAnswer_TestQuestion">
+          <End Role="TestQuestion" Type="MRZSodel.Store.TestQuestion" Multiplicity="1" />
+          <End Role="QuestionAnswer" Type="MRZSodel.Store.QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestQuestion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="TestQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Quiz_Section">
           <End Role="Section" Type="MRZSodel.Store.Section" Multiplicity="0..1" />
           <End Role="Quiz" Type="MRZSodel.Store.Quiz" Multiplicity="*" />
@@ -1052,6 +1138,30 @@
             </Principal>
             <Dependent Role="SectionInterectiveTest">
               <PropertyRef Name="SectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestAnswer_TestQuestion">
+          <End Role="TestQuestion" Type="MRZSodel.Store.TestQuestion" Multiplicity="0..1" />
+          <End Role="TestAnswer" Type="MRZSodel.Store.TestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestQuestion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestResults_User">
+          <End Role="User" Type="MRZSodel.Store.User" Multiplicity="1" />
+          <End Role="TestResults" Type="MRZSodel.Store.TestResults" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TestResults">
+              <PropertyRef Name="id" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1305,6 +1415,27 @@
           <AssociationSet Name="FK_mrzs05mMenu_typeFuncDC" Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC">
             <End Role="typeFuncDC" EntitySet="typeFuncDCs" />
             <End Role="mrzs05mMenu" EntitySet="mrzs05mMenu" />
+          </AssociationSet>
+          <EntitySet Name="QuestionAnswers" EntityType="MRZSodel.QuestionAnswer" />
+          <EntitySet Name="TestAnswers" EntityType="MRZSodel.TestAnswer" />
+          <EntitySet Name="TestingImages" EntityType="MRZSodel.TestingImage" />
+          <EntitySet Name="TestQuestions" EntityType="MRZSodel.TestQuestion" />
+          <AssociationSet Name="FK_QuestionAnswer_QuestionAnswer" Association="MRZSodel.FK_QuestionAnswer_QuestionAnswer">
+            <End Role="TestAnswer" EntitySet="TestAnswers" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QuestionAnswer_TestQuestion" Association="MRZSodel.FK_QuestionAnswer_TestQuestion">
+            <End Role="TestQuestion" EntitySet="TestQuestions" />
+            <End Role="QuestionAnswer" EntitySet="QuestionAnswers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestAnswer_TestQuestion" Association="MRZSodel.FK_TestAnswer_TestQuestion">
+            <End Role="TestQuestion" EntitySet="TestQuestions" />
+            <End Role="TestAnswer" EntitySet="TestAnswers" />
+          </AssociationSet>
+          <EntitySet Name="TestResults" EntityType="MRZSodel.TestResult" />
+          <AssociationSet Name="FK_TestResults_User" Association="MRZSodel.FK_TestResults_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TestResult" EntitySet="TestResults" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Answer">
@@ -1722,6 +1853,7 @@
                               ToRole="QuizResult" />
           <NavigationProperty Name="UserSections" Relationship="MRZSodel.FK_UserSection_User" FromRole="User"
                               ToRole="UserSection" />
+          <NavigationProperty Name="TestResult" Relationship="MRZSodel.FK_TestResults_User" FromRole="User" ToRole="TestResult" />
         </EntityType>
         <EntityType Name="UserSection">
           <Key>
@@ -2288,6 +2420,102 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="QuestionAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="TestQuestionID" Nullable="false" />
+          <Property Type="Int32" Name="TestAnswerID" Nullable="false" />
+          <NavigationProperty Name="TestAnswer" Relationship="MRZSodel.FK_QuestionAnswer_QuestionAnswer" FromRole="QuestionAnswer" ToRole="TestAnswer" />
+          <NavigationProperty Name="TestQuestion" Relationship="MRZSodel.FK_QuestionAnswer_TestQuestion" FromRole="QuestionAnswer" ToRole="TestQuestion" />
+        </EntityType>
+        <EntityType Name="TestAnswer">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="questionID" />
+          <Property Type="String" Name="answer" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="IsTrue" />
+          <NavigationProperty Name="QuestionAnswers" Relationship="MRZSodel.FK_QuestionAnswer_QuestionAnswer" FromRole="TestAnswer" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="TestQuestion" Relationship="MRZSodel.FK_TestAnswer_TestQuestion" FromRole="TestAnswer" ToRole="TestQuestion" />
+        </EntityType>
+        <EntityType Name="TestingImage">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="imgPath" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="TestQuestion">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="question" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="QuestionAnswers" Relationship="MRZSodel.FK_QuestionAnswer_TestQuestion" FromRole="TestQuestion" ToRole="QuestionAnswer" />
+          <NavigationProperty Name="TestAnswers" Relationship="MRZSodel.FK_TestAnswer_TestQuestion" FromRole="TestQuestion" ToRole="TestAnswer" />
+        </EntityType>
+        <Association Name="FK_QuestionAnswer_QuestionAnswer">
+          <End Type="MRZSodel.TestAnswer" Role="TestAnswer" Multiplicity="1" />
+          <End Type="MRZSodel.QuestionAnswer" Role="QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestAnswer">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="TestAnswerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QuestionAnswer_TestQuestion">
+          <End Type="MRZSodel.TestQuestion" Role="TestQuestion" Multiplicity="1" />
+          <End Type="MRZSodel.QuestionAnswer" Role="QuestionAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestQuestion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="QuestionAnswer">
+              <PropertyRef Name="TestQuestionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestAnswer_TestQuestion">
+          <End Type="MRZSodel.TestQuestion" Role="TestQuestion" Multiplicity="0..1" />
+          <End Type="MRZSodel.TestAnswer" Role="TestAnswer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestQuestion">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TestAnswer">
+              <PropertyRef Name="questionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TestResult">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="TestMark" />
+          <Property Type="Int32" Name="UserID" Nullable="false" />
+          <Property Type="DateTime" Name="TestDateStart" Precision="3" />
+          <Property Type="DateTime" Name="TestDateEnd" Precision="3" />
+          <NavigationProperty Name="User" Relationship="MRZSodel.FK_TestResults_User" FromRole="TestResult" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_TestResults_User">
+          <End Type="MRZSodel.User" Role="User" Multiplicity="1" />
+          <End Type="MRZSodel.TestResult" Role="TestResult" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="TestResult">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2733,6 +2961,52 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="QuestionAnswers">
+            <EntityTypeMapping TypeName="MRZSodel.QuestionAnswer">
+              <MappingFragment StoreEntitySet="QuestionAnswer">
+                <ScalarProperty Name="TestAnswerID" ColumnName="TestAnswerID" />
+                <ScalarProperty Name="TestQuestionID" ColumnName="TestQuestionID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestAnswers">
+            <EntityTypeMapping TypeName="IsTypeOf(MRZSodel.TestAnswer)">
+              <MappingFragment StoreEntitySet="TestAnswer">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="questionID" ColumnName="questionID" />
+                <ScalarProperty Name="answer" ColumnName="answer" />
+                <ScalarProperty Name="IsTrue" ColumnName="IsTrue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestingImages">
+            <EntityTypeMapping TypeName="MRZSodel.TestingImage">
+              <MappingFragment StoreEntitySet="TestingImages">
+                <ScalarProperty Name="imgPath" ColumnName="imgPath" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestQuestions">
+            <EntityTypeMapping TypeName="MRZSodel.TestQuestion">
+              <MappingFragment StoreEntitySet="TestQuestion">
+                <ScalarProperty Name="question" ColumnName="question" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestResults">
+            <EntityTypeMapping TypeName="MRZSodel.TestResult">
+              <MappingFragment StoreEntitySet="TestResults">
+                <ScalarProperty Name="TestDateEnd" ColumnName="TestDateEnd" />
+                <ScalarProperty Name="TestDateStart" ColumnName="TestDateStart" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TestMark" ColumnName="TestMark" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -2981,6 +3255,15 @@
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_typeSignalDC" />
         <EntityTypeShape EntityType="MRZSodel.typeFuncDC" Width="1.5" PointX="8.115147139930702" PointY="17.963278212567456" />
         <AssociationConnector Association="MRZSodel.FK_mrzs05mMenu_typeFuncDC" />
+        <EntityTypeShape EntityType="MRZSodel.QuestionAnswer" Width="1.5" PointX="2" PointY="4.5" />
+        <EntityTypeShape EntityType="MRZSodel.TestAnswer" Width="1.5" PointX="10.333006599141754" PointY="29.120023293942225" />
+        <EntityTypeShape EntityType="MRZSodel.TestingImage" Width="1.5" PointX="5.5566810544378509" PointY="27.975263638410375" />
+        <EntityTypeShape EntityType="MRZSodel.TestQuestion" Width="1.5" PointX="8.2185095624153082" PointY="26.738140595489249" />
+        <AssociationConnector Association="MRZSodel.FK_QuestionAnswer_QuestionAnswer" />
+        <AssociationConnector Association="MRZSodel.FK_QuestionAnswer_TestQuestion" />
+        <AssociationConnector Association="MRZSodel.FK_TestAnswer_TestQuestion" />
+        <EntityTypeShape EntityType="MRZSodel.TestResult" Width="1.5" PointX="14.375" PointY="17.875" />
+        <AssociationConnector Association="MRZSodel.FK_TestResults_User" />
       </Diagram>
     </Diagrams>
   </Designer>

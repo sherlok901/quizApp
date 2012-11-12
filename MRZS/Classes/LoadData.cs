@@ -15,43 +15,56 @@ using MRZS.Web.Services;
 
 namespace MRZS.Classes
 {
-    internal class LoadData
+    internal static class LoadData
     {        
-        LoadOperation<mrzs05mMenu> mrzs05mMModel;
-        LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
-        LoadOperation<passwordCheckType> passwordCheckTypeModel;
-        LoadOperation<kindSignalDC> kindSignalDCModel;
-        LoadOperation<typeSignalDC> typeSignalDCModel;
-        LoadOperation<typeFuncDC> typeFuncDCModel;
-        LoadOperation<BooleanVal> BooleanValModel;
-        LoadOperation<BooleanVal2> BooleanVal2Model;
-        LoadOperation<BooleanVal3> BooleanVal3Model;
-        LoadOperation<mtzVal> mtzValModel;
-        LoadOperation<mrzsInOutOption> mrzsInOutOptModel;
-        IEnumerable<mrzs05mMenu> mrzs05Entity;
-        IEnumerable<passwordCheckType> listPass2 = null;
-        IEnumerable<kindSignalDC> kindSignalDCList = null;
-        IEnumerable<typeSignalDC> typeSignalDCList = null;
-        IEnumerable<typeFuncDC> typeFuncDCList = null;
-        IEnumerable<BooleanVal> BooleanValList = null;
-        IEnumerable<BooleanVal2> BooleanVal2List = null;
-        IEnumerable<BooleanVal3> BooleanVal3List = null;
-        IEnumerable<mtzVal> mtzValList = null;
-        IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
-        public IEnumerable<mrzs05mMenu> MrzsTable { get { return mrzs05Entity; } }
-        public IEnumerable<passwordCheckType> passwordCheckTypeTable {get{return  listPass2; }}
-        public IEnumerable<kindSignalDC> kindSignalDCTable { get { return kindSignalDCList; } }
-        public IEnumerable<typeSignalDC> typeSignalDCTable { get { return typeSignalDCList; } }
-        public IEnumerable<typeFuncDC> typeFuncDCTable {get{return  typeFuncDCList; }}
-        public IEnumerable<BooleanVal> BooleanValTable {get{return  BooleanValList; }}
-        public IEnumerable<BooleanVal2> BooleanVal2Table {get{return  BooleanVal2List; }}
-        public IEnumerable<BooleanVal3> BooleanVal3Table {get{return  BooleanVal3List; }}
-        public IEnumerable<mtzVal> mtzValTable {get{return  mtzValList; }}
-        public IEnumerable<mrzsInOutOption> mrzsInOutOptionTable {get{return  mrzsInOutOptionList; }}
-        public event EventHandler DataLoaded;
-        mrzs05mMenuContext mrzs05mMContxt = null;
+        static LoadOperation<mrzs05mMenu> mrzs05mMModel;
+        static LoadOperation<mrzsInOutOption> mrzsInOutOptionModel;
+        static LoadOperation<passwordCheckType> passwordCheckTypeModel;
+        static LoadOperation<kindSignalDC> kindSignalDCModel;
+        static LoadOperation<typeSignalDC> typeSignalDCModel;
+        static LoadOperation<typeFuncDC> typeFuncDCModel;
+        static LoadOperation<BooleanVal> BooleanValModel;
+        static LoadOperation<BooleanVal2> BooleanVal2Model;
+        static LoadOperation<BooleanVal3> BooleanVal3Model;
+        static LoadOperation<mtzVal> mtzValModel;
+        static LoadOperation<mrzsInOutOption> mrzsInOutOptModel;
+        static LoadOperation<TestAnswer> TestAnswerModel;
+        static LoadOperation<TestQuestion> TestQuestionModel;
+        static LoadOperation<TestResult> TestResultModel;
+        static LoadOperation<TestingImage> TestingImageModel;
+        static IEnumerable<mrzs05mMenu> mrzs05Entity;
+        static IEnumerable<passwordCheckType> listPass2 = null;
+        static IEnumerable<kindSignalDC> kindSignalDCList = null;
+        static IEnumerable<typeSignalDC> typeSignalDCList = null;
+        static IEnumerable<typeFuncDC> typeFuncDCList = null;
+        static IEnumerable<BooleanVal> BooleanValList = null;
+        static IEnumerable<BooleanVal2> BooleanVal2List = null;
+        static IEnumerable<BooleanVal3> BooleanVal3List = null;
+        static IEnumerable<mtzVal> mtzValList = null;
+        static IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
+        static IEnumerable<TestAnswer> TestAnswerList = null;
+        static IEnumerable<TestQuestion> TestQuestionList = null;
+        static IEnumerable<TestResult> TestResultList = null;
+        static IEnumerable<TestingImage> TestingImageList = null;
 
-        internal LoadData()
+        public static IEnumerable<mrzs05mMenu> MrzsTable { get { return mrzs05Entity; } }
+        public static IEnumerable<passwordCheckType> passwordCheckTypeTable { get { return listPass2; } }
+        public static IEnumerable<kindSignalDC> kindSignalDCTable { get { return kindSignalDCList; } }
+        public static IEnumerable<typeSignalDC> typeSignalDCTable { get { return typeSignalDCList; } }
+        public static IEnumerable<typeFuncDC> typeFuncDCTable { get { return typeFuncDCList; } }
+        public static IEnumerable<BooleanVal> BooleanValTable { get { return BooleanValList; } }
+        public static IEnumerable<BooleanVal2> BooleanVal2Table { get { return BooleanVal2List; } }
+        public static IEnumerable<BooleanVal3> BooleanVal3Table { get { return BooleanVal3List; } }
+        public static IEnumerable<mtzVal> mtzValTable { get { return mtzValList; } }
+        public static IEnumerable<mrzsInOutOption> mrzsInOutOptionTable { get { return mrzsInOutOptionList; } }
+        internal static IEnumerable<TestAnswer> TestAnswerTable { get { return TestAnswerList; } }
+        internal static IEnumerable<TestQuestion> TestQuestionTable { get { return TestQuestionList; } }
+        internal static IEnumerable<TestResult> TestResultTable { get { return TestResultList; } }
+        internal static IEnumerable<TestingImage> TestingImageTable { get { return TestingImageList; } }
+        public static event EventHandler DataLoaded;
+        static mrzs05mMenuContext mrzs05mMContxt = null;
+
+        static LoadData()
         {
             mrzs05mMContxt = new mrzs05mMenuContext();
             mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
@@ -73,76 +86,119 @@ namespace MRZS.Classes
             mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
             mtzValModel.Completed += mtzValModel_Completed;
             mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
-            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;            
+            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
+
+            TestAnswerContext TestAnswContxt = new TestAnswerContext();
+            TestAnswerModel = TestAnswContxt.Load(TestAnswContxt.GetTestAnswersQuery());
+            TestAnswerModel.Completed += TestAnswerModel_Completed;
+            
+            TestQuestionContext TestQuestContxt = new TestQuestionContext();
+            TestQuestionModel = TestQuestContxt.Load(TestQuestContxt.GetTestQuestionsQuery());
+            TestQuestionModel.Completed += TestQuestionModel_Completed;
+
+            TestResultsContext TestResContxt = new TestResultsContext();
+            TestResultModel = TestResContxt.Load(TestResContxt.GetTestResultsQuery());
+            TestResultModel.Completed += TestResultModel_Completed;
+
+            TestImagesContext TestImgContxt = new TestImagesContext();
+            TestingImageModel = TestImgContxt.Load(TestImgContxt.GetTestingImagesQuery());
+            TestingImageModel.Completed += TestingImageModel_Completed;
+        }
+        //for test===
+        static void TestingImageModel_Completed(object sender, EventArgs e)
+        {
+            TestingImageList = TestingImageModel.Entities;
+            checkNotNullTables();
         }
 
-        internal void rejectAllChanges()
+        static void TestResultModel_Completed(object sender, EventArgs e)
+        {
+            TestResultList = TestResultModel.Entities;
+            checkNotNullTables();
+        }
+
+        static void TestQuestionModel_Completed(object sender, EventArgs e)
+        {
+            TestQuestionList = TestQuestionModel.Entities;
+            checkNotNullTables();
+        }
+
+        static void TestAnswerModel_Completed(object sender, EventArgs e)
+        {
+            TestAnswerList = TestAnswerModel.Entities;
+            checkNotNullTables();
+        }
+
+        //for canseled saving
+        internal static void rejectAllChanges()
         {
             mrzs05mMContxt.RejectChanges();
         }
-        internal void savingAllChanges()
+        //for saving
+        internal static void savingAllChanges()
         {
             mrzs05mMContxt.SubmitChanges();
         }
-        void mrzsInOutOptModel_Completed(object sender, EventArgs e)
+
+        static void mrzsInOutOptModel_Completed(object sender, EventArgs e)
         {
             mrzsInOutOptionList = mrzsInOutOptModel.Entities;
             checkNotNullTables();
         }
-        void mtzValModel_Completed(object sender, EventArgs e)
+        static void mtzValModel_Completed(object sender, EventArgs e)
         {
             mtzValList = mtzValModel.Entities;
             checkNotNullTables();
         }
-        void BooleanValModel_Completed(object sender, EventArgs e)
+        static void BooleanValModel_Completed(object sender, EventArgs e)
         {
             BooleanValList = BooleanValModel.Entities;
             checkNotNullTables();
         }
-        void BooleanVal3Model_Completed(object sender, EventArgs e)
+        static void BooleanVal3Model_Completed(object sender, EventArgs e)
         {
             BooleanVal3List = BooleanVal3Model.Entities;
             checkNotNullTables();
         }
 
-        void BooleanVal2Model_Completed(object sender, EventArgs e)
+        static void BooleanVal2Model_Completed(object sender, EventArgs e)
         {
             BooleanVal2List = BooleanVal2Model.Entities;
             checkNotNullTables();
         }
 
-        void typeFuncDCModel_Completed(object sender, EventArgs e)
+        static void typeFuncDCModel_Completed(object sender, EventArgs e)
         {
             typeFuncDCList = typeFuncDCModel.Entities;
             checkNotNullTables();
         }
 
-        void typeSignalDCModel_Completed(object sender, EventArgs e)
+        static void typeSignalDCModel_Completed(object sender, EventArgs e)
         {
             typeSignalDCList = typeSignalDCModel.Entities;
             checkNotNullTables();
         }
 
-        void kindSignalDCModel_Completed(object sender, EventArgs e)
+        static void kindSignalDCModel_Completed(object sender, EventArgs e)
         {
             kindSignalDCList = kindSignalDCModel.Entities;
             checkNotNullTables();
         }
 
-        void passwordCheckTypeModel_Completed(object sender, EventArgs e)
+        static void passwordCheckTypeModel_Completed(object sender, EventArgs e)
         {
             listPass2 = passwordCheckTypeModel.Entities;
             checkNotNullTables();
         }
 
-        void mrzs05mMModel_Completed(object sender, EventArgs e)
+        static void mrzs05mMModel_Completed(object sender, EventArgs e)
         {
             mrzs05Entity = mrzs05mMModel.Entities;
             checkNotNullTables();
         }
 
         //check that tables are loaded
-        private void checkNotNullTables()
+        private static void checkNotNullTables()
         {
             if (mrzs05Entity != null &&
                 listPass2 != null &&
@@ -152,8 +208,13 @@ namespace MRZS.Classes
                 BooleanValList != null &&
                 BooleanVal2List != null &&
                 BooleanVal3List != null &&
-                mtzValList != null) //data loaded alert
-                    if (DataLoaded != null) DataLoaded(this, EventArgs.Empty);            
+                mtzValList != null &&
+                TestAnswerList!=null &&
+                TestQuestionList!=null &&
+                TestResultList!=null &&
+                TestingImageList!=null
+                ) //data loaded alert
+                    if (DataLoaded != null) DataLoaded(null, EventArgs.Empty);            
         }
     }
 }

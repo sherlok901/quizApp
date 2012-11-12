@@ -21,7 +21,7 @@ namespace MRZS.Classes
     {       
         IEnumerable<mrzs05mMenu> MrzsTables;        
         DisplayViewModel dispControllr = new DisplayViewModel();
-        LoadData ld = new LoadData();
+        
         List<int> SelectedID = new List<int>(0);
         NumValueChanging NumValue = new NumValueChanging();
         List<int?> AllParentID;
@@ -34,7 +34,7 @@ namespace MRZS.Classes
         internal MenuController()
         {            
             //subcribe to data load event
-            ld.DataLoaded += ld_DataLoaded;
+            LoadData.DataLoaded += ld_DataLoaded;
         }
 
         void ld_DataLoaded(object sender, EventArgs e)
@@ -45,7 +45,7 @@ namespace MRZS.Classes
         //getting first menu level
         internal List<Menu> getFirstMenu()
         {
-            AllParentID = AddFunctions.selectDistinctMrzsId(ld.MrzsTable);
+            AllParentID = AddFunctions.selectDistinctMrzsId(LoadData.MrzsTable);
             CurrentParentID = AllParentID[0];
             return getMenu(CurrentParentID);            
         }
@@ -53,7 +53,7 @@ namespace MRZS.Classes
         //get menu by parentID
         List<Menu> getMenu(int? parentID)
         {
-            List<mrzs05mMenu> mrzsTables= AddFunctions.getEntitiesByParentID(ld.MrzsTable, parentID);
+            List<mrzs05mMenu> mrzsTables= AddFunctions.getEntitiesByParentID(LoadData.MrzsTable, parentID);
             return getTransformedMenu(mrzsTables);
         }
 
@@ -221,7 +221,7 @@ namespace MRZS.Classes
                         //if user want save inputed\choosed value
                     else if (PasswordController.isWaitingState())
                     {
-                        ld.savingAllChanges();
+                        LoadData.savingAllChanges();
                         //set first state
                         PasswordController.setPasswordAsk();
                         //show parent last selected menu
@@ -261,7 +261,7 @@ namespace MRZS.Classes
             //if user want reject entered\choosed value
             else if (PasswordController.isWaitingState())
             {
-                ld.rejectAllChanges();
+                LoadData.rejectAllChanges();
                 //set first state
                 PasswordController.setPasswordAsk();
             }
@@ -327,7 +327,7 @@ namespace MRZS.Classes
         //has Menu children or not
         bool checkMenuOnShowOneOrTwo(Menu m)
         {
-            List<mrzs05mMenu> mrzsTables = AddFunctions.getEntitiesByParentID(ld.MrzsTable, m.ID);
+            List<mrzs05mMenu> mrzsTables = AddFunctions.getEntitiesByParentID(LoadData.MrzsTable, m.ID);
             if (mrzsTables == null) return false;
             else if (mrzsTables.Count == 0) return false;
             else return true;            
@@ -349,7 +349,7 @@ namespace MRZS.Classes
         void changingValue(EmulatorDisplay d,Menu CurrMenu)
         {
             //get current entity
-            mrzs05mMenu ent = AddFunctions.getEntityByID(ld.MrzsTable, CurrMenu.ID);
+            mrzs05mMenu ent = AddFunctions.getEntityByID(LoadData.MrzsTable, CurrMenu.ID);
             
             //if value can be choosed by Enter
             if (ent.value == null)
@@ -358,7 +358,7 @@ namespace MRZS.Classes
                 if (ent.kindSignalDCid != null)
                 {
                     //get entity by another id that not equale id of Menu
-                    kindSignalDC KindEnt = ld.kindSignalDCTable.Where(n => n.id != ent.kindSignalDCid).Single();
+                    kindSignalDC KindEnt = LoadData.kindSignalDCTable.Where(n => n.id != ent.kindSignalDCid).Single();
                     //get val from entity
                     val = KindEnt.kindSignal;
 
@@ -366,38 +366,38 @@ namespace MRZS.Classes
                 }
                 else if (ent.typeSignalDCid != null)
                 {
-                    typeSignalDC TypeEnt = ld.typeSignalDCTable.Where(n => n.id != ent.typeSignalDCid).Single();
+                    typeSignalDC TypeEnt = LoadData.typeSignalDCTable.Where(n => n.id != ent.typeSignalDCid).Single();
                     val = TypeEnt.typeSignal;
                     ent.typeSignalDCid = Convert.ToInt32(TypeEnt.id);
                 }
                 else if (ent.typeFuncDCid != null)
                 {
-                    typeFuncDC TypeFunc = ld.typeFuncDCTable.Where(n => n.@int != ent.typeFuncDCid).Single();
+                    typeFuncDC TypeFunc = LoadData.typeFuncDCTable.Where(n => n.@int != ent.typeFuncDCid).Single();
                     val = TypeFunc.typeFunction;
                     ent.typeFuncDCid = Convert.ToInt32(TypeFunc.@int);
                 }
                 else if (ent.BooleanVal2ID != null)
                 {
-                    BooleanVal2 Bool2Ent = ld.BooleanVal2Table.Where(n => n.id != ent.BooleanVal2ID).Single();
+                    BooleanVal2 Bool2Ent = LoadData.BooleanVal2Table.Where(n => n.id != ent.BooleanVal2ID).Single();
                     val = Bool2Ent.val;
                     //set new value to current mrzs05Menu entity
                     ent.BooleanVal2ID = Convert.ToInt32(Bool2Ent.id);
                 }
                 else if (ent.BooleanVal3ID != null)
                 {
-                    BooleanVal3 Bool3 = ld.BooleanVal3Table.Where(n => n.id != ent.BooleanVal3ID).Single();
+                    BooleanVal3 Bool3 = LoadData.BooleanVal3Table.Where(n => n.id != ent.BooleanVal3ID).Single();
                     val = Bool3.boolVal;
                     ent.BooleanVal3ID = Convert.ToInt32(Bool3.id);
                 }
                 else if (ent.mtzValID != null)
                 {
-                    mtzVal MtzEnt = ld.mtzValTable.Where(n => n.id != ent.mtzValID).Single();
+                    mtzVal MtzEnt = LoadData.mtzValTable.Where(n => n.id != ent.mtzValID).Single();
                     val = MtzEnt.mtzVals;
                     ent.mtzValID = Convert.ToInt32(MtzEnt.id);
                 }
                 else if (ent.BooleanValID != null)
                 {
-                    BooleanVal bEnt = ld.BooleanValTable.Where(n => n.id != ent.BooleanValID).Single();
+                    BooleanVal bEnt = LoadData.BooleanValTable.Where(n => n.id != ent.BooleanValID).Single();
                     val = bEnt.val;
                     ent.BooleanValID = bEnt.id;
                 }
@@ -417,7 +417,7 @@ namespace MRZS.Classes
         void changingNumValue2(EmulatorDisplay d, Menu CurrMenu)
         {
             //get current entity
-            mrzs05mMenu ent = AddFunctions.getEntityByID(ld.MrzsTable, CurrMenu.ID);
+            mrzs05mMenu ent = AddFunctions.getEntityByID(LoadData.MrzsTable, CurrMenu.ID);
             NumValue.parseNumeric(d.SecondTextBlock, d.SecondTextBlock.Text);
             //temporary saved value
             NumValue.setValue(dispControllr.SecondMenuStr);
@@ -429,7 +429,7 @@ namespace MRZS.Classes
         void returnToParentMenu()
         {
             //get selected mrzs05menu entity
-            mrzs05mMenu temp = ld.MrzsTable.Where(n => n.id == SelectedID.Last()).Single();
+            mrzs05mMenu temp = LoadData.MrzsTable.Where(n => n.id == SelectedID.Last()).Single();
             if (temp == null) return;
 
             //transform entity to Menu class
@@ -441,7 +441,7 @@ namespace MRZS.Classes
 
         internal string getValueByMenuElement(string name)
         {
-            return ld.MrzsTable.Where(n => n.menuElement == name).Single().value;
+            return LoadData.MrzsTable.Where(n => n.menuElement == name).Single().value;
         }
 
         //заменить в строке точку на комму
@@ -485,27 +485,27 @@ namespace MRZS.Classes
         //1 Ступень МТЗ
         internal string getStupenMTZ()
         {
-            return ld.MrzsTable.Where(n => n.menuElement == "1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+            return LoadData.MrzsTable.Where(n => n.menuElement == "1 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
         }
         //2 Ступень МТЗ
         internal string getStupenMTZ2()
         {
-            return ld.MrzsTable.Where(n => n.menuElement == "2 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
+            return LoadData.MrzsTable.Where(n => n.menuElement == "2 Ступень МТЗ\\{value}").Single().BooleanVal3.boolVal;
         }
         //ускор мтз2
         internal string getUskorMTZ2()
         {
-            return ld.MrzsTable.Where(n => n.menuElement == "Ускор МТЗ2\\{value}").Single().BooleanVal3.boolVal;
+            return LoadData.MrzsTable.Where(n => n.menuElement == "Ускор МТЗ2\\{value}").Single().BooleanVal3.boolVal;
         }
         //пуск от мтз1
         internal int? puskOtMtz1()
         {
-            return ld.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ1\\{value}").Single().BooleanVal3.id;
+            return LoadData.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ1\\{value}").Single().BooleanVal3.id;
         }
         //пуск от мтз2
         internal int? puskOtMtz2()
         {
-            return ld.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ2\\{value}").Single().BooleanVal3.id;
+            return LoadData.MrzsTable.Where(n => n.menuElement == "Пуск от МТЗ2\\{value}").Single().BooleanVal3.id;
         }
         internal double get1CycleAPV()
         {
@@ -515,6 +515,16 @@ namespace MRZS.Classes
         internal double getZZExcerpt()
         {
             return getValFromMenuElement("Выдержка ЗЗ\\{value}");
+        }
+        //уставка ЗЗ
+        internal double ZZSetpoint()
+        {
+            return getValFromMenuElement("Уставка ЗЗ ЗI0\\{value}");
+        }
+        //защита ЗЗ
+        internal string getDefenceZZ()
+        {
+            return LoadData.MrzsTable.Where(n => n.menuElement == "Защита ЗЗ\\{value}").Single().BooleanVal3.boolVal;
         }
     }
 }

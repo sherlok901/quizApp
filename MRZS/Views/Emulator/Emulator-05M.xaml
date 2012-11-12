@@ -2441,7 +2441,7 @@
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="Гц" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="0" Grid.Column="2" Content="ЗІ0" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
             <sdk:Label Grid.Row="1" Grid.ColumnSpan="5" Content="Ток" HorizontalAlignment="Center" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="0" Grid.Column="3" MouseEnter="NumericUpDown_MouseEnter_1" DecimalPlaces="2"/>
+            <toolkit:NumericUpDown x:Name="ZIO" Grid.Row="0" Grid.Column="3" MouseEnter="NumericUpDown_MouseEnter_1" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="0" Grid.Column="4" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!--tok -->
             <sdk:Label Grid.Row="2" Grid.Column="0" Content="Ia" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
@@ -2463,7 +2463,7 @@
             <sdk:Label Grid.Row="4" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <!---->
             <sdk:Label Grid.Row="5" Grid.Column="0" Content="ЗфI" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
-            <toolkit:NumericUpDown Grid.Row="5" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_6" DecimalPlaces="2"/>
+            <toolkit:NumericUpDown x:Name="Izfa" Grid.Row="5" Grid.Column="1" MouseEnter="NumericUpDown_MouseEnter_6" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="5" Grid.Column="2" Content="A" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>
             <toolkit:NumericUpDown Grid.Row="5" Grid.Column="3" Maximum="360" MouseEnter="NumericUpDown_MouseEnter_7" DecimalPlaces="2"/>
             <sdk:Label Grid.Row="5" Grid.Column="4" Content="o" HorizontalAlignment="Left" Style="{StaticResource LabelFontStyle}"/>

@@ -8,6 +8,15 @@
            mc:Ignorable="d"
            d:DesignWidth="640" d:DesignHeight="480"
            Title="Education Page">
+    <navigation:Page.Resources>
+        <Style TargetType="Button" x:Key="ButtonFont">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Arial"/>            
+            <Setter Property="Width" Value="280"/>
+            <Setter Property="Height" Value="76"/>            
+        </Style>
+    </navigation:Page.Resources>
     <Grid x:Name="LayoutRoot">
 
         <Grid x:Name="gridCurrentEducation" HorizontalAlignment="Stretch" VerticalAlignment="Top" Margin="20,20,20,0" Background="#FFD0D0D0">
@@ -45,16 +54,24 @@
 			            FontSize="16" Text="{Binding Name}" Grid.Row="2" Grid.Column="1" Foreground="Red"/>
 
         </Grid>
-        <Button
+        <StackPanel>
+            <Button Margin="0,150,0,0"
 				x:Name="buttonStartEducation" 
 				HorizontalAlignment="Center" 
 				VerticalAlignment="Center" 
 				Height="80" Width="280" Click="Button_Click">
-            <StackPanel Orientation="Horizontal">
-                <Image HorizontalAlignment="Left" Source="../../Images/1298497749_daemons.png"/>
-                <TextBlock VerticalAlignment="Center" FontSize="18" Text="Начать обучение" FontFamily="Arial"/>
-            </StackPanel>
-        </Button>
+                <StackPanel Orientation="Horizontal">
+                    <Image HorizontalAlignment="Left" Source="../../Images/1298497749_daemons.png"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="18" Text="Начать обучение" FontFamily="Arial"/>
+                </StackPanel>
+            </Button>
+        
+<Button  Height="76" Margin="0,30,0,0"  Width="280" Click="Button_Click_1" Style="{StaticResource ButtonFont}">
+                <TextBlock Height="23" TextWrapping="Wrap" Text="Емулятор МРЗС" Width="270" FontSize="18" TextAlignment="Center" FontFamily="Arial"/>
+            </Button>
+            <Button x:Name="Testing"  Margin="0,30,0,0" Content="Тестирование" Style="{StaticResource ButtonFont}" Click="Testing_Click_1"></Button>
+        </StackPanel>
+       
         <toolkit:BusyIndicator
 						VerticalAlignment="Center"
 						IsBusy="True"
@@ -62,9 +79,7 @@
 						x:Name="busyIndicator"
 						HorizontalAlignment="Center" 
 					 	d:LayoutOverrides="Height" d:IsHidden="True"/>
-        <Button HorizontalAlignment="Left" Height="76" Margin="180,317,0,0" VerticalAlignment="Top" Width="280" Click="Button_Click_1">
-            <TextBlock Height="23" TextWrapping="Wrap" Text="Емулятор МРЗС" Width="270" FontSize="18" TextAlignment="Center" FontFamily="Arial"/>
-        </Button>
+                
     </Grid>
 
 </navigation:Page>

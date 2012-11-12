@@ -58,6 +58,10 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_passwordCheckType", "passwordCheckType", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.passwordCheckType), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_typeSignalDC", "typeSignalDC", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.typeSignalDC), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
 [assembly: EdmRelationshipAttribute("MRZSodel", "FK_mrzs05mMenu_typeFuncDC", "typeFuncDC", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.typeFuncDC), "mrzs05mMenu", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.mrzs05mMenu), true)]
+[assembly: EdmRelationshipAttribute("MRZSodel", "FK_QuestionAnswer_QuestionAnswer", "TestAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MRZS.Web.Models.TestAnswer), "QuestionAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.QuestionAnswer), true)]
+[assembly: EdmRelationshipAttribute("MRZSodel", "FK_QuestionAnswer_TestQuestion", "TestQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MRZS.Web.Models.TestQuestion), "QuestionAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.QuestionAnswer), true)]
+[assembly: EdmRelationshipAttribute("MRZSodel", "FK_TestAnswer_TestQuestion", "TestQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.TestQuestion), "TestAnswer", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(MRZS.Web.Models.TestAnswer), true)]
+[assembly: EdmRelationshipAttribute("MRZSodel", "FK_TestResults_User", "User", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(MRZS.Web.Models.User), "TestResult", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(MRZS.Web.Models.TestResult), true)]
 
 #endregion
 
@@ -716,6 +720,86 @@ namespace MRZS.Web.Models
             }
         }
         private ObjectSet<typeFuncDC> _typeFuncDCs;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<QuestionAnswer> QuestionAnswers
+        {
+            get
+            {
+                if ((_QuestionAnswers == null))
+                {
+                    _QuestionAnswers = base.CreateObjectSet<QuestionAnswer>("QuestionAnswers");
+                }
+                return _QuestionAnswers;
+            }
+        }
+        private ObjectSet<QuestionAnswer> _QuestionAnswers;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<TestAnswer> TestAnswers
+        {
+            get
+            {
+                if ((_TestAnswers == null))
+                {
+                    _TestAnswers = base.CreateObjectSet<TestAnswer>("TestAnswers");
+                }
+                return _TestAnswers;
+            }
+        }
+        private ObjectSet<TestAnswer> _TestAnswers;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<TestingImage> TestingImages
+        {
+            get
+            {
+                if ((_TestingImages == null))
+                {
+                    _TestingImages = base.CreateObjectSet<TestingImage>("TestingImages");
+                }
+                return _TestingImages;
+            }
+        }
+        private ObjectSet<TestingImage> _TestingImages;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<TestQuestion> TestQuestions
+        {
+            get
+            {
+                if ((_TestQuestions == null))
+                {
+                    _TestQuestions = base.CreateObjectSet<TestQuestion>("TestQuestions");
+                }
+                return _TestQuestions;
+            }
+        }
+        private ObjectSet<TestQuestion> _TestQuestions;
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        public ObjectSet<TestResult> TestResults
+        {
+            get
+            {
+                if ((_TestResults == null))
+                {
+                    _TestResults = base.CreateObjectSet<TestResult>("TestResults");
+                }
+                return _TestResults;
+            }
+        }
+        private ObjectSet<TestResult> _TestResults;
 
         #endregion
 
@@ -1023,6 +1107,46 @@ namespace MRZS.Web.Models
         public void AddTotypeFuncDCs(typeFuncDC typeFuncDC)
         {
             base.AddObject("typeFuncDCs", typeFuncDC);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet QuestionAnswers. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddToQuestionAnswers(QuestionAnswer questionAnswer)
+        {
+            base.AddObject("QuestionAnswers", questionAnswer);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet TestAnswers. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddToTestAnswers(TestAnswer testAnswer)
+        {
+            base.AddObject("TestAnswers", testAnswer);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet TestingImages. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddToTestingImages(TestingImage testingImage)
+        {
+            base.AddObject("TestingImages", testingImage);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet TestQuestions. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddToTestQuestions(TestQuestion testQuestion)
+        {
+            base.AddObject("TestQuestions", testQuestion);
+        }
+    
+        /// <summary>
+        /// Устаревший метод для добавления новых объектов в набор EntitySet TestResults. Взамен можно использовать метод .Add связанного свойства ObjectSet&lt;T&gt;.
+        /// </summary>
+        public void AddToTestResults(TestResult testResult)
+        {
+            base.AddObject("TestResults", testResult);
         }
 
         #endregion
@@ -7415,6 +7539,195 @@ namespace MRZS.Web.Models
     /// <summary>
     /// Нет доступной документации по метаданным.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="QuestionAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class QuestionAnswer : EntityObject
+    {
+        #region Фабричный метод
+    
+        /// <summary>
+        /// Создание нового объекта QuestionAnswer.
+        /// </summary>
+        /// <param name="id">Исходное значение свойства id.</param>
+        /// <param name="testQuestionID">Исходное значение свойства TestQuestionID.</param>
+        /// <param name="testAnswerID">Исходное значение свойства TestAnswerID.</param>
+        public static QuestionAnswer CreateQuestionAnswer(global::System.Int32 id, global::System.Int32 testQuestionID, global::System.Int32 testAnswerID)
+        {
+            QuestionAnswer questionAnswer = new QuestionAnswer();
+            questionAnswer.id = id;
+            questionAnswer.TestQuestionID = testQuestionID;
+            questionAnswer.TestAnswerID = testAnswerID;
+            return questionAnswer;
+        }
+
+        #endregion
+
+        #region Свойства-примитивы
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestQuestionID
+        {
+            get
+            {
+                return _TestQuestionID;
+            }
+            set
+            {
+                OnTestQuestionIDChanging(value);
+                ReportPropertyChanging("TestQuestionID");
+                _TestQuestionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestQuestionID");
+                OnTestQuestionIDChanged();
+            }
+        }
+        private global::System.Int32 _TestQuestionID;
+        partial void OnTestQuestionIDChanging(global::System.Int32 value);
+        partial void OnTestQuestionIDChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 TestAnswerID
+        {
+            get
+            {
+                return _TestAnswerID;
+            }
+            set
+            {
+                OnTestAnswerIDChanging(value);
+                ReportPropertyChanging("TestAnswerID");
+                _TestAnswerID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestAnswerID");
+                OnTestAnswerIDChanged();
+            }
+        }
+        private global::System.Int32 _TestAnswerID;
+        partial void OnTestAnswerIDChanging(global::System.Int32 value);
+        partial void OnTestAnswerIDChanged();
+
+        #endregion
+
+    
+        #region Свойства навигации
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_QuestionAnswer_QuestionAnswer", "TestAnswer")]
+        public TestAnswer TestAnswer
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "TestAnswer").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "TestAnswer").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestAnswer> TestAnswerReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "TestAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "TestAnswer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_QuestionAnswer_TestQuestion", "TestQuestion")]
+        public TestQuestion TestQuestion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_QuestionAnswer_TestQuestion", "TestQuestion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_QuestionAnswer_TestQuestion", "TestQuestion").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestQuestion> TestQuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_QuestionAnswer_TestQuestion", "TestQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestQuestion>("MRZSodel.FK_QuestionAnswer_TestQuestion", "TestQuestion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Нет доступной документации по метаданным.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="Quiz")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -8833,6 +9146,610 @@ namespace MRZS.Web.Models
     /// <summary>
     /// Нет доступной документации по метаданным.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="TestAnswer")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TestAnswer : EntityObject
+    {
+        #region Фабричный метод
+    
+        /// <summary>
+        /// Создание нового объекта TestAnswer.
+        /// </summary>
+        /// <param name="id">Исходное значение свойства id.</param>
+        public static TestAnswer CreateTestAnswer(global::System.Int32 id)
+        {
+            TestAnswer testAnswer = new TestAnswer();
+            testAnswer.id = id;
+            return testAnswer;
+        }
+
+        #endregion
+
+        #region Свойства-примитивы
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> questionID
+        {
+            get
+            {
+                return _questionID;
+            }
+            set
+            {
+                OnquestionIDChanging(value);
+                ReportPropertyChanging("questionID");
+                _questionID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("questionID");
+                OnquestionIDChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _questionID;
+        partial void OnquestionIDChanging(Nullable<global::System.Int32> value);
+        partial void OnquestionIDChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String answer
+        {
+            get
+            {
+                return _answer;
+            }
+            set
+            {
+                OnanswerChanging(value);
+                ReportPropertyChanging("answer");
+                _answer = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("answer");
+                OnanswerChanged();
+            }
+        }
+        private global::System.String _answer;
+        partial void OnanswerChanging(global::System.String value);
+        partial void OnanswerChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsTrue
+        {
+            get
+            {
+                return _IsTrue;
+            }
+            set
+            {
+                OnIsTrueChanging(value);
+                ReportPropertyChanging("IsTrue");
+                _IsTrue = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsTrue");
+                OnIsTrueChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsTrue;
+        partial void OnIsTrueChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsTrueChanged();
+
+        #endregion
+
+    
+        #region Свойства навигации
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_QuestionAnswer_QuestionAnswer", "QuestionAnswer")]
+        public EntityCollection<QuestionAnswer> QuestionAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<QuestionAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "QuestionAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<QuestionAnswer>("MRZSodel.FK_QuestionAnswer_QuestionAnswer", "QuestionAnswer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_TestAnswer_TestQuestion", "TestQuestion")]
+        public TestQuestion TestQuestion
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_TestAnswer_TestQuestion", "TestQuestion").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_TestAnswer_TestQuestion", "TestQuestion").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestQuestion> TestQuestionReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestQuestion>("MRZSodel.FK_TestAnswer_TestQuestion", "TestQuestion");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestQuestion>("MRZSodel.FK_TestAnswer_TestQuestion", "TestQuestion", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Нет доступной документации по метаданным.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="TestingImage")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TestingImage : EntityObject
+    {
+        #region Фабричный метод
+    
+        /// <summary>
+        /// Создание нового объекта TestingImage.
+        /// </summary>
+        /// <param name="id">Исходное значение свойства id.</param>
+        /// <param name="imgPath">Исходное значение свойства imgPath.</param>
+        public static TestingImage CreateTestingImage(global::System.Int32 id, global::System.String imgPath)
+        {
+            TestingImage testingImage = new TestingImage();
+            testingImage.id = id;
+            testingImage.imgPath = imgPath;
+            return testingImage;
+        }
+
+        #endregion
+
+        #region Свойства-примитивы
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String imgPath
+        {
+            get
+            {
+                return _imgPath;
+            }
+            set
+            {
+                OnimgPathChanging(value);
+                ReportPropertyChanging("imgPath");
+                _imgPath = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("imgPath");
+                OnimgPathChanged();
+            }
+        }
+        private global::System.String _imgPath;
+        partial void OnimgPathChanging(global::System.String value);
+        partial void OnimgPathChanged();
+
+        #endregion
+
+    
+    }
+    
+    /// <summary>
+    /// Нет доступной документации по метаданным.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="TestQuestion")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TestQuestion : EntityObject
+    {
+        #region Фабричный метод
+    
+        /// <summary>
+        /// Создание нового объекта TestQuestion.
+        /// </summary>
+        /// <param name="id">Исходное значение свойства id.</param>
+        /// <param name="question">Исходное значение свойства question.</param>
+        public static TestQuestion CreateTestQuestion(global::System.Int32 id, global::System.String question)
+        {
+            TestQuestion testQuestion = new TestQuestion();
+            testQuestion.id = id;
+            testQuestion.question = question;
+            return testQuestion;
+        }
+
+        #endregion
+
+        #region Свойства-примитивы
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String question
+        {
+            get
+            {
+                return _question;
+            }
+            set
+            {
+                OnquestionChanging(value);
+                ReportPropertyChanging("question");
+                _question = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("question");
+                OnquestionChanged();
+            }
+        }
+        private global::System.String _question;
+        partial void OnquestionChanging(global::System.String value);
+        partial void OnquestionChanged();
+
+        #endregion
+
+    
+        #region Свойства навигации
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_QuestionAnswer_TestQuestion", "QuestionAnswer")]
+        public EntityCollection<QuestionAnswer> QuestionAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<QuestionAnswer>("MRZSodel.FK_QuestionAnswer_TestQuestion", "QuestionAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<QuestionAnswer>("MRZSodel.FK_QuestionAnswer_TestQuestion", "QuestionAnswer", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_TestAnswer_TestQuestion", "TestAnswer")]
+        public EntityCollection<TestAnswer> TestAnswers
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<TestAnswer>("MRZSodel.FK_TestAnswer_TestQuestion", "TestAnswer");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<TestAnswer>("MRZSodel.FK_TestAnswer_TestQuestion", "TestAnswer", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Нет доступной документации по метаданным.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="TestResult")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class TestResult : EntityObject
+    {
+        #region Фабричный метод
+    
+        /// <summary>
+        /// Создание нового объекта TestResult.
+        /// </summary>
+        /// <param name="id">Исходное значение свойства id.</param>
+        /// <param name="userID">Исходное значение свойства UserID.</param>
+        public static TestResult CreateTestResult(global::System.Int32 id, global::System.Int32 userID)
+        {
+            TestResult testResult = new TestResult();
+            testResult.id = id;
+            testResult.UserID = userID;
+            return testResult;
+        }
+
+        #endregion
+
+        #region Свойства-примитивы
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 id
+        {
+            get
+            {
+                return _id;
+            }
+            set
+            {
+                if (_id != value)
+                {
+                    OnidChanging(value);
+                    ReportPropertyChanging("id");
+                    _id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("id");
+                    OnidChanged();
+                }
+            }
+        }
+        private global::System.Int32 _id;
+        partial void OnidChanging(global::System.Int32 value);
+        partial void OnidChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Int32> TestMark
+        {
+            get
+            {
+                return _TestMark;
+            }
+            set
+            {
+                OnTestMarkChanging(value);
+                ReportPropertyChanging("TestMark");
+                _TestMark = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestMark");
+                OnTestMarkChanged();
+            }
+        }
+        private Nullable<global::System.Int32> _TestMark;
+        partial void OnTestMarkChanging(Nullable<global::System.Int32> value);
+        partial void OnTestMarkChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                OnUserIDChanging(value);
+                ReportPropertyChanging("UserID");
+                _UserID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserID");
+                OnUserIDChanged();
+            }
+        }
+        private global::System.Int32 _UserID;
+        partial void OnUserIDChanging(global::System.Int32 value);
+        partial void OnUserIDChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> TestDateStart
+        {
+            get
+            {
+                return _TestDateStart;
+            }
+            set
+            {
+                OnTestDateStartChanging(value);
+                ReportPropertyChanging("TestDateStart");
+                _TestDateStart = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestDateStart");
+                OnTestDateStartChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _TestDateStart;
+        partial void OnTestDateStartChanging(Nullable<global::System.DateTime> value);
+        partial void OnTestDateStartChanged();
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> TestDateEnd
+        {
+            get
+            {
+                return _TestDateEnd;
+            }
+            set
+            {
+                OnTestDateEndChanging(value);
+                ReportPropertyChanging("TestDateEnd");
+                _TestDateEnd = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("TestDateEnd");
+                OnTestDateEndChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _TestDateEnd;
+        partial void OnTestDateEndChanging(Nullable<global::System.DateTime> value);
+        partial void OnTestDateEndChanged();
+
+        #endregion
+
+    
+        #region Свойства навигации
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_TestResults_User", "User")]
+        public User User
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MRZSodel.FK_TestResults_User", "User").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MRZSodel.FK_TestResults_User", "User").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<User> UserReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<User>("MRZSodel.FK_TestResults_User", "User");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<User>("MRZSodel.FK_TestResults_User", "User", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Нет доступной документации по метаданным.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="MRZSodel", Name="typeFuncDC")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -9343,6 +10260,44 @@ namespace MRZS.Web.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<UserSection>("MRZSodel.FK_UserSection_User", "UserSection", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("MRZSodel", "FK_TestResults_User", "TestResult")]
+        public TestResult TestResult
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestResult>("MRZSodel.FK_TestResults_User", "TestResult").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestResult>("MRZSodel.FK_TestResults_User", "TestResult").Value = value;
+            }
+        }
+        /// <summary>
+        /// Нет доступной документации по метаданным.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<TestResult> TestResultReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<TestResult>("MRZSodel.FK_TestResults_User", "TestResult");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<TestResult>("MRZSodel.FK_TestResults_User", "TestResult", value);
                 }
             }
         }

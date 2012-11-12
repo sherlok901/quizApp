@@ -256,6 +256,14 @@
       <DependentUpon>SectionService.cs</DependentUpon>
       <AutoGen>True</AutoGen>
     </Compile>
+    <Compile Include="Services\TestAnswerService.cs" />
+    <Compile Include="Services\TestAnswerService.metadata.cs" />
+    <Compile Include="Services\TestImagesService.cs" />
+    <Compile Include="Services\TestImagesService.metadata.cs" />
+    <Compile Include="Services\TestQuestionService.cs" />
+    <Compile Include="Services\TestQuestionService.metadata.cs" />
+    <Compile Include="Services\TestResultsService.cs" />
+    <Compile Include="Services\TestResultsService.metadata.cs" />
     <Compile Include="Services\TypeSignalDCService.cs" />
     <Compile Include="Services\UserRegistrationService.cs" />
     <Compile Include="Models\Shared\User.shared.cs" />

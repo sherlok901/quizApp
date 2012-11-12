@@ -153,6 +153,7 @@
     <Compile Include="Classes\MyControl1.cs" />
     <Compile Include="Classes\NumValueChanging.cs" />
     <Compile Include="Classes\PasswordController.cs" />
+    <Compile Include="Classes\Testing\TestControler.cs" />
     <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
       <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
     </Compile>
@@ -288,6 +289,9 @@
     <Compile Include="Views\Student\TestResult.Model.cs" />
     <Compile Include="Views\Student\TestResult.xaml.cs">
       <DependentUpon>TestResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Testing\Testing.xaml.cs">
+      <DependentUpon>Testing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WarrningPopup.xaml.cs">
       <DependentUpon>WarrningPopup.xaml</DependentUpon>
@@ -440,6 +444,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Student\TestResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Testing\Testing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

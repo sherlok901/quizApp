@@ -25,8 +25,13 @@
 
         void Home_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
+            //TODO:sffs
+            //turn on logining
             //WebContext.Current.Authentication.LoggedIn += new EventHandler<System.ServiceModel.DomainServices.Client.ApplicationServices.AuthenticationEventArgs>(Authentication_LoggedIn);           
-            NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
+            //to emulator
+            //NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
+            //to testing
+            NavigationService.Navigate(new Uri("/Student/Education", UriKind.Relative));
         }
 
         void Authentication_LoggedIn(object sender, System.ServiceModel.DomainServices.Client.ApplicationServices.AuthenticationEventArgs e)

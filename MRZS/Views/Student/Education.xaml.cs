@@ -42,6 +42,8 @@ namespace MRZS.Views.Student
             //if (currentSection == null)
             //    buttonStartEducation.IsEnabled = false;
             busyIndicator.IsBusy = false;
+
+            NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));
         }
 
         // Executes when the user navigates to this page.
@@ -64,6 +66,12 @@ namespace MRZS.Views.Student
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
+        }
+
+        //тестирование
+        private void Testing_Click_1(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));
         }
         
 

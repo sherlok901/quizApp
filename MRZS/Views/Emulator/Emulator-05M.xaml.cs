@@ -21,8 +21,8 @@ namespace MRZS.Views.Emulator
         private NumericUpDown numUpDown1;        
         //entity        
         IEnumerable<passwordCheckType> passwordCheckTypeList = null;
-        IEnumerable<kindSignalDC> kindSignalDCList = null;
-        IEnumerable<typeSignalDC> typeSignalDCList=null;
+        IEnumerable<kindSignalDC> kindSignaLoadDataCList = null;
+        IEnumerable<typeSignalDC> typeSignaLoadDataCList=null; 
         IEnumerable<typeFuncDC> typeFuncDCList=null;
         IEnumerable<BooleanVal> BooleanValList = null;
         IEnumerable<BooleanVal2> BooleanVal2List=null;
@@ -39,8 +39,7 @@ namespace MRZS.Views.Emulator
             СДИ1, СДИ2, СДИ3, СДИ4, СДИ5, СДИ6,
             P01, P02, P03, P04, P05
         }        
-        
-        LoadData ld = new LoadData();
+                
         MenuController MenuControllr = new MenuController();
 
         public Emulator_05M()
@@ -48,7 +47,7 @@ namespace MRZS.Views.Emulator
             InitializeComponent();
             
             //subcribing for loaded data event
-            ld.DataLoaded += ld_DataLoaded;
+            LoadData.DataLoaded += LoadData_DataLoaded;
             MenuControllr.DataLoad += MenuControllr_DataLoad;
          
         }        
@@ -61,18 +60,18 @@ namespace MRZS.Views.Emulator
             PasswordController.setDisplayController(DispControlr);
         }
 
-        void ld_DataLoaded(object sender, EventArgs e)
+        void LoadData_DataLoaded(object sender, EventArgs e)
         {
-            passwordCheckTypeList = ld.passwordCheckTypeTable;
-            kindSignalDCList = ld.kindSignalDCTable;
-            typeSignalDCList = ld.typeSignalDCTable;
-            typeFuncDCList = ld.typeFuncDCTable;
-            BooleanValList = ld.BooleanValTable;
-            BooleanVal2List = ld.BooleanVal2Table;
-            BooleanVal3List = ld.BooleanVal3Table;
-            mtzValList = ld.mtzValTable;
-            mrzsInOutOptionList = ld.mrzsInOutOptionTable;
-            if(mrzs05Entity==null) mrzs05Entity = ld.MrzsTable;            
+            passwordCheckTypeList = LoadData.passwordCheckTypeTable;
+            kindSignaLoadDataCList = LoadData.kindSignalDCTable;
+            typeSignaLoadDataCList = LoadData.typeSignalDCTable;
+            typeFuncDCList = LoadData.typeFuncDCTable;
+            BooleanValList = LoadData.BooleanValTable;
+            BooleanVal2List = LoadData.BooleanVal2Table;
+            BooleanVal3List = LoadData.BooleanVal3Table;
+            mtzValList = LoadData.mtzValTable;
+            mrzsInOutOptionList = LoadData.mrzsInOutOptionTable;
+            if(mrzs05Entity==null) mrzs05Entity = LoadData.MrzsTable;            
             
         }                                                       
 
@@ -192,7 +191,15 @@ namespace MRZS.Views.Emulator
         }
         private void CheckDefence_ZZ()
         {
-
+            //уставка ЗЗ
+            double ZZsetpoint=MenuControllr.ZZSetpoint();
+            //защита ЗЗ
+            string DefenceZZ=MenuControllr.getDefenceZZ();
+            if ((ZIO.Value > ZZsetpoint || Izfa.Value > ZZsetpoint) && DefenceZZ.IndexOf("ВКЛ") != -1)//&& IsInDVArrayValue("")
+            {
+                CheckR("Сраб ЗЗ", true);
+                CheckSDI("Сраб ЗЗ", true);
+            }
         }
         //check all DV on true or false
         private bool IsInDVArrayValue(string functionName)
