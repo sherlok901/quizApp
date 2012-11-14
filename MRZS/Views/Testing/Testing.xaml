@@ -10,18 +10,25 @@
     <Grid x:Name="LayoutRoot">
         <TextBlock Text="Тестирование" FontFamily="Arial" FontSize="18" HorizontalAlignment="Center"
                    VerticalAlignment="Top" Margin="0,20,0,0" Width="auto" Height="20"></TextBlock>
-        <StackPanel x:Name="TestPanel" Width="500" MaxWidth="800" MinWidth="300" Orientation="Vertical"  Margin="0,50,0,0" VerticalAlignment="Top">                                   
+        <StackPanel>
+            <StackPanel x:Name="TestPanel" Width="550" MaxWidth="800" MinWidth="300" Orientation="Vertical"  Margin="0,50,0,0" VerticalAlignment="Top">                                   
             
             
+            </StackPanel>
+            <TextBlock x:Name="TestTimeTblock">cxcv</TextBlock>
+            <StackPanel Width="500" Orientation="Horizontal">
+                <Button Height="50" Content="Отмена" Margin="0,0,10,0" FontFamily="Arial" FontSize="14" Click="CanselBtn_Click"></Button>
+                <Button Height="50" Content="Предыдущий вопрос" Margin="10,0,10,0"  FontFamily="Arial" FontSize="14" Click="PrevBtn_Click"/>
+                <Button Height="50" Content="Следущий вопрос" Margin="10,0,0,0"  FontFamily="Arial" FontSize="14" Click="NextBtn_Click"></Button>
+            </StackPanel>
         </StackPanel>
         
-<toolkit:BusyIndicator
+        <toolkit:BusyIndicator
 						VerticalAlignment="Center"
 						IsBusy="True"
 						BusyContent="Загрузка данных..."
 						x:Name="busyIndicator"
 						HorizontalAlignment="Center" 
-					 	d:LayoutOverrides="Height" d:IsHidden="True"/>
-        
+					 	d:LayoutOverrides="Height" d:IsHidden="True"/>        
     </Grid>
 </navigation:Page>

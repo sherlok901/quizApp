@@ -13,69 +13,118 @@ using System.Windows.Navigation;
 using System.Windows.Media.Imaging;
 using MRZS.Classes.Testing;
 using MRZS.Classes;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace MRZS.Views.Testing
 {
     public partial class Testing : Page
     {
-        TestControler testControler = new TestControler();
+        TestControler testControler = new TestControler();          
+        
+        int myTick=0;
+        //TimeSpan ts; 
+        //Thread newThread;
+        
 
         public Testing()
         {
-            InitializeComponent();      
-                              
+            InitializeComponent();
+                                          
             //Image im = new Image();
             //im.Source = new BitmapImage(new Uri("/MRZS;Component/Assets/1_active.png", UriKind.Relative));            
                                     
             busyIndicator.IsBusy = true;
-            LoadData.DataLoaded += LoadData_DataLoaded;                                    
+            LoadData.DataLoaded += LoadData_DataLoaded;
+
+            //newThread = new Thread(new ThreadStart(myTimer));
+            //newThread.IsBackground = true;
+            //newThread.Start();
+         
+        }
+
+        void timer_Completed(object sender, EventArgs e)
+        {
+            
+            TestTimeTblock.Text = myTick.ToString();
+        
+        }
+
+        void myUpdate(object state)
+        {
+            //this.Dispatcher.BeginInvoke(delegate()
+            //{
+            //    //TestTimeTblock.Text = DateTime.Now.ToLongTimeString();
+            //    myTick += 1;
+            //    TestTimeTblock.Text = myTick.ToString();
+
+            //});
         }
 
         void LoadData_DataLoaded(object sender, EventArgs e)
         {
             busyIndicator.IsBusy = false;
-
-            WrapPanel wp = testControler.getQuestionUIElem();
+            //get first question
+            int questionId = 47;
+            WrapPanel wp = testControler.getQuestionUIElem(questionId);
             //parse text there
             wp.Width = 500;
-            wp.Orientation = Orientation.Horizontal;
-            wp.Background = new SolidColorBrush(Colors.Cyan);            
+            wp.Orientation = Orientation.Horizontal;                       
             TestPanel.Children.Add(wp);
-            //adding grid with answers
-            Grid g = testControler.getAnswersUIElem();
-            TestPanel.Children.Add(g);
-            //adding buttons for test managment            
             
-            Button CanselBtn = new Button();
-            CanselBtn.FontFamily = new FontFamily("Arial");
-            CanselBtn.FontSize = 14;
-            CanselBtn.Width=70;
-            CanselBtn.Height = 40;
-            CanselBtn.Content = "Отмена";
-            CanselBtn.Margin=new Thickness(10, 20, 10, 10);
-            Button NextBtn = new Button();
-            NextBtn.Name = "nextBtn";
-            NextBtn.Width = 100;
-            NextBtn.Height = 40;
-            NextBtn.Margin=new Thickness(10, 20, 10, 10);
-            NextBtn.FontFamily = new FontFamily("Arial");
-            NextBtn.FontSize = 14;
-            NextBtn.Content = "Следущий вопрос";
-            Button PrevBtn = new Button();
-            PrevBtn.Width = 100;
-            PrevBtn.Height = 40;
-            PrevBtn.Margin = new Thickness(10, 20, 10, 10);
-            PrevBtn.Content = "Предыдущий вопрос";
-            PrevBtn.FontFamily = new FontFamily("Arial");
-            PrevBtn.FontSize = 14;
+            //adding grid with first answers
+            Grid g = testControler.getAnswersUIElem(questionId);
+            g.Margin = new Thickness(0, 15, 0, 0);
+            TestPanel.Children.Add(g);                        
+            
 
-            StackPanel sp = new StackPanel();
-            sp.Width = 500;
-            sp.Orientation = Orientation.Horizontal;
-            sp.Children.Add(CanselBtn);
-            sp.Children.Add(PrevBtn);
-            sp.Children.Add(NextBtn);
-            TestPanel.Children.Add(sp);
+            //if (TestPanel.Children.Contains(TimerTextBlock) == false) TestPanel.Children.Add(TimerTextBlock);
+        }
+        
+        private void myTimer()
+        {
+            //DispatcherTimer tmr = new DispatcherTimer();            
+            //tmr.Interval = TimeSpan.FromSeconds(5);
+            //tmr.Tick += tmr_Tick;
+            //tmr.Start();
+
+            //Timer t = new Timer(myUpdate, null, 1000, 1000);
+                  
+        }
+         
+        void tmr_Tick(object sender, EventArgs e)
+        {
+            
+            
+        }       
+
+       
+
+        void CanselBtn_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Student/Education", UriKind.Relative));
+        }
+
+        void PrevBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<object> QuestAnswList = testControler.getPrevQuestionAndAnsersUserElem();
+            WrapPanel wpQuest = QuestAnswList[0] as WrapPanel;
+            Grid gdAnsw = QuestAnswList[1] as Grid;
+            TestPanel.Children.Clear();
+            TestPanel.Children.Add(wpQuest);
+            TestPanel.Children.Add(gdAnsw);
+            
+        }
+
+        void NextBtn_Click(object sender, RoutedEventArgs e)
+        {
+            List<object> QuestAnswList = testControler.getNextQuestionAndAnsersUserElem();
+            WrapPanel wpQuest = QuestAnswList[0] as WrapPanel;
+            Grid gdAnsw = QuestAnswList[1] as Grid;
+            TestPanel.Children.Clear();
+            TestPanel.Children.Add(wpQuest);
+            TestPanel.Children.Add(gdAnsw);
+            
         }
 
         // Выполняется, когда пользователь переходит на эту страницу.
