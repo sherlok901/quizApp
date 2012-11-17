@@ -47,9 +47,11 @@ namespace MRZS.Views.Emulator
             InitializeComponent();
             
             //subcribing for loaded data event
-            LoadData.DataLoaded += LoadData_DataLoaded;
-            MenuControllr.DataLoad += MenuControllr_DataLoad;
-         
+            if (LoadData.checkNotNullTables() == false)
+            {
+                LoadData.DataLoaded += LoadData_DataLoaded;
+                MenuControllr.DataLoad += MenuControllr_DataLoad;
+            }
         }        
                        
         void MenuControllr_DataLoad(object sender, EventArgs e)

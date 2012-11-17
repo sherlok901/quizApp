@@ -8,18 +8,20 @@
            d:DesignWidth="640" d:DesignHeight="480"
            Title="Testing Page">
     <Grid x:Name="LayoutRoot">
-        <TextBlock Text="Тестирование" FontFamily="Arial" FontSize="18" HorizontalAlignment="Center"
+        <TextBlock Text='Тестирование по прибору "МРЗС"' FontFamily="Arial" FontSize="18" HorizontalAlignment="Center"
                    VerticalAlignment="Top" Margin="0,20,0,0" Width="auto" Height="20"></TextBlock>
+        <TextBlock x:Name="TestTimeTblock" FontFamily="Arial" FontSize="16"  VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,20,80,0">cxcv</TextBlock>
+        <Button x:Name="StartTestButton" Width="200" Height="70" Margin="0,90,0,0" VerticalAlignment="Top" Content="Начать тестирование " FontFamily="Arial" FontSize="18" Click="StartTestButton_Click_1"></Button>
+        
+        
         <StackPanel>
-            <StackPanel x:Name="TestPanel" Width="550" MaxWidth="800" MinWidth="300" Orientation="Vertical"  Margin="0,50,0,0" VerticalAlignment="Top">                                   
+            <StackPanel x:Name="TestPanel" Width="550" MaxWidth="800" MinWidth="300" Orientation="Vertical"  Margin="0,50,0,0" VerticalAlignment="Top">                                                           
+            </StackPanel>            
             
-            
-            </StackPanel>
-            <TextBlock x:Name="TestTimeTblock">cxcv</TextBlock>
             <StackPanel Width="500" Orientation="Horizontal">
-                <Button Height="50" Content="Отмена" Margin="0,0,10,0" FontFamily="Arial" FontSize="14" Click="CanselBtn_Click"></Button>
-                <Button Height="50" Content="Предыдущий вопрос" Margin="10,0,10,0"  FontFamily="Arial" FontSize="14" Click="PrevBtn_Click"/>
-                <Button Height="50" Content="Следущий вопрос" Margin="10,0,0,0"  FontFamily="Arial" FontSize="14" Click="NextBtn_Click"></Button>
+                <Button x:Name="CanselBtn" Height="50" Content="Отмена" Margin="0,0,10,0" FontFamily="Arial" FontSize="14" Click="CanselBtn_Click"></Button>
+                <Button x:Name="PrevBtn" Height="50" Content="Предыдущий вопрос" Margin="10,0,10,0"  FontFamily="Arial" FontSize="14" Click="PrevBtn_Click"/>
+                <Button x:Name="NextBtn" Height="50" Content="Следущий вопрос" Margin="10,0,0,0"  FontFamily="Arial" FontSize="14" Click="NextBtn_Click"></Button>
             </StackPanel>
         </StackPanel>
         

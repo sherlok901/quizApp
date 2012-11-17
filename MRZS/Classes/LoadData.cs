@@ -198,7 +198,7 @@ namespace MRZS.Classes
         }
 
         //check that tables are loaded
-        private static void checkNotNullTables()
+        internal static bool checkNotNullTables()
         {
             if (mrzs05Entity != null &&
                 listPass2 != null &&
@@ -209,12 +209,16 @@ namespace MRZS.Classes
                 BooleanVal2List != null &&
                 BooleanVal3List != null &&
                 mtzValList != null &&
-                TestAnswerList!=null &&
-                TestQuestionList!=null &&
-                TestResultList!=null &&
-                TestingImageList!=null
+                TestAnswerList != null &&
+                TestQuestionList != null &&
+                TestResultList != null &&
+                TestingImageList != null
                 ) //data loaded alert
-                    if (DataLoaded != null) DataLoaded(null, EventArgs.Empty);            
+            {
+                if (DataLoaded != null) DataLoaded(null, EventArgs.Empty);
+                return true;
+            }
+            else return false;
         }
     }
 }

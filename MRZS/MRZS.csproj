@@ -154,6 +154,7 @@
     <Compile Include="Classes\NumValueChanging.cs" />
     <Compile Include="Classes\PasswordController.cs" />
     <Compile Include="Classes\Testing\TestControler.cs" />
+    <Compile Include="Classes\Testing\TestTimeController.cs" />
     <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
       <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
     </Compile>
