@@ -7,7 +7,6 @@
     d:DesignHeight="61" d:DesignWidth="229" >
 
     
-    
     <Grid x:Name="LayoutRoot" Background="White">
         <Border             
             BorderThickness="1" BorderBrush="Black" 

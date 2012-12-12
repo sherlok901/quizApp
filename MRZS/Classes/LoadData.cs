@@ -66,6 +66,8 @@ namespace MRZS.Classes
 
         static LoadData()
         {
+            
+
             mrzs05mMContxt = new mrzs05mMenuContext();
             mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
             mrzs05mMModel.Completed += mrzs05mMModel_Completed;

@@ -40,10 +40,6 @@ namespace MRZS.Views.Testing
             else busyIndicator.IsBusy = false;
             TestTimeTblock.Visibility= CanselBtn.Visibility = PrevBtn.Visibility = NextBtn.Visibility = Visibility.Collapsed;
 
-            //newThread = new Thread(new ThreadStart(myTimer));
-            //newThread.IsBackground = true;
-            //newThread.Start();
-         
         }
 
         void myUpdate(object state)

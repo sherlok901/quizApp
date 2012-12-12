@@ -441,6 +441,7 @@ namespace MRZS.Classes
 
         internal string getValueByMenuElement(string name)
         {
+            List<mrzs05mMenu> l = LoadData.MrzsTable.Where(n => n.menuElement == name).Select(n => n).ToList();
             return LoadData.MrzsTable.Where(n => n.menuElement == name).Single().value;
         }
 

@@ -44,6 +44,7 @@ namespace MRZS.Views.Student
             busyIndicator.IsBusy = false;
 
             //NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
         }
 
         // Executes when the user navigates to this page.

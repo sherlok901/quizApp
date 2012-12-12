@@ -45,12 +45,19 @@ namespace MRZS.Views.Emulator
         public Emulator_05M()
         {
             InitializeComponent();
-            
+            busyIndicator.IsBusy = false;
             //subcribing for loaded data event
             if (LoadData.checkNotNullTables() == false)
             {
+                busyIndicator.IsBusy = true;
                 LoadData.DataLoaded += LoadData_DataLoaded;
                 MenuControllr.DataLoad += MenuControllr_DataLoad;
+            }
+            //if data already loaded
+            else
+            {
+                LoadData_DataLoaded(null, EventArgs.Empty);
+                MenuControllr_DataLoad(null, EventArgs.Empty);
             }
         }        
                        
@@ -64,6 +71,7 @@ namespace MRZS.Views.Emulator
 
         void LoadData_DataLoaded(object sender, EventArgs e)
         {
+            busyIndicator.IsBusy = false;
             passwordCheckTypeList = LoadData.passwordCheckTypeTable;
             kindSignaLoadDataCList = LoadData.kindSignalDCTable;
             typeSignaLoadDataCList = LoadData.typeSignalDCTable;
