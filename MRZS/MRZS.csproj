@@ -147,6 +147,9 @@
     <Compile Include="Classes\DisplayCode\DisplayViewModel.cs" />
     <Compile Include="Classes\EmulatorDisplayController.cs" />
     <Compile Include="Classes\Inputing.cs" />
+    <Compile Include="Classes\InterTesting\MTZ.cs" />
+    <Compile Include="Classes\InterTesting\OutputsRele.cs" />
+    <Compile Include="Classes\InterTesting\Questns.cs" />
     <Compile Include="Classes\LoadData.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\MenuController.cs" />
@@ -290,6 +293,9 @@
     <Compile Include="Views\Student\TestResult.Model.cs" />
     <Compile Include="Views\Student\TestResult.xaml.cs">
       <DependentUpon>TestResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Testing\InterTestControl.xaml.cs">
+      <DependentUpon>InterTestControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Testing\Testing.xaml.cs">
       <DependentUpon>Testing.xaml</DependentUpon>
@@ -445,6 +451,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Student\TestResult.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Testing\InterTestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

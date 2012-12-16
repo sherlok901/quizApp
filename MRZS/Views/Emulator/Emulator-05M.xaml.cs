@@ -13,6 +13,7 @@ using System.Windows.Threading;
 using MRZS.Classes;
 using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
+using MRZS.Classes.InterTesting;
 
 namespace MRZS.Views.Emulator
 {
@@ -41,10 +42,15 @@ namespace MRZS.Views.Emulator
         }        
                 
         MenuController MenuControllr = new MenuController();
+        Questns InterTestQuests = null;
+
+
 
         public Emulator_05M()
         {
             InitializeComponent();
+            TestCtrl.Visibility = Visibility.Collapsed;
+            
             busyIndicator.IsBusy = false;
             //subcribing for loaded data event
             if (LoadData.checkNotNullTables() == false)
@@ -453,14 +459,56 @@ namespace MRZS.Views.Emulator
         private List<mrzs05mMenu> getEntitiesByParentID(int? parentID)
         {
             return (from t in mrzs05Entity where t.parentID == parentID select t).ToList();
-        }       
-        
-        
+        }
 
+
+
+        #region Interactive test
         // Executes when the user navigates to this page.
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-        }        
+            //check if it interactive test
+            if (this.NavigationContext.QueryString.ContainsKey("t"))
+            {
+                if (this.NavigationContext.QueryString["t"] == "t")
+                {
+                    TestCtrl.Visibility = Visibility.Visible;
+                    //BMK:Testing tasks
+                    InterTestQuests = new Questns();
+                    //subscribing for TestCtrl events
+                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
+                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
+                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
+                    TestCtrl.TaskText = InterTestQuests.getFirstTask();
+                }
+            }
+        }
+        //проверка выполненого задания
+        void TestCtrl_CheckBtnClicked(object sender, EventArgs e)
+        {
+            //get current taks number
+            int CurrentTaksNumber= InterTestQuests.getCurrentTaskNumber();
+            switch(CurrentTaksNumber)
+            {
+                case 0:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask01(Ia.Value,Ib.Value,Ic.Value);
+                    break;
+            }
+            DeviceON_button_Click(null, null);
+        }
+        //следущий вопрос
+        void TestCtrl_NextBtnClicked(object sender, EventArgs e)
+        {
+            string nextTask=InterTestQuests.getNextTask();
+            if (nextTask != null) TestCtrl.TaskText = nextTask;
+        }
+        //предыдущий вопрос
+        void TestCtrl_PrevBtnClicked(object sender, EventArgs e)
+        {
+            string prevTask = InterTestQuests.getPrevTask();
+            if(prevTask!=null) TestCtrl.TaskText = prevTask;
+        }  
+        #endregion       
 
         private void slider1_MouseLeave(object sender, MouseEventArgs e)
         {

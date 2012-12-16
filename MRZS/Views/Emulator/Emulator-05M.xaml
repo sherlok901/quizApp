@@ -5,7 +5,8 @@
            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
            xmlns:navigation="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Navigation"            
            xmlns:MRZS="clr-namespace:MRZS" 
-           xmlns:Emulator="clr-namespace:MRZS.Views.Emulator"            
+           xmlns:Emulator="clr-namespace:MRZS.Views.Emulator"  
+           xmlns:TestCtrl="clr-namespace:MRZS.Views.Testing"
            xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit" 
            xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.DomainServices" 
            xmlns:System="clr-namespace:System;assembly=mscorlib"
@@ -2369,7 +2370,7 @@
         </Style>
     </navigation:Page.Resources>    
    <StackPanel>
-    <TextBlock Grid.Row="0" Grid.ColumnSpan="3" Text="sdfsfsdfsff" Margin="0,20,0,20" Width="100" Height="50" VerticalAlignment="Top"></TextBlock>
+           <TestCtrl:InterTestControl x:Name="TestCtrl" Margin="0,0,0,20" HorizontalAlignment="Center"></TestCtrl:InterTestControl>
        
         <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="530">
             <Grid.ColumnDefinitions>

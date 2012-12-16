@@ -52,18 +52,20 @@ namespace MRZS.Views.Student
         {
         }
 
+        //interactive test
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             //EmulatorStarter starter = new EmulatorStarter();
             //starter.Start();
-            NavigationService.Navigate(new Uri("/Student/StartEducation", UriKind.Relative));
+
+            string uriText = String.Format("/Emulator/Emulator-05M?t={0}", "t");
+            NavigationService.Navigate(new Uri(uriText, UriKind.Relative));
+            //NavigationService.Navigate(new Uri("/Student/StartEducation", UriKind.Relative));
         }
 
         /// <summary>
         /// запуск емулятора
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// </summary>       
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new Uri("/Emulator/Emulator-05M", UriKind.Relative));
@@ -71,8 +73,8 @@ namespace MRZS.Views.Student
 
         //тестирование
         private void Testing_Click_1(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));
+        {            
+            NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));            
         }
         
 
