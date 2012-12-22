@@ -66,45 +66,51 @@ namespace MRZS.Classes
 
         static LoadData()
         {
-            
+            //MessageBox.Show("Hello from MessageBox");
+            try
+            {
+                mrzs05mMContxt = new mrzs05mMenuContext();
+                mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
+                mrzs05mMModel.Completed += mrzs05mMModel_Completed;
+                passwordCheckTypeModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetPasswordCheckTypesQuery());
+                passwordCheckTypeModel.Completed += passwordCheckTypeModel_Completed;
+                kindSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetKindSignalDCsQuery());
+                kindSignalDCModel.Completed += kindSignalDCModel_Completed;
+                typeSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeSignalDCsQuery());
+                typeSignalDCModel.Completed += typeSignalDCModel_Completed;
+                typeFuncDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeFuncDCsQuery());
+                typeFuncDCModel.Completed += typeFuncDCModel_Completed;
+                BooleanValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanValsQuery());
+                BooleanValModel.Completed += BooleanValModel_Completed;
+                BooleanVal2Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal2Query());
+                BooleanVal2Model.Completed += BooleanVal2Model_Completed;
+                BooleanVal3Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal3Query());
+                BooleanVal3Model.Completed += BooleanVal3Model_Completed;
+                mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
+                mtzValModel.Completed += mtzValModel_Completed;
+                mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
+                mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
 
-            mrzs05mMContxt = new mrzs05mMenuContext();
-            mrzs05mMModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzs05mMenuQuery());
-            mrzs05mMModel.Completed += mrzs05mMModel_Completed;
-            passwordCheckTypeModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetPasswordCheckTypesQuery());
-            passwordCheckTypeModel.Completed += passwordCheckTypeModel_Completed;
-            kindSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetKindSignalDCsQuery());
-            kindSignalDCModel.Completed += kindSignalDCModel_Completed;
-            typeSignalDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeSignalDCsQuery());
-            typeSignalDCModel.Completed += typeSignalDCModel_Completed;
-            typeFuncDCModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetTypeFuncDCsQuery());
-            typeFuncDCModel.Completed += typeFuncDCModel_Completed;
-            BooleanValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanValsQuery());
-            BooleanValModel.Completed += BooleanValModel_Completed;
-            BooleanVal2Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal2Query());
-            BooleanVal2Model.Completed += BooleanVal2Model_Completed;
-            BooleanVal3Model = mrzs05mMContxt.Load(mrzs05mMContxt.GetBooleanVal3Query());
-            BooleanVal3Model.Completed += BooleanVal3Model_Completed;
-            mtzValModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMtzValsQuery());
-            mtzValModel.Completed += mtzValModel_Completed;
-            mrzsInOutOptModel = mrzs05mMContxt.Load(mrzs05mMContxt.GetMrzsInOutOptionsQuery());
-            mrzsInOutOptModel.Completed += mrzsInOutOptModel_Completed;
+                TestAnswerContext TestAnswContxt = new TestAnswerContext();
+                TestAnswerModel = TestAnswContxt.Load(TestAnswContxt.GetTestAnswersQuery());
+                TestAnswerModel.Completed += TestAnswerModel_Completed;
 
-            TestAnswerContext TestAnswContxt = new TestAnswerContext();
-            TestAnswerModel = TestAnswContxt.Load(TestAnswContxt.GetTestAnswersQuery());
-            TestAnswerModel.Completed += TestAnswerModel_Completed;
-            
-            TestQuestionContext TestQuestContxt = new TestQuestionContext();
-            TestQuestionModel = TestQuestContxt.Load(TestQuestContxt.GetTestQuestionsQuery());
-            TestQuestionModel.Completed += TestQuestionModel_Completed;
+                TestQuestionContext TestQuestContxt = new TestQuestionContext();
+                TestQuestionModel = TestQuestContxt.Load(TestQuestContxt.GetTestQuestionsQuery());
+                TestQuestionModel.Completed += TestQuestionModel_Completed;
 
-            TestResultsContext TestResContxt = new TestResultsContext();
-            TestResultModel = TestResContxt.Load(TestResContxt.GetTestResultsQuery());
-            TestResultModel.Completed += TestResultModel_Completed;
+                TestResultsContext TestResContxt = new TestResultsContext();
+                TestResultModel = TestResContxt.Load(TestResContxt.GetTestResultsQuery());
+                TestResultModel.Completed += TestResultModel_Completed;
 
-            TestImagesContext TestImgContxt = new TestImagesContext();
-            TestingImageModel = TestImgContxt.Load(TestImgContxt.GetTestingImagesQuery());
-            TestingImageModel.Completed += TestingImageModel_Completed;
+                TestImagesContext TestImgContxt = new TestImagesContext();
+                TestingImageModel = TestImgContxt.Load(TestImgContxt.GetTestingImagesQuery());
+                TestingImageModel.Completed += TestingImageModel_Completed;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         //for test===
         static void TestingImageModel_Completed(object sender, EventArgs e)

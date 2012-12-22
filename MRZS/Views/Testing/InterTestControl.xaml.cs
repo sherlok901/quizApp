@@ -33,7 +33,20 @@ namespace MRZS.Views.Testing
         internal string RezStatusText
         {
             set { ResultStateTb.Text = value; }
+            get { return ResultStateTb.Text; }
         }
+        internal bool IsCheckedResultGood
+        {
+            set
+            {
+                if (value)
+                {
+                    ResultStateTb.Foreground = new SolidColorBrush(Colors.Green);
+                }
+                else ResultStateTb.Foreground = new SolidColorBrush(Colors.Red);
+            }
+        }
+
 
         void PrevBtn_Click(object sender, RoutedEventArgs e)
         {            
@@ -50,11 +63,11 @@ namespace MRZS.Views.Testing
             if (CheckBtnClicked != null) CheckBtnClicked(null, EventArgs.Empty);
         }
       
-        private void ResultStateTb_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (ResultStateTb.Text == "Все настроено верно") ResultStateTb.Foreground = new SolidColorBrush(Colors.Green);
-            else ResultStateTb.Foreground = new SolidColorBrush(Colors.Red);
-        }
+        //private void ResultStateTb_TextChanged(object sender, TextChangedEventArgs e)
+        //{
+        //    //if (ResultStateTb.Text == "Все настроено верно") ResultStateTb.Foreground = new SolidColorBrush(Colors.Green);
+        //    //else ResultStateTb.Foreground = new SolidColorBrush(Colors.Red);
+        //}
         
     }
 }

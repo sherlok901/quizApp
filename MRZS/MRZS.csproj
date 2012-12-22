@@ -147,9 +147,12 @@
     <Compile Include="Classes\DisplayCode\DisplayViewModel.cs" />
     <Compile Include="Classes\EmulatorDisplayController.cs" />
     <Compile Include="Classes\Inputing.cs" />
+    <Compile Include="Classes\InterTesting\APV.cs" />
+    <Compile Include="Classes\InterTesting\DVs.cs" />
     <Compile Include="Classes\InterTesting\MTZ.cs" />
     <Compile Include="Classes\InterTesting\OutputsRele.cs" />
     <Compile Include="Classes\InterTesting\Questns.cs" />
+    <Compile Include="Classes\InterTesting\SDI.cs" />
     <Compile Include="Classes\LoadData.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\MenuController.cs" />

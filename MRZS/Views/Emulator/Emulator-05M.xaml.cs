@@ -493,18 +493,45 @@ namespace MRZS.Views.Emulator
                 case 0:
                     TestCtrl.RezStatusText = InterTestQuests.checkTask01(Ia.Value,Ib.Value,Ic.Value);
                     break;
+                case 1:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask02(dv1, dv2, dv3, dv4, dv5, dv6);
+                    break;
+                case 2:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask03(Ia.Value, Ib.Value, Ic.Value);
+                    break;
+                case 3:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask04(Ia.Value, Ib.Value, Ic.Value);
+                    break;
+                case 4:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask05(Ia.Value, Ib.Value, Ic.Value);
+                    break;
             }
             DeviceON_button_Click(null, null);
+            //статус проверки
+            if (TestCtrl.RezStatusText == "Все настроено верно") TestCtrl.IsCheckedResultGood = true;
+            else TestCtrl.IsCheckedResultGood = false;
         }
         //следущий вопрос
         void TestCtrl_NextBtnClicked(object sender, EventArgs e)
         {
+            //turn off device
+            DeviceOff_button_Click(null, null);
+            TestCtrl.RezStatusText = "";
+            //set all mtz in 0000.0000
+            //InterTestQuests.clearMTZs();
+
             string nextTask=InterTestQuests.getNextTask();
             if (nextTask != null) TestCtrl.TaskText = nextTask;
         }
         //предыдущий вопрос
         void TestCtrl_PrevBtnClicked(object sender, EventArgs e)
         {
+            //turn off device
+            DeviceOff_button_Click(null, null);
+            TestCtrl.RezStatusText = "";
+            //set all mtz in 0000.0000
+            InterTestQuests.clearMTZs();
+
             string prevTask = InterTestQuests.getPrevTask();
             if(prevTask!=null) TestCtrl.TaskText = prevTask;
         }  
@@ -770,10 +797,8 @@ namespace MRZS.Views.Emulator
         //return inputsTurnONFunctionIDs
         private List<int?> getmrzsInOutOptionsID(Inputs input, IEnumerable<mrzs05mMenu> mrzs05Entitys)
         {
-            List<mrzs05mMenu> list= mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).ToList();
-            int inputIDInMenu = mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).Single().id;
-            //int inputIDInMenu = mrzs05Entitys.Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).Single().id;
-            //return inputsTurnONFunctionIDs
+            //List<mrzs05mMenu> list= mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).ToList();
+            int inputIDInMenu = mrzs05Entitys.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(input.ToString()) && n.passwordCheckType == null).Single().id;            
             return getEntitiesByParentID(inputIDInMenu).Where(n => n.BooleanValID == 1).Select(n => n.mrzsInOutOptionsID).ToList();            
         }
         private List<string> getInputsTurnONFunctionsByID(List<int?> ids)

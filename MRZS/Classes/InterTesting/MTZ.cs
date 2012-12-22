@@ -31,9 +31,14 @@ namespace MRZS.Classes.InterTesting
             return getMenuElementValue("Уставка МТЗ1\\{value}");
         }
         //уставка мтз2
-        internal double getSetpointMTZ2()
+        internal double getMTZ2Value()
         {
             return getMenuElementValue("Уставка МТЗ2\\{value}");
+        }
+        //выдержка мтз1
+        internal double getTimerMtz1()
+        {
+            return getMenuElementValue("Выдержка МТЗ1\\{value}");
         }
         
         mrzs05mMenu getMenuElement(string name)
@@ -41,8 +46,7 @@ namespace MRZS.Classes.InterTesting
             mrzs05mMenu q = (from t2 in
                                  (from t in LoadData.MrzsTable where t.menuElement != null select t)
                              where t2.menuElement.StartsWith(name)
-                             select t2).Single();
-            //return LoadData.MrzsTable.Where(n => n.menuElement.StartsWith(name)).Single();
+                             select t2).Single();            
             return q;
         }
         double getMenuElementValue(string name)
@@ -56,6 +60,16 @@ namespace MRZS.Classes.InterTesting
         string replaceDotOnComma(string InStr)
         {
             return InStr.Replace('.', ',');
+        }
+        
+        internal void SetMTZsNull()
+        {
+            mrzs05mMenu m = getMenuElement("Уставка МТЗ1\\{value}");
+            if (!m.value.StartsWith("0000.0000"))
+            {
+                m.value = "0000.0000";
+                LoadData.savingAllChanges();
+            }
         }
     }
 }
