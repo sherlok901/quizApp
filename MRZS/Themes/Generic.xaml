@@ -5,14 +5,5 @@
     
 
 
-<Style TargetType="local:HighlightingTextBlock">
-        <Setter Property="HighlightBrush" Value="Blue" />
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="local:HighlightingTextBlock">
-                    <TextBlock x:Name="Text" />
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
+
 </ResourceDictionary>

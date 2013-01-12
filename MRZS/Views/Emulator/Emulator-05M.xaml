@@ -12,8 +12,8 @@
            xmlns:System="clr-namespace:System;assembly=mscorlib"
            x:Class="MRZS.Views.Emulator.Emulator_05M"               
            mc:Ignorable="d"
-           d:DesignWidth="840" d:DesignHeight="680"
-           Title="Emulator_05M Page">
+           d:DesignWidth="974" d:DesignHeight="832"
+           Title="Emulator_05M Page" ScrollViewer.VerticalScrollBarVisibility="Visible">
     <navigation:Page.Resources>
         <Style TargetType="Button" x:Key="PanelKey">
             <Setter Property="Width" Value="43"/>
@@ -252,8 +252,8 @@
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="16"></Setter>
         </Style>
-
-                
+       
+        
         <ImageSource x:Key="Img1">/MRZS;Component/Assets/1_active.png</ImageSource>
         <ImageSource x:Key="Img2">/MRZS;Component/Assets/1.png</ImageSource>
         <Style x:Key="ButtonStyle1" TargetType="Button">
@@ -2368,11 +2368,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
-    </navigation:Page.Resources>    
+    </navigation:Page.Resources>  
+    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch">
    <StackPanel>
            <TestCtrl:InterTestControl x:Name="TestCtrl" Margin="0,0,0,20" HorizontalAlignment="Center"></TestCtrl:InterTestControl>
        
-        <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="530">
+        <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="550" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="120"/>
@@ -2414,7 +2415,7 @@
                 <sdk:Label Grid.Row="0" Grid.Column="0" Content="F" HorizontalAlignment="Right" Style="{StaticResource LabelFontStyle}"/>
                 <toolkit:NumericUpDown ToolTipService.ToolTip="Hi,Igor!" x:Name="f" x:FieldModifier="public" 
                                    Grid.Row="0" Grid.Column="1" Background="#FFEAD719"  HorizontalAlignment="Right"
-                                   Style="{StaticResource CustomNumericUpDown}" DecimalPlaces="2" MouseEnter="f_MouseEnter"/>
+                                   DecimalPlaces="2" MouseEnter="f_MouseEnter"/>
                 <Popup x:Name="popUpLittle" MaxWidth="40" Width="40" MaxHeight="400" Height="400"
                    Grid.Column="1" Grid.Row="2" HorizontalOffset="5">
                     <Border Background="BurlyWood" Width="30" Height="30" MouseLeave="Border_MouseLeave_2" x:Name="borderPopLittle">
@@ -2514,7 +2515,7 @@
                 <Emulator:InputDV x:Name="dv5" InputName="ДВ05" Style="{StaticResource InDV}"/>
                 <Emulator:InputDV x:Name="dv6" InputName="ДВ06" Style="{StaticResource InDV}"/>
             </StackPanel>
-            <Grid Grid.Column="2" Width="350">
+            <Grid Grid.Column="2" Width="350" Height="530" VerticalAlignment="Top">
                 <Grid.Background>
                     <ImageBrush ImageSource="/MRZS;component/Assets/device_background.png"></ImageBrush>
                 </Grid.Background>
@@ -2524,10 +2525,10 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="119"/>
-                    <RowDefinition/>
+                    <RowDefinition/>                    
                 </Grid.RowDefinitions>
-                <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="0" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-119,55,0,0" AllowDrop="True" Loaded="emju_Loaded" ></Emulator:EmulatorDisplay>
-
+                <Emulator:EmulatorDisplay x:Name="emju" Grid.Row="0" Grid.Column="2" Width="230" Height="63" VerticalAlignment="Top" Margin="-119,55,0,0" AllowDrop="True" ></Emulator:EmulatorDisplay>
+                
 
                 <StackPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Margin="10,133,0,0" Width="220">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -2562,7 +2563,9 @@
                     </Image>
                     <Image x:Name="bottomButton" Source="/MRZS;component/Assets/bottom.png" Width="101" Height="44" Margin="48,-38,0,0" MouseLeftButtonDown="bottomButton_MouseLeftButtonDown" MouseLeftButtonUp="bottomButton_MouseLeftButtonUp"/>
                 </StackPanel>
-
+               
+               
+                
                 <StackPanel Grid.Column="0" Grid.Row="1" Margin="9,15,0,0" HorizontalAlignment="Left" Width="90">
                     <StackPanel Style="{StaticResource st}" Margin="0,4">
                         <CheckBox x:Name="sdi1" Margin="6,6,0,0" Style="{StaticResource CheckBoxStyle1}"/>
@@ -2591,7 +2594,10 @@
                 </StackPanel>
 
             </Grid>
-            <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,0,0,0">
+            
+            <TextBlock x:Name="TimerLabel" Text="Таймер " Grid.Column="2" FontSize="14" Margin="20,530,0,0"></TextBlock>
+            
+            <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,15,0,-15">
                 <TextBlock Text="Реле" FontSize="20"/>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                     <TextBlock Text="Реле01" Style="{StaticResource ReleTitleStyle}"></TextBlock>
@@ -2625,7 +2631,8 @@
 						x:Name="busyIndicator"
 						HorizontalAlignment="Center" 
 					 	d:LayoutOverrides="Height" d:IsHidden="True"/>
-
+            
         </Grid>
    </StackPanel>
+</ScrollViewer>
 </navigation:Page>

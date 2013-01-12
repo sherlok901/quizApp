@@ -1,0 +1,1783 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirstFloor.Documents.Controls</name>
+    </assembly>
+    <members>
+        <member name="T:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner">
+            <summary>
+            Provides visual cues such as selection and annotations to a <see cref="T:FirstFloor.Documents.FixedPage"/> contained in a <see cref="T:FirstFloor.Documents.Controls.FixedPageViewer"/>.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.AnnotationsProperty">
+            <summary>
+            Identifies the Annotations dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.SelectionProperty">
+            <summary>
+            Identifies the Selection dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.OnAttached">
+            <summary>
+            Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.OnDetaching">
+            <summary>
+            Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.Annotations">
+            <summary>
+            Gets the annotations.
+            </summary>
+            <value>The annotations.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Behaviors.FixedPageAdorner.Selection">
+            <summary>
+            Gets or sets the text selection.
+            </summary>
+            <value>The selection.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior">
+            <summary>
+            Provides link navigation.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.TextContainerProperty">
+            <summary>
+            Identifies the TextContainer dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.TargetNameProperty">
+            <summary>
+            Identifies the TargetName dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.OnAttached">
+            <summary>
+            Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.OnDetaching">
+            <summary>
+            Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.ProcessRequest(System.Uri)">
+            <summary>
+            Processes the navigation request for specified uri.
+            </summary>
+            <param name="navigateUri">The navigate URI.</param>
+            <returns>A value indicating whether the request was processed</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.TextContainer">
+            <summary>
+            Gets or sets the text container.
+            </summary>
+            <value>The text container.</value>
+            <remarks>
+            <para>
+            The text container is used to perform internal link navigation.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Behaviors.NavigationBehavior.TargetName">
+            <summary>
+            Gets or sets the name of the target window or frame that the Web page should open in, or the name of the object within the Silverlight application to navigate to.
+            </summary>
+            <value>The name of the target.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer">
+            <summary>
+            Provides page virtualization by loading and unloading fixed pages based on the visibility of the page container.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.OnAttached">
+            <summary>
+            Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.OnDetaching">
+            <summary>
+            Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.Virtualize">
+            <summary>
+            Enforces the behavior to virtualize the visible pages.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Behaviors.PageVirtualizer.VisiblePageNumber">
+            <summary>
+            Gets the page number of the page container that is currently visible.
+            </summary>
+            <value>The visible page number.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ColorHelper">
+            <summary>
+            Provides color utility functions.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ColorHelper.ColorFromString(System.String)">
+            <summary>
+            Returns a color from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>The parsed color</returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.ClearHighlightCommand">
+            <summary>
+            Clears all highlight annotations from the current text selection
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.SelectionCommand">
+            <summary>
+            The base class for all commands that work with a text selection.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.CommandBase">
+            <summary>
+            Represents the basic command implementation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.CommandBase.OnCanExecuteChanged">
+            <summary>
+            Raises the CanExecuteChanged event.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.CommandBase.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.CommandBase.Execute(System.Object)">
+            <summary>
+            Defines the method to be called when the command is invoked.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.CommandBase.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.Commands.CommandBase.CanExecuteChanged">
+            <summary>
+            Occurs when changes occur that affect whether the command should execute.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Commands.SelectionCommand.SelectionProperty">
+            <summary>
+            Identifies the Selection dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.SelectionCommand.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.SelectionCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.SelectionCommand.Selection">
+            <summary>
+            Gets or sets the selection.
+            </summary>
+            <value>The selection.</value>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.ClearHighlightCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.ClearHighlightCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand">
+            <summary>
+            Performs a link navigation based on the current selected text.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.LinkFormatProperty">
+            <summary>
+            Identifies the LinkFormat dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.TargetNameProperty">
+            <summary>
+            Identifies the TargetName dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.LinkFormat">
+            <summary>
+            Gets or sets the format of the link that is navigated to.
+            </summary>
+            <value>The link format.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.TargetName">
+            <summary>
+            Gets or sets the name of the target window or frame that the Web page should open in, or the name of the object within the Silverlight application to navigate to.
+            </summary>
+            <value>The name of the target.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.NavigateSelectionCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.UnselectCommand">
+            <summary>
+            The command that clears the selected text.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.UnselectCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.UnselectCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.CopyToClipboardCommand">
+            <summary>
+            Copies selected text to the clipboard.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.CopyToClipboardCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.CopyToClipboardCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.GenericCommand`1">
+            <summary>
+            A generic command capable of executing any action.
+            </summary>
+            <typeparam name="T">The type of the command parameter.</typeparam>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.GenericCommand`1.#ctor(System.Action{`0},System.Func{`0,System.Boolean})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.Commands.GenericCommand`1"/> class.
+            </summary>
+            <param name="execute">The execute.</param>
+            <param name="canExecute">The can execute.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.GenericCommand`1.RaiseCanExecuteChanged">
+            <summary>
+            Raises the CanExecuteChanged event.
+            </summary>
+            <remarks>
+            <para>
+            Command listeners should requery CanExecute after the event is raised.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.GenericCommand`1.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.GenericCommand`1.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.HighlightCommand">
+            <summary>
+            The command that highlights the current text selection.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.HighlightCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.HighlightCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand">
+            <summary>
+            The command that opens an XPS document from disk using the DefaultPackageReader and assigns it to a DocumentDataSource.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.DocumentDataSourceProperty">
+            <summary>
+            Identifies the DocumentDataSource dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.FilterProperty">
+            <summary>
+            Identifies the Filter dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.CanExecute(System.Object)">
+            <summary>
+            Defines the method that determines whether the command can execute in its current state.
+            </summary>
+            <param name="parameter">Data used by the command. If the command does not require data to be passed, this object can be set to null.</param>
+            <returns>
+            true if this command can be executed; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.OnCreatePackageReaderFailed(System.Exception)">
+            <summary>
+            Called when the creation of a package reader has failed.
+            </summary>
+            <param name="error">The error.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.CreatePackageReader(System.IO.Stream)">
+            <summary>
+            Creates a package reader for given stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <returns>The created package reader.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.DocumentDataSource">
+            <summary>
+            Gets or sets the target document data source.
+            </summary>
+            <value>The selection.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.OpenFromDiskCommand.Filter">
+            <summary>
+            Gets or sets the file type filter string.
+            </summary>
+            <value>The selection.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.SelectDocumentCommand">
+            <summary>
+            The command that selects all text of an entire document.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.SelectDocumentCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.SelectDocumentCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Commands.SelectPageCommand">
+            <summary>
+            The command that selects all text of a single page.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.Commands.SelectPageCommand.OnExecute(System.Object)">
+            <summary>
+            Implements the actual command execution.
+            </summary>
+            <param name="parameter">The parameter.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Commands.SelectPageCommand.RequiresSelectedText">
+            <summary>
+            Gets a value indicating whether this command requires text to be selected.
+            </summary>
+            <value>
+            	<c>true</c> if this command requires selected text; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ControlBase">
+            <summary>
+            Provides a generic control base class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ControlBase.GetTemplateChild``1(System.String,System.Boolean)">
+            <summary>
+            Gets the template child and checks whether a required child exists and is of the correct type.
+            </summary>
+            <typeparam name="T">Specifies the type of the template child.</typeparam>
+            <param name="childName">Name of the child.</param>
+            <param name="required">if set to <c>true</c> [required].</param>
+            <returns>The typed template child.</returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.DocumentViewer">
+            <summary>
+            Represents a control capable of displaying the pages of an XPS document.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.DocumentDataSourceProperty">
+            <summary>
+            Identifies the DocumentDataSource dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.IsMouseEnabledProperty">
+            <summary>
+            Identifies the IsMouseEnabled dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.PageIndexProperty">
+            <summary>
+            Identifies the PageIndex dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.PageNumberProperty">
+            <summary>
+            Identifies the PageNumber dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.SelectionProperty">
+            <summary>
+            Identifies the Selection dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentViewer.ViewModeProperty">
+            <summary>
+            Identifies the ViewMode dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.DocumentViewer"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.OnKeyDown(System.Windows.Input.KeyEventArgs)">
+            <summary>
+            Called before the <see cref="E:System.Windows.UIElement.KeyDown"/> event occurs.
+            </summary>
+            <param name="e">The data for the event.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.GetText(FirstFloor.Documents.TextPointer@,FirstFloor.Documents.TextPointer@)">
+            <summary>
+            Gets the plain text indicated with specified positions.
+            </summary>
+            <param name="position1">The position1.</param>
+            <param name="position2">The position2.</param>
+            <returns>The plain text in given range.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.OnAnnotationServiceChanged">
+            <summary>
+            Notifies the text container of a change of the annotation service.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.BringIntoView(FirstFloor.Documents.TextPointer)">
+            <summary>
+            Attempts to bring the text at specified position into view.
+            </summary>
+            <param name="position">The position.</param>
+            <remarks>
+            <para>
+            Please note that scrolling a position into view is an asynchronous operation if the associated fixed page is not loaded yet.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.BringIntoView(FirstFloor.Documents.LinkTarget)">
+            <summary>
+            Attempts to bring the specified link target into view.
+            </summary>
+            <param name="linkTarget">The link target.</param>
+            <remarks>
+            <para>
+            Please note that scrolling a link target into view is an asynchronous operation if the target fixed page is not loaded yet.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentViewer.BringIntoView(System.Int32,System.Windows.Point)">
+            <summary>
+            Attempts to bring specified position on given page into view.
+            </summary>
+            <param name="pageNumber">The page number.</param>
+            <param name="p">The p.</param>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentViewer.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.Annotations">
+            <summary>
+            Gets the annotations for this document viewer.
+            </summary>
+            <value>The annotations.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.DocumentDataSource">
+            <summary>
+            Gets or sets the document data source.
+            </summary>
+            <value>The document data source.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.History">
+            <summary>
+            Gets the navigation history.
+            </summary>
+            <value>The history.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.IsMouseEnabled">
+            <summary>
+            Gets or sets a value indicating whether the document viewer handles mouse events.
+            </summary>
+            <value>
+            	<c>true</c> if the mouse is enabled; otherwise, <c>false</c>.
+            </value>
+            <remarks>
+            Default value is true. Disabling the mouse effectivily disables user text selection and panning.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.PageCount">
+            <summary>
+            Gets the number of pages displayed in this instance.
+            </summary>
+            <value>The page count.</value>
+            <remarks>
+            The page count may differ from the document page count due to <see cref="P:FirstFloor.Documents.Controls.DocumentDataSource.PageFilter"/> settings.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.PageIndex">
+            <summary>
+            Gets or sets the 0 based index of the current page.
+            </summary>
+            <value>The index of the page.</value>
+            <remarks>
+            <para>Page index -1 is used to identify there is no current page</para>
+            <para>Valid page index values range from -1 to <see cref="P:FirstFloor.Documents.Controls.DocumentViewer.PageCount"/> minus 1.</para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.PageNumber">
+            <summary>
+            Gets or sets the current page number (1 based).
+            </summary>
+            <value>The page number.</value>
+            <remarks>
+            <para>Page number 0 is used to identify there is no current page</para>
+            <para>Valid page numbers range from 0 to the total number of pages of the current document</para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.Selection">
+            <summary>
+            Gets or sets the selected text content of the <see cref="T:FirstFloor.Documents.Controls.DocumentViewer"/>
+            </summary>
+            <value>The selection.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentViewer.ViewMode">
+            <summary>
+            Gets or sets the view mode.
+            </summary>
+            <value>The document data source.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.FixedPageChangedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageChanged"/> event.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageChangedEventArgs.#ctor(FirstFloor.Documents.FixedPage,FirstFloor.Documents.FixedPage)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.FixedPageChangedEventArgs"/> class.
+            </summary>
+            <param name="oldPage">The old page.</param>
+            <param name="newPage">The new page.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageChangedEventArgs.OldPage">
+            <summary>
+            Gets the old page.
+            </summary>
+            <value>The old page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageChangedEventArgs.NewPage">
+            <summary>
+            Gets the new page.
+            </summary>
+            <value>The new page.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.FixedPageLoadedEventArgs">
+            <summary>
+            Provides data for the <see cref="E:FirstFloor.Documents.Controls.DocumentDataSource.FixedPageLoaded"/> event.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageLoadedEventArgs.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.FixedPageLoadedEventArgs"/> class.
+            </summary>
+            <param name="pageNumber">The page number.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageLoadedEventArgs.PageNumber">
+            <summary>
+            Gets the page number.
+            </summary>
+            <value>The page number.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.HistoryNavigator">
+            <summary>
+            Provides a user interface for moving back and forward on a document navigation history.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.HistoryNavigator.HistoryProperty">
+            <summary>
+            Identifies the History dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.HistoryNavigator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.HistoryNavigator"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.HistoryNavigator.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.HistoryNavigator.History">
+            <summary>
+            Gets or sets the navigation history.
+            </summary>
+            <value>The history.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.NavigationHistory">
+            <summary>
+            Represents the document navigation history.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistory.#ctor(FirstFloor.Documents.ITextContainer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.NavigationHistory"/> class.
+            </summary>
+            <param name="textContainer">The text container.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistory.GoBack">
+            <summary>
+            Navigates to the most recent entry in the back navigation history, or throws an exception if no entry exists in back navigation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistory.GoForward">
+            <summary>
+            Navigates to the most recent entry in the forward navigation history, or throws an exception if no entry exists in forward navigation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistory.AddItem(FirstFloor.Documents.Controls.NavigationHistoryItem)">
+            <summary>
+            Adds the item to the navigation history.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistory.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.NavigationHistory.CanGoBack">
+            <summary>
+            Gets a value that indicates whether there is at least one entry in the back navigation history.
+            </summary>
+            <value>
+            	<c>true</c> if can go back; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.NavigationHistory.CanGoForward">
+            <summary>
+            Gets a value that indicates whether there is at least one entry in the forward navigation history.
+            </summary>
+            <value>
+            	<c>true</c> if this instance can go forward; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.NavigationHistoryItem">
+            <summary>
+            Represents a single history item.
+            </summary>
+            <remarks>
+            A history item is either a link target or a position.
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.NavigationHistoryItem"/> class.
+            </summary>
+            <param name="pageNumber">The page number.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.#ctor(FirstFloor.Documents.LinkTarget)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.NavigationHistoryItem"/> class.
+            </summary>
+            <param name="linkTarget">The link target.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.#ctor(FirstFloor.Documents.TextPointer)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.NavigationHistoryItem"/> class.
+            </summary>
+            <param name="position">The position.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+            	<c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            </summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. 
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.op_Equality(FirstFloor.Documents.Controls.NavigationHistoryItem,FirstFloor.Documents.Controls.NavigationHistoryItem)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="i1">The i1.</param>
+            <param name="i2">The i2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.NavigationHistoryItem.op_Inequality(FirstFloor.Documents.Controls.NavigationHistoryItem,FirstFloor.Documents.Controls.NavigationHistoryItem)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="i1">The i1.</param>
+            <param name="i2">The i2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.NavigationHistoryItem.LinkTarget">
+            <summary>
+            Gets the link target.
+            </summary>
+            <value>The link target.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.NavigationHistoryItem.Position">
+            <summary>
+            Gets the position.
+            </summary>
+            <value>The position.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.HyperlinkNavigator">
+            <summary>
+            Provides hyperlink navigation that works in in-browser, out-of-browser and phone scenarios.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.HyperlinkNavigator.NavigateTo(System.Uri,System.String)">
+            <summary>
+            Navigates to specified uri.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="targetName">Name of the target window or frame.</param>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ErrorEventArgs">
+            <summary>
+            Provides data for the error events.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ErrorEventArgs.#ctor(System.Exception)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.ErrorEventArgs"/> class.
+            </summary>
+            <param name="error">The error.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ErrorEventArgs.Error">
+            <summary>
+            Gets the error.
+            </summary>
+            <value>The error.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.FixedPageViewer">
+            <summary>
+            Represents a control displaying a single fixed page in a scalable manner.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageProperty">
+            <summary>
+            Identifies the FixedPage dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageErrorProperty">
+            <summary>
+            Identifies the FixedPageError dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageSizeProperty">
+            <summary>
+            Identifies the FixedPageSize dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.FixedPageViewer.ScaleProperty">
+            <summary>
+            Identifies the Scale dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageViewer.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.FixedPageViewer"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageViewer.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageViewer.MeasureOverride(System.Windows.Size)">
+            <summary>
+            Provides the behavior for the "measure" pass of Silverlight layout. Classes can override this method to define their own measure pass behavior.
+            </summary>
+            <param name="availableSize">The available size that this object can give to child objects. Infinity can be specified as a value to indicate that the object will size to whatever content is available.</param>
+            <returns>
+            The size that this object determines it needs during layout, based on its calculations of child object allotted sizes.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.FixedPageViewer.ArrangeOverride(System.Windows.Size)">
+            <summary>
+            Provides the behavior for the "Arrange" pass of Silverlight layout. Classes can override this method to define their own arrange pass behavior.
+            </summary>
+            <param name="finalSize">The final area within the parent that this object should use to arrange itself and its children.</param>
+            <returns>The actual size used.</returns>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.FixedPageViewer.LinkClick">
+            <summary>
+            Occurs when a link is clicked.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageChanged">
+            <summary>
+            Occurs when the fixed page property has changed.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageViewer.FixedPage">
+            <summary>
+            Gets or sets the fixed page.
+            </summary>
+            <value>The page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageError">
+            <summary>
+            Gets or sets the fixed page error.
+            </summary>
+            <value>The page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageViewer.FixedPageSize">
+            <summary>
+            Gets or sets the size of the fixed page.
+            </summary>
+            <value>The size of the fixed page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageViewer.Scale">
+            <summary>
+            Gets or sets the value that is used to scale the viewer.
+            </summary>
+            <value>The page.</value>
+            <remarks>
+            <para>
+            Set the property value to null to automatically scale the viewer to fill the available space.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.FixedPageViewer.ActualScale">
+            <summary>
+            Gets the actual scale.
+            </summary>
+            <value>The actual scale.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.PageContext">
+            <summary>
+            Contains bindable page context.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.PageContextBase">
+            <summary>
+            Represents the base binding context for a single page.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.PageContextBase.OnLoadFixedPageCompleted(FirstFloor.Documents.FixedPage,System.Exception)">
+            <summary>
+            Called when a load fixed page operation has completed.
+            </summary>
+            <param name="fixedPage">The fixed page.</param>
+            <param name="error">The error.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.Owner">
+            <summary>
+            Gets the DocumentDataSource owner.
+            </summary>
+            <value>The owner.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.IsFixedPageOwner">
+            <summary>
+            Determines whether this page instance is the owner of the dynamically loaded fixed page.
+            </summary>
+            <value><c>true</c> if this instance is the owner of the fixed page; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.PageContent">
+            <summary>
+            Gets the page content providing information about the associated fixed page.
+            </summary>
+            <value>The content of the page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.FixedPageSize">
+            <summary>
+            Gets the size of the fixed page.
+            </summary>
+            <value>The size of the fixed page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.FixedPage">
+            <summary>
+            Gets the fixed page.
+            </summary>
+            <value>The fixed page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.FixedPageError">
+            <summary>
+            Gets the error (if any) that occurred while loading the fixed page.
+            </summary>
+            <value>The fixed page error.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContextBase.IsInUse">
+            <summary>
+            Determines whether the page is in use and the associated fixed page should be loaded.
+            </summary>
+            <value><c>true</c> if this instance is in use; otherwise, <c>false</c>.</value>
+            <remarks>
+            <para>
+            When set to true, the associated fixed page is loaded asynchronously and the PropertyChanged event will be raised accordingly.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.PageContext.OnLoadFixedPageCompleted(FirstFloor.Documents.FixedPage,System.Exception)">
+            <summary>
+            Called when a load fixed page operation has completed.
+            </summary>
+            <param name="fixedPage">The fixed page.</param>
+            <param name="error">The error.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContext.IsFixedPageOwner">
+            <summary>
+            Determines whether this page instance is the owner of the dynamically loaded fixed page.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is the owner of the fixed page; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContext.IsInUse">
+            <summary>
+            Determines whether the page is in use and the associated fixed page should be loaded.
+            </summary>
+            <value><c>true</c> if this instance is in use; otherwise, <c>false</c>.</value>
+            <remarks>
+            When set to true, the associated fixed page is loaded asynchronously and the PropertyChanged event will be raised accordingly.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContext.DesiredPageContainerSize">
+            <summary>
+            Gets or sets the desired size of the page container.
+            </summary>
+            <value>The size of the desired page container.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContext.DesiredPageScale">
+            <summary>
+            Gets or sets the desired page scale.
+            </summary>
+            <value>The desired page scale.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageContext.TextContainer">
+            <summary>
+            Gets or sets the text container that is available for this page instance.
+            </summary>
+            <value>The text container.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.DocumentDataSource">
+            <summary>
+            Provides an object for loading and searching XPS documents and managing virtualizing page collections.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentDataSource.LoadDocumentSettingsProperty">
+            <summary>
+            Identifies the LoadDocumentSettings dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentDataSource.LoadPageSettingsProperty">
+            <summary>
+            Identifies the LoadPageSettings dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentDataSource.DefaultThumbnailMaxSizeProperty">
+            <summary>
+            Identifies the DefaultThumbnailMaxSize dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentDataSource.PageFilterProperty">
+            <summary>
+            Identifies the PageFilter dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.DocumentDataSource"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.CreatePageCollection">
+            <summary>
+            Creates a virtualizing page collection.
+            </summary>
+            <returns>The created collection.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.CreatePageThumbnailCollection(System.Windows.Size)">
+            <summary>
+            Creates a virtualizing page thumbnail collection.
+            </summary>
+            <param name="maxThumbnailSize">Maximum size of the thumbnails.</param>
+            <returns>The created collection.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.CancelSearch">
+            <summary>
+            Cancels the current search operation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.Search(FirstFloor.Documents.Search.SearchQuery)">
+            <summary>
+            Starts a full text search using specified query.
+            </summary>
+            <param name="query">The query.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentDataSource.FirstFloor#Documents#IPageFilter#IsPageVisible(FirstFloor.Documents.PageContent)">
+            <summary>
+            Determines whether specified page is visible.
+            </summary>
+            <param name="page">The page.</param>
+            <returns>
+            	<c>true</c> if is page visible; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentDataSource.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentDataSource.LoadError">
+            <summary>
+            Occurs when a document or page fails to load.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentDataSource.FixedPageLoaded">
+            <summary>
+            Occurs when a fixed page has been loaded.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentDataSource.SearchCompleted">
+            <summary>
+            Occurs when an asynchronous search operation has completed.
+            </summary>
+            <remarks>Handle this event to check whether a search operation was canceled or completed with errors.</remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.PackageReader">
+            <summary>
+            Gets or sets the package reader.
+            </summary>
+            <value>The package reader.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.Document">
+            <summary>
+            Gets the XPS document associated with this instance.
+            </summary>
+            <value>The document.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.PageFilter">
+            <summary>
+            Gets or sets the filter that is used to determine which pages are visible.
+            </summary>
+            <value>The page filter.</value>
+            <remarks>
+            The default value is an instance of <see cref="T:FirstFloor.Documents.DefaultPageFilter"/>.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.CanSearch">
+            <summary>
+            Gets whether the control is ready for searching.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.IsSearching">
+            <summary>
+            Gets whether the control is busy searching.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.SearchResults">
+            <summary>
+            Gets the results of a search operation.
+            </summary>
+            <value>The search results.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.DefaultThumbnailMaxSize">
+            <summary>
+            Gets or sets the maximum size of the thumbnails in the default thumbnail collection.
+            </summary>
+            <value>The maximum size of the default thumbnails.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.LoadDocumentSettings">
+            <summary>
+            Gets or sets the settings for document load operations.
+            </summary>
+            <value>The load document settings.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.LoadPageSettings">
+            <summary>
+            Gets or sets the settings for the page load operations.
+            </summary>
+            <value>The load page settings.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.DefaultThumbnailCollection">
+            <summary>
+            Gets the default thumbnail collection.
+            </summary>
+            <value>The default thumbnail collection.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.SearchCommand">
+            <summary>
+            Gets the command that will cause a search operation to occur when executed.
+            </summary>
+            <value>The search command.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentDataSource.CancelSearchCommand">
+            <summary>
+            Gets the command that will cancel the current search operation.
+            </summary>
+            <value>The cancel search command.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.PageThumbnailContext">
+            <summary>
+            Provides the context of a generated page thumbnail.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.PageThumbnailContext.OnLoadFixedPageCompleted(FirstFloor.Documents.FixedPage,System.Exception)">
+            <summary>
+            Called when a load fixed page operation has completed.
+            </summary>
+            <param name="fixedPage">The fixed page.</param>
+            <param name="error">The error.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageThumbnailContext.IsFixedPageOwner">
+            <summary>
+            Determines whether this page instance is the owner of the dynamically loaded fixed page.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is the owner of the fixed page; otherwise, <c>false</c>.
+            </value>
+            <remarks>
+            <para>
+            Page thumbnails do not exclusively own the fixed page and therefor return false.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageThumbnailContext.IsInUse">
+            <summary>
+            Determines whether the page is in use and the fixed page should be loaded.
+            </summary>
+            <value><c>true</c> if this instance is in use; otherwise, <c>false</c>.</value>
+            <remarks>
+            When set to true, the associated fixed page is loaded asynchronously and the PropertyChanged event will be raised accordingly.
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageThumbnailContext.FixedPageThumbnail">
+            <summary>
+            Gets the fixed page thumbnail.
+            </summary>
+            <value>The fixed page thumbnail.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.DocumentPrinter">
+            <summary>
+            Provides printing services.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.AnnotationsProperty">
+            <summary>
+            Identifies the Annotations dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.DocumentDataSourceProperty">
+            <summary>
+            Identifies the DocumentDataSource dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.DocumentNameProperty">
+            <summary>
+            Identifies the DocumentName dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.FixedPageViewerStyleProperty">
+            <summary>
+            Identifies the FixedPageViewerStyle dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.PageFilterProperty">
+            <summary>
+            Identifies the PageFilter dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.HorizontalPageAlignmentProperty">
+            <summary>
+            Identifies the HorizontalPageAlignment dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.DocumentPrinter.VerticalPageAlignmentProperty">
+            <summary>
+            Identifies the VerticalPageAlignment dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.DocumentPrinter"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.BeginLoadPageVisual(FirstFloor.Documents.Controls.PageContextBase)">
+            <summary>
+            Initiates the loading of the visual of given page.
+            </summary>
+            <param name="page">The page.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.IsPageVisualLoaded(FirstFloor.Documents.Controls.PageContextBase)">
+            <summary>
+            Determines whether the visual for given page has been loaded.
+            </summary>
+            <param name="page">The page.</param>
+            <returns>
+            	<c>true</c> if the page visual is loaded; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.CreatePageVisual(FirstFloor.Documents.FixedPage,System.Windows.Size)">
+            <summary>
+            Creates the visual that is sent to the printer for the specified fixed page.
+            </summary>
+            <param name="fixedPage">The fixed page.</param>
+            <param name="maxSize">The maximum allowed size.</param>
+            <returns>The page visual that is sent to the printer.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.CancelPrint">
+            <summary>
+            Cancels the current printing operation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.DocumentPrinter.Print">
+            <summary>
+            Starts the printing process of the document.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentPrinter.PrintError">
+            <summary>
+            Occurs when a printing error has occured.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.DocumentPrinter.PropertyChanged">
+            <summary>
+            Occurs when a property value changes.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.CanPrint">
+            <summary>
+            Gets whether the control is ready for printing.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.CurrentPrintingPage">
+            <summary>
+            Gets the one-based number of the page being printed.
+            </summary>
+            <value>The current printing page.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.Annotations">
+            <summary>
+            Gets or sets the annotations.
+            </summary>
+            <value>The annotations.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.DocumentDataSource">
+            <summary>
+            Gets or sets the document data source.
+            </summary>
+            <value>The document data source.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.DocumentName">
+            <summary>
+            Gets or sets the name of the document to be printed.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.FixedPageViewerStyle">
+            <summary>
+            Gets or sets the style associated with the control's internal FixedPageViewer object.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.HorizontalPageAlignment">
+            <summary>
+            Gets or sets the horizontal page alignment.
+            </summary>
+            <value>The horizontal page alignment.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.VerticalPageAlignment">
+            <summary>
+            Gets or sets the vertical page alignment.
+            </summary>
+            <value>The vertical page alignment.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.IsPrinting">
+            <summary>
+            Gets whether the control is busy printing.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.PageFilter">
+            <summary>
+            Gets or sets the filter that is used to determine which pages are printed.
+            </summary>
+            <value>The page filter.</value>
+            <remarks>
+            <para>
+            Please note that this filter is applied on top of <see cref="P:FirstFloor.Documents.Controls.DocumentDataSource.PageFilter"/>.
+            </para>
+            <para>
+            The default value is an instance of <see cref="T:FirstFloor.Documents.DefaultPageFilter"/> which prints all available pages.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.PrintCommand">
+            <summary>
+            Gets the command that will cause printing to occur when executed.
+            </summary>
+            <value>The print command.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.DocumentPrinter.CancelPrintCommand">
+            <summary>
+            Gets the command that will cancel the current printing operation.
+            </summary>
+            <value>The cancel print command.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.PageNavigator">
+            <summary>
+            Provides a user interface for navigating the pages of a document.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.PageNavigator.PageIndexProperty">
+            <summary>
+            Identifies the PageIndex dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.PageNavigator.PageCountProperty">
+            <summary>
+            Identifies the PageCount dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.PageNavigator.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.PageNavigator"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.PageNavigator.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.PageNavigator.PageIndexChanged">
+            <summary>
+            Occurs when the page index has changed.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageNavigator.PageCount">
+            <summary>
+            Gets or sets the page count.
+            </summary>
+            <value>The page count.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.PageNavigator.PageIndex">
+            <summary>
+            Gets or sets the 0 based page index.
+            </summary>
+            <value>The page index.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.CannotNavigateBack">
+            <summary>
+              Looks up a localized string similar to Cannot navigate backward.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.CannotNavigateForward">
+            <summary>
+              Looks up a localized string similar to Cannot navigate forward.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.FailedToCreatePackageReader">
+            <summary>
+              Looks up a localized string similar to Failed to create package reader.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.FitHeight">
+            <summary>
+              Looks up a localized string similar to Fit height.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.FitPage">
+            <summary>
+              Looks up a localized string similar to Fit page.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.FitWidth">
+            <summary>
+              Looks up a localized string similar to Fit width.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.TemplateChildMissing">
+            <summary>
+              Looks up a localized string similar to Required template child &apos;{0}&apos; is not found.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.TemplateChildWrongType">
+            <summary>
+              Looks up a localized string similar to Template child &apos;{0}&apos; is found but of invalid type &apos;{1}&apos;. Expecting type: &apos;{2}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.Resources.TemplateIsReadonly">
+            <summary>
+              Looks up a localized string similar to Template is read-only.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ScaleMode">
+            <summary>
+            Defines the set of scale modes.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ScaleMode.Fixed">
+            <summary>
+            A fixed scale.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ScaleMode.FitWidth">
+            <summary>
+            Adjusts the scale so that a single page fills the pane horizontally.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ScaleMode.FitHeight">
+            <summary>
+            Adjusts the scale so that a single page fills the pane vertically.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ScaleMode.FitPage">
+            <summary>
+            Adjusts the scale so that a single page fills the pane.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ScrollViewerBehavior">
+            <summary>
+            Ensures a scrollviewer maintains its relative position when the extent width and/or height changes.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ScrollViewerBehavior.Reset">
+            <summary>
+            Resets this instance.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ScrollViewerBehavior.OnAttached">
+            <summary>
+            Called after the behavior is attached to an AssociatedObject.
+            </summary>
+            <remarks>Override this to hook up functionality to the AssociatedObject.</remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ScrollViewerBehavior.OnDetaching">
+            <summary>
+            Called when the behavior is being detached from its AssociatedObject, but before it has actually occurred.
+            </summary>
+            <remarks>Override this to unhook functionality from the AssociatedObject.</remarks>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.ScrollViewerBehavior.ViewPortChanged">
+            <summary>
+            Occurs when the scroll viewer's view port has changed.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ThumbnailListBox">
+            <summary>
+            Contains a list of selectable page thumbnails.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ThumbnailListBox.DocumentDataSourceProperty">
+            <summary>
+            Identifies the DocumentDataSource dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ThumbnailListBox.PageIndexProperty">
+            <summary>
+            Identifies the PageIndex dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ThumbnailListBox.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.ThumbnailListBox"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ThumbnailListBox.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>. In simplest terms, this means the method is called just before a UI element displays in an application. For more information, see Remarks.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ThumbnailListBox.DocumentDataSource">
+            <summary>
+            Gets or sets the document data source.
+            </summary>
+            <value>The document data source.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ThumbnailListBox.PageIndex">
+            <summary>
+            Gets or sets the selected page index.
+            </summary>
+            <value>The page index.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ViewMode">
+            <summary>
+            Represents a view that defines how pages are represented in document viewers.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ViewMode.GetDefaultItems">
+            <summary>
+            Gets a default list of view mode items.
+            </summary>
+            <returns>The default list of view mode items.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewMode.DisplayName">
+            <summary>
+            Gets or sets the display name of this view mode instance.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewMode.Scale">
+            <summary>
+            Gets or sets the scale.
+            </summary>
+            <value>The scale.</value>
+            <remarks>Only used when <see cref="P:FirstFloor.Documents.Controls.ViewMode.ScaleMode"/> is set to <see cref="F:FirstFloor.Documents.Controls.ScaleMode.Fixed"/>.</remarks>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewMode.ScaleMode">
+            <summary>
+            Gets or sets the scale mode.
+            </summary>
+            <value>The scale mode.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewMode.IsDefault">
+            <summary>
+            Gets or sets a value indicating whether this instance is the default.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is default; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ViewModeCollection">
+            <summary>
+            Represents a collection of view modes.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ViewModeCollection.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.ViewModeCollection"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ViewModeCollection.#ctor(System.Collections.Generic.IEnumerable{FirstFloor.Documents.Controls.ViewMode})">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.ViewModeCollection"/> class.
+            </summary>
+            <param name="modes">The modes.</param>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.ViewModePicker">
+            <summary>
+            Represents a control that allows the user to select a viewmode.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ViewModePicker.SelectedViewModeProperty">
+            <summary>
+            Identifies the SelectedViewMode dependency property.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Controls.ViewModePicker.ViewModesProperty">
+            <summary>
+            Identifies the ViewModes dependency property.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ViewModePicker.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Controls.ViewModePicker"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.ViewModePicker.OnApplyTemplate">
+            <summary>
+            When overridden in a derived class, is invoked whenever application code or internal processes (such as a rebuilding layout pass) call <see cref="M:System.Windows.Controls.Control.ApplyTemplate"/>.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewModePicker.SelectedViewMode">
+            <summary>
+            Gets or sets the selected view mode.
+            </summary>
+            <value>The selected view mode.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.ViewModePicker.ViewModes">
+            <summary>
+            Gets or sets a collection of view modes.
+            </summary>
+            <value>The view modes.</value>
+            <remarks>
+            <para>
+            Setting the view modes also sets the ViewMode property to the first ViewMode that has its IsDefault property set to true.
+            </para>
+            </remarks>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.VirtualizingPageCollection">
+            <summary>
+            Represents a virtualizing collection of pages from a single XPS document.
+            </summary>
+            <remarks>
+            <para>
+            The <see cref="T:FirstFloor.Documents.Controls.VirtualizingPageCollection"/> provides access to all pages of an XPS document and only keeps the
+            fixed pages in memory that are in use. The collection uses the <see cref="T:FirstFloor.Documents.Controls.DocumentDataSource"/> internally to perform on-demand asynchronous fixed page loads. 
+            </para>
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.VirtualizingPageCollection.CreatePageItem(FirstFloor.Documents.Controls.DocumentDataSource,FirstFloor.Documents.PageContent)">
+            <summary>
+            Creates the page item for specified page content.
+            </summary>
+            <param name="owner">The owner.</param>
+            <param name="pageContent">Content of the page.</param>
+            <returns>The created page item used for databinding.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.VirtualizingPageCollection.Reset">
+            <summary>
+            Resets this instance.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.VirtualizingPageCollection.GetEnumerator">
+            <summary>
+            Gets the enumerator.
+            </summary>
+            <returns>The enumerator.</returns>
+        </member>
+        <member name="E:FirstFloor.Documents.Controls.VirtualizingPageCollection.CollectionChanged">
+            <summary>
+            Occurs when the items list of the collection has changed, or the collection is reset.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.VirtualizingPageCollection.Document">
+            <summary>
+            Gets the XPS document.
+            </summary>
+            <value>The document.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Controls.VirtualizingPageThumbnailCollection">
+            <summary>
+            Represents a virtualizing collection of dynamically generated thumbnails of XPS document pages.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Controls.VirtualizingPageThumbnailCollection.CreatePageItem(FirstFloor.Documents.Controls.DocumentDataSource,FirstFloor.Documents.PageContent)">
+            <summary>
+            Creates the page item for specified page content.
+            </summary>
+            <param name="owner">The owner.</param>
+            <param name="pageContent">Content of the page.</param>
+            <returns>The created page item used for databinding.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Controls.VirtualizingPageThumbnailCollection.MaxThumbnailSize">
+            <summary>
+            Gets the maximum size of the dynamically generated page thumbnails.
+            </summary>
+            <value>The size of the max thumbnail.</value>
+        </member>
+    </members>
+</doc>

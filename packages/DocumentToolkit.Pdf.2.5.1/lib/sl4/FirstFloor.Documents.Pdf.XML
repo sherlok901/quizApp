@@ -1,0 +1,2546 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FirstFloor.Documents.Pdf</name>
+    </assembly>
+    <members>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.CalGray">
+            <summary>
+            Represents the CalGray color space.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace">
+            <summary>
+            Represents the base class for all color spaces.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace.FromXYZ(FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint)">
+            <summary>
+            Converts a value from the XYZ color space to a value in this color space.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace.CreateColorSpace(FirstFloor.Documents.Pdf.PageParserContext,System.String)">
+            <summary>
+            Creates the specified color space using given page context.
+            </summary>
+            <param name="context">The context.</param>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>The name.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace.DefaultColor">
+            <summary>
+            Gets or sets the components of the default color.
+            </summary>
+            <value>The default color.</value>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.CalGray.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.CalGray"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.CalGray.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalGray.WhitePoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse white point.
+            </summary>
+            <value>The white point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalGray.BlackPoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse black point.
+            </summary>
+            <value>The black point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalGray.Gamma">
+            <summary>
+            Defines the gamma for the gray component.
+            </summary>
+            <value>The gamma.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.StreamObject">
+            <summary>
+            Represents a stream object embedded in a PDF document.
+            </summary>
+            <remarks>
+            Disposing a stream object does not dispose its underlying base stream.
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.#ctor(FirstFloor.Documents.Pdf.DictionaryObject,System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.StreamObject"/> class.
+            </summary>
+            <param name="dictionary">The dictionary.</param>
+            <param name="baseStream">The base PDF stream.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.OpenFilteredStream">
+            <summary>
+            Opens the filtered stream.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.Flush">
+            <summary>
+            When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.</param>
+            <param name="count">The maximum number of bytes to be read from the current stream.</param>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset"/> and <paramref name="count"/> is larger than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            When overridden in a derived class, sets the position within the current stream.
+            </summary>
+            <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter.</param>
+            <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position.</param>
+            <returns>
+            The new position within the current stream.
+            </returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.SetLength(System.Int64)">
+            <summary>
+            When overridden in a derived class, sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes.</param>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.StreamObject.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
+            <param name="count">The number of bytes to be written to the current stream.</param>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset"/> and <paramref name="count"/> is greater than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support writing. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.Dictionary">
+            <summary>
+            Gets the dictionary associated with this stream object.
+            </summary>
+            <value>The dictionary.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.Filters">
+            <summary>
+            Gets the filters used to process the stream.
+            </summary>
+            <value>The filters.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.DecodeParams">
+            <summary>
+            Gets the decode filter parameters.
+            </summary>
+            <value>The decode params.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.CanRead">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports reading.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports reading; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.CanSeek">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports seeking; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.CanWrite">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports writing.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports writing; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.Length">
+            <summary>
+            When overridden in a derived class, gets the length in bytes of the stream.
+            </summary>
+            <value></value>
+            <returns>A long value representing the length of the stream in bytes.</returns>
+            <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.StreamObject.Position">
+            <summary>
+            When overridden in a derived class, gets or sets the position within the current stream.
+            </summary>
+            <value></value>
+            <returns>The current position within the stream.</returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfParser">
+            <summary>
+            Parses PDF documents.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfParser.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfParser.ParseDocument(System.IO.Stream)">
+            <summary>
+            Parses the PDF document from specified stream.
+            </summary>
+            <param name="stream">The stream.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.GlyphIndexPoint">
+            <summary>
+            Encapsulates the data of a single glyph index point.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.GlyphIndexPoint.Advance(System.Double)">
+            <summary>
+            Advances the glyph width and returns a new instance of a glyph index point.
+            </summary>
+            <param name="advance">The advance.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GlyphIndexPoint.GlyphIndex">
+            <summary>
+            Gets the glyph index.
+            </summary>
+            <value>The index.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GlyphIndexPoint.Width">
+            <summary>
+            Gets the glyph width measured in units in which 1000 units corresponds to 1 unit in text space.
+            </summary>
+            <value>The width.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GlyphIndexPoint.UnicodeCodePoint">
+            <summary>
+            Gets the unicode code point.
+            </summary>
+            <value>The unicode code point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GlyphIndexPoint.IsSpaceCharacter">
+            <summary>
+            Gets a value indicating whether this instance represents the space character.
+            </summary>
+            <value>
+            	<c>true</c> if this instance represents the space character; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.TokenType">
+            <summary>
+            Defines the lexical PDF tokens.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.Number">
+            <summary>
+            Integer or real number
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.String">
+            <summary>
+            String literal value
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.HexadecimalString">
+            <summary>
+            Hexadecimal string
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.Name">
+            <summary>
+            Name
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.Keyword">
+            <summary>
+            Keyword
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.ArrayStart">
+            <summary>
+            Array start
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.ArrayEnd">
+            <summary>
+            Array end
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.DictionaryStart">
+            <summary>
+            Dictionary start
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.TokenType.DictionaryEnd">
+            <summary>
+            Dictionary end
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.RequestHelper">
+            <summary>
+            Provides request helper methods.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.RequestHelper.TryParseFontIdentifier(System.String,FirstFloor.Documents.Pdf.ObjectIdentifier@)">
+            <summary>
+            Parses the identifier from a font request uri.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="identifier">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.RequestHelper.TryParseImageIdentifier(System.String,FirstFloor.Documents.Pdf.ObjectIdentifier@)">
+            <summary>
+            Parses the identifier from a image request uri.
+            </summary>
+            <param name="uri">The URI.</param>
+            <param name="identifier">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.RequestHelper.CreateFontRequestUri(FirstFloor.Documents.Pdf.ObjectIdentifier)">
+            <summary>
+            Creates a request uri for the font having specified identifier.
+            </summary>
+            <param name="identifier">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.RequestHelper.CreateImageRequestUri(FirstFloor.Documents.Pdf.ObjectIdentifier,System.String)">
+            <summary>
+            Creates a request uri for the image having specified identifier.
+            </summary>
+            <param name="identifier">The identifier.</param>
+            <param name="fileExtension">The file extension.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfLexerExtensions">
+            <summary>
+            Provides PDF lexer extension methods.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexerExtensions.ReadDictionaryObject(FirstFloor.Documents.Pdf.PdfLexer,FirstFloor.Documents.Pdf.PdfParser)">
+            <summary>
+            Consumes the next dictionary object from the lexer.
+            </summary>
+            <param name="lexer">The lexer.</param>
+            <param name="owner">The owner.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexerExtensions.ReadObject(FirstFloor.Documents.Pdf.PdfLexer,FirstFloor.Documents.Pdf.PdfParser)">
+            <summary>
+            Consumes the next object from the lexer.
+            </summary>
+            <param name="lexer">The lexer.</param>
+            <param name="owner">The owner.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Images.PdfImageDecoder">
+            <summary>
+            Provides image decoding functionality.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Images.PdfImageDecoder.GetImageStream(FirstFloor.Documents.Pdf.StreamObject)">
+            <summary>
+            Gets the image stream for given image stream object.
+            </summary>
+            <param name="image">The image.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.DictionaryObject">
+            <summary>
+            Represents a PDF dictionary object.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfObject">
+            <summary>
+            Represents the abstract PDF object base class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfObject.Identifier">
+            <summary>
+            Gets the identifier for indirect objects.
+            </summary>
+            <value>The identifier.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfObject.IsIndirectObject">
+            <summary>
+            Gets a value indicating whether this instance is an indirect object.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is indirect object; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.DictionaryObject.#ctor(FirstFloor.Documents.Pdf.PdfParser,System.Collections.Generic.Dictionary{System.String,System.Object},System.Int64)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.DictionaryObject"/> class.
+            </summary>
+            <param name="owner">The owner.</param>
+            <param name="contents">The contents.</param>
+            <param name="streamEndPosition">The position in the PDF stream that marks the end of the dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.DictionaryObject.Get``1(System.String)">
+            <summary>
+            Gets the entry having specified key. Raises a KeyNotFoundException if the entry does not exists.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.DictionaryObject.Get``1(System.String,``0)">
+            <summary>
+            Gets the entry having specified key. Returns the specified default value if the entry could not be found.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="defaultValue">The default value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.DictionaryObject.TryGet``1(System.String,``0@)">
+            <summary>
+            Gets the entry having specified key.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.DictionaryObject.ContainsKey(System.String)">
+            <summary>
+            Determines whether this dictionary object contains an entry having specified key.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>
+            	<c>true</c> if this dictionary object contains the key; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.Owner">
+            <summary>
+            Gets the PDF parser that owns this dictionary object.
+            </summary>
+            <value>The owner.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.StreamEndPosition">
+            <summary>
+            Gets the stream position that marks the end of this dictionary object.
+            </summary>
+            <value>The stream end position.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.Type">
+            <summary>
+            Gets the type of the dictionary.
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.Count">
+            <summary>
+            Gets the number of entries contained in this dictionary object.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.AllKeys">
+            <summary>
+            Gets all keys.
+            </summary>
+            <value>All keys.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.DictionaryObject.Item(System.String)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> with the specified key.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint">
+            <summary>
+            Represents a color point consisting of 3 components.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint.X">
+            <summary>
+            Gets or sets the X component.
+            </summary>
+            <value>The X.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint.Y">
+            <summary>
+            Gets or sets the Y component.
+            </summary>
+            <value>The Y.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint.Z">
+            <summary>
+            Gets or sets the Z component.
+            </summary>
+            <value>The Z.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PageParserContext">
+            <summary>
+            Represents the context during a page parse operation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.UpdateCurrentFont">
+            <summary>
+            Updates the current font.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.UpdateCurrentFont(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Updates the current font to specified font dictionary.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.AddPathData(System.String,System.Object[])">
+            <summary>
+            Adds data to the current path.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="o">The o.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.GetPathData">
+            <summary>
+            Gets the current path data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.ClearPathData">
+            <summary>
+            Clears the path data.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.AddPathCurveSegment(System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Adds a curve segment to the path data.
+            </summary>
+            <param name="x1">The x1.</param>
+            <param name="y1">The y1.</param>
+            <param name="x2">The x2.</param>
+            <param name="y2">The y2.</param>
+            <param name="x3">The x3.</param>
+            <param name="y3">The y3.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.SaveState">
+            <summary>
+            Saves the current graphics state to the stack.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.RestoreState">
+            <summary>
+            Restores a previously saved graphics state.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.Create(FirstFloor.Documents.Pdf.DictionaryObject,System.Xml.XmlWriter,FirstFloor.Documents.IO.LoadSettings)">
+            <summary>
+            Creates a parse context for specified page.
+            </summary>
+            <param name="pageObject">The page object.</param>
+            <param name="writer">The writer.</param>
+            <param name="settings">The settings.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParserContext.CreateFormContext(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates a parse form context based on this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.IsFormContext">
+            <summary>
+            Gets or sets a value indicating whether this instance is a form context.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is form context; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.MediaBox">
+            <summary>
+            Defines the boundaries of the physical medium.
+            </summary>
+            <value>The media box.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.CropBox">
+            <summary>
+            Defines the region to which the contents of the page are to be clipped.
+            </summary>
+            <value>The crop box.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.Writer">
+            <summary>
+            Gets or sets the writer.
+            </summary>
+            <value>The writer.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.Parser">
+            <summary>
+            Gets the PDF parser.
+            </summary>
+            <value>The parser.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.Resources">
+            <summary>
+            Gets the resource dictionary contained in the page dictionary.
+            </summary>
+            <value>The resource dictionary.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.State">
+            <summary>
+            Gets or sets the current graphics state.
+            </summary>
+            <value>The state.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.CurrentPathPoint">
+            <summary>
+            Gets or sets the current point in the path data.
+            </summary>
+            <value>The current path point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PageParserContext.CurrentFont">
+            <summary>
+            Gets the current font.
+            </summary>
+            <value>The current font.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.SampledFunction">
+            <summary>
+            Represents a PDF Type 0 Sampled function.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.Function">
+            <summary>
+            Represents a PDF function.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.Function.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Functions.Function"/> class.
+            </summary>
+            <param name="dictionary">The function dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.Function.Execute(System.Double[])">
+            <summary>
+            Executes this function instance.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.Function.OnExecute(System.Double[])">
+            <summary>
+            Provides the actual implementation of the function.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.Function.CreateFunction(FirstFloor.Documents.Pdf.PdfParser,FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates the function.
+            </summary>
+            <param name="parser">The parser.</param>
+            <param name="dictionary">The dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Functions.Function.Domain">
+            <summary>
+            Gets the domain.
+            </summary>
+            <value>The domain.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Functions.Function.Range">
+            <summary>
+            Gets the range.
+            </summary>
+            <value>The range.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Functions.Function.M">
+            <summary>
+            Gets the number of input values.
+            </summary>
+            <value>The number of input values.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Functions.Function.N">
+            <summary>
+            Gets the number of output values.
+            </summary>
+            <value>The number of output values.</value>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.SampledFunction.#ctor(FirstFloor.Documents.Pdf.StreamObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Functions.SampledFunction"/> class.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.SampledFunction.OnExecute(System.Double[])">
+            <summary>
+            Provides the actual implementation of the function.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.Type1Font">
+            <summary>
+            A font that defines glyph shapes using Type 1 font technology
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.FontBase">
+            <summary>
+            Represents the base class for all fonts.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.FontBase"/> class.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.GetFontFile">
+            <summary>
+            Gets the embedded font file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.ParseGlyphContent(System.Collections.Generic.IEnumerable{System.Object})">
+            <summary>
+            Parses the glyph content of specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>The parsed content</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.ParseIndices(System.String)">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.ParseIndices(System.Byte[])">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontBase.CreateFont(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates the font.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.FontDictionary">
+            <summary>
+            Gets the font dictionary.
+            </summary>
+            <value>The font dictionary.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.FontDescriptor">
+            <summary>
+            Gets the font descriptor.
+            </summary>
+            <value>The font descriptor.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.Encoding">
+            <summary>
+            Gets the font encoding.
+            </summary>
+            <value>The encoding.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.FontName">
+            <summary>
+            Gets the name of the font.
+            </summary>
+            <value>The name of the font.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.FontFlags">
+            <summary>
+            Defines various characteristics of the font
+            </summary>
+            <value>The font flags.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.IsSubset">
+            <summary>
+            Determines whether this font contains a subset.
+            </summary>
+            <value><c>true</c> if this instance is subset; otherwise, <c>false</c>.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.RequestUri">
+            <summary>
+            Gets the request uri associated with this font.
+            </summary>
+            <value>The font URI.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.FontType">
+            <summary>
+            Gets the type of the font.
+            </summary>
+            <value>The type of the font.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.FontBase.StyleSimulation">
+            <summary>
+            Gets or sets the style simulation.
+            </summary>
+            <value>The style simulation.</value>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type1Font.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.Type1Font"/> class.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type1Font.ParseIndices(System.String)">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type1Font.ParseIndices(System.Byte[])">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type1Font.GetGlyphIndex(System.String)">
+            <summary>
+            Gets the glyph index for specified glyph name.
+            </summary>
+            <param name="glyphName">Name of the glyph.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type1Font.FirstChar">
+            <summary>
+            Gets the first char.
+            </summary>
+            <value>The first char.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type1Font.LastChar">
+            <summary>
+            Gets the last char.
+            </summary>
+            <value>The last char.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type1Font.Widths">
+            <summary>
+            Gets the widths.
+            </summary>
+            <value>The widths.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type1Font.MissingWidth">
+            <summary>
+            The width to use for character codes whose widths are not specified in a font dictionary’s Widths array.
+            </summary>
+            <value>The width of the missing.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Filters.Filter">
+            <summary>
+            Represents the base class for all filters.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.#ctor(System.IO.Stream,FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Filters.FlateDecode"/> class.
+            </summary>
+            <param name="baseStream">The base stream.</param>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.Flush">
+            <summary>
+            When overridden in a derived class, clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.SetLength(System.Int64)">
+            <summary>
+            When overridden in a derived class, sets the length of the current stream.
+            </summary>
+            <param name="value">The desired length of the current stream in bytes.</param>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support both writing and seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream.</param>
+            <param name="count">The number of bytes to be written to the current stream.</param>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset"/> and <paramref name="count"/> is greater than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support writing. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.Filter.CreateFilter(System.String,System.IO.Stream,FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates a stream filter for given input.
+            </summary>
+            <param name="filter">The filter.</param>
+            <param name="input">The input.</param>
+            <param name="parameters">The parameters.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.BaseStream">
+            <summary>
+            Gets access to the base stream.
+            </summary>
+            <value>The base stream.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.Parameters">
+            <summary>
+            Gets the parameters associated with this filter.
+            </summary>
+            <value>The parameters.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.CanRead">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports reading.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports reading; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.CanSeek">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports seeking.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports seeking; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.CanWrite">
+            <summary>
+            When overridden in a derived class, gets a value indicating whether the current stream supports writing.
+            </summary>
+            <value></value>
+            <returns>true if the stream supports writing; otherwise, false.</returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.Filter.Length">
+            <summary>
+            When overridden in a derived class, gets the length in bytes of the stream.
+            </summary>
+            <value></value>
+            <returns>A long value representing the length of the stream in bytes.</returns>
+            <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.DeviceCMYK">
+            <summary>
+            Represents the DeviceCMYK color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.DeviceCMYK.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.DeviceCMYK.Default">
+            <summary>
+            Gets the DeviceCMYK color space.
+            </summary>
+            <value>The default.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB">
+            <summary>
+            Represents the CalRGB color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.FromXYZ(FirstFloor.Documents.Pdf.ColorSpaces.ColorPoint)">
+            <summary>
+            Converts a value from the XYZ color space to a value in this color space.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.WhitePoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse white point.
+            </summary>
+            <value>The white point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.BlackPoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse black point.
+            </summary>
+            <value>The black point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.Gamma">
+            <summary>
+            Specifies the gamma for the red, green, and blue components of the color space.
+            </summary>
+            <value>The gamma.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.Matrix">
+            <summary>
+            Specifies the linear interpretation of the decoded A, B, and C components of the color space with respect to the final XYZ representation.
+            </summary>
+            <value>The matrix.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.CalRGB.InverseMatrix">
+            <summary>
+            Gets or sets the inverse matrix.
+            </summary>
+            <value>The inverse matrix.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PageParser">
+            <summary>
+            Parses page content streams and returns Silverlight compatible XAML.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PageParser.Parse(FirstFloor.Documents.Pdf.DictionaryObject,FirstFloor.Documents.IO.LoadSettings)">
+            <summary>
+            Parses the specified page using given object reader.
+            </summary>
+            <param name="pageObject">The page object.</param>
+            <param name="settings">The settings.</param>
+            <returns>The XAML.</returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.Indexed">
+            <summary>
+            Represents the Indexed color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Indexed.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.Indexed"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Indexed.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.GraphicsState">
+            <summary>
+            Maintains the graphics state during a page render operation.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.GraphicsState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.GraphicsState"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.GraphicsState.Copy">
+            <summary>
+            Copies this instance.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.StrokingColorSpace">
+            <summary>
+            Gets or sets the color space for stroking operations.
+            </summary>
+            <value>The stroke color space.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.NonstrokingColorSpace">
+            <summary>
+            Gets or sets the color space for nonstroking operations.
+            </summary>
+            <value>The nonstroking color space.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.StrokingColor">
+            <summary>
+            Gets or sets the components of the stroking color.
+            </summary>
+            <value>The stroke.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.NonstrokingColor">
+            <summary>
+            Gets or sets the components of the nonstroking color.
+            </summary>
+            <value>The fill.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tc">
+            <summary>
+            Gets or sets the character spacing.
+            </summary>
+            <value>The text character spacing.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tw">
+            <summary>
+            Gets or sets the word spacing.
+            </summary>
+            <value>The word spacing.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Th">
+            <summary>
+            Gets or sets the horizontal scaling.
+            </summary>
+            <value>The horizontal scaling.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tl">
+            <summary>
+            Gets or sets the leading.
+            </summary>
+            <value>The text leading.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tf">
+            <summary>
+            Gets or sets the font.
+            </summary>
+            <value>The text font.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tfs">
+            <summary>
+            Gets or sets the size of the font.
+            </summary>
+            <value>The size of the text font.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tmode">
+            <summary>
+            Gets or sets the text rendering mode.
+            </summary>
+            <value>The text rendering mode.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Trise">
+            <summary>
+            Gets or sets the text rise.
+            </summary>
+            <value>The text rise.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tk">
+            <summary>
+            Gets or sets the text knockout.
+            </summary>
+            <value>The text knockout.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tm">
+            <summary>
+            Gets or sets the text matrix.
+            </summary>
+            <value>The text matrix.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Tlm">
+            <summary>
+            Gets or sets the text line matrix.
+            </summary>
+            <value>The text line matrix.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Trm">
+            <summary>
+            Gets or sets the text rendering matrix.
+            </summary>
+            <value>The text rendering matrix.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.Ctm">
+            <summary>
+            The current transformation matrix.
+            </summary>
+            <value>The CTM.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.LineWidth">
+            <summary>
+            The thickness of paths.
+            </summary>
+            <value>The width of the line.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.LineCap">
+            <summary>
+            Specifies the shape of the endpoints for any open path that is stroked.
+            </summary>
+            <value>The line cap.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.LineJoin">
+            <summary>
+            Specifies the shape of joints between connected segments of a stroked path.
+            </summary>
+            <value>The line join.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.MiterLimit">
+            <summary>
+            The maximum length of mitered line joins for stroked paths
+            </summary>
+            <value>The stroke miter limit.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.LineDashPattern">
+            <summary>
+            Gets or sets the line dash pattern.
+            </summary>
+            <value>The dash pattern.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.LineDashOffset">
+            <summary>
+            Gets or sets the line dash offset.
+            </summary>
+            <value>The line dash offset.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.NonstrokingRGBColor">
+            <summary>
+            Gets the nonstroking RGB color value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.GraphicsState.StrokingRGBColor">
+            <summary>
+            Gets the stroking RGB color value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.StitchingFunction">
+            <summary>
+            Represents a PDF Type 3 Stitching function.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.StitchingFunction.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Functions.StitchingFunction"/> class.
+            </summary>
+            <param name="dictionary">The function dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.StitchingFunction.OnExecute(System.Double[])">
+            <summary>
+            Provides the actual implementation of the function.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.GlyphsContent">
+            <summary>
+            Defines glyph content in the form of a Unicode string and glyph indices.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.GlyphsContent.#ctor(FirstFloor.Documents.Pdf.GlyphIndexPoint[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.GlyphsContent"/> class.
+            </summary>
+            <param name="indices">The indices.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.GlyphsContent.Indices">
+            <summary>
+            Gets or sets the glyph index points.
+            </summary>
+            <value>The indices.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.GlyphsContent.WordCount">
+            <summary>
+            Gets or sets the word count.
+            </summary>
+            <value>The word count.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.GlyphsContent.CharacterCount">
+            <summary>
+            Gets the character count.
+            </summary>
+            <value>The character count.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.FontEncoding">
+            <summary>
+            Represents a font encoding.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontEncoding.#ctor(FirstFloor.Documents.Pdf.DictionaryObject,FirstFloor.Documents.Pdf.Fonts.FontFlags)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.FontEncoding"/> class.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+            <param name="flags">The flags.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.FontEncoding.GetGlyphName(System.Char)">
+            <summary>
+            Gets the glyph name of given character.
+            </summary>
+            <param name="c">The c.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ObjectIdentifier">
+            <summary>
+            Uniquely identifies an indirect object in a PDF document.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ObjectIdentifier"/> struct.
+            </summary>
+            <param name="number">The number.</param>
+            <param name="generation">The generation.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.Equals(System.Object)">
+            <summary>
+            Indicates whether this instance and a specified object are equal.
+            </summary>
+            <param name="obj">Another object to compare to.</param>
+            <returns>
+            true if <paramref name="obj"/> and this instance are the same type and represent the same value; otherwise, false.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.GetHashCode">
+            <summary>
+            Returns the hash code for this instance.
+            </summary>
+            <returns>
+            A 32-bit signed integer that is the hash code for this instance.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.op_Equality(FirstFloor.Documents.Pdf.ObjectIdentifier,FirstFloor.Documents.Pdf.ObjectIdentifier)">
+            <summary>
+            Implements the operator ==.
+            </summary>
+            <param name="o1">The o1.</param>
+            <param name="o2">The o2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.op_Inequality(FirstFloor.Documents.Pdf.ObjectIdentifier,FirstFloor.Documents.Pdf.ObjectIdentifier)">
+            <summary>
+            Implements the operator !=.
+            </summary>
+            <param name="o1">The o1.</param>
+            <param name="o2">The o2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectIdentifier.ToString">
+            <summary>
+            Returns the fully qualified type name of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing a fully qualified type name.
+            </returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ObjectIdentifier.Number">
+            <summary>
+            Gets the number.
+            </summary>
+            <value>The number.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ObjectIdentifier.Generation">
+            <summary>
+            Gets the generation.
+            </summary>
+            <value>The generation.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.FunctionType">
+            <summary>
+            Defines the available PDF function types.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Functions.FunctionType.Sampled">
+            <summary>
+            Sampled function.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Functions.FunctionType.ExponentialInterpolation">
+            <summary>
+            Exponential interpolation function.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Functions.FunctionType.Stitching">
+            <summary>
+            Stitching function.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Functions.FunctionType.PostScriptCalculator">
+            <summary>
+            PostScript calculator function.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.ExponentialInterpolationFunction">
+            <summary>
+            Represents a PDF Type 2 Exponential Interpolation function.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.ExponentialInterpolationFunction.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Functions.ExponentialInterpolationFunction"/> class.
+            </summary>
+            <param name="dictionary">The function dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.ExponentialInterpolationFunction.OnExecute(System.Double[])">
+            <summary>
+            Provides the actual implementation of the function.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfLexer">
+            <summary>
+            Reads tokens from a stream
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.PdfLexer"/> class.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.ClearBuffers">
+            <summary>
+            Clears the token and character buffers.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.ReadBytes(System.Int32)">
+            <summary>
+            Reads a fixed number of bytes from the stream.
+            </summary>
+            <param name="length">The length.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Sets the position within the current stream.
+            </summary>
+            <param name="offset">The offset.</param>
+            <param name="origin">The origin.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.HasNextToken">
+            <summary>
+            Determines whether a token exists in the stream.
+            </summary>
+            <returns>
+            	<c>true</c> if [has next token]; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Peek">
+            <summary>
+            Reads the next token without consuming it.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Peek(System.Int32)">
+            <summary>
+            Reads the specified token without consuming it.
+            </summary>
+            <param name="lookAhead">The look ahead.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Read">
+            <summary>
+            Consumes the next token.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Read(FirstFloor.Documents.Pdf.TokenType)">
+            <summary>
+            Consumes the next token that must match specified type.
+            </summary>
+            <param name="type">The type.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.Read(FirstFloor.Documents.Pdf.TokenType,System.String)">
+            <summary>
+            Consumes the next token that must match specified type and value.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.ReadWhitespace">
+            <summary>
+            Reads any whitespace.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfLexer.ReadStreamObjectEol">
+            <summary>
+            Reads the end-of-line marker in a stream object.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfLexer.Stream">
+            <summary>
+            Gets the stream.
+            </summary>
+            <value>The stream.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.StandardType1Font">
+            <summary>
+            Represents a standard Type 1 font.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardType1Font.GetGlyphIndex(System.String)">
+            <summary>
+            Gets the glyph index for specified glyph name.
+            </summary>
+            <param name="glyphName">Name of the glyph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardType1Font.CreateStandardType1Font(System.String,FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates the specified Standard Type 1 font.
+            </summary>
+            <param name="fontName">Name of the font.</param>
+            <param name="fontDictionary">The font dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardType1Font.CreateSubstituteFont(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Creates a substitute font for specified font dictionary.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.StandardFonts">
+            <summary>
+            Maps standard fonts to glyph typefaces available on the local system.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardFonts.InitializeFontNameMap">
+            <summary>
+            Maps alternative standard font names to the default standard font name
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardFonts.InitializeFontFileNameMap">
+            <summary>
+            Maps standard font names to font file names.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardFonts.Initialize">
+            <summary>
+            Initializes this instance.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardFonts.IsStandardFontName(System.String)">
+            <summary>
+            Determines whether specified font name is a Standard Type 1 font name.
+            </summary>
+            <param name="fontName">Name of the font.</param>
+            <returns>
+            	<c>true</c> if the name is a standard font name; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.StandardFonts.GetGlyphTypeface(System.String)">
+            <summary>
+            Gets the typeface for given standard font name
+            </summary>
+            <param name="fontName">Name of the font.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.StandardFonts.FallbackTypeface">
+            <summary>
+            Gets the typeface that is used when all else fails.
+            </summary>
+            <value>The fallback typeface.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.DeviceRGB">
+            <summary>
+            Represents the DeviceRGB color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.DeviceRGB.ToColor(FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace,System.Double[])">
+            <summary>
+            Converts the value from specified color space to a color in the DeviceRGB color space.
+            </summary>
+            <param name="colorSpace">The color space.</param>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.DeviceRGB.Default">
+            <summary>
+            Gets the DeviceRGB color space.
+            </summary>
+            <value>The default.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Token">
+            <summary>
+            Represent a token.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Token.#ctor(FirstFloor.Documents.Pdf.TokenType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Token"/> struct.
+            </summary>
+            <param name="type">The type.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Token.#ctor(FirstFloor.Documents.Pdf.TokenType,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Token"/> class.
+            </summary>
+            <param name="type">The type.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Token.ToString">
+            <summary>
+            Returns the fully qualified type name of this instance.
+            </summary>
+            <returns>
+            A <see cref="T:System.String"/> containing a fully qualified type name.
+            </returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Token.Type">
+            <summary>
+            Gets the token type.
+            </summary>
+            <value>The type.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Token.Value">
+            <summary>
+            Gets the value.
+            </summary>
+            <value>The value.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont">
+            <summary>
+            Represents the font based on the TrueType font format.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont"/> class.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont.GetFontFile">
+            <summary>
+            Gets the font file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont.GetGlyphIndex(System.String)">
+            <summary>
+            Gets the glyph index for specified glyph name.
+            </summary>
+            <param name="glyphName">Name of the glyph.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.TrueTypeFont.IsFontFileEmbedded(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Determines whether a font file is embedded in the specified font dictionary.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+            <returns>
+            	<c>true</c> if a font file is embedded; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.FontFlags">
+            <summary>
+            Specifies the characterics of a font.
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.None">
+            <summary>
+            None
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.FixedPitch">
+            <summary>
+            Fixed pitch
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.Serif">
+            <summary>
+            Serif
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.Symbolic">
+            <summary>
+            Symbolic
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.Script">
+            <summary>
+            Script
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.Nonsymbolic">
+            <summary>
+            Nonsymbolic
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.Italic">
+            <summary>
+            Italic
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.AllCap">
+            <summary>
+            AllCap
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.SmallCap">
+            <summary>
+            SmallCap
+            </summary>
+        </member>
+        <member name="F:FirstFloor.Documents.Pdf.Fonts.FontFlags.ForceBold">
+            <summary>
+            ForceBold
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap">
+            <summary>
+            Maps characters to glyph names.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.TryGetName(System.Int32,System.String@)">
+            <summary>
+            Gets the glyph name for specified character.
+            </summary>
+            <param name="c">The c.</param>
+            <param name="name">The name.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.TryGetChar(System.String,System.Int32@)">
+            <summary>
+            Gets the character for specified glyph name.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="c">The character.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.Item(System.Int32)">
+            <summary>
+            Gets the glyph name for specified character.
+            </summary>
+            <value></value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.StandardEncoding">
+            <summary>
+            Adobe standard Latin-text encoding.
+            </summary>
+            <value>The standard encoding.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.MacRomanEncoding">
+            <summary>
+            Mac OS standard encoding for Latin text in Western writing systems.
+            </summary>
+            <value>The mac roman encoding.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.MacOSRomanEncoding">
+            <summary>
+            Standard Roman encoding used on Mac OS.
+            </summary>
+            <value>The mac roman encoding.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.WinAnsiEncoding">
+            <summary>
+            Windows Code Page 1252, often called the “Windows ANSI” encoding.
+            </summary>
+            <value>The win ANSI encoding.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.CharacterToGlyphNameMap.PdfDocEncoding">
+            <summary>
+            Encoding for text strings in a PDF document outside the document’s content streams.
+            </summary>
+            <value>The PDF doc encoding.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.Separation">
+            <summary>
+            Represents the Separation color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Separation.#ctor(FirstFloor.Documents.Pdf.ColorSpaces.ColorSpace,FirstFloor.Documents.Pdf.Functions.Function)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.Separation"/> class.
+            </summary>
+            <param name="alternateSpace">The alternate space.</param>
+            <param name="function">The function.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Separation.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfDocument">
+            <summary>
+            Provides information about a parsed PDF document.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocument.GetPageXaml(System.Int32,FirstFloor.Documents.IO.LoadSettings)">
+            <summary>
+            Gets the XAML of specified page.
+            </summary>
+            <param name="pageNumber">The page number.</param>
+            <param name="settings">The settings.</param>
+            <returns></returns>
+            <remarks>
+            Page numbers are 1-based.
+            </remarks>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocument.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfDocument.Owner">
+            <summary>
+            Gets the parser this document originates from.
+            </summary>
+            <value>The owner.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfDocument.PdfVersion">
+            <summary>
+            Gets the version of the PDF document.
+            </summary>
+            <value>The PDF version.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfDocument.FileIdentifier">
+            <summary>
+            Gets the identifier that uniquely identifies the PDF document.
+            </summary>
+            <value>The file identifier.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfDocument.PageCount">
+            <summary>
+            Gets the number of pages found in the PDF document.
+            </summary>
+            <value>The page count.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ParserUtility">
+            <summary>
+            Provides various parser utility functions.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.ParseIdentifier(System.String,System.Int32)">
+            <summary>
+            Parses an object identifier from given string starting at specified index.
+            </summary>
+            <param name="value">The value.</param>
+            <param name="startIndex">The start index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.ParseAsciiInt32(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Parses an integer value from given byte array where the value is stored in ASCII.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="offset">The offset.</param>
+            <param name="length">The length.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.ParseInt32(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Parses the integer value from given byte array stored with high-order byte first.
+            </summary>
+            <param name="data">The data.</param>
+            <param name="offset">The offset.</param>
+            <param name="length">The length.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.ParseHex(System.Int32)">
+            <summary>
+            Parses a hexacimal value.
+            </summary>
+            <param name="c">The c.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.CreateRectangle(FirstFloor.Documents.Pdf.ArrayObject)">
+            <summary>
+            Creates a rectangle from specified ArrayObject.
+            </summary>
+            <param name="o">The o.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.CreateMatrix(FirstFloor.Documents.Pdf.ArrayObject)">
+            <summary>
+            Creates a matrix from specified ArrayObject.
+            </summary>
+            <param name="o">The o.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.ToArray``1(System.Object[])">
+            <summary>
+            Converts specified object array to a typed array.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Cast``1(System.Object)">
+            <summary>
+            Casts the specified value to given type.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Concat(System.Windows.Media.Matrix,System.Windows.Media.Matrix)">
+            <summary>
+            Concatenates the specified matrices.
+            </summary>
+            <param name="m1">The m1.</param>
+            <param name="m2">The m2.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Concat(System.Windows.Media.Matrix,System.Double,System.Double,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Concatenates the matrix with specified values.
+            </summary>
+            <param name="m">The matrix.</param>
+            <param name="m11">The M11.</param>
+            <param name="m12">The M12.</param>
+            <param name="m21">The M21.</param>
+            <param name="m22">The M22.</param>
+            <param name="offsetX">The offset X.</param>
+            <param name="offsetY">The offset Y.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Enum)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Windows.Media.Matrix)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Windows.Media.Color)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Uri)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Int32)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ParserUtility.Format(System.Double)">
+            <summary>
+            Formats the specified value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Functions.PostScriptCalculatorFunction">
+            <summary>
+            Represents a PDF Type 4 PostScript Calculator function.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.PostScriptCalculatorFunction.#ctor(FirstFloor.Documents.Pdf.StreamObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Functions.PostScriptCalculatorFunction"/> class.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Functions.PostScriptCalculatorFunction.OnExecute(System.Double[])">
+            <summary>
+            Provides the actual implementation of the function.
+            </summary>
+            <param name="args">The args.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.Pattern">
+            <summary>
+            Represents the Pattern color space
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Pattern.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.Pattern"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Pattern.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.GlyphList">
+            <summary>
+            Maps glyph names to Unicode code points.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.GlyphList.TryGetCodePoint(System.String,System.Char@)">
+            <summary>
+            Gets the Unicode code point for specified glyph name.
+            </summary>
+            <param name="glyphName">Name of the glyph.</param>
+            <param name="c">The c.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfDocumentReader">
+            <summary>
+            Implements a package reader capable of parsing and converting PDF documents to XPS.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.#ctor(System.Uri)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.PdfDocumentReader"/> class.
+            </summary>
+            <param name="resourceUri">The resource URI.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.PdfDocumentReader"/> class.
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.GetPageXaml(System.Int32)">
+            <summary>
+            Gets the XAML of specified page.
+            </summary>
+            <param name="pageNumber">The page number.</param>
+            <returns>The page XAML.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.GetPart(System.String)">
+            <summary>
+            Gets the part identified with given uri.
+            </summary>
+            <param name="partUri">The part URI.</param>
+            <returns>The part stream.</returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfDocumentReader.IsPdfStream(System.IO.Stream)">
+            <summary>
+            Determines whether the specified stream contains a PDF document.
+            </summary>
+            <param name="stream">The stream.</param>
+            <returns>
+            	<c>true</c> if specified stream contains a PDF document; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.PdfDocumentReader.PageCount">
+            <summary>
+            Gets the number of pages.
+            </summary>
+            <value>The page count.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Fonts.Type0Font">
+            <summary>
+            A composite font, a font composed of glyphs from a descendant CIDFont.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type0Font.#ctor(FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Fonts.Type0Font"/> class.
+            </summary>
+            <param name="fontDictionary">The font dictionary.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type0Font.GetFontFile">
+            <summary>
+            Gets the font file.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type0Font.ParseIndices(System.String)">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Fonts.Type0Font.ParseIndices(System.Byte[])">
+            <summary>
+            Parses the Glyph indices from specified string value.
+            </summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type0Font.CIDFontDictionary">
+            <summary>
+            Gets the CID font dictionary.
+            </summary>
+            <value>The CID font dictionary.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Fonts.Type0Font.CIDFontType">
+            <summary>
+            Gets the type of the CID font.
+            </summary>
+            <value>The type of the CID font.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Filters.FlateDecode">
+            <summary>
+            Decompresses data encoded using the zlib/deflate compression method, 
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.FlateDecode.#ctor(System.IO.Stream,FirstFloor.Documents.Pdf.DictionaryObject)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.Filters.FlateDecode"/> class.
+            </summary>
+            <param name="baseStream"></param>
+            <param name="parameters">The parameters.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.FlateDecode.PaethPredictor(System.Byte,System.Byte,System.Byte)">
+            <summary>
+            The Paeth predictor function.
+            </summary>
+            <param name="a">Left.</param>
+            <param name="b">Above.</param>
+            <param name="c">Upper left.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.FlateDecode.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.FlateDecode.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            When overridden in a derived class, reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source.</param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream.</param>
+            <param name="count">The maximum number of bytes to be read from the current stream.</param>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <exception cref="T:System.ArgumentException">The sum of <paramref name="offset"/> and <paramref name="count"/> is larger than the buffer length. </exception>
+            <exception cref="T:System.ArgumentNullException">
+            	<paramref name="buffer"/> is null. </exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">
+            	<paramref name="offset"/> or <paramref name="count"/> is negative. </exception>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support reading. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.Filters.FlateDecode.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            When overridden in a derived class, sets the position within the current stream.
+            </summary>
+            <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter.</param>
+            <param name="origin">A value of type <see cref="T:System.IO.SeekOrigin"/> indicating the reference point used to obtain the new position.</param>
+            <returns>
+            The new position within the current stream.
+            </returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking, such as if the stream is constructed from a pipe or console output. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.FlateDecode.Length">
+            <summary>
+            When overridden in a derived class, gets the length in bytes of the stream.
+            </summary>
+            <value></value>
+            <returns>A long value representing the length of the stream in bytes.</returns>
+            <exception cref="T:System.NotSupportedException">A class derived from Stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Filters.FlateDecode.Position">
+            <summary>
+            When overridden in a derived class, gets or sets the position within the current stream.
+            </summary>
+            <value></value>
+            <returns>The current position within the stream.</returns>
+            <exception cref="T:System.IO.IOException">An I/O error occurs. </exception>
+            <exception cref="T:System.NotSupportedException">The stream does not support seeking. </exception>
+            <exception cref="T:System.ObjectDisposedException">Methods were called after the stream was closed. </exception>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.DeviceGray">
+            <summary>
+            Represents the DeviceGray color space.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.DeviceGray.Default">
+            <summary>
+            Gets the DeviceGray color space.
+            </summary>
+            <value>The default.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.TokenExtensions">
+            <summary>
+            Provides extension helper for the Token struct.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.IsMatch(FirstFloor.Documents.Pdf.Token,FirstFloor.Documents.Pdf.TokenType,System.String)">
+            <summary>
+            Determines whether the token is of specified type and has specified value.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="type">The type.</param>
+            <param name="value">The value.</param>
+            <returns>
+            	<c>true</c> if the specified token is match; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.Match(FirstFloor.Documents.Pdf.Token,FirstFloor.Documents.Pdf.TokenType)">
+            <summary>
+            Raises an exception if specified token is not of given type.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="type">The type to match.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.Match(FirstFloor.Documents.Pdf.Token,FirstFloor.Documents.Pdf.TokenType,System.String)">
+            <summary>
+            Raises an exception if specified token is not of given type and contains given value.
+            </summary>
+            <param name="token">The token.</param>
+            <param name="type">The type.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.ParseBool(FirstFloor.Documents.Pdf.Token)">
+            <summary>
+            Parses a boolean value from specified keyword token.
+            </summary>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.ParseHexString(FirstFloor.Documents.Pdf.Token)">
+            <summary>
+            Parses the byte array from given hexadecimal string token.
+            </summary>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.ParseInteger(FirstFloor.Documents.Pdf.Token)">
+            <summary>
+            Parses the integer value from given integer token.
+            </summary>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.TokenExtensions.ParseDouble(FirstFloor.Documents.Pdf.Token)">
+            <summary>
+            Parses the double value from given double token.
+            </summary>
+            <param name="token">The token.</param>
+            <returns></returns>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.PdfParseException">
+            <summary>
+            The exception that is raised when a parse error occurs.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.PdfParseException.#ctor(System.String,System.Object[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:PdfParseException"/> class.
+            </summary>
+            <param name="message">The message.</param>
+            <param name="args">The args.</param>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.Lab">
+            <summary>
+            Represents the Lab color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Lab.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.Lab"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.Lab.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.Lab.WhitePoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse white point.
+            </summary>
+            <value>The white point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.Lab.BlackPoint">
+            <summary>
+            Specifies the tristimulus value of the diffuse black point.
+            </summary>
+            <value>The black point.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ColorSpaces.Lab.Range">
+            <summary>
+            Specifies the range of valid values for the components of the color space
+            </summary>
+            <value>The range.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ArrayObject">
+            <summary>
+            Represents a PDF array object.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ArrayObject.#ctor(FirstFloor.Documents.Pdf.PdfParser)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ArrayObject"/> class.
+            </summary>
+            <param name="owner">The owner.</param>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ArrayObject.Get``1(System.Int32)">
+            <summary>
+            Gets the entry at specified index.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ArrayObject.ToArray``1">
+            <summary>
+            Gets the typed elements of this array object.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ArrayObject.Owner">
+            <summary>
+            Gets the PDF parser that owns this dictionary object.
+            </summary>
+            <value>The owner.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ArrayObject.Count">
+            <summary>
+            Gets the number of entries contained in this array object.
+            </summary>
+            <value>The count.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ArrayObject.Item(System.Int32)">
+            <summary>
+            Gets the <see cref="T:System.Object"/> at specified index.
+            </summary>
+            <value></value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.CouldNotCastValue">
+            <summary>
+              Looks up a localized string similar to Could not cast value of type &apos;{0}&apos; to &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.FontIdentifierNotFound">
+            <summary>
+              Looks up a localized string similar to Unable to read font from dictionary. No identifier found.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.InvalidBooleanValue">
+            <summary>
+              Looks up a localized string similar to Invalid value &apos;{0}&apos; for boolean token.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.InvalidFontDictionary">
+            <summary>
+              Looks up a localized string similar to Not a valid font dictionary.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.InvalidFunctionParameters">
+            <summary>
+              Looks up a localized string similar to Cannot execute function, invalid number of parameters. Expected: {0}, got: {1}.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.InvalidFunctionResultValues">
+            <summary>
+              Looks up a localized string similar to Error executing function, invalid number of result values. Expected: {0}, got: {1}.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.InvalidHexChar">
+            <summary>
+              Looks up a localized string similar to Invalid hexadecimal character &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.MissingFontDescriptor">
+            <summary>
+              Looks up a localized string similar to Missing required font descriptor.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.MissingTrailerDictionary">
+            <summary>
+              Looks up a localized string similar to Missing trailer dictionary.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.ObjectNotFound">
+            <summary>
+              Looks up a localized string similar to Could not find object with identifier &apos;{0}&apos; in object stream.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.PageNotFound">
+            <summary>
+              Looks up a localized string similar to Page &apos;{0}&apos; not found.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.ResourceNotFound">
+            <summary>
+              Looks up a localized string similar to Resource &apos;{0}&apos; not found.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnexceptedTokenValue">
+            <summary>
+              Looks up a localized string similar to Unexpected token value &apos;{0}&apos;, expected &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnexpectedEndOfCrossRefStream">
+            <summary>
+              Looks up a localized string similar to Unexpected end of stream while reading entries from cross-ref stream data.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnexpectedEndOfStream">
+            <summary>
+              Looks up a localized string similar to Unexpected end of stream.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnexpectedToken">
+            <summary>
+              Looks up a localized string similar to Unexpected token &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnexpectedTokenType">
+            <summary>
+              Looks up a localized string similar to Unexpected token &apos;{0}&apos;, expected &apos;{1}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnknownPredictor">
+            <summary>
+              Looks up a localized string similar to Unable to decode stream, unknown predictor &apos;{0}&apos; found.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnknownToken">
+            <summary>
+              Looks up a localized string similar to Found an unknown token &apos;{0}&apos;.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedBitsPerSample">
+            <summary>
+              Looks up a localized string similar to Unsupported bits per sample {0}.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedEncryption">
+            <summary>
+              Looks up a localized string similar to Unable to read encrypted document; security handler &apos;{0}&apos; using algorithm &apos;{1}&apos; is not supported.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedFontType">
+            <summary>
+              Looks up a localized string similar to Cannot create font, the {0} font type is not supported.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedPdfVersion">
+            <summary>
+              Looks up a localized string similar to PDF version &apos;{0}.{1}&apos; is not supported.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedStreamFilter">
+            <summary>
+              Looks up a localized string similar to Stream filter &apos;{0}&apos; is not supported.
+            </summary>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.Resources.UnsupportedTiff2Predictor">
+            <summary>
+              Looks up a localized string similar to Unable to decode stream, TIFF predictor 2 is not supported.
+            </summary>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ObjectStreamReference">
+            <summary>
+            References an object in an object stream.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ObjectStreamReference.#ctor(FirstFloor.Documents.Pdf.ObjectIdentifier,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ObjectStreamReference"/> struct.
+            </summary>
+            <param name="streamIdentifier">The stream identifier.</param>
+            <param name="index">The index.</param>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ObjectStreamReference.StreamIdentifier">
+            <summary>
+            Gets the object stream identifier.
+            </summary>
+            <value>The object stream identifier.</value>
+        </member>
+        <member name="P:FirstFloor.Documents.Pdf.ObjectStreamReference.Index">
+            <summary>
+            Gets the index of the object in the stream.
+            </summary>
+            <value>The index.</value>
+        </member>
+        <member name="T:FirstFloor.Documents.Pdf.ColorSpaces.DeviceN">
+            <summary>
+            Represents the DeviceN color space.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.DeviceN.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:FirstFloor.Documents.Pdf.ColorSpaces.DeviceN"/> class.
+            </summary>
+        </member>
+        <member name="M:FirstFloor.Documents.Pdf.ColorSpaces.DeviceN.ToXYZ(System.Double[])">
+            <summary>
+            Converts specified value to the XYZ color space.
+            </summary>
+            <param name="values">The values.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

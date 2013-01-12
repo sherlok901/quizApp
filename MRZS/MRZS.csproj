@@ -78,6 +78,15 @@
     <Reference Include="Divelements.SandRibbon">
       <HintPath>Libs\Divelements.SandRibbon.dll</HintPath>
     </Reference>
+    <Reference Include="FirstFloor.Documents">
+      <HintPath>..\packages\DocumentToolkit.2.5.4\lib\sl4\FirstFloor.Documents.dll</HintPath>
+    </Reference>
+    <Reference Include="FirstFloor.Documents.Controls">
+      <HintPath>..\packages\DocumentToolkit.2.5.4\lib\sl4\FirstFloor.Documents.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="FirstFloor.Documents.Pdf">
+      <HintPath>..\packages\DocumentToolkit.Pdf.2.5.1\lib\sl4\FirstFloor.Documents.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Expression.Drawing">
       <HintPath>Libs\Microsoft.Expression.Drawing.dll</HintPath>
@@ -110,11 +119,16 @@
     <Reference Include="System.Windows.Controls.Input.Toolkit" />
     <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Controls.Toolkit.Internals, Version=4.0.5.0, Culture=neutral, PublicKeyToken=2c5c654d367bf4a7, processorArchitecture=MSIL" />
-    <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentToolkit.2.5.4\lib\sl4\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
     <Reference Include="System.Windows.Controls" />
     <Reference Include="System.Windows.Controls.Navigation" />
+    <Reference Include="ZLib">
+      <HintPath>..\packages\DocumentToolkit.Pdf.2.5.1\lib\sl4\ZLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\MRZS.Web\Resources\RegistrationDataResources.Designer.cs">
@@ -146,6 +160,7 @@
     <Compile Include="Classes\Display.cs" />
     <Compile Include="Classes\DisplayCode\DisplayViewModel.cs" />
     <Compile Include="Classes\EmulatorDisplayController.cs" />
+    <Compile Include="Classes\Errors\MrzsErrors.cs" />
     <Compile Include="Classes\Inputing.cs" />
     <Compile Include="Classes\InterTesting\APV.cs" />
     <Compile Include="Classes\InterTesting\DVs.cs" />
@@ -156,11 +171,12 @@
     <Compile Include="Classes\LoadData.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\MenuController.cs" />
-    <Compile Include="Classes\MyControl1.cs" />
     <Compile Include="Classes\NumValueChanging.cs" />
     <Compile Include="Classes\PasswordController.cs" />
+    <Compile Include="Classes\Studying\StudyEmulator.cs" />
     <Compile Include="Classes\Testing\TestControler.cs" />
     <Compile Include="Classes\Testing\TestTimeController.cs" />
+    <Compile Include="Classes\myTimer\MyTimer.cs" />
     <Compile Include="Views\Emulator\EmulatorDisplay.xaml.cs">
       <DependentUpon>EmulatorDisplay.xaml</DependentUpon>
     </Compile>
@@ -296,6 +312,9 @@
     <Compile Include="Views\Student\TestResult.Model.cs" />
     <Compile Include="Views\Student\TestResult.xaml.cs">
       <DependentUpon>TestResult.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Testing\BookView.xaml.cs">
+      <DependentUpon>BookView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Testing\InterTestControl.xaml.cs">
       <DependentUpon>InterTestControl.xaml</DependentUpon>
@@ -457,6 +476,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Testing\BookView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Testing\InterTestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -471,6 +494,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="emulBook.pdf" />
+    <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
   <ItemGroup>

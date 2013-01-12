@@ -32,7 +32,7 @@
         }
 
         private void Application_Startup(object sender, StartupEventArgs e)
-        {
+        {         
             // This will enable you to bind controls in XAML files to WebContext.Current
             // properties
             this.Resources.Add("WebContext", WebContext.Current);

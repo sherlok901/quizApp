@@ -59,16 +59,18 @@
 				x:Name="buttonStartEducation" 
 				HorizontalAlignment="Center" 
 				VerticalAlignment="Center" 
-				Height="80" Width="280" Click="Button_Click">
+				Height="80" Width="280" Click="buttonStartEducation_Click_1">
                 <StackPanel Orientation="Horizontal">
-                    <Image HorizontalAlignment="Left" Source="../../Images/1298497749_daemons.png"/>
-                    <TextBlock VerticalAlignment="Center" FontSize="18" Text="Начать обучение" FontFamily="Arial"/>
+                    <Image HorizontalAlignment="Left" Source="../../Images/1298497749_daemons.png" Width="54"/>
+                    <TextBlock VerticalAlignment="Center" FontSize="18" Text="Интерактивное обучение" FontFamily="Arial"/>
                 </StackPanel>
             </Button>
+            <Button x:Name="InterTask" Click="Button_Click" Height="80" Width="280" Margin="0,30,0,0" Content="Интерактивные задания" FontSize="18" FontFamily="Arial"></Button>
         
-<Button  Height="76" Margin="0,30,0,0"  Width="280" Click="Button_Click_1" Style="{StaticResource ButtonFont}">
+            <Button  Height="76" Margin="0,30,0,0"  Width="280" Click="Button_Click_1" Style="{StaticResource ButtonFont}">
                 <TextBlock Height="23" TextWrapping="Wrap" Text="Емулятор МРЗС" Width="270" FontSize="18" TextAlignment="Center" FontFamily="Arial"/>
             </Button>
+            
             <Button x:Name="Testing"  Margin="0,30,0,0" Content="Тестирование" Style="{StaticResource ButtonFont}" Click="Testing_Click_1"></Button>
         </StackPanel>
        

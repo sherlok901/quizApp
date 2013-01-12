@@ -158,6 +158,11 @@
     <Compile Include="Models\Section.cs" />
     <Compile Include="Models\SectionResult.cs" />
     <Compile Include="Models\UserExstension.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\RegistrationDataResources.Designer.cs">
       <DependentUpon>RegistrationDataResources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
@@ -288,6 +293,10 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\RegistrationDataResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RegistrationDataResources.Designer.cs</LastGenOutput>
@@ -338,4 +347,8 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
 </Project>

@@ -17,11 +17,13 @@ namespace MRZS.Views.Testing
         internal event EventHandler PrevBtnClicked;
         internal event EventHandler NextBtnClicked;
         internal event EventHandler CheckBtnClicked;
+        MRZS.Views.Testing.BookView book = null;
 
         public InterTestControl()
         {
-            InitializeComponent();          
-  
+            InitializeComponent();
+            //загрузка книги
+            book = new BookView();
         }
         //task text
         internal string TaskText
@@ -61,6 +63,12 @@ namespace MRZS.Views.Testing
         private void CheckTestBtn_Click(object sender, RoutedEventArgs e)
         {
             if (CheckBtnClicked != null) CheckBtnClicked(null, EventArgs.Empty);
+        }
+
+        private void ViewBook_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            book.Show();
         }
       
         //private void ResultStateTb_TextChanged(object sender, TextChangedEventArgs e)

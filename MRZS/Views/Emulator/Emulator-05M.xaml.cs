@@ -14,6 +14,7 @@ using MRZS.Classes;
 using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
 using MRZS.Classes.InterTesting;
+using MRZS.Classes.Studying;
 
 namespace MRZS.Views.Emulator
 {
@@ -31,7 +32,14 @@ namespace MRZS.Views.Emulator
         IEnumerable<mtzVal> mtzValList=null;
         IEnumerable<mrzsInOutOption> mrzsInOutOptionList = null;
         private IEnumerable<mrzs05mMenu> mrzs05Entity;
-        DispatcherTimer timer = new DispatcherTimer();
+        //DispatcherTimer timer = new DispatcherTimer();
+        static Timer mtz1Timer;
+        static Timer mtz2Timer;
+        static Timer apvTimer;
+        static Timer zzTimer;
+        static Timer tmrTemp;
+        double Counter = 0;
+        
 
         //get info of inputs
         public enum Inputs
@@ -43,13 +51,13 @@ namespace MRZS.Views.Emulator
                 
         MenuController MenuControllr = new MenuController();
         Questns InterTestQuests = null;
-
-
+        StudyEmulator StudyEmulCtrler = null;        
 
         public Emulator_05M()
         {
             InitializeComponent();
             TestCtrl.Visibility = Visibility.Collapsed;
+            
             
             busyIndicator.IsBusy = false;
             //subcribing for loaded data event
@@ -63,7 +71,7 @@ namespace MRZS.Views.Emulator
             else
             {
                 LoadData_DataLoaded(null, EventArgs.Empty);
-                MenuControllr_DataLoad(null, EventArgs.Empty);
+                MenuControllr_DataLoad(null, EventArgs.Empty);                
             }
         }        
                        
@@ -133,12 +141,42 @@ namespace MRZS.Views.Emulator
             DeviceON_button.BorderBrush = new SolidColorBrush(Colors.Green);            
             DeviceON_button.BorderThickness = new Thickness(3);
             
-            //defences
+            
+            //defences            
             //выдержка мтз1
             double MTZ1TimeSpan = MenuControllr.getExcerptMTZ1();            
-            Thread.Sleep(TimeSpan.FromSeconds(MTZ1TimeSpan));
-            CheckDefence_MTZ1();
-
+            mtz1Timer = new Timer((state) =>
+            {               
+                this.Dispatcher.BeginInvoke(() =>
+                {                    
+                    //что-то обновить в UI Thread
+                    CheckDefence_MTZ1();
+                });
+            }, null, TimeSpan.FromSeconds(MTZ1TimeSpan),TimeSpan.FromMilliseconds(-1.0));
+          
+           
+            Counter = MTZ1TimeSpan;
+            tmrTemp = new Timer((state) =>
+                {                    
+                    this.Dispatcher.BeginInvoke(() =>
+                    {
+                        //что-то обновить в UI Thread
+                        if (Counter > 0)
+                        {
+                            Counter -= 0.1;
+                            Counter = Math.Round(Counter, 3);
+                            TimerLabel.Text = "Таймер МТЗ1: " + Counter;
+                        }
+                        else if (Counter < 0 ||Counter == 0) tmrTemp.Change(TimeSpan.FromMilliseconds(-1.0), TimeSpan.FromMilliseconds(-1.0));
+                    });
+                }, null, 0, 100);
+            //
+            
+            
+            //Thread.Sleep(TimeSpan.FromSeconds(MTZ1TimeSpan));
+            //CheckDefence_MTZ1();
+           
+            
             //выдержка мтз2
             string uskorMTZ2 = MenuControllr.getUskorMTZ2();
             double temp = 0;
@@ -147,15 +185,34 @@ namespace MRZS.Views.Emulator
                 //Т Ускор МТЗ
                 temp = MenuControllr.getTUskorMTZ();
             }//Выдержка МТЗ2
-            else temp = MenuControllr.getExcerptMTZ2();
+            else temp = MenuControllr.getExcerptMTZ2();            
             //sleep
-            Thread.Sleep(TimeSpan.FromSeconds(temp));
-            CheckDefence_MTZ2();
+            //Thread.Sleep(TimeSpan.FromSeconds(temp));
+            mtz2Timer = new Timer((state) =>
+            {                
+                //что-то делать
+                this.Dispatcher.BeginInvoke(() =>
+                {                    
+                    //что-то обновить в UI Thread
+                    CheckDefence_MTZ2();
+                });
+            }, null, TimeSpan.FromSeconds(temp), TimeSpan.FromMilliseconds(-1.0));
+            
 
+            
             //выдержка ЗЗ
             double ZZtimespan = MenuControllr.getZZExcerpt();
-            Thread.Sleep(TimeSpan.FromSeconds(ZZtimespan));
-            CheckDefence_ZZ();
+            //Thread.Sleep(TimeSpan.FromSeconds(ZZtimespan));
+            zzTimer = new Timer((state) =>
+            {
+                //что-то делать
+                this.Dispatcher.BeginInvoke(() =>
+                {
+                    //что-то обновить в UI Thread
+                    CheckDefence_ZZ();
+                });
+            }, null, TimeSpan.FromSeconds(ZZtimespan), TimeSpan.FromMilliseconds(-1.0));
+            
         }
         
         void CheckDefence_MTZ1()
@@ -370,33 +427,40 @@ namespace MRZS.Views.Emulator
         private void CheckDefence_APV(int MTZnumber)
         {
             double cycle1APV = MenuControllr.get1CycleAPV();
-            Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
-            //int? puskOtMTZ1= getMrzs05mMenuByMenuElement(mrzs05Entity,"Пуск от МТЗ1").Single().BooleanVal3ID;
-            //int? puskOtMTZ2 = getMrzs05mMenuByMenuElement(mrzs05Entity, "Пуск от МТЗ2").Single().BooleanVal3ID;
-            int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
-            int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
-            //get МТЗ->Уставки->Уставка МТЗ1                       
-            double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
-            string stupen1MTZ = MenuControllr.getStupenMTZ();
-            double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
-            string stupen2MTZ = MenuControllr.getStupenMTZ2();
+            //Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
 
-            if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
-                && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
+            mtz1Timer = new Timer((state) =>
             {
-
-                if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                //что-то делать
+                this.Dispatcher.BeginInvoke(() =>
                 {
-                    CheckR("Сраб МТЗ 1", false);
-                }
+                    //что-то обновить в UI Thread
+                    int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
+                    int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
+                    //get МТЗ->Уставки->Уставка МТЗ1                       
+                    double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
+                    string stupen1MTZ = MenuControllr.getStupenMTZ();
+                    double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
+                    string stupen2MTZ = MenuControllr.getStupenMTZ2();
 
-                if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
-                {
-                    CheckR("Сраб МТЗ 2", false);
-                }
-                CheckSDI("Сраб АПВ", true);
-            }               
-            
+                    if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
+                        && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
+                    {
+
+                        if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
+                        {
+                            CheckR("Сраб МТЗ 1", false);
+                        }
+
+                        if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                        {
+                            CheckR("Сраб МТЗ 2", false);
+                        }
+                        CheckSDI("Сраб АПВ", true);
+                    }              
+                });
+            }, null, TimeSpan.FromSeconds(cycle1APV), TimeSpan.FromMilliseconds(-1.0));
+                                    
         }
         private void DeviceOff_button_Click(object sender, RoutedEventArgs e)
         {
@@ -470,28 +534,90 @@ namespace MRZS.Views.Emulator
             //check if it interactive test
             if (this.NavigationContext.QueryString.ContainsKey("t"))
             {
+                TestCtrl.Visibility = Visibility.Visible;
+                //subscribing for TestCtrl events
+                TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
+                TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
+                TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
+
                 if (this.NavigationContext.QueryString["t"] == "t")
-                {
-                    TestCtrl.Visibility = Visibility.Visible;
+                {                    
                     //BMK:Testing tasks
-                    InterTestQuests = new Questns();
-                    //subscribing for TestCtrl events
-                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
-                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
-                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
-                    TestCtrl.TaskText = InterTestQuests.getFirstTask();
+                    InterTestQuests = new Questns();                    
+                    TestCtrl.TaskText = InterTestQuests.getFirstTask();                  
+                }
+                else if (this.NavigationContext.QueryString["t"] == "i")
+                {
+                    StudyEmulCtrler = new StudyEmulator();
+                    TestCtrl.TaskText = StudyEmulCtrler.getFirstTask();                   
                 }
             }
+        }
+        bool IsItStudying()
+        {
+            if (this.NavigationContext.QueryString.ContainsKey("t"))
+            {
+                if (this.NavigationContext.QueryString["t"] == "i") return true;
+                else return false;
+            }
+            else return false;
+        }
+        bool IsItInterTasks()
+        {
+            if (this.NavigationContext.QueryString.ContainsKey("t"))
+            {
+                if (this.NavigationContext.QueryString["t"] == "t") return true;
+                else return false;
+            }
+            else return false;
         }
         //проверка выполненого задания
         void TestCtrl_CheckBtnClicked(object sender, EventArgs e)
         {
+            if (IsItStudying())
+            {
+                //get current taks number
+                int CurrentTaksNumber = StudyEmulCtrler.getCurrentTaskNumber();
+                switch (CurrentTaksNumber)
+                {
+                    case 0:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ1();
+                        break;
+                    case 1:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ2();
+                        break;
+                    case 2:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ3();
+                        break;
+                    case 3:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ4();
+                        break;
+                    case 4:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ5();
+                        break;
+                }
+            }
+            else if (IsItInterTasks())
+            {
+                switchQuestions();
+            }
+
+            DeviceON_button_Click(null, null);
+            
+            //статус проверки
+            if (TestCtrl.RezStatusText == "Все настроено верно") TestCtrl.IsCheckedResultGood = true;
+            else TestCtrl.IsCheckedResultGood = false;
+        }
+
+        //переключение на след/пред вопрос
+        void switchQuestions()
+        {
             //get current taks number
-            int CurrentTaksNumber= InterTestQuests.getCurrentTaskNumber();
-            switch(CurrentTaksNumber)
+            int CurrentTaksNumber = InterTestQuests.getCurrentTaskNumber();
+            switch (CurrentTaksNumber)
             {
                 case 0:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask01(Ia.Value,Ib.Value,Ic.Value);
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask01(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 1:
                     TestCtrl.RezStatusText = InterTestQuests.checkTask02(dv1, dv2, dv3, dv4, dv5, dv6);
@@ -506,10 +632,6 @@ namespace MRZS.Views.Emulator
                     TestCtrl.RezStatusText = InterTestQuests.checkTask05(Ia.Value, Ib.Value, Ic.Value);
                     break;
             }
-            DeviceON_button_Click(null, null);
-            //статус проверки
-            if (TestCtrl.RezStatusText == "Все настроено верно") TestCtrl.IsCheckedResultGood = true;
-            else TestCtrl.IsCheckedResultGood = false;
         }
         //следущий вопрос
         void TestCtrl_NextBtnClicked(object sender, EventArgs e)
@@ -520,8 +642,18 @@ namespace MRZS.Views.Emulator
             //set all mtz in 0000.0000
             //InterTestQuests.clearMTZs();
 
-            string nextTask=InterTestQuests.getNextTask();
-            if (nextTask != null) TestCtrl.TaskText = nextTask;
+            //если это обучение
+            if (IsItStudying())
+            {
+                string nextTask = StudyEmulCtrler.getNextTask();
+                if (nextTask != null) TestCtrl.TaskText = nextTask;
+            }
+                //если это интерактивные задания
+            else if (IsItInterTasks())
+            {
+                string nextTask = InterTestQuests.getNextTask();
+                if (nextTask != null) TestCtrl.TaskText = nextTask;
+            }
         }
         //предыдущий вопрос
         void TestCtrl_PrevBtnClicked(object sender, EventArgs e)
@@ -529,11 +661,21 @@ namespace MRZS.Views.Emulator
             //turn off device
             DeviceOff_button_Click(null, null);
             TestCtrl.RezStatusText = "";
-            //set all mtz in 0000.0000
-            InterTestQuests.clearMTZs();
-
-            string prevTask = InterTestQuests.getPrevTask();
-            if(prevTask!=null) TestCtrl.TaskText = prevTask;
+            
+            //если это обучение
+            if (IsItStudying())
+            {
+                string nextTask = StudyEmulCtrler.getPrevTask();
+                if (nextTask != null) TestCtrl.TaskText = nextTask;
+            }
+            //если это интерактивные задания
+            else if (IsItInterTasks())
+            {
+                //set all mtz in 0000.0000
+                InterTestQuests.clearMTZs();
+                string nextTask = InterTestQuests.getPrevTask();
+                if (nextTask != null) TestCtrl.TaskText = nextTask;
+            }
         }  
         #endregion       
 
@@ -843,6 +985,11 @@ namespace MRZS.Views.Emulator
         private void leftButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             leftButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/left.png", UriKind.Relative));
+            //фокус для выдиление числа для ввода
+            //if (Inputing.isNumericValue(emju.SecondTextBlock.Text) && PasswordController.canShowValueWithSelection())
+            {
+                emju.SecondTextBlock.Focus();
+            }
         }
 
         private void upButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -859,12 +1006,17 @@ namespace MRZS.Views.Emulator
         private void rightButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             rightButton.Source= new BitmapImage(new Uri("/MRZS;component/Assets/right_active.png", UriKind.Relative));
-            MenuControllr.rightButtonClicked(emju.SecondTextBlock);
+            MenuControllr.rightButtonClicked(emju.SecondTextBlock);           
         }
 
         private void rightButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             rightButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/right.png", UriKind.Relative));
+            //фокус выдиление числа для ввода
+            //if (Inputing.isNumericValue(emju.SecondTextBlock.Text) && PasswordController.canShowValueWithSelection())
+            {
+                emju.SecondTextBlock.Focus();                
+            }
         }
 
         private void bottomButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -877,12 +1029,7 @@ namespace MRZS.Views.Emulator
         {
             bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom.png", UriKind.Relative));
         }
-
-        private void emju_Loaded(object sender, RoutedEventArgs e)
-        {
-
-        }
-       
+               
     }
     
 }

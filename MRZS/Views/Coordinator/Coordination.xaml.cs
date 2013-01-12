@@ -56,8 +56,10 @@ namespace MRZS.Views.Coordinator
 
         private void button1_Click(object sender, RoutedEventArgs e)
         {
-            dynamic shell = AutomationFactory.CreateObject("Shell.Application");
-            shell.ShellExecute(@"KievPribor.exe", "", @"D:\Projects\MRZS\Sources\WebAst\Emulator\");
+            //dynamic shell = AutomationFactory.CreateObject("Shell.Application");
+            //shell.ShellExecute(@"KievPribor.exe", "", @"D:\Projects\MRZS\Sources\WebAst\Emulator\");
+
+            //нижче було закоментировано by Костя
             //if (AutomationFactory.IsAvailable)
             //{
             //    using (dynamic shell = AutomationFactory.GetObject("Wscript.Shell"))

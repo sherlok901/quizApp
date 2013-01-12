@@ -3,6 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    
+
     mc:Ignorable="d"
      d:DesignWidth="940">
     
@@ -13,17 +15,22 @@
         <ColumnDefinition Width="90"></ColumnDefinition>
     </Grid.ColumnDefinitions>
     <Grid.RowDefinitions>
-        <RowDefinition Height="45"></RowDefinition>
+        <RowDefinition Height="35"></RowDefinition>
         <RowDefinition></RowDefinition>
         <RowDefinition Height="60"></RowDefinition>
     </Grid.RowDefinitions>
         <TextBlock x:Name="HeaderText" Grid.Row="0" Grid.Column="1" Text="Задание" FontFamily="Arial" FontSize="20" VerticalAlignment="Center"></TextBlock>
         <Button x:Name="PrevBtn" Content="Предыдущее" Height="40" Width="90" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Click="PrevBtn_Click"></Button>
         <Button x:Name="NextBtn" Content="Следущее" Height="40" Width="90" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" Click="NextBtn_Click"></Button>
-        <TextBlock x:Name="TestTextTb" Grid.Row="1" Grid.Column="1"  Text="sdfsfsdfsff" Margin="20,10,0,20" Width="720" Height="70" VerticalAlignment="Top" HorizontalAlignment="Left"
-                 FontFamily="Arial" FontSize="16" FontStyle="Italic" TextWrapping="Wrap"></TextBlock>
+    
+        
+            <TextBox x:Name="TestTextTb" Grid.Row="1" Grid.Column="1"  Text="sdfsfsdfsff" Margin="5,0,0,0" Width="750" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"
+                 FontFamily="Arial" FontSize="16" FontStyle="Italic" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Visible"></TextBox>
+      
+        <Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>
+   
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="350,0,0,0">
-            <Button HorizontalAlignment="Center" x:Name="CheckTestBtn" Content="Проверить" Height="30" Width="90" Click="CheckTestBtn_Click" ></Button>
+            <Button HorizontalAlignment="Center" x:Name="CheckTestBtn" Content="Проверить" Height="35" Width="90" Click="CheckTestBtn_Click" ></Button>
             <Image x:Name="ResStateImg"  Height="30" Width="30" Margin="20,0,0,0"></Image>
             <TextBlock x:Name="ResultStateTb" Height="auto" Width="300" Margin="20,0,0,0" TextWrapping="Wrap" Foreground="Red" FontSize="14" VerticalAlignment="Center"/>
         </StackPanel>        

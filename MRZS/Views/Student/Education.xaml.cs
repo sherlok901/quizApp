@@ -76,6 +76,12 @@ namespace MRZS.Views.Student
         {            
             NavigationService.Navigate(new Uri("/Testing/Testing", UriKind.Relative));            
         }
+
+        private void buttonStartEducation_Click_1(object sender, RoutedEventArgs e)
+        {
+            string uriText = String.Format("/Emulator/Emulator-05M?t={0}", "i");
+            NavigationService.Navigate(new Uri(uriText, UriKind.Relative));
+        }
         
 
     }
