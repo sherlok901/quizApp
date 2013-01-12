@@ -18,8 +18,9 @@ namespace MRZS.Classes.myTimer
     {
         
         internal MyTimer()
-        {            
-                       
+        {
+            System.Windows.Threading.DispatcherTimer dt = new System.Windows.Threading.DispatcherTimer();
+            
 
         }
         private static Timer ticker;

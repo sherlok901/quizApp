@@ -39,7 +39,8 @@ namespace MRZS.Views.Emulator
         static Timer zzTimer;
         static Timer tmrTemp;
         double Counter = 0;
-        
+        MTZ MtzCtrl = new MTZ();
+        APV ApvCtrl = new APV();
 
         //get info of inputs
         public enum Inputs
@@ -142,41 +143,52 @@ namespace MRZS.Views.Emulator
             DeviceON_button.BorderThickness = new Thickness(3);
             
             
-            //defences            
+            //defences  
+            //mtz1
+            if(MtzCtrl.IsTurnOn()&&MtzCtrl.IsMTZ1TurnOn()) Mtz1Timer();                                               
+           
+            //mtz2
+            //если мтз вкл, мтз1 выкл и мтз2 вкл
+            if (MtzCtrl.IsTurnOn() && MtzCtrl.IsMTZ2TurnOn()&&MtzCtrl.IsMTZ1TurnOn()==false) Mtz2Timer();
+            
+            //zz
+            ZzTimer();
+            
+            
+        }
+        void Mtz1Timer()
+        {
             //выдержка мтз1
-            double MTZ1TimeSpan = MenuControllr.getExcerptMTZ1();            
-            mtz1Timer = new Timer((state) =>
-            {               
-                this.Dispatcher.BeginInvoke(() =>
-                {                    
-                    //что-то обновить в UI Thread
-                    CheckDefence_MTZ1();
-                });
-            }, null, TimeSpan.FromSeconds(MTZ1TimeSpan),TimeSpan.FromMilliseconds(-1.0));
-          
-           
+            double MTZ1TimeSpan = MenuControllr.getExcerptMTZ1();
+            MTZ1TimeSpan *= 1000;
+            if (MTZ1TimeSpan < 10) MTZ1TimeSpan = 10;
             Counter = MTZ1TimeSpan;
+            double rez, part;
+            rez = part = MTZ1TimeSpan / 10;
+
+
+            //Counter = MTZ1TimeSpan;
             tmrTemp = new Timer((state) =>
-                {                    
-                    this.Dispatcher.BeginInvoke(() =>
+            {
+                this.Dispatcher.BeginInvoke(() =>
+                {
+                    //что-то обновить в UI Thread
+                    if (Counter > 0)
                     {
-                        //что-то обновить в UI Thread
-                        if (Counter > 0)
-                        {
-                            Counter -= 0.1;
-                            Counter = Math.Round(Counter, 3);
-                            TimerLabel.Text = "Таймер МТЗ1: " + Counter;
-                        }
-                        else if (Counter < 0 ||Counter == 0) tmrTemp.Change(TimeSpan.FromMilliseconds(-1.0), TimeSpan.FromMilliseconds(-1.0));
-                    });
-                }, null, 0, 100);
-            //
-            
-            
-            //Thread.Sleep(TimeSpan.FromSeconds(MTZ1TimeSpan));
-            //CheckDefence_MTZ1();
-           
-            
+                        Counter -= part;
+                        Counter = Math.Round(Counter, 3);
+                        TimerLabel.Text = "Таймер МТЗ1: " + Counter;
+                    }
+                    else if (Counter < 0 || Counter == 0)
+                    {
+                        CheckDefence_MTZ1();
+                        tmrTemp.Dispose();
+                    }
+                });
+            }, null, 0, (long)part);
+        }
+        void Mtz2Timer()
+        {
             //выдержка мтз2
             string uskorMTZ2 = MenuControllr.getUskorMTZ2();
             double temp = 0;
@@ -185,21 +197,41 @@ namespace MRZS.Views.Emulator
                 //Т Ускор МТЗ
                 temp = MenuControllr.getTUskorMTZ();
             }//Выдержка МТЗ2
-            else temp = MenuControllr.getExcerptMTZ2();            
+            else temp = MenuControllr.getExcerptMTZ2();
             //sleep
             //Thread.Sleep(TimeSpan.FromSeconds(temp));
             mtz2Timer = new Timer((state) =>
-            {                
+            {
                 //что-то делать
                 this.Dispatcher.BeginInvoke(() =>
-                {                    
+                {
                     //что-то обновить в UI Thread
                     CheckDefence_MTZ2();
                 });
             }, null, TimeSpan.FromSeconds(temp), TimeSpan.FromMilliseconds(-1.0));
-            
+        }
+        void ApvTimer(int MTZnumber)
+        {
+            double cycle1APV = MenuControllr.get1CycleAPV();
+            //Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
 
-            
+            //MTZ1TimeSpan *= 1000;
+            //if (MTZ1TimeSpan < 10) MTZ1TimeSpan = 10;
+            //Counter = MTZ1TimeSpan;
+            //double rez, part;
+            //rez = part = MTZ1TimeSpan / 10;
+            mtz1Timer = new Timer((state) =>
+            {
+                //что-то делать
+                this.Dispatcher.BeginInvoke(() =>
+                {
+                    //что-то обновить в UI Thread
+                    APVcore(MTZnumber);
+                });
+            }, null, TimeSpan.FromSeconds(cycle1APV), TimeSpan.FromMilliseconds(-1.0));
+        }
+        void ZzTimer()
+        {
             //выдержка ЗЗ
             double ZZtimespan = MenuControllr.getZZExcerpt();
             //Thread.Sleep(TimeSpan.FromSeconds(ZZtimespan));
@@ -212,9 +244,8 @@ namespace MRZS.Views.Emulator
                     CheckDefence_ZZ();
                 });
             }, null, TimeSpan.FromSeconds(ZZtimespan), TimeSpan.FromMilliseconds(-1.0));
-            
         }
-        
+
         void CheckDefence_MTZ1()
         {            
             //get МТЗ->Уставки->Уставка МТЗ1
@@ -426,41 +457,34 @@ namespace MRZS.Views.Emulator
         }
         private void CheckDefence_APV(int MTZnumber)
         {
-            double cycle1APV = MenuControllr.get1CycleAPV();
-            //Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
-
-            mtz1Timer = new Timer((state) =>
-            {
-                //что-то делать
-                this.Dispatcher.BeginInvoke(() =>
-                {
-                    //что-то обновить в UI Thread
-                    int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
-                    int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
-                    //get МТЗ->Уставки->Уставка МТЗ1                       
-                    double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
-                    string stupen1MTZ = MenuControllr.getStupenMTZ();
-                    double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
-                    string stupen2MTZ = MenuControllr.getStupenMTZ2();
-
-                    if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
-                        && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
-                    {
-
-                        if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
-                        {
-                            CheckR("Сраб МТЗ 1", false);
-                        }
-
-                        if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
-                        {
-                            CheckR("Сраб МТЗ 2", false);
-                        }
-                        CheckSDI("Сраб АПВ", true);
-                    }              
-                });
-            }, null, TimeSpan.FromSeconds(cycle1APV), TimeSpan.FromMilliseconds(-1.0));
+            if(ApvCtrl.IsApvTurnOn() ) ApvTimer(MTZnumber)
                                     
+        }
+        private void APVcore(int MTZnumber)
+        {
+            int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
+            int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
+            //get МТЗ->Уставки->Уставка МТЗ1                       
+            double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
+            string stupen1MTZ = MenuControllr.getStupenMTZ();
+            double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
+            string stupen2MTZ = MenuControllr.getStupenMTZ2();
+
+            if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
+                && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
+            {
+
+                if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
+                {
+                    CheckR("Сраб МТЗ 1", false);
+                }
+
+                if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                {
+                    CheckR("Сраб МТЗ 2", false);
+                }
+                CheckSDI("Сраб АПВ", true);
+            } 
         }
         private void DeviceOff_button_Click(object sender, RoutedEventArgs e)
         {

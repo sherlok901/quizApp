@@ -2373,7 +2373,7 @@
    <StackPanel>
            <TestCtrl:InterTestControl x:Name="TestCtrl" Margin="0,0,0,20" HorizontalAlignment="Center"></TestCtrl:InterTestControl>
        
-        <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="550" ScrollViewer.VerticalScrollBarVisibility="Visible">
+        <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="570" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="120"/>
@@ -2596,6 +2596,7 @@
             </Grid>
             
             <TextBlock x:Name="TimerLabel" Text="Таймер " Grid.Column="2" FontSize="14" Margin="20,530,0,0"></TextBlock>
+            <TextBlock x:Name="ApvTimerLabel" Text="Таймер " Grid.Column="2" FontSize="14" Margin="20,550,0,0"></TextBlock>
             
             <StackPanel x:Name="ReleStack" Grid.Column="3" Margin="0,15,0,-15">
                 <TextBlock Text="Реле" FontSize="20"/>
