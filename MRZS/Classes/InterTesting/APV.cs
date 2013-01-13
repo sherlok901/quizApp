@@ -1,13 +1,4 @@
 ﻿using System;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Ink;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using System.Collections.Generic;
 using System.Linq;
 using MRZS.Web.Models;
@@ -16,7 +7,15 @@ namespace MRZS.Classes.InterTesting
 {
     internal class APV
     {
-        //включено ли апв вообще
+        //добавлено ли апв к меню
+        internal bool IsApvAddedToMenu()
+        {
+            return LoadData.MrzsTable.Where(n => n.menuElement != null && n.menuElement.StartsWith("АПВ\\{value}") && n.BooleanVal2ID != null).Single().BooleanVal2.val.StartsWith("ЕСТЬ");
+            //mrzs05mMenu m= LoadData.MrzsTable.Where(n => n.id == 411).Single(); 
+                //Where(n=> n.BooleanVal2ID != null).Single().BooleanVal2.val.StartsWith("ЕСТЬ");
+            //return true;
+        }
+        //включено ли апв
         internal bool IsApvTurnOn()
         {
             if (getApvMenuElement("АПВ\\{value}").BooleanVal3.boolVal.Contains("ВКЛ")) return true;
@@ -26,6 +25,18 @@ namespace MRZS.Classes.InterTesting
         internal double getTimer1CycleApv()
         {
             return getMenuElementValue("1 Цикл АПВ\\{value}");
+        }
+        //вкл ли запуск апв от мтз1
+        internal bool IsApvStartsFromMtz1()
+        {
+            if(getApvMenuElement("Пуск от МТЗ1\\{value}").BooleanVal3.boolVal.Contains("ВКЛ")) return true;
+            else return false;
+        }
+        //вкл ли запуск апв от мтз2
+        internal bool IsApvStartsFromMtz2()
+        {
+            if (getApvMenuElement("Пуск от МТЗ2\\{value}").BooleanVal3.boolVal.Contains("ВКЛ")) return true;
+            else return false;
         }
 
         double getMenuElementValue(string name)

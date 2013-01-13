@@ -168,6 +168,7 @@
     <Compile Include="Classes\InterTesting\OutputsRele.cs" />
     <Compile Include="Classes\InterTesting\Questns.cs" />
     <Compile Include="Classes\InterTesting\SDI.cs" />
+    <Compile Include="Classes\InterTesting\ZZ.cs" />
     <Compile Include="Classes\LoadData.cs" />
     <Compile Include="Classes\Menu.cs" />
     <Compile Include="Classes\MenuController.cs" />

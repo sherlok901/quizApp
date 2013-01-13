@@ -163,9 +163,7 @@ namespace MRZS.Views.Emulator
             MTZ1TimeSpan *= 1000;
             if (MTZ1TimeSpan < 10) MTZ1TimeSpan = 10;
             Counter = MTZ1TimeSpan;
-            double rez, part;
-            rez = part = MTZ1TimeSpan / 10;
-
+            double part = MTZ1TimeSpan / 10;
 
             //Counter = MTZ1TimeSpan;
             tmrTemp = new Timer((state) =>
@@ -198,11 +196,10 @@ namespace MRZS.Views.Emulator
                 temp = MenuControllr.getTUskorMTZ();
             }//Выдержка МТЗ2
             else temp = MenuControllr.getExcerptMTZ2();
-            //sleep
-            //Thread.Sleep(TimeSpan.FromSeconds(temp));
+            
+
             mtz2Timer = new Timer((state) =>
-            {
-                //что-то делать
+            {               
                 this.Dispatcher.BeginInvoke(() =>
                 {
                     //что-то обновить в UI Thread
@@ -212,14 +209,7 @@ namespace MRZS.Views.Emulator
         }
         void ApvTimer(int MTZnumber)
         {
-            double cycle1APV = MenuControllr.get1CycleAPV();
-            //Thread.Sleep(TimeSpan.FromSeconds(cycle1APV));
-
-            //MTZ1TimeSpan *= 1000;
-            //if (MTZ1TimeSpan < 10) MTZ1TimeSpan = 10;
-            //Counter = MTZ1TimeSpan;
-            //double rez, part;
-            //rez = part = MTZ1TimeSpan / 10;
+            double cycle1APV = MenuControllr.get1CycleAPV();            
             mtz1Timer = new Timer((state) =>
             {
                 //что-то делать
@@ -254,7 +244,7 @@ namespace MRZS.Views.Emulator
             string stupen1MTZ = MenuControllr.getStupenMTZ();
             
             if ((Ia.Value > val || Ib.Value > val || Ic.Value > val)
-                && (stupen1MTZ.IndexOf("ВКЛ")!=-1)
+                //&& (stupen1MTZ.IndexOf("ВКЛ")!=-1)
                 && !IsInDVArrayValue("Блок МТЗ 1"))//ДВ не включены; если вкл, то на них нет ф-ции "Блок МТЗ 1"
             {
                 //turn on/off rele
@@ -275,7 +265,7 @@ namespace MRZS.Views.Emulator
 
             //есть хотябы в одном ДВ устан. параметр "Блок. МТЗ 2"
             if ((Ia.Value > val || Ib.Value > val || Ic.Value > val)
-                && (stupen2MTZ.IndexOf("ВКЛ") != -1)
+               // && (stupen2MTZ.IndexOf("ВКЛ") != -1)
                 && !IsInDVArrayValue("Блок МТЗ 2"))//ДВ не включены; если вкл, то на них нет ф-ции "Блок МТЗ 1"
             {
                 string uskorMTZ2 = MenuControllr.getUskorMTZ2();
@@ -457,29 +447,34 @@ namespace MRZS.Views.Emulator
         }
         private void CheckDefence_APV(int MTZnumber)
         {
-            if(ApvCtrl.IsApvTurnOn() ) ApvTimer(MTZnumber)
+            //мтз добавлено в меню, мтз1 включена, апв включена, запуск от Мтз1 включено
+            if(ApvCtrl.IsApvAddedToMenu() && ApvCtrl.IsApvTurnOn() &&( ApvCtrl.IsApvStartsFromMtz1() || ApvCtrl.IsApvStartsFromMtz2()))                
+                ApvTimer(MTZnumber);
                                     
         }
         private void APVcore(int MTZnumber)
         {
-            int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
-            int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
+            //int? puskOtMTZ1 = MenuControllr.puskOtMtz1();
+            //int? puskOtMTZ2 = MenuControllr.puskOtMtz2();
             //get МТЗ->Уставки->Уставка МТЗ1                       
             double UstavkaMTZ1 = MenuControllr.getSetpointMTZ1();
-            string stupen1MTZ = MenuControllr.getStupenMTZ();
+            //string stupen1MTZ = MenuControllr.getStupenMTZ();
             double UstavkaMTZ2 = MenuControllr.getSetpointMTZ2();
-            string stupen2MTZ = MenuControllr.getStupenMTZ2();
+            //string stupen2MTZ = MenuControllr.getStupenMTZ2();
 
-            if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
-                && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
+            //if (((puskOtMTZ1 == 1 && MTZnumber == 1) || (puskOtMTZ2 == 1 && MTZnumber == 2))
+            //    && (!IsInDVArrayValue("АЧР/ЧАПВ")))//ДВ не вкл или если вкл, то ни на одном ДВ не установлен параметр "АЧР/ЧАПВ"
+                if (!IsInDVArrayValue("АЧР/ЧАПВ"))
             {
 
-                if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
+                //if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false && (stupen1MTZ.IndexOf("ВКЛ") != -1))
+                if ((Ia.Value > UstavkaMTZ1 || Ib.Value > UstavkaMTZ1 || Ic.Value > UstavkaMTZ1) == false)
                 {
                     CheckR("Сраб МТЗ 1", false);
                 }
 
-                if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                //if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false && (stupen2MTZ.IndexOf("ВКЛ") != -1))
+                if ((Ia.Value > UstavkaMTZ2 || Ib.Value > UstavkaMTZ2 || Ic.Value > UstavkaMTZ2) == false)
                 {
                     CheckR("Сраб МТЗ 2", false);
                 }
