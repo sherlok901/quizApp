@@ -40,6 +40,11 @@ namespace MRZS.Classes.InterTesting
         {
             return getMenuElementValue("Выдержка МТЗ1\\{value}");
         }
+        //выдержка мтз2
+        internal double getTimerMtz2()
+        {
+            return getMenuElementValue("Выдержка МТЗ2\\{value}");
+        }
         
         mrzs05mMenu getMenuElement(string name)
         {

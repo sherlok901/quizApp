@@ -16,6 +16,8 @@ namespace MRZS.Classes.InterTesting
         string MTZ2ReleParamName = "Сраб МТЗ 2";
         string boolValName = "ДА";
 
+        string ZzParam = "Сраб ЗЗ";
+
         //настроено ли реле01 на МТЗ1
         internal bool IsRele1ConfiguredOnMTZ1()
         {
@@ -76,6 +78,19 @@ namespace MRZS.Classes.InterTesting
         internal bool IsRele5ConfiguredOnMTZ2()
         {
             return checkReleOnMtz(MTZ2ReleParamName, Rele5Name, boolValName);
+        }
+
+        internal bool IsRele1ConfiguredOnZZ()
+        {
+            string boolval = IsParamTurnOnInCurrRele(ZzParam, Rele1Name);
+            if (boolval.Contains(boolValName)) return true;
+            else return false;
+        }
+        internal bool IsRele5ConfiguredOnZZ()
+        {
+            string boolval = IsParamTurnOnInCurrRele(ZzParam, Rele5Name);
+            if (boolval.Contains(boolValName)) return true;
+            else return false;
         }
 
         //get boolval by MrzsInOutOption paramName and rele name

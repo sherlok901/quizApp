@@ -24,6 +24,7 @@ namespace MRZS.Classes.InterTesting
         DVs DVCtrl = new DVs();
         SDI SdiCtrl = new SDI();
         APV ApvCtrl = new APV();
+        ZZ ZzCtrl = new ZZ();
         MrzsErrors mrzsErrors = new MrzsErrors();
         
 
@@ -34,10 +35,10 @@ namespace MRZS.Classes.InterTesting
             string q3 = "3)	Настройте прибор так, чтобы выходное реле 01 и светодиод 01 срабатывали на один из токов Ia, Ib, Ic на 5 А и выше, при этом выходное реле срабатывало через 0,5 с.";
             string q4 = "4)	Настройте прибор так, чтобы срабатывало выходное реле 01 и 02 на МТЗ1 5А и через 3с после срабатывания МТЗ1 задействовалось автоматическое повторное включение (АПВ).";
             string q5 = "5)	Настройте выходные реле и светодиодные индикаторы прибора МРЗС на  срабатывание защиты МТЗ2 при значениях токов Ia, Ib, Ic от 5А и выше и через 1с включалось АПВ.";
-            string q6 = "6)	Настройте АПВ так, чтобы оно срабатывало после срабатывания защиты МТЗ2, уставка которой равна 10А, выдержка 0,1с. АПВ должно срабатывать через 1с. 2-е выходное реле и 2-й светодиодный индикатор также настройте на защиту МТЗ2.";
+            string q6 = "6)	Настройте АПВ так, чтобы оно срабатывало после срабатывания защиты МТЗ2, уставка которой равна 10А, выдержка 2с. АПВ должно срабатывать через 3с. 2-е выходное реле и 2-й светодиодный индикатор также настройте на защиту МТЗ2.";
             string q7 = "7)	Настройте индикацию прибора, чтобы срабатывали 1-е и 5-е реле на ток ЗI0=15 мА через 0,5с.";
             string q8 = "8)	Настройте индикацию прибора, чтобы засвечивались 1-й и 3-й индикатор на ток ЗфI=10 мА через 1с.";
-            string q9 = "9)	Настройте первое выходное реле на срабатывание защиты от замыканий на землю (ЗЗ) на ток ЗI0 от 20мА и выше; установите уставку ЗЗ на 1с. После этого, включите и настройте первый дискретный вход 01 (ДВ01) так, чтобы выше упомянутое настроенное выходное реле 01 не срабатывало на ток ЗI0.";
+            string q9 = "9)	Настройте первое выходное реле на срабатывание защиты от замыканий на землю (ЗЗ) на ток ЗI0 от 20мА и выше; установите выдержку ЗЗ на 1с. После этого, включите и настройте первый дискретный вход 01 (ДВ01) так, чтобы выше упомянутое настроенное выходное реле 01 не срабатывало на ток ЗI0.";
             qs.Add(q1);
             qs.Add(q2);
             qs.Add(q3);
@@ -46,7 +47,7 @@ namespace MRZS.Classes.InterTesting
             qs.Add(q6);
             qs.Add(q7);
             qs.Add(q8);
-            qs.Add(q9);
+            //qs.Add(q9);
         }
         internal string getFirstTask()
         {
@@ -153,6 +154,41 @@ namespace MRZS.Classes.InterTesting
             else return mrzsErrors.SucfRez;
         }
 
+        internal string checkTask06(double Ia, double Ib, double Ic)
+        {
+            if (!MtzCtrl.IsTurnOn()) return mrzsErrors.mtzError1;            
+            else if (!MtzCtrl.IsMTZ2TurnOn()) return mrzsErrors.mtzError5;
+            else if (MtzCtrl.getMTZ2Value() != 10) return mrzsErrors.mtzError6;
+            else if (MtzCtrl.getTimerMtz2() != 2) return mrzsErrors.mtzError10;
+            else if (!ReleCtrl.IsRele2ConfiguredOnMTZ2()) return mrzsErrors.mtzError9;
+            else if (!SdiCtrl.IsSD2ConfiguredOnMTZ2()) return mrzsErrors.SDIError2;
+            else if (!ApvCtrl.IsApvTurnOn()) return mrzsErrors.ApvError1;
+            else if (ApvCtrl.getTimer1CycleApv() != 3) return mrzsErrors.ApvError2;
+            else if ((Ia < MtzCtrl.getMTZ2Value()) && (Ic < MtzCtrl.getMTZ2Value()) && (Ib < MtzCtrl.getMTZ2Value())) return mrzsErrors.NumUpDownError3;
+            else return mrzsErrors.SucfRez;
+        }
+        internal string checkTask07(double ZIO,double Izfa)
+        {
+            if (!ZzCtrl.IsZZaddedToMenu()) return mrzsErrors.ZzErr1;
+            else if (!ZzCtrl.IsZzTurnOn()) return mrzsErrors.ZzErr2;
+            else if (ZzCtrl.UstavkaZz() != 15) return mrzsErrors.ZzErr3;
+            else if (ZzCtrl.VudergkaZz() != 0.5) return mrzsErrors.ZzErr4;
+            else if (!ReleCtrl.IsRele1ConfiguredOnZZ()) return mrzsErrors.Rele1Err1;
+            else if (!ReleCtrl.IsRele5ConfiguredOnZZ()) return mrzsErrors.Rele5Err2;
+            else if (ZIO < ZzCtrl.UstavkaZz() && Izfa < ZzCtrl.UstavkaZz()) return mrzsErrors.NumUpDownErr4;
+            else return mrzsErrors.SucfRez;
+        }
+        internal string checkTask08(double ZIO, double Izfa)
+        {
+            if (!ZzCtrl.IsZZaddedToMenu()) return mrzsErrors.ZzErr1;
+            else if (!ZzCtrl.IsZzTurnOn()) return mrzsErrors.ZzErr2;
+            else if (ZzCtrl.UstavkaZz() != 10) return mrzsErrors.ZzErr3;
+            else if (ZzCtrl.VudergkaZz() != 1) return mrzsErrors.ZzErr4;
+            else if (!SdiCtrl.IsSD1ConfiguredOnZZ()) return mrzsErrors.SDIError3;
+            else if (!SdiCtrl.IsSD3ConfiguredOnZZ()) return mrzsErrors.SDIError4;
+            else if (ZIO < ZzCtrl.UstavkaZz() && Izfa < ZzCtrl.UstavkaZz()) return mrzsErrors.NumUpDownErr4;
+            else return mrzsErrors.SucfRez;
+        }
 
         //установка все мтз в ноль
         internal void clearMTZs()

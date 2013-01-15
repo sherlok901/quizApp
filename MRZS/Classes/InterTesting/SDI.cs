@@ -79,6 +79,15 @@ namespace MRZS.Classes.InterTesting
         {
             return checkSdiOnMtz(MTZ2ReleParamName, SD6Name, boolValName);
         }
+        
+        internal bool IsSD1ConfiguredOnZZ()
+        {
+            return checkSdiOnMtz("Сраб ЗЗ", SD1Name, boolValName);
+        }
+        internal bool IsSD3ConfiguredOnZZ()
+        {
+            return checkSdiOnMtz("Сраб ЗЗ", SD3Name, boolValName);
+        }
 
         //проверка СДИ настроеные ли на мтз1 или мтз2
         bool checkSdiOnMtz(string MTZ1ReleParamName_, string SdiName, string boolValNam)

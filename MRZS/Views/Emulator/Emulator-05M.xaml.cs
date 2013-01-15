@@ -175,7 +175,7 @@ namespace MRZS.Views.Emulator
                     {
                         Counter -= part;
                         Counter = Math.Round(Counter, 3);
-                        TimerLabel.Text = "Таймер МТЗ1: " + Counter;
+                        Mtz1TimerLabel.Text = "Таймер МТЗ1: " + Counter;
                     }
                     else if (Counter < 0 || Counter == 0)
                     {
@@ -196,44 +196,85 @@ namespace MRZS.Views.Emulator
                 temp = MenuControllr.getTUskorMTZ();
             }//Выдержка МТЗ2
             else temp = MenuControllr.getExcerptMTZ2();
-            
+
+            temp *= 1000;
+            if (temp < 10) temp = 10;
+            double Counter2 = temp;
+            double part = temp / 10;
 
             mtz2Timer = new Timer((state) =>
             {               
                 this.Dispatcher.BeginInvoke(() =>
                 {
-                    //что-то обновить в UI Thread
-                    CheckDefence_MTZ2();
+                    if (Counter2 > 0)
+                    {
+                        Counter2 -= part;
+                        Counter2 = Math.Round(Counter2, 3);
+                        Mtz2TimerLabel.Text = "Таймер МТЗ2: " + Counter2; 
+                    }
+                    else if (Counter2 < 0 || Counter2 == 0)
+                    {
+                        CheckDefence_MTZ2();
+                        mtz2Timer.Dispose();
+                    }                   
                 });
-            }, null, TimeSpan.FromSeconds(temp), TimeSpan.FromMilliseconds(-1.0));
+            }, null, 0, (long)part);
         }
         void ApvTimer(int MTZnumber)
         {
-            double cycle1APV = MenuControllr.get1CycleAPV();            
-            mtz1Timer = new Timer((state) =>
+            double cycle1APV = MenuControllr.get1CycleAPV();
+            cycle1APV *= 1000;
+            if (cycle1APV < 10) cycle1APV = 10;
+            double Counter2 = cycle1APV;
+            double part = cycle1APV / 10;
+
+            apvTimer = new Timer((state) =>
             {
                 //что-то делать
                 this.Dispatcher.BeginInvoke(() =>
                 {
-                    //что-то обновить в UI Thread
-                    APVcore(MTZnumber);
+                    if (Counter2 > 0)
+                    {
+                        Counter2 -= part;
+                        Counter2 = Math.Round(Counter2, 3);
+                        ApvTimerLabel.Text = "Таймер АПВ: " + Counter2;
+                    }
+                    else if (Counter2 < 0 || Counter2 == 0)
+                    {
+                        APVcore(MTZnumber);
+                        apvTimer.Dispose();
+                    } 
+                    
                 });
-            }, null, TimeSpan.FromSeconds(cycle1APV), TimeSpan.FromMilliseconds(-1.0));
+            }, null, 0, (long)part);
         }
         void ZzTimer()
         {
             //выдержка ЗЗ
             double ZZtimespan = MenuControllr.getZZExcerpt();
-            //Thread.Sleep(TimeSpan.FromSeconds(ZZtimespan));
+            ZZtimespan *= 1000;
+            if (ZZtimespan < 10) ZZtimespan = 10;
+            double Counter2 = ZZtimespan;
+            double part = ZZtimespan / 10;
+
             zzTimer = new Timer((state) =>
             {
                 //что-то делать
                 this.Dispatcher.BeginInvoke(() =>
                 {
-                    //что-то обновить в UI Thread
-                    CheckDefence_ZZ();
+                    if (Counter2 > 0)
+                    {
+                        Counter2 -= part;
+                        Counter2 = Math.Round(Counter2, 3);
+                        ZzTimerLabel.Text = "Таймер ЗЗ: " + Counter2;
+                    }
+                    else if (Counter2 < 0 || Counter2 == 0)
+                    {
+                        CheckDefence_ZZ();
+                        zzTimer.Dispose();
+                    }                    
                 });
-            }, null, TimeSpan.FromSeconds(ZZtimespan), TimeSpan.FromMilliseconds(-1.0));
+            }, null, 0, (long)part);
         }
 
         void CheckDefence_MTZ1()
@@ -568,7 +609,8 @@ namespace MRZS.Views.Emulator
                 else if (this.NavigationContext.QueryString["t"] == "i")
                 {
                     StudyEmulCtrler = new StudyEmulator();
-                    TestCtrl.TaskText = StudyEmulCtrler.getFirstTask();                   
+                    TestCtrl.TaskText = StudyEmulCtrler.getFirstTask();
+                    TestCtrl.HyperlinkButton_Click_1(null, null);
                 }
             }
         }
@@ -614,6 +656,15 @@ namespace MRZS.Views.Emulator
                     case 4:
                         TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ5();
                         break;
+                    case 5:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ6(Ia.Value, Ib.Value, Ic.Value);
+                        break;
+                    case 6:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ7();
+                        break;
+                    case 7:
+                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ8(dv1);
+                        break;
                 }
             }
             else if (IsItInterTasks())
@@ -649,6 +700,15 @@ namespace MRZS.Views.Emulator
                     break;
                 case 4:
                     TestCtrl.RezStatusText = InterTestQuests.checkTask05(Ia.Value, Ib.Value, Ic.Value);
+                    break;
+                case 5:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask06(Ia.Value, Ib.Value, Ic.Value);
+                    break;
+                case 6:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask07(ZIO.Value,Izfa.Value);
+                    break;
+                case 7:
+                    TestCtrl.RezStatusText = InterTestQuests.checkTask08(ZIO.Value, Izfa.Value);
                     break;
             }
         }
@@ -975,8 +1035,9 @@ namespace MRZS.Views.Emulator
         {
             return mrzs05Entities.Where(n => n.menuElement != null).Where(n => n.menuElement.Contains(menuElement)).ToList();
         }
-       
 
+        #region Клавишы курсора МРЗС
+                
         private void button1_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             
@@ -1048,7 +1109,7 @@ namespace MRZS.Views.Emulator
         {
             bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom.png", UriKind.Relative));
         }
-               
+        #endregion
     }
     
 }

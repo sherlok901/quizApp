@@ -9,7 +9,7 @@ namespace MRZS.Classes.InterTesting
         //добавлено ли зз к меню
         internal bool IsZZaddedToMenu()
         {
-            return LoadData.MrzsTable.Where(n => n.menuElement != null && n.menuElement.StartsWith("ЗЗ\\{value}") && n.BooleanVal2ID != null).Single().BooleanVal2.val.StartsWith("ЕСТЬ");
+            return LoadData.MrzsTable.Where(n => n.menuElement != null && n.menuElement.StartsWith("ЗЗ \\{value}") && n.BooleanVal2ID != null).Single().BooleanVal2.val.StartsWith("ЕСТЬ");
             //return LoadData.MrzsTable.Where(n => n.menuElement != null).Where(n => n.menuElement.StartsWith("ЗЗ\\{value}")).Where(n => n.BooleanVal2ID != null).Single().BooleanVal2.val.StartsWith("ЕСТЬ");
         }
 

@@ -18,14 +18,16 @@ namespace MRZS.Views.Testing
 {
     public partial class BookView : ChildWindow
     {
-        public BookView()
+        public BookView() { }
+        public BookView(string bookName)
         {
             InitializeComponent();
 
             //string Width = HtmlPage.Window.Eval("screen.width").ToString();
             //string Height = HtmlPage.Window.Eval("screen.height").ToString();
 
-            this.DataSource.PackageReader = new PdfDocumentReader(new Uri("emulBook.pdf", UriKind.Relative));
+            this.DataSource.PackageReader = new PdfDocumentReader(new Uri(bookName, UriKind.Relative));
+           
         }
 
         private void OKButton_Click(object sender, RoutedEventArgs e)

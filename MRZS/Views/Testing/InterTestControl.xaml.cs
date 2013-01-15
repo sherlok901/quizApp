@@ -18,12 +18,20 @@ namespace MRZS.Views.Testing
         internal event EventHandler NextBtnClicked;
         internal event EventHandler CheckBtnClicked;
         MRZS.Views.Testing.BookView book = null;
+        MRZS.Views.Testing.BookView introBook = null;
+        MRZS.Views.Testing.BookView mtz = null;
+        MRZS.Views.Testing.BookView apv = null;
+        MRZS.Views.Testing.BookView zz = null;
 
         public InterTestControl()
         {
             InitializeComponent();
             //загрузка книги
-            book = new BookView();
+            book = new BookView("emulBook.pdf");
+            introBook = new BookView("vstup.pdf");
+            mtz = new BookView("мтз.pdf");
+            apv = new BookView("апв.pdf");
+            zz = new BookView("ЗЗ.pdf");
         }
         //task text
         internal string TaskText
@@ -69,6 +77,29 @@ namespace MRZS.Views.Testing
         {
             
             book.Show();
+        }
+
+        internal void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            introBook.Show();
+        }
+
+        private void HyperlinkButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            //book = null;
+            //book = new BookView("мтз.pdf");
+            //book.Show();
+            mtz.Show();
+        }
+
+        private void HyperlinkButton_Click_3(object sender, RoutedEventArgs e)
+        {
+            apv.Show();
+        }
+
+        private void HyperlinkButton_Click_4(object sender, RoutedEventArgs e)
+        {
+            zz.Show();
         }
       
         //private void ResultStateTb_TextChanged(object sender, TextChangedEventArgs e)

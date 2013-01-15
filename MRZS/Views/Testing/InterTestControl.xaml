@@ -8,6 +8,7 @@
     mc:Ignorable="d"
      d:DesignWidth="940">
     
+    
 <Grid x:Name="LoyoutRoot" Background="AliceBlue">
     <Grid.ColumnDefinitions>
         <ColumnDefinition Width="90"></ColumnDefinition>
@@ -27,12 +28,20 @@
             <TextBox x:Name="TestTextTb" Grid.Row="1" Grid.Column="1"  Text="sdfsfsdfsff" Margin="5,0,0,0" Width="750" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"
                  FontFamily="Arial" FontSize="16" FontStyle="Italic" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Visible"></TextBox>
       
-        <Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>
+        <!--<Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>-->
+       
+    
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
-            <HyperlinkButton Content="Вступление" Grid.Row="2" Grid.Column="1" Height="15" Width="80" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left"></HyperlinkButton>
-            <HyperlinkButton Content="МТЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left"></HyperlinkButton>
-            <HyperlinkButton Content="АПВ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left"></HyperlinkButton>
-            <HyperlinkButton Content="ЗЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left"></HyperlinkButton>            
+            <HyperlinkButton Grid.Row="2" Grid.Column="1" Height="40" Width="100" FontSize="12" Foreground="Black" Margin="5,0,0,0" HorizontalAlignment="Left" Click="ViewBook_Click_1">
+                <HyperlinkButton.Content>
+                    <TextBlock TextWrapping="Wrap" Text="Инструкция по эксплуатации"/>
+                </HyperlinkButton.Content>
+            </HyperlinkButton>
+            
+            <HyperlinkButton Content="Вступление" Grid.Row="2" Grid.Column="1" Height="15" Width="80" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_1"></HyperlinkButton>
+            <HyperlinkButton Content="МТЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_2"></HyperlinkButton>
+            <HyperlinkButton Content="АПВ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_3"></HyperlinkButton>
+            <HyperlinkButton Content="ЗЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_4"></HyperlinkButton>            
         </StackPanel>
     
         <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="350,0,0,0">
