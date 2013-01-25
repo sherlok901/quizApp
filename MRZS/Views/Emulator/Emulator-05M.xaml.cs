@@ -41,6 +41,7 @@ namespace MRZS.Views.Emulator
         double Counter = 0;
         MTZ MtzCtrl = new MTZ();
         APV ApvCtrl = new APV();
+        Classes.ReverseStudyTest.ReversStudyTest RevrsStudyTestInstans = new Classes.ReverseStudyTest.ReversStudyTest();
 
         //get info of inputs
         public enum Inputs
@@ -593,26 +594,52 @@ namespace MRZS.Views.Emulator
         {
             //check if it interactive test
             if (this.NavigationContext.QueryString.ContainsKey("t"))
-            {
-                TestCtrl.Visibility = Visibility.Visible;
-                //subscribing for TestCtrl events
-                TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
-                TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
-                TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
-
+            {                
                 if (this.NavigationContext.QueryString["t"] == "t")
-                {                    
+                {
+                    ReverseEductnPanel.Visibility = Visibility.Collapsed;
+                    TestCtrl.Visibility = Visibility.Visible;
+                    //subscribing for TestCtrl events
+                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
+                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
+                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
                     //BMK:Testing tasks
                     InterTestQuests = new Questns();                    
                     TestCtrl.TaskText = InterTestQuests.getFirstTask();                  
                 }
                 else if (this.NavigationContext.QueryString["t"] == "i")
                 {
+                    ReverseEductnPanel.Visibility = Visibility.Collapsed;
+                    TestCtrl.Visibility = Visibility.Visible;
+                    //subscribing for TestCtrl events
+                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
+                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
+                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
                     StudyEmulCtrler = new StudyEmulator();
                     TestCtrl.TaskText = StudyEmulCtrler.getFirstTask();
                     TestCtrl.HyperlinkButton_Click_1(null, null);
                 }
+                else if (this.NavigationContext.QueryString["t"] == "r")
+                {
+                    ReverseEductnPanel.Visibility = Visibility.Visible;
+                    TaskNumber.Text = "Задание 1";
+                    TaskText.Text = RevrsStudyTestInstans.Question;
+                    Answers.Children.Add(RevrsStudyTestInstans.getAnswers());
+
+                    Button btnRunMrzs = new Button();
+                    btnRunMrzs.Width = 90;
+                    btnRunMrzs.Height = 40;
+                    btnRunMrzs.Content = "Запустить прибор";
+                    btnRunMrzs.Click += btnRunMrzs_Click;
+                    btnRunMrzs.HorizontalAlignment = HorizontalAlignment.Center;
+                    Answers.Children.Add(btnRunMrzs);
+                }
             }
+        }
+
+        void btnRunMrzs_Click(object sender, RoutedEventArgs e)
+        {
+            
         }
         bool IsItStudying()
         {
@@ -1110,6 +1137,21 @@ namespace MRZS.Views.Emulator
             bottomButton.Source = new BitmapImage(new Uri("/MRZS;component/Assets/bottom.png", UriKind.Relative));
         }
         #endregion
+
+        private void Cansel_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void PrevBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void NextBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
     
 }

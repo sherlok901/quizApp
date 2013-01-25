@@ -38,6 +38,8 @@ namespace MRZS.Views.Student
         {
             var loadResult = sender as LoadOperation<MRZS.Web.Models.Section>;
             currentSection = loadResult.Entities.FirstOrDefault(s => s.IsCurrent);
+            int count= loadResult.Entities.Count();
+            currentSection= loadResult.Entities.DefaultIfEmpty().First();
             gridCurrentEducation.DataContext = currentSection;
             //if (currentSection == null)
             //    buttonStartEducation.IsEnabled = false;
@@ -80,6 +82,12 @@ namespace MRZS.Views.Student
         private void buttonStartEducation_Click_1(object sender, RoutedEventArgs e)
         {
             string uriText = String.Format("/Emulator/Emulator-05M?t={0}", "i");
+            NavigationService.Navigate(new Uri(uriText, UriKind.Relative));
+        }
+
+        private void ReverceEdu_Click_1(object sender, RoutedEventArgs e)
+        {
+            string uriText = String.Format("/Emulator/Emulator-05M?t={0}", "r");
             NavigationService.Navigate(new Uri(uriText, UriKind.Relative));
         }
         

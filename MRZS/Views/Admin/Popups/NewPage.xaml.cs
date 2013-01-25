@@ -103,6 +103,7 @@ namespace MRZS.Views.Admin.Popups
 
         private void SavePage()
         {
+            //комент Кости
             //if (!EditMode)
             //{
             //    page = new Web.Models.Page();
@@ -120,6 +121,7 @@ namespace MRZS.Views.Admin.Popups
             //    CurrentPage.IsLastPage = checkBoxLastPage.IsChecked;
             //    CurrentPage.PageOrder = (int)pageOrder.Value;
             //}
+            //комент Кости конец
             var submitingResult = pageService.SubmitChanges();
             submitingResult.Completed += new EventHandler(submitingResult_Completed);
         }

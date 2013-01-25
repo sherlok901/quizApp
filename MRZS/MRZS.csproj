@@ -174,6 +174,8 @@
     <Compile Include="Classes\MenuController.cs" />
     <Compile Include="Classes\NumValueChanging.cs" />
     <Compile Include="Classes\PasswordController.cs" />
+    <Compile Include="Classes\ReverseStudyTest\ReversStudyController.cs" />
+    <Compile Include="Classes\ReverseStudyTest\ReversStudyTest.cs" />
     <Compile Include="Classes\Studying\StudyEmulator.cs" />
     <Compile Include="Classes\Testing\TestControler.cs" />
     <Compile Include="Classes\Testing\TestTimeController.cs" />
@@ -496,6 +498,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="emulBook.pdf" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
     <None Include="Properties\AppManifest.xml" />
     <Content Include="апв.pdf" />

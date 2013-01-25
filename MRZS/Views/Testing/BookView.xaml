@@ -30,9 +30,9 @@
                     </doc:SearchQuery>
                 </Button.CommandParameter>
             </Button>
-            <ListBox x:Name="SearchResults" SelectionChanged="SearchResults_SelectionChanged_1"
+            <!--<ListBox x:Name="SearchResults" SelectionChanged="SearchResults_SelectionChanged_1"
 				ItemsSource="{Binding SearchResults, ElementName=DataSource}"
-				DisplayMemberPath="Value"/>
+				DisplayMemberPath="Value"/>-->
            
             <!--<Button x:Name="Apv1Btn" Content="АПВ" Width="60" Click="Apv1Btn_Click_1"/>-->
             <HyperlinkButton Content="АПВ" Click="Apv1Btn_Click_1"></HyperlinkButton>

@@ -10,11 +10,7 @@ namespace UnitTestProject1
     public class UnitTest1
     {
         string s = "Уставка МТЗ1\r\n0002.0000 A";
-        //[TestMethod]
-        //public void TestMethod1()
-        //{
-            
-        //}
+        
         [TestMethod]
         public void TestREGEX()
         {            

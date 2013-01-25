@@ -66,7 +66,7 @@
                 </StackPanel>
             </Button>
             <Button x:Name="InterTask" Click="Button_Click" Height="80" Width="280" Margin="0,30,0,0" Content="Интерактивные задания" FontSize="18" FontFamily="Arial"></Button>
-        
+            <Button x:Name="ReverceEdu" Content="Действия оператора" Click="ReverceEdu_Click_1" Height="80" Width="280" Margin="0,30,0,0" FontSize="18" FontFamily="Arial"></Button>
             <Button  Height="76" Margin="0,30,0,0"  Width="280" Click="Button_Click_1" Style="{StaticResource ButtonFont}">
                 <TextBlock Height="23" TextWrapping="Wrap" Text="Емулятор МРЗС" Width="270" FontSize="18" TextAlignment="Center" FontFamily="Arial"/>
             </Button>

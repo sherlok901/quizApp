@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
 using System.Windows;
-using System.Windows.Browser;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
 using FirstFloor.Documents.Pdf;
-using FirstFloor.Documents.Search;
 
 
 namespace MRZS.Views.Testing
@@ -61,15 +51,15 @@ namespace MRZS.Views.Testing
 
         private void SearchResults_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
         {
-            var result = this.SearchResults.SelectedItem as SearchResult;
-            if (result != null)
-            {
-                // select
-                this.Viewer.Selection.Select(result.Range);
+            //var result = this.SearchResults.SelectedItem as SearchResult;
+            //if (result != null)
+            //{
+            //    // select
+            //    this.Viewer.Selection.Select(result.Range);
 
-                // bring into view
-                this.Viewer.BringIntoView(result.Range.Start);
-            }
+            //    // bring into view
+            //    this.Viewer.BringIntoView(result.Range.Start);
+            //}
 
         }
 

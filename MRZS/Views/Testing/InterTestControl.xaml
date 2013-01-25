@@ -28,7 +28,7 @@
             <TextBox x:Name="TestTextTb" Grid.Row="1" Grid.Column="1"  Text="sdfsfsdfsff" Margin="5,0,0,0" Width="750" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"
                  FontFamily="Arial" FontSize="16" FontStyle="Italic" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Visible"></TextBox>
       
-        <!--<Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>-->
+        <Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>
        
     
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
