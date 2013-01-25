@@ -15,6 +15,8 @@ using MRZS.Classes.DisplayCode;
 using MRZS.Web.Models;
 using MRZS.Classes.InterTesting;
 using MRZS.Classes.Studying;
+using MRZS.Classes.ReverseStudyTest;
+using MRZS.Views.Testing;
 
 namespace MRZS.Views.Emulator
 {
@@ -41,7 +43,14 @@ namespace MRZS.Views.Emulator
         double Counter = 0;
         MTZ MtzCtrl = new MTZ();
         APV ApvCtrl = new APV();
-        Classes.ReverseStudyTest.ReversStudyTest RevrsStudyTestInstans = new Classes.ReverseStudyTest.ReversStudyTest();
+        //Classes.ReverseStudyTest.ReversStudyTest RevrsStudyTestInstans = new Classes.ReverseStudyTest.ReversStudyTest();
+        ReversStudyController ReversStudyControllr = new ReversStudyController();
+
+        MRZS.Views.Testing.BookView book = null;
+        MRZS.Views.Testing.BookView introBook = null;
+        MRZS.Views.Testing.BookView mtz = null;
+        MRZS.Views.Testing.BookView apv = null;
+        MRZS.Views.Testing.BookView zz = null;
 
         //get info of inputs
         public enum Inputs
@@ -597,37 +606,32 @@ namespace MRZS.Views.Emulator
             {                
                 if (this.NavigationContext.QueryString["t"] == "t")
                 {
-                    ReverseEductnPanel.Visibility = Visibility.Collapsed;
-                    TestCtrl.Visibility = Visibility.Visible;
-                    //subscribing for TestCtrl events
-                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
-                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
-                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
+                    InitInterTestControl();
+
                     //BMK:Testing tasks
                     InterTestQuests = new Questns();                    
-                    TestCtrl.TaskText = InterTestQuests.getFirstTask();                  
+                    TestTextTb.Text = InterTestQuests.getFirstTask();                  
                 }
                 else if (this.NavigationContext.QueryString["t"] == "i")
                 {
-                    ReverseEductnPanel.Visibility = Visibility.Collapsed;
-                    TestCtrl.Visibility = Visibility.Visible;
-                    //subscribing for TestCtrl events
-                    TestCtrl.PrevBtnClicked += TestCtrl_PrevBtnClicked;
-                    TestCtrl.NextBtnClicked += TestCtrl_NextBtnClicked;
-                    TestCtrl.CheckBtnClicked += TestCtrl_CheckBtnClicked;
+                    InitInterTestControl();
+
                     StudyEmulCtrler = new StudyEmulator();
-                    TestCtrl.TaskText = StudyEmulCtrler.getFirstTask();
-                    TestCtrl.HyperlinkButton_Click_1(null, null);
+                    TestTextTb.Text = StudyEmulCtrler.getFirstTask();
+                    HyperlinkButton_Click_1(null, null);
                 }
                 else if (this.NavigationContext.QueryString["t"] == "r")
                 {
                     ReverseEductnPanel.Visibility = Visibility.Visible;
-                    TaskNumber.Text = "Задание 1";
-                    TaskText.Text = RevrsStudyTestInstans.Question;
-                    Answers.Children.Add(RevrsStudyTestInstans.getAnswers());
+                    //hide textblock for test result and button for reapet test
+                    RevStatusText.Visibility = Visibility.Collapsed;
+                    ReapetTest.Visibility = Visibility.Collapsed;
+                    TaskText.Text = ReversStudyControllr.GetNextTask();
+                    TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber()+1).ToString()+"/"+ReversStudyControllr.GetTaskCount().ToString();
+                    if(Answers.Children.Count==0) Answers.Children.Add(ReversStudyControllr.GetAnswers());
 
                     Button btnRunMrzs = new Button();
-                    btnRunMrzs.Width = 90;
+                    btnRunMrzs.Width = 130;
                     btnRunMrzs.Height = 40;
                     btnRunMrzs.Content = "Запустить прибор";
                     btnRunMrzs.Click += btnRunMrzs_Click;
@@ -635,6 +639,18 @@ namespace MRZS.Views.Emulator
                     Answers.Children.Add(btnRunMrzs);
                 }
             }
+        }
+        void InitInterTestControl()
+        {
+            ReverseEductnPanel.Visibility = Visibility.Collapsed;
+            TestCtrl.Visibility = Visibility.Visible;            
+
+            //загрузка книги
+            book = new BookView("emulBook.pdf");
+            introBook = new BookView("vstup.pdf");
+            mtz = new BookView("мтз.pdf");
+            apv = new BookView("апв.pdf");
+            zz = new BookView("ЗЗ.pdf");
         }
 
         void btnRunMrzs_Click(object sender, RoutedEventArgs e)
@@ -669,28 +685,28 @@ namespace MRZS.Views.Emulator
                 switch (CurrentTaksNumber)
                 {
                     case 0:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ1();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ1();
                         break;
                     case 1:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ2();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ2();
                         break;
                     case 2:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ3();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ3();
                         break;
                     case 3:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ4();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ4();
                         break;
                     case 4:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ5();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ5();
                         break;
                     case 5:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ6(Ia.Value, Ib.Value, Ic.Value);
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ6(Ia.Value, Ib.Value, Ic.Value);
                         break;
                     case 6:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ7();
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ7();
                         break;
                     case 7:
-                        TestCtrl.RezStatusText = StudyEmulCtrler.checkMTZ8(dv1);
+                        ResultStateTb.Text = StudyEmulCtrler.checkMTZ8(dv1);
                         break;
                 }
             }
@@ -702,8 +718,8 @@ namespace MRZS.Views.Emulator
             DeviceON_button_Click(null, null);
             
             //статус проверки
-            if (TestCtrl.RezStatusText == "Все настроено верно") TestCtrl.IsCheckedResultGood = true;
-            else TestCtrl.IsCheckedResultGood = false;
+            if (ResultStateTb.Text == "Все настроено верно") ResultStateTb.Foreground = new SolidColorBrush(Colors.Green);
+            else ResultStateTb.Foreground = new SolidColorBrush(Colors.Red);
         }
 
         //переключение на след/пред вопрос
@@ -714,28 +730,28 @@ namespace MRZS.Views.Emulator
             switch (CurrentTaksNumber)
             {
                 case 0:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask01(Ia.Value, Ib.Value, Ic.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask01(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 1:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask02(dv1, dv2, dv3, dv4, dv5, dv6);
+                    ResultStateTb.Text = InterTestQuests.checkTask02(dv1, dv2, dv3, dv4, dv5, dv6);
                     break;
                 case 2:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask03(Ia.Value, Ib.Value, Ic.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask03(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 3:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask04(Ia.Value, Ib.Value, Ic.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask04(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 4:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask05(Ia.Value, Ib.Value, Ic.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask05(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 5:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask06(Ia.Value, Ib.Value, Ic.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask06(Ia.Value, Ib.Value, Ic.Value);
                     break;
                 case 6:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask07(ZIO.Value,Izfa.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask07(ZIO.Value, Izfa.Value);
                     break;
                 case 7:
-                    TestCtrl.RezStatusText = InterTestQuests.checkTask08(ZIO.Value, Izfa.Value);
+                    ResultStateTb.Text = InterTestQuests.checkTask08(ZIO.Value, Izfa.Value);
                     break;
             }
         }
@@ -744,7 +760,7 @@ namespace MRZS.Views.Emulator
         {
             //turn off device
             DeviceOff_button_Click(null, null);
-            TestCtrl.RezStatusText = "";
+            ResultStateTb.Text = "";
             //set all mtz in 0000.0000
             //InterTestQuests.clearMTZs();
 
@@ -752,13 +768,13 @@ namespace MRZS.Views.Emulator
             if (IsItStudying())
             {
                 string nextTask = StudyEmulCtrler.getNextTask();
-                if (nextTask != null) TestCtrl.TaskText = nextTask;
+                if (nextTask != null) TestTextTb.Text = nextTask;
             }
                 //если это интерактивные задания
             else if (IsItInterTasks())
             {
                 string nextTask = InterTestQuests.getNextTask();
-                if (nextTask != null) TestCtrl.TaskText = nextTask;
+                if (nextTask != null) TestTextTb.Text = nextTask;
             }
         }
         //предыдущий вопрос
@@ -766,13 +782,13 @@ namespace MRZS.Views.Emulator
         {
             //turn off device
             DeviceOff_button_Click(null, null);
-            TestCtrl.RezStatusText = "";
+            ResultStateTb.Text = "";
             
             //если это обучение
             if (IsItStudying())
             {
                 string nextTask = StudyEmulCtrler.getPrevTask();
-                if (nextTask != null) TestCtrl.TaskText = nextTask;
+                if (nextTask != null) TestTextTb.Text = nextTask;
             }
             //если это интерактивные задания
             else if (IsItInterTasks())
@@ -780,7 +796,7 @@ namespace MRZS.Views.Emulator
                 //set all mtz in 0000.0000
                 InterTestQuests.clearMTZs();
                 string nextTask = InterTestQuests.getPrevTask();
-                if (nextTask != null) TestCtrl.TaskText = nextTask;
+                if (nextTask != null) TestTextTb.Text = nextTask;
             }
         }  
         #endregion       
@@ -1143,14 +1159,77 @@ namespace MRZS.Views.Emulator
 
         }
 
-        private void PrevBtn_Click_1(object sender, RoutedEventArgs e)
-        {
 
+        private void ViewBook_Click_1(object sender, RoutedEventArgs e)
+        {
+            book.Show();
+        }
+
+        private void HyperlinkButton_Click_1(object sender, RoutedEventArgs e)
+        {
+            introBook.Show();
+        }
+
+        private void HyperlinkButton_Click_2(object sender, RoutedEventArgs e)
+        {
+            mtz.Show();
+        }
+
+        private void HyperlinkButton_Click_3(object sender, RoutedEventArgs e)
+        {
+            apv.Show();
+        }
+
+        private void HyperlinkButton_Click_4(object sender, RoutedEventArgs e)
+        {
+            zz.Show();
+        }
+
+        private void ReapetTest_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+            
         }
 
         private void NextBtn_Click_1(object sender, RoutedEventArgs e)
         {
+            string taskText = ReversStudyControllr.GetNextTask();
+            if (taskText == null) return;
 
+            TaskText.Text = taskText;
+            TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber()+1).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
+            if (Answers.Children.Count > 0) Answers.Children.Clear();
+            Grid g = ReversStudyControllr.GetAnswers();
+            if(g!=null) Answers.Children.Add(g);
+        }
+        private void PrevBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            string taskText = ReversStudyControllr.GetPrevTask();
+            if (taskText == null) return;
+
+            TaskText.Text = taskText;
+            TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber() + 1).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
+            if (Answers.Children.Count > 0) Answers.Children.Clear();
+            Grid g = ReversStudyControllr.GetAnswers();
+            if (g != null) Answers.Children.Add(g);
+        }
+
+        //Operator actions
+        private void OperatorActBtn_Click_1(object sender, RoutedEventArgs e)
+        {
+            switch (ReversStudyControllr.GetCurrentTaskNumber())
+            {
+                case 0:
+                    {
+                        MtzCtrl.SetTurnOn();
+                        MtzCtrl.SetMtz1TurnOn();
+                        MtzCtrl.SetMtz1Value("0005.0000");
+                        Ia.Value = 6;
+                        MtzCtrl.SetTimerMtz1("0002.0000");
+                        LoadData.savingAllChanges();
+                        DeviceON_button_Click(null, null);
+                    }break;
+            }
         }
     }
     

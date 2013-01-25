@@ -16,11 +16,8 @@ namespace MRZS.Classes.ReverseStudyTest
     {        
         internal string Question;
         Dictionary<string, bool> AnswList = new Dictionary<string, bool>();
-
-        internal ReversStudyTest()
-        {
-            
-        }
+        internal bool ReduceApv = false;
+        internal double ApvReducedValue;
 
         internal void add(string Answer,bool IsRight)
         {
@@ -57,6 +54,7 @@ namespace MRZS.Classes.ReverseStudyTest
                 g.Children.Add(rb);                
 
                 TextBlock tb = new TextBlock();
+                tb.MaxWidth = 710;
                 tb.FontFamily = new FontFamily("Arial");
                 tb.FontSize = 14;
                 tb.TextWrapping = TextWrapping.Wrap;

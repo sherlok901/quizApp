@@ -25,21 +25,55 @@ namespace MRZS.Classes.ReverseStudyTest
             rv.add("сработала защита МТЗ, первая ступень, Уставка МТЗ1=7А, Выдержка МТЗ1=2с", false);
             rv.add("сработала защита МТЗ, первая ступень, Уставка МТЗ1=5А, Выдержка МТЗ1=3с", false);
             rv.Question = "Какие параметры установил оператор?";
+            TaskList.Add(rv);
 
-            TaskList.Add(rv);            
+            ReversStudyTest rv2 = new ReversStudyTest();
+            rv2.add("Сработала защита МТЗ1; Уставка МТЗ1=3А, Выдержка МТЗ1=2с; затем включился таймер АПВ; 1 Цикл АПВ=3с; при срабатывании АПВ реле 1 и 3 включились", false);
+            rv2.add("Сработала защита МТЗ1; Уставка МТЗ1=4А, Выдержка МТЗ1=3с; затем включился таймер АПВ; 1 Цикл АПВ=4с; при срабатывании АПВ реле 1 и 3 включились", true);
+            rv2.add("Сработала защита МТЗ1; Уставка МТЗ1=4А, Выдержка МТЗ1=2с; затем включился таймер АПВ; 1 Цикл АПВ=4с; при срабатывании АПВ реле 1 и 3 включились", false);
+            rv2.Question = rv.Question;
+            rv2.ReduceApv = false;
+            rv2.ApvReducedValue = 3;
+            TaskList.Add(rv2);
+        }
+
+        internal void OperatorActions1()
+        {
+
+        }
+        internal void OperatorActions2()
+        {
+
         }
 
         internal string GetNextTask()
         {
             CurrentTask++;
-            if (CurrentTask == TaskList.Count) return null;
+            if (CurrentTask == TaskList.Count) { CurrentTask = TaskList.Count - 1; return null; }
 
-            ReversStudyTest rv = TaskList[CurrentTask];
-            return rv.Question;
+            return TaskList[CurrentTask].Question;
+        }
+        internal string GetPrevTask()
+        {            
+            CurrentTask--;
+            if (CurrentTask < 0) { CurrentTask = 0; return null; }
+
+            return TaskList[CurrentTask].Question;
         }
         internal Grid GetAnswers()
         {
+            if (CurrentTask == TaskList.Count) return null;
+
             return TaskList[CurrentTask].getAnswers();
         }
+        internal int GetTaskCount()
+        {
+            return TaskList.Count;
+        }
+        internal int GetCurrentTaskNumber()
+        {
+            return CurrentTask;
+        }
+
     }
 }

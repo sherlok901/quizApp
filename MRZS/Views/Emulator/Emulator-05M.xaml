@@ -2370,16 +2370,59 @@
         </Style>
     </navigation:Page.Resources>  
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" Margin="0,0,0,0">
-   <StackPanel>
-           <!--<TestCtrl:InterTestControl x:Name="TestCtrl" Margin="0,0,0,20" HorizontalAlignment="Center"></TestCtrl:InterTestControl>-->
-           
-       <StackPanel Orientation="Horizontal" x:Name="ReverseEductnPanel"  Margin="0,10,0,10" VerticalAlignment="Top" Background="AliceBlue" HorizontalAlignment="Center" MaxWidth="960">
+   <StackPanel>          
+            <Grid x:Name="TestCtrl" Background="AliceBlue">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="760"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="60"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock x:Name="HeaderText" Grid.Row="0" Grid.Column="1" Text="Задание" FontFamily="Arial" FontSize="20" VerticalAlignment="Center"></TextBlock>
+                <Button x:Name="PrevBtnInter" Content="Предыдущее" Height="40" Width="90" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0" Click="TestCtrl_PrevBtnClicked"></Button>
+                <Button x:Name="NextBtnIntern" Content="Следущее" Height="40" Width="90" HorizontalAlignment="Right" Grid.Row="1" Grid.Column="2" Click="TestCtrl_NextBtnClicked"></Button>
+
+
+                <TextBox x:Name="TestTextTb" Grid.Row="1" Grid.Column="1"  Text="sdfsfsdfsff" Margin="5,0,0,0" Width="750" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"
+                 FontFamily="Arial" FontSize="16" FontStyle="Italic" TextWrapping="Wrap" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Visible"></TextBox>
+
+                <Button x:Name="ViewBook" Content="ViewBook" Grid.Row="2" Grid.Column="0" Click="ViewBook_Click_1" Height="35"></Button>
+
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
+                    <HyperlinkButton Grid.Row="2" Grid.Column="1" Height="40" Width="100" FontSize="12" Foreground="Black" Margin="5,0,0,0" HorizontalAlignment="Left" Click="ViewBook_Click_1">
+                        <HyperlinkButton.Content>
+                            <TextBlock TextWrapping="Wrap" Text="Инструкция по эксплуатации"/>
+                        </HyperlinkButton.Content>
+                    </HyperlinkButton>
+
+                    <HyperlinkButton Content="Вступление" Grid.Row="2" Grid.Column="1" Height="15" Width="80" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_1"></HyperlinkButton>
+                    <HyperlinkButton Content="МТЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_2"></HyperlinkButton>
+                    <HyperlinkButton Content="АПВ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_3"></HyperlinkButton>
+                    <HyperlinkButton Content="ЗЗ" Grid.Row="2" Grid.Column="1" Height="15" Width="30" FontSize="12" Foreground="Black" Margin="20,0,0,0" HorizontalAlignment="Left" Click="HyperlinkButton_Click_4"></HyperlinkButton>
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="350,0,0,0">
+                    <Button HorizontalAlignment="Center" x:Name="CheckTestBtn" Content="Проверить" Height="35" Width="90" Click="TestCtrl_CheckBtnClicked" ></Button>                    
+                    <TextBlock x:Name="ResultStateTb" Height="auto" Width="300" Margin="20,0,0,0" TextWrapping="Wrap" Foreground="Red" FontSize="14" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+
+            <StackPanel Orientation="Horizontal" x:Name="ReverseEductnPanel"  Margin="0,10,0,10" VerticalAlignment="Top" Background="AliceBlue" HorizontalAlignment="Center" MaxWidth="960">
                 <Button x:Name="PrevBtn" Content="Предыдущее " Width="90" Height="40" Margin="0,0,20,0" Click="PrevBtn_Click_1"></Button>
             <StackPanel>
                 <TextBlock x:Name="TaskNumber" Height="40" FontFamily="Arial" FontSize="16"></TextBlock>
                 <TextBlock x:Name="TaskText" Height="40" TextWrapping="Wrap" FontFamily="Arial" FontSize="16"></TextBlock>
-                <StackPanel x:Name="Answers"></StackPanel>                
-            </StackPanel>
+                <StackPanel x:Name="Answers"></StackPanel>
+                
+                <TextBlock x:Name="RevStatusText" Height="40" TextWrapping="Wrap" FontFamily="Arial" FontSize="16"></TextBlock>
+                    <Button x:Name="OperatorActBtn" Content="Действия оператора" Width="130" Height="40" Margin="0,0,0,0" Click="OperatorActBtn_Click_1"></Button>
+                    <Button x:Name="ReapetTest" Content="Сначала" Width="90" Height="40" Margin="0,0,0,0" Click="ReapetTest_Click_1"></Button>
+                </StackPanel>
                 <Button x:Name="NextBtn" Content="Следущее" Width="90" Height="40" Margin="20,0,0,0" Click="NextBtn_Click_1"></Button>
             </StackPanel>
 

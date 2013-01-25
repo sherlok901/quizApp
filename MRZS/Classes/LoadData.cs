@@ -145,7 +145,7 @@ namespace MRZS.Classes
         //for saving
         internal static void savingAllChanges()
         {
-            mrzs05mMContxt.SubmitChanges();
+            mrzs05mMContxt.SubmitChanges();          
         }
 
         static void mrzsInOutOptModel_Completed(object sender, EventArgs e)
