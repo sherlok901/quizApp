@@ -2370,8 +2370,8 @@
         </Style>
     </navigation:Page.Resources>  
     <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" HorizontalContentAlignment="Stretch" Margin="0,0,0,0">
-   <StackPanel>          
-            <Grid x:Name="TestCtrl" Background="AliceBlue">
+   <StackPanel>
+            <Grid x:Name="TestCtrl" Background="AliceBlue" MaxWidth="960" HorizontalAlignment="Center">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="90"></ColumnDefinition>
                     <ColumnDefinition Width="760"></ColumnDefinition>
@@ -2412,19 +2412,29 @@
                 </StackPanel>
             </Grid>
 
-            <StackPanel Orientation="Horizontal" x:Name="ReverseEductnPanel"  Margin="0,10,0,10" VerticalAlignment="Top" Background="AliceBlue" HorizontalAlignment="Center" MaxWidth="960">
-                <Button x:Name="PrevBtn" Content="Предыдущее " Width="90" Height="40" Margin="0,0,20,0" Click="PrevBtn_Click_1"></Button>
-            <StackPanel>
-                <TextBlock x:Name="TaskNumber" Height="40" FontFamily="Arial" FontSize="16"></TextBlock>
-                <TextBlock x:Name="TaskText" Height="40" TextWrapping="Wrap" FontFamily="Arial" FontSize="16"></TextBlock>
-                <StackPanel x:Name="Answers"></StackPanel>
-                
-                <TextBlock x:Name="RevStatusText" Height="40" TextWrapping="Wrap" FontFamily="Arial" FontSize="16"></TextBlock>
-                    <Button x:Name="OperatorActBtn" Content="Действия оператора" Width="130" Height="40" Margin="0,0,0,0" Click="OperatorActBtn_Click_1"></Button>
-                    <Button x:Name="ReapetTest" Content="Сначала" Width="90" Height="40" Margin="0,0,0,0" Click="ReapetTest_Click_1"></Button>
-                </StackPanel>
-                <Button x:Name="NextBtn" Content="Следущее" Width="90" Height="40" Margin="20,0,0,0" Click="NextBtn_Click_1"></Button>
-            </StackPanel>
+            <Grid MaxWidth="960" x:Name="ReverseEductnPanel" Background="AliceBlue" Margin="0,10,0,10" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="100"></ColumnDefinition>                    
+                </Grid.ColumnDefinitions>                
+                <Grid.RowDefinitions>
+                    <RowDefinition ></RowDefinition>                    
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                    <RowDefinition ></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Grid.Column="0" Grid.RowSpan="5" x:Name="PrevBtn" Content="Предыдущее " Width="90" Height="40" Margin="0,0,10,0" Click="PrevBtn_Click_1"></Button>               
+                <TextBlock Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" x:Name="TaskNumber" Height="40" FontFamily="Arial" FontSize="16" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0"  x:Name="TimerText" Height="40" FontFamily="Arial" FontSize="16" VerticalAlignment="Center" HorizontalAlignment="Right" TextWrapping="Wrap"></TextBlock>                                    
+                <TextBlock Grid.Column="1" Grid.Row="1" x:Name="TaskText" Height="40" TextWrapping="Wrap" FontFamily="Arial" FontSize="16" VerticalAlignment="Center"></TextBlock>         
+                <StackPanel Grid.Column="1" Grid.Row="2" x:Name="Answers"></StackPanel>                
+                <Button Grid.Column="1" Grid.Row="3" x:Name="OperatorActBtn" Content="Действия оператора" Width="130" Height="40" Margin="0,10,0,0" Click="OperatorActBtn_Click_1"></Button>
+                <Button Grid.Column="1" Grid.Row="4" x:Name="ReapetTest" Content="Сначала" Width="90" Height="40" Margin="0,0,0,0" Click="ReapetTest_Click_1"></Button>                
+                <Button Grid.Column="2" Grid.RowSpan="5" x:Name="NextBtn" Content="Следущее" Width="90" Height="40" Margin="10,0,0,0" Click="NextBtn_Click_1"></Button>                
+            </Grid>            
 
             <Grid x:Name="LayoutRoot" HorizontalAlignment="Center" VerticalAlignment="Top" Height="610" ScrollViewer.VerticalScrollBarVisibility="Visible" Width="960">
             <Grid.ColumnDefinitions>

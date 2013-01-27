@@ -176,6 +176,7 @@
     <Compile Include="Classes\PasswordController.cs" />
     <Compile Include="Classes\ReverseStudyTest\ReversStudyController.cs" />
     <Compile Include="Classes\ReverseStudyTest\ReversStudyTest.cs" />
+    <Compile Include="Classes\ReverseStudyTest\SelectedAnswConrllr.cs" />
     <Compile Include="Classes\Studying\StudyEmulator.cs" />
     <Compile Include="Classes\Testing\TestControler.cs" />
     <Compile Include="Classes\Testing\TestTimeController.cs" />

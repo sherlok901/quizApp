@@ -18,14 +18,19 @@ namespace MRZS.Classes.ReverseStudyTest
         Dictionary<string, bool> AnswList = new Dictionary<string, bool>();
         internal bool ReduceApv = false;
         internal double ApvReducedValue;
+        List<RadioButton> RadioBtnList = new List<RadioButton>();
+         
 
         internal void add(string Answer,bool IsRight)
         {
             AnswList.Add(Answer, IsRight);
         }
-        internal Grid getAnswers()
+        internal Grid getAnswers(List<bool> AnsweredList)
         {
+            int RadioBtnCount = -1;
+
             Grid g = new Grid();
+            g.Name = "AnswerGrid";
             g.Background = new SolidColorBrush(Colors.LightGray);           
 
             ColumnDefinition col1 = new ColumnDefinition();
@@ -45,7 +50,12 @@ namespace MRZS.Classes.ReverseStudyTest
             //building Grid
             foreach (KeyValuePair<string,bool> pairs in AnswList)
             {
+                RadioBtnCount++;
                 RadioButton rb = new RadioButton();
+                if (AnsweredList == null) rb.IsChecked = false;                
+                else rb.IsChecked = AnsweredList[RadioBtnCount];
+
+                RadioBtnList.Add(rb);
                 rb.Click += rb_Click;
                 rb.HorizontalAlignment = HorizontalAlignment.Center;
                 rb.VerticalAlignment = VerticalAlignment.Center;
@@ -68,7 +78,12 @@ namespace MRZS.Classes.ReverseStudyTest
             }
             return g;
         }
+        internal Dictionary<string, bool> GetAnswList() { return AnswList; }
 
+        internal List<RadioButton> GetRadioBtnList()
+        {
+            return RadioBtnList;
+        }
         void rb_Click(object sender, RoutedEventArgs e)
         {
             

@@ -40,11 +40,14 @@ namespace MRZS.Views.Emulator
         static Timer apvTimer;
         static Timer zzTimer;
         static Timer tmrTemp;
+        DispatcherTimer TestTimer;
+        DateTime StartTest;
+        DateTime EndTest;
         double Counter = 0;
         MTZ MtzCtrl = new MTZ();
-        APV ApvCtrl = new APV();
-        //Classes.ReverseStudyTest.ReversStudyTest RevrsStudyTestInstans = new Classes.ReverseStudyTest.ReversStudyTest();
+        APV ApvCtrl = new APV();        
         ReversStudyController ReversStudyControllr = new ReversStudyController();
+        SelectedAnswConrllr SelectedAnswController = new SelectedAnswConrllr();
 
         MRZS.Views.Testing.BookView book = null;
         MRZS.Views.Testing.BookView introBook = null;
@@ -622,23 +625,49 @@ namespace MRZS.Views.Emulator
                 }
                 else if (this.NavigationContext.QueryString["t"] == "r")
                 {
-                    ReverseEductnPanel.Visibility = Visibility.Visible;
-                    //hide textblock for test result and button for reapet test
-                    RevStatusText.Visibility = Visibility.Collapsed;
+                    ReverseEductnPanel.Visibility = Visibility.Visible;                                     
                     ReapetTest.Visibility = Visibility.Collapsed;
                     TaskText.Text = ReversStudyControllr.GetNextTask();
                     TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber()+1).ToString()+"/"+ReversStudyControllr.GetTaskCount().ToString();
-                    if(Answers.Children.Count==0) Answers.Children.Add(ReversStudyControllr.GetAnswers());
+                    if(Answers.Children.Count==0) Answers.Children.Add(ReversStudyControllr.GetAnswers(null));                    
 
-                    Button btnRunMrzs = new Button();
-                    btnRunMrzs.Width = 130;
-                    btnRunMrzs.Height = 40;
-                    btnRunMrzs.Content = "Запустить прибор";
-                    btnRunMrzs.Click += btnRunMrzs_Click;
-                    btnRunMrzs.HorizontalAlignment = HorizontalAlignment.Center;
-                    Answers.Children.Add(btnRunMrzs);
-                }
+                    TestTimer = new DispatcherTimer();
+                    TestTimer.Tick += TestTimer_Tick;
+                    StartTest = DateTime.Now;
+                    //one minute per 1 question
+                    TimeSpan MinutePerQuestion = new TimeSpan(0, ReversStudyControllr.GetTaskCount(), 0);
+                    //get end time of test
+                    EndTest = StartTest + MinutePerQuestion;
+                    TestTimer.Start();
+                 }
             }
+        }
+
+        void TestTimer_Tick(object sender, EventArgs e)
+        {
+            
+            TimerText.Text = "До конца теста: " + howReimains().Hours.ToString() + ":" + howReimains().Minutes.ToString() + ":" + howReimains().Seconds.ToString();
+            //if time is left
+            if (howReimains().Hours == 0 && howReimains().Minutes == 0 && howReimains().Seconds == 0)
+            {
+                TestTimer.Stop();
+                TimerText.Text = "";
+                TaskNumber.Text = "Время вышло! Результат= " + SelectedAnswController.TestResultWithPenalty(ReversStudyControllr.GetAnswersList()).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();                
+                HideButtons();                
+            }
+        }
+        TimeSpan howReimains()
+        {
+            return EndTest - DateTime.Now;
+        }
+        void HideButtons()
+        {
+            PrevBtn.Visibility = Visibility.Collapsed;
+            NextBtn.Visibility = Visibility.Collapsed;
+            OperatorActBtn.Visibility = Visibility.Collapsed;            
+            TaskText.Visibility = Visibility.Collapsed;
+            Answers.Visibility = Visibility.Collapsed;
+            ReapetTest.Visibility = Visibility.Visible;
         }
         void InitInterTestControl()
         {
@@ -652,11 +681,7 @@ namespace MRZS.Views.Emulator
             apv = new BookView("апв.pdf");
             zz = new BookView("ЗЗ.pdf");
         }
-
-        void btnRunMrzs_Click(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        
         bool IsItStudying()
         {
             if (this.NavigationContext.QueryString.ContainsKey("t"))
@@ -1187,30 +1212,94 @@ namespace MRZS.Views.Emulator
 
         private void ReapetTest_Click_1(object sender, RoutedEventArgs e)
         {
-            
-            
+            PrevBtn.Visibility = Visibility.Visible;
+            NextBtn.Visibility = Visibility.Visible;
+            OperatorActBtn.Visibility = Visibility.Visible;            
+            TaskText.Visibility = Visibility.Visible;
+            Answers.Visibility = Visibility.Visible;           
+
+            ReverseEductnPanel.Visibility = Visibility.Visible;                       
+            ReapetTest.Visibility = Visibility.Collapsed;
+            ReversStudyControllr.SetCurrentTaskNumberToZero();
+            TaskText.Text = ReversStudyControllr.GetNextTask();
+            TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber() + 1).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
+            Answers.Children.Clear();
+            if (Answers.Children.Count == 0) Answers.Children.Add(ReversStudyControllr.GetAnswers(null));           
+
+            TestTimer.Tick += TestTimer_Tick;
+            StartTest = DateTime.Now;
+            //one minute per 1 question
+            TimeSpan MinutePerQuestion = new TimeSpan(0, ReversStudyControllr.GetTaskCount(), 0);
+            //get end time of test
+            EndTest = StartTest + MinutePerQuestion;
+            TestTimer.Start();
+            SelectedAnswController.ClearAnswers();
         }
 
         private void NextBtn_Click_1(object sender, RoutedEventArgs e)
         {
+            RecordAnswers();
+
+            //next task
             string taskText = ReversStudyControllr.GetNextTask();
-            if (taskText == null) return;
+            if (taskText == null) 
+            {
+                HideButtons();
+                TestTimer.Stop();
+                TimerText.Text = "";
+                TaskNumber.Text = "Результат= " + SelectedAnswController.TestRusult(ReversStudyControllr.GetAnswersList()).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
+                return; 
+            }
 
             TaskText.Text = taskText;
             TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber()+1).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
             if (Answers.Children.Count > 0) Answers.Children.Clear();
-            Grid g = ReversStudyControllr.GetAnswers();
-            if(g!=null) Answers.Children.Add(g);
+
+            Grid g = null;
+            if (SelectedAnswController.IsThisTaskWasAnswered(ReversStudyControllr.GetCurrentTaskNumber()))
+                g = ReversStudyControllr.GetAnswers(SelectedAnswController.GetAnswredValue(ReversStudyControllr.GetCurrentTaskNumber()));
+            else g = ReversStudyControllr.GetAnswers(null);
+            if(g!=null) Answers.Children.Add(g);           
+        }
+
+        private void RecordAnswers()
+        {           
+            //find selected radiobuttons
+            List<RadioButton> RbList = new List<RadioButton>();
+            foreach (UIElement elem in Answers.Children)
+            {
+                if (elem is Grid)
+                {
+                    Grid RenderedGrid = elem as Grid;
+                    foreach (UIElement el2 in RenderedGrid.Children)
+                    {
+                        if (el2 is RadioButton)
+                        {
+                            RbList.Add(el2 as RadioButton);
+                        }
+                    }
+                }
+            }
+            //список выбраных ответов пользователем
+            SelectedAnswController.CheckAnsw(RbList, ReversStudyControllr.GetCurrentTaskNumber());
         }
         private void PrevBtn_Click_1(object sender, RoutedEventArgs e)
         {
+            RecordAnswers();
+
             string taskText = ReversStudyControllr.GetPrevTask();
             if (taskText == null) return;
 
             TaskText.Text = taskText;
             TaskNumber.Text = "Задание " + (ReversStudyControllr.GetCurrentTaskNumber() + 1).ToString() + "/" + ReversStudyControllr.GetTaskCount().ToString();
             if (Answers.Children.Count > 0) Answers.Children.Clear();
-            Grid g = ReversStudyControllr.GetAnswers();
+            Grid g=null;
+            //if user was answered on current task
+            if (SelectedAnswController.IsThisTaskWasAnswered(ReversStudyControllr.GetCurrentTaskNumber()))
+                g = ReversStudyControllr.GetAnswers(SelectedAnswController.GetAnswredValue(ReversStudyControllr.GetCurrentTaskNumber()));
+            else {                
+                g = ReversStudyControllr.GetAnswers(null); 
+            }
             if (g != null) Answers.Children.Add(g);
         }
 

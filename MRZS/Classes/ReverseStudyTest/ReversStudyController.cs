@@ -17,6 +17,7 @@ namespace MRZS.Classes.ReverseStudyTest
     {
         int CurrentTask = -1;
         List<ReversStudyTest> TaskList = new List<ReversStudyTest>();
+        
 
         internal ReversStudyController()
         {            
@@ -35,16 +36,7 @@ namespace MRZS.Classes.ReverseStudyTest
             rv2.ReduceApv = false;
             rv2.ApvReducedValue = 3;
             TaskList.Add(rv2);
-        }
-
-        internal void OperatorActions1()
-        {
-
-        }
-        internal void OperatorActions2()
-        {
-
-        }
+        }       
 
         internal string GetNextTask()
         {
@@ -60,11 +52,11 @@ namespace MRZS.Classes.ReverseStudyTest
 
             return TaskList[CurrentTask].Question;
         }
-        internal Grid GetAnswers()
+        internal Grid GetAnswers(List<bool> AnsweredList)
         {
             if (CurrentTask == TaskList.Count) return null;
-
-            return TaskList[CurrentTask].getAnswers();
+            Grid gr=TaskList[CurrentTask].getAnswers(AnsweredList);            
+            return gr;
         }
         internal int GetTaskCount()
         {
@@ -74,6 +66,7 @@ namespace MRZS.Classes.ReverseStudyTest
         {
             return CurrentTask;
         }
-
+        internal void SetCurrentTaskNumberToZero() { CurrentTask = -1; }
+        internal List<ReversStudyTest> GetAnswersList() { return TaskList; }
     }
 }
